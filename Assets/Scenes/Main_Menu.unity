@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 121216890}
   - component: {fileID: 121216889}
   m_Layer: 5
-  m_Name: Panel_Root
+  m_Name: PanelRoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -384,7 +384,7 @@ GameObject:
   - component: {fileID: 669158568}
   - component: {fileID: 669158567}
   m_Layer: 5
-  m_Name: Button_Start
+  m_Name: ButtonStart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -505,7 +505,7 @@ GameObject:
   - component: {fileID: 770133504}
   - component: {fileID: 770133503}
   m_Layer: 5
-  m_Name: Button_Setting
+  m_Name: ButtonSetting
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -625,7 +625,7 @@ GameObject:
   - component: {fileID: 1030392420}
   - component: {fileID: 1030392419}
   m_Layer: 5
-  m_Name: Button_Login
+  m_Name: ButtonLogin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1064,7 +1064,7 @@ GameObject:
   - component: {fileID: 1709067556}
   - component: {fileID: 1709067555}
   m_Layer: 5
-  m_Name: Button_Info
+  m_Name: ButtonInfo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
