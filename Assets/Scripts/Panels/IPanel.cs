@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-// NOTE:组合模式
+// NOTE:组合模式 使用树形结构，使得客户端可以统一处理单个对象和组合对象
 public abstract class IPanel
 {
     public GameObject gameObject { get; protected set; }
-
     public Transform transform => gameObject.transform;
     public RectTransform rectTransform { get; protected set; }
 
@@ -32,6 +31,7 @@ public abstract class IPanel
             OnInit();
         }
 
+        // 树形结构，用深度优先搜索去Update子物体
         foreach (var panel in children)
         {
             panel.GameUpdate();
@@ -46,7 +46,7 @@ public abstract class IPanel
     {
         Suspend();
 
-        if(gameObject==null)
+        if (gameObject == null)
         {
             gameObject = GameObject.Find(GetType().Name);
         }
@@ -61,11 +61,10 @@ public abstract class IPanel
             isEnter = true;
             OnEnter();
         }
-
     }
     public virtual void OnExit()
     {
-        if(!isShowAfterExit)
+        if (!isShowAfterExit)
         {
             gameObject.SetActive(false);
         }
