@@ -1,0 +1,15 @@
+Library/
+Temp/
+.vs/
+Logs/
+UserSettings/
+Packages/
+obj/
+Assets/Resources/
+Assets/Sprite/
+
+*.sln
+*.csproj
+*.userprefs
+*.unityproj
+*.DS_Store
