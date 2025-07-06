@@ -16,7 +16,7 @@ public abstract class IStateMachine
         // NOTE:如果不存在状态T，那么向stateDic中添加状态T
         if (!stateDic.ContainsKey(typeof(T)))
         {
-            stateDic.Add(typeof(T), (IState)Activator.CreateInstance(typeof(T), this));
+            stateDic.Add(typeof(T), Activator.CreateInstance(typeof(T), this) as IState);
         }
 
         currentState?.OnExit();
