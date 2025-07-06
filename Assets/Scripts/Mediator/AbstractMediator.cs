@@ -29,6 +29,6 @@ public abstract class AbstractMediator
             }
         }
 
-        return default(T);
+        return default;
     }
 }

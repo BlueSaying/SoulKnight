@@ -13,11 +13,11 @@ public class ICharacter
         {
             if (value)
             {
-                transform.localScale = new Vector3(1, 1, 0);
+                transform.localScale = new Vector3(-1, 1, 0);
             }
             else
             {
-                transform.localScale = new Vector3(-1, 1, 0);
+                transform.localScale = new Vector3(1, 1, 0);
             }
             _isLeft = value;
 
@@ -28,7 +28,6 @@ public class ICharacter
     private bool isStart;
     private bool isShouldRemove;
     private bool isAlreadyRemove;
-
     public ICharacter(GameObject obj)
     {
         gameObject = obj;
@@ -57,6 +56,6 @@ public class ICharacter
     protected virtual void OnCharacterDieUpdate() { }
     public void Remove()
     {
-
+        isShouldRemove = true;
     }
 }

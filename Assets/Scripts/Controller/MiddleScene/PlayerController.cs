@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 public class PlayerController : AbstractController
 {
@@ -11,6 +12,8 @@ public class PlayerController : AbstractController
     protected override void OnInit()
     {
         base.OnInit();
+
+        // NOTE:初始化一个骑士
         mainPlayer = PlayerFactory.Instance.GetPlayer(PlayerType.Knight);
     }
 

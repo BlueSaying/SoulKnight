@@ -25,9 +25,9 @@ public class PlayerFactory
             return _instance;
         }
     }
-
     private PlayerFactory() { }
 
+    // NOTE:给定playerType，返回相应的IPlayer
     public IPlayer GetPlayer(PlayerType playerType)
     {
         GameObject obj = GameObject.Find(playerType.ToString());

@@ -7,7 +7,8 @@ using UnityEngine;
 
 public class IPlayer : ICharacter
 {
-    protected Animator _animator;
+    protected Animator animator;
+    protected PlayerStateMachine _playerStateMachine;
     public IPlayer(GameObject obj) : base(obj)
     {
 
@@ -15,6 +16,12 @@ public class IPlayer : ICharacter
     protected override void OnInit()
     {
         base.OnInit();
-        _animator = transform.Find("Sprite").GetComponent<Animator>();
+        animator = transform.Find("Sprite").GetComponent<Animator>();
+        _playerStateMachine = new PlayerStateMachine(this);
+    }
+    protected override void OnCharacterUpdate()
+    {
+        base.OnCharacterUpdate();
+        _playerStateMachine.GameUpdate();
     }
 }

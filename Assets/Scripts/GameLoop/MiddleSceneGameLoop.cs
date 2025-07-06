@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using MiddleScene;
 
-public class MiddleSceneGameLoop:MonoBehaviour
+public class MiddleSceneGameLoop : MonoBehaviour
 {
     private Facade facade;
     void Start()
