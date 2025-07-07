@@ -20,6 +20,7 @@ public class UnityTools
         }
     }
     private UnityTools() { }
+
     public T GetComponentFromChildren<T>(GameObject obj, string name)
     {
         foreach (Transform t in obj.GetComponentsInChildren<Transform>())
@@ -29,6 +30,19 @@ public class UnityTools
                 return t.GetComponent<T>();
             }
         }
+        return default;
+    }
+
+    public Transform GetTransformFromChildren(GameObject parent, string name)
+    {
+        foreach(Transform t in parent.GetComponentsInChildren<Transform>())
+        {
+            if(t.name==name)
+            {
+                return t;
+            }
+        }
+
         return default;
     }
 }

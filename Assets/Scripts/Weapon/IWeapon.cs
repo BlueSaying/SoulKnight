@@ -9,7 +9,7 @@ public abstract class IWeapon
 {
     public GameObject gameObject { get;protected set; }
     public Transform transform => gameObject.transform;
-    protected ICharacter character;
+    protected ICharacter character;// ? 为什么要加这个成员变量
 
     private bool isInit;
     private bool isEnter;

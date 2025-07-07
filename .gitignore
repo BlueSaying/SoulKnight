@@ -5,7 +5,9 @@ Logs/
 UserSettings/
 Packages/
 obj/
-Assets/Resources/
+Assets/Resources/Audios/
+Assets/Resources/Excel/
+Assets/Resources/Images/
 Assets/Sprite/
 
 *.sln

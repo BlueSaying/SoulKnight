@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Unity.VisualScripting;
 using UnityEditor.Build.Player;
 using UnityEngine;
 
@@ -40,7 +41,12 @@ public class PlayerFactory
                 break;
 
         }
-       
+        if (!UnityTools.Instance.GetComponentFromChildren<Symbol>(obj, "BulletCheckBox"))
+        {
+            UnityTools.Instance.GetTransformFromChildren(obj, "BulletCheckBox").AddComponent<Symbol>();
+        }
+        UnityTools.Instance.GetComponentFromChildren<Symbol>(obj,"BulletCheckBox").SetCharacter(player);
+
         return player;
     }
 }
