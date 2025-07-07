@@ -22,7 +22,9 @@ public class WeaponFactory
     }
     private WeaponFactory() { }
 
-    public IPlayerWeapon GetPlayerWeapon(PlayerWeaponType type,ICharacter character)
+    // 给*character*角色添加一个*type*类型的武器并
+    // 放于GunOriginPoint物体下，返回该武器
+    public IPlayerWeapon GetPlayerWeapon(PlayerWeaponType type, ICharacter character)
     {
         GameObject GunOriginPoint = UnityTools.Instance.GetTransformFromChildren(character.gameObject, "GunOriginPoint").gameObject;
         GameObject obj = Object.Instantiate(ResourcesFactory.Instance.GetWeapon(type.ToString()), GunOriginPoint.transform);
@@ -31,10 +33,10 @@ public class WeaponFactory
         obj.transform.localPosition = Vector3.zero;
 
         IPlayerWeapon weapon = null;
-        switch(type)
+        switch (type)
         {
             case PlayerWeaponType.BadPistol:
-                weapon=new BadPistol(obj,character);
+                weapon = new BadPistol(obj, character);
                 break;
         }
 

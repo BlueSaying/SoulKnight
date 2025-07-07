@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class IPlayer : ICharacter
 {
@@ -11,6 +6,8 @@ public class IPlayer : ICharacter
     protected PlayerStateMachine _playerStateMachine;
 
     protected IPlayerWeapon weapon;
+
+    public PlayerInput playerInput { get; protected set; }
 
     public IPlayer(GameObject obj) : base(obj)
     {
@@ -26,10 +23,21 @@ public class IPlayer : ICharacter
     {
         base.OnCharacterUpdate();
         _playerStateMachine.GameUpdate();
-    }
 
+        if (weapon != null)
+        {
+            weapon.GameUpdate();
+            weapon.ControlWeapon(Input.GetKeyDown(KeyCode.J));
+            weapon.RotateWeapon(new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")));
+        }
+    }
     public void AddWeapon(PlayerWeaponType type)
     {
         weapon = WeaponFactory.Instance.GetPlayerWeapon(type, this);
+    }
+
+    public void SetPlayerInput(PlayerInput playerInput)
+    {
+        this.playerInput = playerInput;
     }
 }

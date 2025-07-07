@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Unity.VisualScripting;
-using UnityEditor.Build.Player;
+﻿using Unity.VisualScripting;
 using UnityEngine;
 
 public enum PlayerType
@@ -39,7 +33,6 @@ public class PlayerFactory
             case PlayerType.Knight:
                 player = new Knight(obj);
                 break;
-
         }
         if (!UnityTools.Instance.GetComponentFromChildren<Symbol>(obj, "BulletCheckBox"))
         {

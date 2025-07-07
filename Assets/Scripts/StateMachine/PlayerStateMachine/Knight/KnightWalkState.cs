@@ -14,7 +14,7 @@ public class KnightWalkState : IPlayerState
     {
         base.OnUpdate();
         // 测试代码
-        _moveDir.Set(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        _moveDir.Set(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         if (_moveDir.magnitude > 0)
         {
             // TODO: 手感调优：自己写一个更平滑的移动函数

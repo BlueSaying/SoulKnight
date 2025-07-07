@@ -15,6 +15,8 @@ public class PlayerController : AbstractController
 
         // NOTE:初始化一个骑士
         mainPlayer = PlayerFactory.Instance.GetPlayer(PlayerType.Knight);
+
+        mainPlayer.SetPlayerInput(GameMediator.Instance.GetController<InputController>().input);
     }
 
     protected override void AlwaysUpdate()

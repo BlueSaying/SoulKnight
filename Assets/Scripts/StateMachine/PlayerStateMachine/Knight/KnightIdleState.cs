@@ -23,7 +23,7 @@ public class KnightIdleState : IPlayerState
     protected override void OnUpdate()
     {
         base.OnUpdate();
-        _moveDir.Set(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        _moveDir.Set(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         if (_moveDir.magnitude > 0)
         {
             stateMachine.SetState<KnightWalkState>();

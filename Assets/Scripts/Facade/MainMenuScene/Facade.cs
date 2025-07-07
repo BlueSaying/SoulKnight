@@ -13,7 +13,7 @@ namespace MainMenuScene
         {
             base.OnInit();
             _uiController = new UIController();
-            GameMediator.Instance.Register_Controller(_uiController);
+            GameMediator.Instance.RegisterController(_uiController);
         }
         protected override void OnUpdate()
         {

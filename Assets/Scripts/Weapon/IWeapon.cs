@@ -11,12 +11,16 @@ public abstract class IWeapon
     public Transform transform => gameObject.transform;
     protected ICharacter character;// ? 为什么要加这个成员变量
 
+    // 武器能否旋转
+    protected bool canRotate;
+
     private bool isInit;
     private bool isEnter;
     public IWeapon(GameObject gameObject,ICharacter character)
     {
         this.gameObject = gameObject;
         this.character = character;
+        canRotate = true;
     }
 
     public void GameUpdate()
@@ -31,8 +35,8 @@ public abstract class IWeapon
     }
 
     protected virtual void OnInit() { }
-    // 每次切换至此武器时调用一次
 
+    // 每次切换至此武器时调用一次
     protected virtual void OnEnter() { }
 
     protected virtual void OnUpdate()
@@ -50,5 +54,5 @@ public abstract class IWeapon
     }
 
     // 发射时执行
-    protected virtual void OnFire() { }
+    protected virtual void OnFire() { Debug.Log("开炮！！！"); }
 }
