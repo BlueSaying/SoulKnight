@@ -2,8 +2,8 @@
 
 public enum PlayerWeaponType
 {
-    BadPistol
-
+    BadPistol,
+    Ak47
 }
 
 public class WeaponFactory
@@ -37,6 +37,9 @@ public class WeaponFactory
         {
             case PlayerWeaponType.BadPistol:
                 weapon = new BadPistol(obj, character);
+                break;
+            case PlayerWeaponType.Ak47:
+                weapon = new Ak47(obj, character);
                 break;
         }
 

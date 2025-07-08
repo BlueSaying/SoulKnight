@@ -1,39 +1,107 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class IPlayer : ICharacter
 {
     protected Animator animator;
     protected PlayerStateMachine _playerStateMachine;
 
-    protected IPlayerWeapon weapon;
+    protected List<IPlayerWeapon> weapons;
+    protected IPlayerWeapon usingWeapon;
 
     public PlayerInput playerInput { get; protected set; }
 
-    public IPlayer(GameObject obj) : base(obj)
-    {
+    public IPlayer(GameObject obj) : base(obj) { }
 
-    }
     protected override void OnInit()
     {
         base.OnInit();
-        animator = transform.Find("Sprite").GetComponent<Animator>();
         _playerStateMachine = new PlayerStateMachine(this);
+        weapons = new List<IPlayerWeapon>();
+        animator = transform.Find("Sprite").GetComponent<Animator>();
     }
     protected override void OnCharacterUpdate()
     {
         base.OnCharacterUpdate();
         _playerStateMachine.GameUpdate();
 
-        if (weapon != null)
+        if (usingWeapon != null)
         {
-            weapon.GameUpdate();
-            weapon.ControlWeapon(Input.GetKeyDown(KeyCode.J));
-            weapon.RotateWeapon(new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")));
+            usingWeapon.GameUpdate();
+            usingWeapon.ControlWeapon(Input.GetKeyDown(KeyCode.J));
+            usingWeapon.RotateWeapon(new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")));
         }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SwitchWeapon();
+        }
+
+        //Debug.Log("当前武器数量"+weapons.Count);
     }
+
     public void AddWeapon(PlayerWeaponType type)
     {
-        weapon = WeaponFactory.Instance.GetPlayerWeapon(type, this);
+        IPlayerWeapon newWeapon = WeaponFactory.Instance.GetPlayerWeapon(type, this);
+
+        if (usingWeapon != null)
+        {
+            RemoveWeapon();
+        }
+
+        UseWeapon(newWeapon);
+        weapons.Add(newWeapon);
+    }
+
+    // 切换下一把武器
+    public void SwitchWeapon()
+    {
+        // 只有武器数量大于一才可以切换武器
+        if (weapons.Count <= 1) return;
+
+        int usingWeaponIndex = 0;
+
+        foreach (IPlayerWeapon weapon in weapons)
+        {
+            if (weapon.isUsing)
+            {
+                break;
+            }
+            usingWeaponIndex++;
+        }
+
+        usingWeaponIndex = (usingWeaponIndex + 1) % weapons.Count;
+
+        RemoveWeapon();
+        UseWeapon(weapons[usingWeaponIndex]);
+    }
+
+    public void UseWeapon(IPlayerWeapon weapon)
+    {
+        weapon.isUsing = true;
+        weapon.gameObject.SetActive(true);
+        usingWeapon = weapon;
+    }
+
+    public void RemoveWeapon()
+    {
+        usingWeapon.isUsing = false;
+        usingWeapon.OnExit();
+        usingWeapon.gameObject.SetActive(false);
+    }
+
+    public IPlayerWeapon GetUsingWeapon()
+    {
+        return usingWeapon;
+        //foreach (IPlayerWeapon weapon in weapons)
+        //{
+        //    if (weapon.isUsing)
+        //    {
+        //        return weapon;
+        //    }
+        //}
+        //
+        //return default;
     }
 
     public void SetPlayerInput(PlayerInput playerInput)

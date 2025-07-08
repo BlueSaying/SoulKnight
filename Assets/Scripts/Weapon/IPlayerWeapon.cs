@@ -12,6 +12,7 @@ public abstract class IPlayerWeapon : IWeapon
     protected GameObject rotOrigin;
 
     private bool isAttackKeyDown;
+    public bool isUsing;
 
     public IPlayerWeapon(GameObject gameObject, ICharacter character) : base(gameObject, character) { }
 

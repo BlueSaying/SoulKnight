@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-public class BadPistol : IPlayerWeapon
+public class Ak47 : IPlayerWeapon
 {
-    public BadPistol(GameObject gameObject, ICharacter character) : base(gameObject, character) { }
+    public Ak47(GameObject gameObject, ICharacter character) : base(gameObject, character) { }
 
     public override void OnExit()
     {
