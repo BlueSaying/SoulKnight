@@ -27,6 +27,7 @@ public class WeaponFactory
     public IPlayerWeapon GetPlayerWeapon(PlayerWeaponType type, ICharacter character)
     {
         GameObject GunOriginPoint = UnityTools.Instance.GetTransformFromChildren(character.gameObject, "GunOriginPoint").gameObject;
+        // TODO:应该设置预制件中无pickupable脚本，仅在生成武器时添加pickupable脚本
         GameObject obj = Object.Instantiate(ResourcesFactory.Instance.GetWeapon(type.ToString()), GunOriginPoint.transform);
         obj.name = type.ToString();
 

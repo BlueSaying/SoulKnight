@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
+
 public class KnightIdleState : IPlayerState
 {
     private Vector2 _moveDir;
@@ -23,12 +19,13 @@ public class KnightIdleState : IPlayerState
     protected override void OnUpdate()
     {
         base.OnUpdate();
-        _moveDir.Set(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        _moveDir.Set(player.playerInput.hor, player.playerInput.ver);
+
         if (_moveDir.magnitude > 0)
         {
             stateMachine.SetState<KnightWalkState>();
             return;
         }
-        
+
     }
 }

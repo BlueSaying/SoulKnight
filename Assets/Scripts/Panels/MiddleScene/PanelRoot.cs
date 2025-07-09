@@ -1,21 +1,25 @@
 ﻿using UnityEngine.UI;
 using UnityEngine;
 
-namespace MainMenuScene
+namespace MiddleScene
 {
     public class PanelRoot : IPanel
     {
-        public PanelRoot() : base(null) { }
+        public PanelRoot() : base(null)
+        {
+            children.Add(new PanelRoom(this));
+        }
+
         protected override void OnInit()
         {
             base.OnInit();
-            UnityTools.Instance.GetComponentFromChildren<Button>(gameObject, "ButtonStart")
-                .onClick.AddListener(() => { Debug.Log("Start Game!"); });
+            Resume();
         }
+
         protected override void OnEnter()
         {
             base.OnEnter();
+            EnterPanel<PanelRoom>();
         }
     }
-
 }

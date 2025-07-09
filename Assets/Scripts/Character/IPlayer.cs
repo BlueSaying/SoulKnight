@@ -29,7 +29,8 @@ public class IPlayer : ICharacter
         {
             usingWeapon.GameUpdate();
             usingWeapon.ControlWeapon(Input.GetKeyDown(KeyCode.J));
-            usingWeapon.RotateWeapon(new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")));
+            usingWeapon.RotateWeapon(playerInput.weaponDir);
+            //usingWeapon.RotateWeapon(new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")));
         }
 
         if (Input.GetKeyDown(KeyCode.R))
@@ -93,15 +94,6 @@ public class IPlayer : ICharacter
     public IPlayerWeapon GetUsingWeapon()
     {
         return usingWeapon;
-        //foreach (IPlayerWeapon weapon in weapons)
-        //{
-        //    if (weapon.isUsing)
-        //    {
-        //        return weapon;
-        //    }
-        //}
-        //
-        //return default;
     }
 
     public void SetPlayerInput(PlayerInput playerInput)

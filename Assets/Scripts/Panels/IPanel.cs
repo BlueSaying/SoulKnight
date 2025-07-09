@@ -13,6 +13,8 @@ public abstract class IPanel
     protected IPanel parent;
     protected List<IPanel> children;
 
+    private GameObject mainCanvas;
+
     private bool isInit;
     private bool isEnter;
     private bool isSuspend;
@@ -42,18 +44,26 @@ public abstract class IPanel
             OnUpdate();
         }
     }
+
     protected virtual void OnInit()
     {
         Suspend();
 
+        mainCanvas = GameObject.Find("MainCanvas");
         if (gameObject == null)
         {
-            gameObject = GameObject.Find(GetType().Name);
+            //gameObject = GameObject.Find(GetType().Name);
+            gameObject = UnityTools.Instance.GetTransformFromChildren(mainCanvas, GetType().Name).gameObject;
         }
 
         rectTransform = gameObject.GetComponent<RectTransform>();
     }
-    protected virtual void OnEnter() { }
+
+    protected virtual void OnEnter()
+    {
+        gameObject.SetActive(true);
+    }
+
     protected virtual void OnUpdate()
     {
         if (!isEnter)
@@ -62,6 +72,7 @@ public abstract class IPanel
             OnEnter();
         }
     }
+
     public virtual void OnExit()
     {
         if (!isShowAfterExit)
@@ -73,6 +84,7 @@ public abstract class IPanel
         parent.Resume();
         Suspend();
     }
+
     public void EnterPanel<T>() where T : IPanel
     {
         IPanel panel = GetPanel<T>();
@@ -80,14 +92,17 @@ public abstract class IPanel
         panel.isEnter = false;
         Suspend();
     }
+
     public T GetPanel<T>() where T : IPanel
     {
         return children.Where(x => x is T).ToArray()[0] as T;
     }
+
     public void Suspend()
     {
         isSuspend = true;
     }
+
     public void Resume()
     {
         isSuspend = false;

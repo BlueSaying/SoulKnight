@@ -38,9 +38,9 @@ public class UnityTools
     /// 3. 只返回第一个找到的匹配项
     /// 4. 对性能敏感的场景慎用（遍历所有子对象+多次GetComponent调用）
     /// </remarks>
-    public T GetComponentFromChildren<T>(GameObject parent, string name)
+    public T GetComponentFromChildren<T>(GameObject parent, string name, bool isActive = false)
     {
-        foreach (Transform t in parent.GetComponentsInChildren<Transform>())
+        foreach (Transform t in parent.GetComponentsInChildren<Transform>(!isActive))
         {
             if (t.name == name && t.GetComponent<T>() != null)
             {
@@ -59,11 +59,11 @@ public class UnityTools
     /// 找到时：返回匹配的第一个子物体的Transform组件；
     /// 未找到时：返回null（default）
     /// </returns>
-    public Transform GetTransformFromChildren(GameObject parent, string name)
+    public Transform GetTransformFromChildren(GameObject parent, string name, bool isActive = false)
     {
-        foreach(Transform t in parent.GetComponentsInChildren<Transform>())
+        foreach (Transform t in parent.GetComponentsInChildren<Transform>(!isActive))
         {
-            if(t.name==name)
+            if (t.name == name)
             {
                 return t;
             }

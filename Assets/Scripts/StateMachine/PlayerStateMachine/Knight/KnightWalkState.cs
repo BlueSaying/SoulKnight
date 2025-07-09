@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Unity.VisualScripting;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class KnightWalkState : IPlayerState
 {
@@ -14,13 +8,13 @@ public class KnightWalkState : IPlayerState
     {
         base.OnUpdate();
         // 测试代码
-        _moveDir.Set(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        _moveDir.Set(player.playerInput.hor, player.playerInput.ver);
         if (_moveDir.magnitude > 0)
         {
             // TODO: 手感调优：自己写一个更平滑的移动函数
             rb.velocity = _moveDir.normalized * 8;
         }
-        else if(_moveDir.magnitude == 0)
+        else if (_moveDir.magnitude == 0)
         {
             stateMachine.SetState<KnightIdleState>();
             return;

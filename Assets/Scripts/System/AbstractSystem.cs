@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Assets.Scripts.System
+public abstract class AbstractSystem
 {
-    internal class WeaponSystem
+    public AbstractSystem()
     {
-
+        OnInit();
     }
+
+    protected virtual void OnInit() { }
 }
