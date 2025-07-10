@@ -10,7 +10,7 @@ public class Knight : IPlayer
     protected override void OnInit()
     {
         base.OnInit();
-        _playerStateMachine.SetState<KnightIdleState>();
+        _playerStateMachine.SwitchState<KnightIdleState>();
     }
     
 }

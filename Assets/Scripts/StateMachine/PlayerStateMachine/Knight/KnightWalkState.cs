@@ -16,7 +16,7 @@ public class KnightWalkState : IPlayerState
         }
         else if (_moveDir.magnitude == 0)
         {
-            stateMachine.SetState<KnightIdleState>();
+            stateMachine.SwitchState<KnightIdleState>();
             return;
         }
         if (_moveDir.x > 0)

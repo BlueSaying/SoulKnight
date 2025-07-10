@@ -4,6 +4,7 @@ public class UIController : AbstractController
 {
     private IPanel rootPanel;
     public UIController() { }
+
     protected override void OnInit()
     {
         base.OnInit();
@@ -19,6 +20,7 @@ public class UIController : AbstractController
                 break;
         }
     }
+
     protected override void AlwaysUpdate()
     {
         base.AlwaysUpdate();

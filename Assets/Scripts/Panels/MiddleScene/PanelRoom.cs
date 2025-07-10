@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace MiddleScene
@@ -30,13 +26,17 @@ namespace MiddleScene
             // 检测鼠标是否点击并点击到了玩家上
             if (Input.GetMouseButton(0))
             {
+                // Physics2D.OverlapCircle(point,radius,layerMask)用于创建一个圆形区域的碰撞体
+                // Camera.main.ScreenToWorldPoint()鼠标的屏幕坐标转换为游戏世界坐标系中的位置（单位：Unity单位）
+                // Input.mousePosition获取鼠标在屏幕坐标系中的坐标（单位：像素，原点在左下角）。
                 collider = Physics2D.OverlapCircle(Camera.main.ScreenToWorldPoint(Input.mousePosition), 0.1f, LayerMask.GetMask("Player"));
                 if (collider)
                 {
                     cameraSystem.SwitchCamera(CameraType.selectingCamera);
                     cameraSystem.SetCameraTarget(CameraType.selectingCamera, collider.transform.parent);
                     EnterPanel<PanelSelectingPlayer>();
-                    // HACK
+
+                    // HACK:点击角色后将原本的UI隐藏
                     gameObject.SetActive(false);
                 }
             }
