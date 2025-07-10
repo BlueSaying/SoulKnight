@@ -12,6 +12,7 @@ public abstract class AbstractFacade
     }
 
     protected virtual void OnInit() { }
+
     protected virtual void OnUpdate()
     {
         if(!isInit)

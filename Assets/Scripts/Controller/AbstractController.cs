@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-public abstract class AbstractController
+﻿public abstract class AbstractController
 {
     private bool isRun;
     private bool isInit;
@@ -32,7 +26,9 @@ public abstract class AbstractController
     }
 
     protected virtual void OnInit() { }
+
     protected virtual void OnBeforeRunStart() { }
+
     protected virtual void OnBeforeRunUpdate()
     {
         if(!isBeforeRunStart)
@@ -41,7 +37,9 @@ public abstract class AbstractController
             OnBeforeRunStart();
         }
     }
+
     protected virtual void OnAfterRunStart() { }
+
     protected virtual void OnAfterRunUpdate()
     {
         if(!isAfterRunStart)
@@ -50,6 +48,7 @@ public abstract class AbstractController
             OnAfterRunStart();
         }
     }
+
     protected virtual void AlwaysUpdate() { }
 
     public void TurnOnController()

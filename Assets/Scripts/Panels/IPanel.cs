@@ -32,7 +32,7 @@ public abstract class IPanel
             isInit = true;
             OnInit();
         }
-
+        
         // 树形结构，用深度优先搜索去Update子物体
         foreach (var panel in children)
         {
