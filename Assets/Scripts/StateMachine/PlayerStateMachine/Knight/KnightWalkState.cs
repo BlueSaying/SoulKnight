@@ -7,6 +7,7 @@ public class KnightWalkState : IPlayerState
     protected override void OnUpdate()
     {
         base.OnUpdate();
+
         // 测试代码
         _moveDir.Set(player.playerInput.hor, player.playerInput.ver);
         if (_moveDir.magnitude > 0)

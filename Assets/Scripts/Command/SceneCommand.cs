@@ -20,6 +20,9 @@ public class SceneCommand : Singleton<SceneCommand>
     private void OnSceneSwitchComplete(AsyncOperation op)
     {
         sceneModel.SetData();
+
+        EventCenter.Instance.NotifyEvent(EventType.OnSceneSwitchComplete);
+        EventCenter.Instance.ClearNonPermanentEvents();
     }
 
     public SceneName GetActiveSceneName()

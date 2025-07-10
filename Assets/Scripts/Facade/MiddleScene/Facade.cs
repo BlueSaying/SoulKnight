@@ -1,6 +1,4 @@
-﻿
-
-namespace MiddleScene
+﻿namespace MiddleScene
 {
     public class Facade : AbstractFacade
     {
@@ -20,6 +18,12 @@ namespace MiddleScene
             GameMediator.Instance.RegisterController(_uiController);
 
             GameMediator.Instance.RegisterSystem(new CameraSystem());
+
+            EventCenter.Instance.RigisterEvent(EventType.OnSelectPlayerComplete, false, () =>
+            {
+                _playerController.TurnOnController();
+            });
+
         }
         protected override void OnUpdate()
         {

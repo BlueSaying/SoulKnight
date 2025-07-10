@@ -5,7 +5,6 @@ namespace MiddleScene
 {
     public class PanelRoom : IPanel
     {
-        private CameraSystem cameraSystem;
         private Collider2D collider;
 
         public PanelRoom(IPanel parent) : base(parent)
@@ -16,7 +15,12 @@ namespace MiddleScene
         protected override void OnInit()
         {
             base.OnInit();
-            cameraSystem = GameMediator.Instance.GetSystem<CameraSystem>();
+        }
+
+        protected override void OnEnter()
+        {
+            base.OnEnter();
+            GameMediator.Instance.GetSystem<CameraSystem>().SwitchCamera(CameraType.staticCamera);
         }
 
         protected override void OnUpdate()
@@ -32,12 +36,13 @@ namespace MiddleScene
                 collider = Physics2D.OverlapCircle(Camera.main.ScreenToWorldPoint(Input.mousePosition), 0.1f, LayerMask.GetMask("Player"));
                 if (collider)
                 {
-                    cameraSystem.SwitchCamera(CameraType.selectingCamera);
-                    cameraSystem.SetCameraTarget(CameraType.selectingCamera, collider.transform.parent);
+                    GameMediator.Instance.GetSystem<CameraSystem>().SwitchCamera(CameraType.selectingCamera);
+                    GameMediator.Instance.GetSystem<CameraSystem>().SetCameraTarget(CameraType.selectingCamera, collider.transform.parent);
+                    GetPanel<PanelSelectingPlayer>().SetSelectingPlayer(collider.transform.parent.gameObject);
                     EnterPanel<PanelSelectingPlayer>();
 
                     // HACK:点击角色后将原本的UI隐藏
-                    gameObject.SetActive(false);
+                    panel.SetActive(false);
                 }
             }
 

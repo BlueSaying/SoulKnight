@@ -14,6 +14,10 @@ namespace MiddleScene
         {
             base.OnInit();
             Resume();
+            EventCenter.Instance.RigisterEvent(EventType.OnSelectPlayerComplete, false, () =>
+            {
+                panel.SetActive(false);
+            });
         }
 
         protected override void OnEnter()

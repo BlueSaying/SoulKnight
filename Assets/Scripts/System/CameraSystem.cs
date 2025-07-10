@@ -55,6 +55,7 @@ public class CameraSystem : AbstractSystem
         }
     }
 
+    // NOTE:每次调用完，记得同时调用SetCameraTarget，因为每一个相机的target不一样
     public void SwitchCamera(CameraType type)
     {
         switch (type)

@@ -9,8 +9,8 @@ namespace MainMenuScene
         protected override void OnInit()
         {
             base.OnInit();
-            UnityTools.Instance.GetComponentFromChildren<Button>(gameObject, "ButtonStart")
-                .onClick.AddListener(() => { Debug.Log("Start Game!"); });
+            UnityTools.Instance.GetComponentFromChildren<Button>(panel, "ButtonStart")
+                .onClick.AddListener(() => { SceneCommand.Instance.LoadScene(SceneName.MiddleScene); });
         }
         protected override void OnEnter()
         {

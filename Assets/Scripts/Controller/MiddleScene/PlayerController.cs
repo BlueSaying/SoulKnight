@@ -1,20 +1,27 @@
 ﻿public class PlayerController : AbstractController
 {
-    public IPlayer mainPlayer {  get; protected set; }
+    public IPlayer mainPlayer { get; protected set; }
     public PlayerController() { }
     protected override void OnInit()
     {
         base.OnInit();
 
         // NOTE:初始化一个骑士
-        //mainPlayer = PlayerFactory.Instance.GetPlayer(PlayerType.Knight);
-        //mainPlayer.SetPlayerInput(GameMediator.Instance.GetController<InputController>().input);
     }
 
-    protected override void AlwaysUpdate()
+    protected override void OnAfterRunUpdate()
     {
-        base.AlwaysUpdate();
-        //mainPlayer.GameUpdate();
+        base.OnAfterRunUpdate();
 
+        if (mainPlayer != null)
+        {
+            mainPlayer.GameUpdate();
+        }
+    }
+
+    public void SetMainPlayer(PlayerType playerType)
+    {
+        mainPlayer = PlayerFactory.Instance.GetPlayer(playerType);
+        mainPlayer.SetPlayerInput(GameMediator.Instance.GetController<InputController>().input);
     }
 }
