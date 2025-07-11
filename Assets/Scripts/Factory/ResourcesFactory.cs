@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -26,6 +27,12 @@ public class ResourcesFactory
     private Dictionary<string, GameObject> weaponDic;
     private string weaponPath = "Prefabs/Weapon/";
 
+    // 角色皮肤路径
+    private string playerSkinPath = "Animation/Characters/Players/";
+
+    // 数据路径
+    private string dataPath = "Datas/";
+
     public GameObject GetWeapon(string name)
     {
         if (weaponDic.ContainsKey(name)) return weaponDic[name];
@@ -36,10 +43,23 @@ public class ResourcesFactory
         return newWeapon;
     }
 
-    private string playerSkinPath = "Animation/Characters/Players/";
+    
 
     public RuntimeAnimatorController GetPlayerSkin(string name)
     {
         return Resources.LoadAll<RuntimeAnimatorController>(playerSkinPath + name).Where(x => x.name == name).ToArray()[0];
+    }
+
+    // 读取SO数据
+    public T GetScriptableObject<T>() where T : ScriptableObject
+    {
+        Type type = typeof(T);
+        string path = dataPath;
+        if(type == typeof(PlayerScriptableObject))
+        {
+            path += "PlayerData";
+        }
+
+        return Resources.Load<T>(path);
     }
 }
