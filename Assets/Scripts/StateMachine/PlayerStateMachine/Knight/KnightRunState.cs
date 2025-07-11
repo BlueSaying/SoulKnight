@@ -9,7 +9,7 @@ public class KnightRunState : IPlayerState
         base.OnUpdate();
 
         // 测试代码
-        Vector2 moveDir= new Vector2(player.playerInput.hor, player.playerInput.ver);
+        Vector2 moveDir= ((Vector2)GameMediator.Instance.GetController<InputController>().GetMovementInput());
         if (moveDir.magnitude > 0)
         {
             // TODO: 手感调优：自己写一个更平滑的移动函数

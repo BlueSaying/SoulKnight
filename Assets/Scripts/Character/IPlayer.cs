@@ -9,7 +9,7 @@ public class IPlayer : ICharacter
     protected List<IPlayerWeapon> weapons;
     protected IPlayerWeapon usingWeapon;
 
-    public PlayerInput playerInput { get; protected set; }
+    //public PlayerInput playerInput { get; protected set; }
 
     public IPlayer(GameObject obj) : base(obj) { }
 
@@ -29,8 +29,8 @@ public class IPlayer : ICharacter
         {
             usingWeapon.GameUpdate();
             usingWeapon.ControlWeapon(Input.GetKeyDown(KeyCode.J));
-            usingWeapon.RotateWeapon(playerInput.weaponDir);
-            //usingWeapon.RotateWeapon(new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")));
+            usingWeapon.RotateWeapon(GameMediator.Instance.GetController<InputController>().GetMovementInput());
+            //usingWeapon.RotateWeapon(playerInput.weaponDir);
         }
 
         if (Input.GetKeyDown(KeyCode.R))
@@ -96,8 +96,8 @@ public class IPlayer : ICharacter
         return usingWeapon;
     }
 
-    public void SetPlayerInput(PlayerInput playerInput)
-    {
-        this.playerInput = playerInput;
-    }
+    //public void SetPlayerInput(PlayerInput playerInput)
+    //{
+    //    this.playerInput = playerInput;
+    //}
 }

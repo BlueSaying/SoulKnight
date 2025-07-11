@@ -2,10 +2,11 @@
 {
     public RogueRollState(PlayerStateMachine playerStateMachine) : base(playerStateMachine) { }
 
+    // TODO:implement this state
     protected override void OnEnter()
     {
         base.OnEnter();
 
-        animator.SetBool("isIdle", true);
+        animator.SetTrigger("isRoll");
     }
 }

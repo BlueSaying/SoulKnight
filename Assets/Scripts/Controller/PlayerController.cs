@@ -20,6 +20,6 @@
     public void SetMainPlayer(PlayerType playerType)
     {
         mainPlayer = PlayerFactory.Instance.GetPlayer(playerType);
-        mainPlayer.SetPlayerInput(GameMediator.Instance.GetController<InputController>().input);
+        //mainPlayer.SetPlayerInput(GameMediator.Instance.GetController<InputController>().input);
     }
 }

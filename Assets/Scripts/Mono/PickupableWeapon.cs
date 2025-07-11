@@ -1,9 +1,9 @@
-ï»¿using UnityEngine;
+using UnityEngine;
 
-public class PickupableWeapon : MonoBehaviour
+public class PickUpableWeapon : MonoBehaviour
 {
-    // ä½¿ç”¨isPlayerEnteræ¥å‚¨å­˜å½“å‰ç©å®¶æ˜¯å¦å¯ä»¥æ‹¾å–æªæ¢°
-    // ä½¿å¾—Updateæ–¹æ³•åªåœ¨ç©å®¶è¿›å…¥å¯æ‹¾å–èŒƒå›´æ—¶è°ƒç”¨
+    // Ê¹ÓÃisPlayerEnterÀ´´¢´æµ±Ç°Íæ¼ÒÊÇ·ñ¿ÉÒÔÊ°È¡Ç¹Ğµ
+    // Ê¹µÃUpdate·½·¨Ö»ÔÚÍæ¼Ò½øÈë¿ÉÊ°È¡·¶Î§Ê±µ÷ÓÃ
     private bool isPlayerEnter;
 
     private IPlayer player;
@@ -14,19 +14,20 @@ public class PickupableWeapon : MonoBehaviour
     {
         if (isPlayerEnter)
         {
-            if (Input.GetKeyDown(KeyCode.F))
+            //if (Input.GetKeyDown(KeyCode.F))
+            if (GameMediator.Instance.GetController<InputController>().GetKeyInput(KeyInputType.pickUp))
             {
-                // TODO:æ¡èµ·æ­¦å™¨åæŒ‰Fä»æœ‰æ•ˆæœbug
+                // TODO:¼ñÆğÎäÆ÷ºó°´FÈÔÓĞĞ§¹ûbug
                 player.AddWeapon(System.Enum.Parse<PlayerWeaponType>(name));
                 Destroy(gameObject);
-                Debug.Log("æ¡èµ·æ­¦å™¨");
+                Debug.Log("¼ñÆğÎäÆ÷");
             }
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // ä¸ç©å®¶ç¢°æ’
+        // ÓëÍæ¼ÒÅö×²
         if (collision.CompareTag("Player"))
         {
             isPlayerEnter = true;
@@ -36,7 +37,7 @@ public class PickupableWeapon : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        // ä¸ç©å®¶ç¢°æ’
+        // ÓëÍæ¼ÒÅö×²
         if (collision.CompareTag("Player"))
         {
             isPlayerEnter = false;

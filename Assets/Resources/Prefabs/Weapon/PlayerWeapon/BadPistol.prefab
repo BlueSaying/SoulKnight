@@ -40,8 +40,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4557737024656482355}
-  - component: {fileID: -2694447462704887460}
   - component: {fileID: 8179374414635252531}
+  - component: {fileID: 2348449486345689420}
   m_Layer: 0
   m_Name: BadPistol
   m_TagString: Untagged
@@ -65,18 +65,6 @@ Transform:
   - {fileID: 3898437781428595785}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-2694447462704887460
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 641174121357476277}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6967d00efc786814a883bf8330fd8e9c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!50 &8179374414635252531
 Rigidbody2D:
   serializedVersion: 4
@@ -104,6 +92,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &2348449486345689420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 641174121357476277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6967d00efc786814a883bf8330fd8e9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2165311729818415147
 GameObject:
   m_ObjectHideFlags: 0

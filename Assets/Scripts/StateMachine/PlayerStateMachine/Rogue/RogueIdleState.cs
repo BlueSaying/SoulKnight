@@ -20,7 +20,7 @@ public class RogueIdleState : IPlayerState
     protected override void OnUpdate()
     {
         base.OnUpdate();
-        Vector2 moveDir = new Vector2(player.playerInput.hor, player.playerInput.ver);
+        Vector2 moveDir = ((Vector2)GameMediator.Instance.GetController<InputController>().GetMovementInput());
 
         if (moveDir.magnitude > 0)
         {
