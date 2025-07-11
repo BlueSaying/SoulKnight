@@ -1,4 +1,4 @@
-﻿using System;
+﻿using UnityEngine.UI;
 using UnityEngine;
 
 namespace MiddleScene
@@ -15,6 +15,10 @@ namespace MiddleScene
         protected override void OnInit()
         {
             base.OnInit();
+            UnityTools.Instance.GetComponentFromChildren<Button>(panel, "ButtonBack")
+                .onClick.AddListener(() => { SceneCommand.Instance.LoadScene(SceneName.MainMenuScene); });
+            UnityTools.Instance.GetComponentFromChildren<Button>(panel, "ButtonStore")
+                .onClick.AddListener(() => { Debug.Log("打开商店"); });
         }
 
         protected override void OnEnter()

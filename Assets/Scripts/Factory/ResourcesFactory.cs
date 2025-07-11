@@ -28,11 +28,18 @@ public class ResourcesFactory
 
     public GameObject GetWeapon(string name)
     {
-        if(weaponDic.ContainsKey(name)) return weaponDic[name];
+        if (weaponDic.ContainsKey(name)) return weaponDic[name];
 
         // NOTE:此处可优化，因为每次都要遍历整个文件
         GameObject newWeapon = Resources.LoadAll<GameObject>(weaponPath).Where(x => x.name == name).ToArray()[0];
         weaponDic.Add(name, newWeapon);
         return newWeapon;
+    }
+
+    private string playerSkinPath = "Animation/Characters/Players/";
+
+    public RuntimeAnimatorController GetPlayerSkin(string name)
+    {
+        return Resources.LoadAll<RuntimeAnimatorController>(playerSkinPath + name).Where(x => x.name == name).ToArray()[0];
     }
 }

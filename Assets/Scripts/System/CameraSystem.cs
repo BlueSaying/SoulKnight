@@ -23,9 +23,9 @@ public class CameraSystem : AbstractSystem
 {
     private GameObject cameras;
 
-    private CinemachineVirtualCamera staticCamera;
-    private CinemachineVirtualCamera selectingCamera;
-    private CinemachineVirtualCamera followCamera;
+    public CinemachineVirtualCamera staticCamera;
+    public CinemachineVirtualCamera selectingCamera;
+    public CinemachineVirtualCamera followCamera;
 
     public CameraSystem() { }
 
@@ -33,6 +33,7 @@ public class CameraSystem : AbstractSystem
     {
         base.OnInit();
 
+        // BUG:切换场景后相机组件丢失
         cameras = GameObject.Find("Cameras");
         staticCamera = UnityTools.Instance.GetComponentFromChildren<CinemachineVirtualCamera>(cameras, "StaticCamera");
         selectingCamera = UnityTools.Instance.GetComponentFromChildren<CinemachineVirtualCamera>(cameras, "SelectingCamera");

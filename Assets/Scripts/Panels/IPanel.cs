@@ -90,7 +90,7 @@ public abstract class IPanel
             panel.SetActive(false);
         }
 
-        //parent.isEnter = false;
+        parent.isEnter = false;
         parent?.Resume();
         Suspend();
     }

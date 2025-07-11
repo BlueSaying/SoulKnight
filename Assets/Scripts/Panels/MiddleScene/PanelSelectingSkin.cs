@@ -4,13 +4,13 @@ using UnityEngine.UI;
 
 namespace MiddleScene
 {
-    public class PanelSelectingPlayer : IPanel
+    public class PanelSelectingSkin : IPanel
     {
         private GameObject selectingPlayer;
 
-        public PanelSelectingPlayer(IPanel parent) : base(parent)
+        public PanelSelectingSkin(IPanel parent) : base(parent)
         {
-            children.Add(new PanelSelectingSkin(this));
+            children.Add(new PanelBattle(this));
         }
 
         protected override void OnInit()
@@ -23,14 +23,13 @@ namespace MiddleScene
             });
             UnityTools.Instance.GetComponentFromChildren<Button>(panel, "ButtonNext").onClick.AddListener(() =>
             {
-                GameMediator.Instance.GetController<PlayerController>().SetMainPlayer(Enum.Parse<PlayerType>(selectingPlayer.name));
-                EventCenter.Instance.NotifyEvent(EventType.OnSelectPlayerComplete);
+                // TODO:GameMediator.Instance.GetController<PlayerController>().SetMainPlayerSkin(Enum.Parse<PlayerSkinType>(skinName));
+                EventCenter.Instance.NotifyEvent(EventType.OnSelectSkinComplete);
                 panel.SetActive(false);
-                GetPanel<PanelSelectingSkin>().SetSelectingPlayer(selectingPlayer);
-                EnterPanel<PanelSelectingSkin>();
+                EnterPanel<PanelBattle>();
             });
 
-            EventCenter.Instance.RigisterEvent(EventType.OnSelectPlayerComplete, false, () =>
+            EventCenter.Instance.RigisterEvent(EventType.OnSelectSkinComplete, false, () =>
             {
                 panel.SetActive(false);
             });

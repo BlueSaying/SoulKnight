@@ -14,7 +14,7 @@ namespace MiddleScene
         {
             base.OnInit();
             Resume();
-            EventCenter.Instance.RigisterEvent(EventType.OnSelectPlayerComplete, false, () =>
+            EventCenter.Instance.RigisterEvent(EventType.OnSelectSkinComplete, false, () =>
             {
                 panel.SetActive(false);
             });

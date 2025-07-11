@@ -7,6 +7,13 @@ public enum PlayerType
     Rogue,
 }
 
+public enum PlayerSkinType
+{
+    Knight,
+    Rogue,
+    RogueKun,
+}
+
 public class PlayerFactory
 {
     private static PlayerFactory _instance;

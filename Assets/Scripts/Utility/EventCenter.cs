@@ -11,9 +11,14 @@ public enum EventType
     OnSceneSwitchComplete,
 
     /// <summary>
-    /// 当选择玩家结束
+    /// 当选择角色结束
     /// </summary>
-    OnSelectPlayerComplete
+    OnSelectPlayerComplete,
+
+    /// <summary>
+    /// 当选择皮肤结束
+    /// </summary>
+    OnSelectSkinComplete,
 }
 
 public class EventCenter : Singleton<EventCenter>
@@ -134,7 +139,7 @@ public class EventCenter : Singleton<EventCenter>
     public void ClearNonPermanentEvents()
     {
         var keysToRemove = new List<EventType>();
-        
+
         foreach (EventType type in eventDic.Keys)
         {
             // 创建待删除项列表

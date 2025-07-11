@@ -1,4 +1,6 @@
-﻿public class PlayerController : AbstractController
+﻿using UnityEngine;
+
+public class PlayerController : AbstractController
 {
     public IPlayer mainPlayer { get; protected set; }
     public PlayerController() { }
@@ -21,5 +23,13 @@
     {
         mainPlayer = PlayerFactory.Instance.GetPlayer(playerType);
         //mainPlayer.SetPlayerInput(GameMediator.Instance.GetController<InputController>().input);
+    }
+
+    public void SetMainPlayerSkin(PlayerSkinType skinType)
+    {
+        if (mainPlayer == null) throw new System.Exception("无角色，无法设置皮肤");
+
+        // TODO:implement this function
+        //mainPlayer
     }
 }
