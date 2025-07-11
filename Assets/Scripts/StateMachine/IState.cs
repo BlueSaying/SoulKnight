@@ -6,12 +6,16 @@ public abstract class IState
 
     private bool isInit;
     private bool isEnter;
+
     public IState(IStateMachine stateMachine)
     {
         this.stateMachine = stateMachine;
     }
+
     protected virtual void OnInit() { }
+
     protected virtual void OnEnter() { }
+
     public virtual void GameUpdate()
     {
         if (!isInit)
@@ -22,6 +26,7 @@ public abstract class IState
 
         OnUpdate();
     }
+
     protected virtual void OnUpdate()
     {
         if (!isEnter)
@@ -30,6 +35,7 @@ public abstract class IState
             OnEnter();
         }
     }
+
     public virtual void OnExit()
     {
         isEnter = false;

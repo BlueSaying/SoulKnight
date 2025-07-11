@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
-
-public class KnightIdleState : IPlayerState
+public class RogueIdleState : IPlayerState
 {
-    public KnightIdleState(PlayerStateMachine playerStateMachine) : base(playerStateMachine) { }
+    public RogueIdleState(PlayerStateMachine playerStateMachine) : base(playerStateMachine) { }
+
     protected override void OnEnter()
     {
         base.OnEnter();
@@ -24,7 +24,7 @@ public class KnightIdleState : IPlayerState
 
         if (moveDir.magnitude > 0)
         {
-            stateMachine.SwitchState<KnightRunState>();
+            stateMachine.SwitchState<RogueRunState>();
             return;
         }
     }

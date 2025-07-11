@@ -5,8 +5,6 @@
     protected override void OnInit()
     {
         base.OnInit();
-
-        // NOTE:初始化一个骑士
     }
 
     protected override void OnAfterRunUpdate()
