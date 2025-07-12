@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using UnityEngine;
 
 public class UnityTools
@@ -97,4 +99,59 @@ public class UnityTools
             return false;
         }
     }
+
+    // 将字符串转换为指定类型的值
+    public object ConvertType(string s, Type type)
+    {
+        if (s == "TRUE")
+        {
+            return true;
+        }
+        if (s == "FALSE")
+        {
+            return false;
+        }
+
+        // 检查type是否是枚举类型
+        if (typeof(Enum).IsAssignableFrom(type))
+        {
+            return Enum.Parse(type, s);
+        }
+
+        return Convert.ChangeType(s, type);
+    }
+    
+    // 将文本写入list中
+    public void WriteDataToList<T>(List<T> list, TextAsset textAsset) where T : new()
+    {
+        if (textAsset == null) return;
+        
+        list.Clear();
+
+        string text = textAsset.text.Replace("\r", "");
+        string[] rows = text.Split("\n");
+
+        // 以逗号分割字段
+        string[] fieldName = rows[0].Split(",");
+
+        for (int i = 1; i < rows.Length; i++)
+        {
+            if (rows[i].Length == 0) continue;
+
+            string[] columes = rows[i].Split(",");
+            Type type = typeof(T);
+            T obj = (T)Activator.CreateInstance(type);
+
+            for (int j = 0; j < columes.Length; j++)
+            {
+                FieldInfo fieldInfo = type.GetField(fieldName[j]);
+
+                if (columes.Length == 0 || fieldInfo == null) continue;
+
+                fieldInfo.SetValue(obj, ConvertType(columes[j], fieldInfo.FieldType));
+            }
+            list.Add(obj);
+        }
+    }
+    
 }

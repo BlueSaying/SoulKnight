@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c78d634d70994104abe9241c75a4f1b4, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
+  textAsset: {fileID: 0}
   attrs: []
