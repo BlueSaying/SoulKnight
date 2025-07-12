@@ -9,6 +9,7 @@ public enum PlayerType
 
 public enum PlayerSkinType
 {
+    None,
     Knight,
     Rogue,
     RogueKun,

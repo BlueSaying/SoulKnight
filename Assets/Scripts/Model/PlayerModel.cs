@@ -7,7 +7,7 @@ public class PlayerModel:AbstractModel
     protected override void OnInit()
     {
         base.OnInit();
-        data = ResourcesFactory.Instance.GetScriptableObject<PlayerScriptableObject>().attrs;
+        data = ResourcesFactory.Instance.GetScriptableObject<PlayerScriptableObject>().playershareAttrs;
     }
 
     public PlayerShareAttr GetPlayerShareAttr(PlayerType type)

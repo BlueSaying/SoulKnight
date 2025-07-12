@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class UnityTools
@@ -120,38 +121,93 @@ public class UnityTools
 
         return Convert.ChangeType(s, type);
     }
-    
+
+
+    private class ListInfo
+    {
+        public FieldInfo fieldInfo;
+        public MethodInfo addMethod;
+    }
+
     // 将文本写入list中
     public void WriteDataToList<T>(List<T> list, TextAsset textAsset) where T : new()
     {
         if (textAsset == null) return;
-        
+
         list.Clear();
 
+        Type type = typeof(T);
         string text = textAsset.text.Replace("\r", "");
         string[] rows = text.Split("\n");
 
         // 以逗号分割字段
-        string[] fieldName = rows[0].Split(",");
+        string[] fieldNames = rows[0].Split(",");
+
+        // *oldFieldName*用于创建链表
+        string preFieldName = null;
+        List<ListInfo> listInfos = new List<ListInfo>();
+
+        // 遍历所有fieldNames里的所有字段
+        foreach (string fieldName in fieldNames)
+        {
+            // NOTE:GetField方法可以获取type的成员变量（通过比较fieldName与成员变量名称进行字符串比较）
+            FieldInfo info = type.GetField(fieldName);
+
+            if (info == null)
+            {
+                throw new Exception("类型：" + type.ToString() + "中不存在成员变量：" + fieldName);
+            }
+
+            // 判断info.FieldType是否是IList类型
+            if (typeof(System.Collections.IList).IsAssignableFrom(info.FieldType))
+            {
+                if (fieldName != preFieldName)
+                {
+                    preFieldName = fieldName;
+                    ListInfo listInfo = new ListInfo();
+                    listInfo.fieldInfo = info;
+                    listInfo.addMethod = info.FieldType.GetMethod("Add");   // 获取List.Add方法
+                    listInfos.Add(listInfo);
+                }
+            }
+        }
 
         for (int i = 1; i < rows.Length; i++)
         {
             if (rows[i].Length == 0) continue;
 
             string[] columes = rows[i].Split(",");
-            Type type = typeof(T);
             T obj = (T)Activator.CreateInstance(type);
+
+            foreach (ListInfo info in listInfos)
+            {
+                info.fieldInfo.SetValue(obj, Activator.CreateInstance(typeof(List<>).MakeGenericType(info.fieldInfo.FieldType.GenericTypeArguments)));
+            }
 
             for (int j = 0; j < columes.Length; j++)
             {
-                FieldInfo fieldInfo = type.GetField(fieldName[j]);
+                FieldInfo fieldInfo = type.GetField(fieldNames[j]);
 
                 if (columes.Length == 0 || fieldInfo == null) continue;
 
-                fieldInfo.SetValue(obj, ConvertType(columes[j], fieldInfo.FieldType));
+                if (typeof(System.Collections.IList).IsAssignableFrom(fieldInfo.FieldType))
+                {
+                    foreach (ListInfo info in listInfos)
+                    {
+                        if (fieldInfo == info.fieldInfo)
+                        {
+                            info.addMethod.Invoke(fieldInfo.GetValue(obj), new object[] { ConvertType(columes[j], fieldInfo.FieldType.GenericTypeArguments[0]) });
+                        }
+                    }
+                }
+                else
+                {
+                    fieldInfo.SetValue(obj, ConvertType(columes[j], fieldInfo.FieldType));
+                }
             }
+
             list.Add(obj);
         }
     }
-    
+
 }

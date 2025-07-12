@@ -6,11 +6,12 @@ public class PlayerScriptableObject : ScriptableObject
 {
     public TextAsset textAsset;
 
+    // 储存所有角色的列表
     [SerializeField]
-    public List<PlayerShareAttr> attrs = new List<PlayerShareAttr>();
+    public List<PlayerShareAttr> playershareAttrs = new List<PlayerShareAttr>();
 
     private void OnValidate()
     {
-        UnityTools.Instance.WriteDataToList(attrs, textAsset);
+        UnityTools.Instance.WriteDataToList(playershareAttrs, textAsset);
     }
 }
