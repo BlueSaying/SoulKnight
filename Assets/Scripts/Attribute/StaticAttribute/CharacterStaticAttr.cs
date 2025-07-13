@@ -2,7 +2,7 @@
 using System;
 
 [Serializable]
-public abstract class CharacterShareAttr
+public abstract class CharacterStaticAttr
 {
     // 角色名称
     public string name;

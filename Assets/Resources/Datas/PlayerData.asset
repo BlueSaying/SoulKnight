@@ -9,8 +9,36 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c78d634d70994104abe9241c75a4f1b4, type: 3}
+  m_Script: {fileID: 11500000, guid: 0986b5a4423a0044c948e920c537eda6, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  textAsset: {fileID: 0}
-  playershareAttrs: []
+  textAsset: {fileID: 4900000, guid: 6035b8e80a62b5a4cb6da70067b6c995, type: 3}
+  playershareAttrs:
+  - name: "\u9A91\u58EB"
+    maxHp: 6
+    speed: 12
+    playerType: 0
+    defaultWeaponType: 0
+    armor: 5
+    energy: 180
+    critical: 5
+    handAttackDamage: 4
+    fightingSpeed: 7.5
+    finishFightingSpeed: 11.5
+    armorRecoveryTime: 1
+    hurtArmorRecoveryTime: 4
+    hurtInvincibleTime: 0.5
+  - name: "\u6E38\u4FA0"
+    maxHp: 5
+    speed: 12
+    playerType: 1
+    defaultWeaponType: 0
+    armor: 2
+    energy: 180
+    critical: 10
+    handAttackDamage: 5
+    fightingSpeed: 7.5
+    finishFightingSpeed: 11.5
+    armorRecoveryTime: 1
+    hurtArmorRecoveryTime: 4
+    hurtInvincibleTime: 0.5

@@ -2,13 +2,13 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "PlayerData", menuName = "ScriptableObjects/PlayerData")]
-public class PlayerScriptableObject : ScriptableObject
+public class PlayerSO : ScriptableObject
 {
     public TextAsset textAsset;
 
     // 储存所有角色的列表
     [SerializeField]
-    public List<PlayerShareAttr> playershareAttrs = new List<PlayerShareAttr>();
+    public List<PlayerStaticAttr> playershareAttrs = new List<PlayerStaticAttr>();
 
     private void OnValidate()
     {

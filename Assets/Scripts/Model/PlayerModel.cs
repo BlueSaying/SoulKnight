@@ -1,25 +1,14 @@
 ﻿using System.Collections.Generic;
 
-public class PlayerModel:AbstractModel
+public class PlayerModel : AbstractModel
 {
-    public List<PlayerShareAttr> data;
+    public List<PlayerStaticAttr> datas;
 
     protected override void OnInit()
     {
         base.OnInit();
-        data = ResourcesFactory.Instance.GetScriptableObject<PlayerScriptableObject>().playershareAttrs;
+        datas = ResourcesFactory.Instance.GetScriptableObject<PlayerSO>().playershareAttrs;
     }
 
-    public PlayerShareAttr GetPlayerShareAttr(PlayerType type)
-    {
-        foreach (var attr in data)
-        {
-            if(attr.playerType == type)
-            {
-                return attr;
-            }
-        }
-
-        return default;
-    }
+    
 }

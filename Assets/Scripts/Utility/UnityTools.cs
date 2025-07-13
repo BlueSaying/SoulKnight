@@ -181,6 +181,9 @@ public class UnityTools
 
             foreach (ListInfo info in listInfos)
             {
+                // 该语句实现对*obj*的*info.fieldInfo*字段的值的修改
+                // MakeGenericType用于将List<T>转换为List<info.fieldInfo.FieldType.GenericTypeArguments>
+                // GenericTypeArguments用于获取已构造的泛型类型的具体参数类型
                 info.fieldInfo.SetValue(obj, Activator.CreateInstance(typeof(List<>).MakeGenericType(info.fieldInfo.FieldType.GenericTypeArguments)));
             }
 
@@ -196,6 +199,7 @@ public class UnityTools
                     {
                         if (fieldInfo == info.fieldInfo)
                         {
+                            // Invoke用于执行Add方法
                             info.addMethod.Invoke(fieldInfo.GetValue(obj), new object[] { ConvertType(columes[j], fieldInfo.FieldType.GenericTypeArguments[0]) });
                         }
                     }

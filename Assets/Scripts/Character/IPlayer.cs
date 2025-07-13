@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class IPlayer : ICharacter
 {
+    public new PlayerDynamicAttr dynamicAttr { get => base.dynamicAttr as PlayerDynamicAttr; set => base.dynamicAttr = value; }
+
     protected Animator animator;
     protected PlayerStateMachine _playerStateMachine;
 
     protected List<IPlayerWeapon> weapons;
     protected IPlayerWeapon usingWeapon;
-
-    //public PlayerInput playerInput { get; protected set; }
 
     public IPlayer(GameObject obj) : base(obj) { }
 
@@ -30,7 +30,6 @@ public class IPlayer : ICharacter
             usingWeapon.GameUpdate();
             usingWeapon.ControlWeapon(Input.GetKeyDown(KeyCode.J));
             usingWeapon.RotateWeapon(GameMediator.Instance.GetController<InputController>().GetMovementInput());
-            //usingWeapon.RotateWeapon(playerInput.weaponDir);
         }
 
         if (Input.GetKeyDown(KeyCode.R))
@@ -95,9 +94,4 @@ public class IPlayer : ICharacter
     {
         return usingWeapon;
     }
-
-    //public void SetPlayerInput(PlayerInput playerInput)
-    //{
-    //    this.playerInput = playerInput;
-    //}
 }

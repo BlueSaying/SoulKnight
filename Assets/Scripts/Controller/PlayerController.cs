@@ -25,11 +25,11 @@ public class PlayerController : AbstractController
         //mainPlayer.SetPlayerInput(GameMediator.Instance.GetController<InputController>().input);
     }
 
-    public void SetMainPlayerSkin(PlayerSkinType skinType)
-    {
-        if (mainPlayer == null) throw new System.Exception("无角色，无法设置皮肤");
-
-        // TODO:implement this function
-        //mainPlayer
-    }
+    //public void SetMainPlayerSkin(PlayerSkinType skinType)
+    //{
+    //    if (mainPlayer == null) throw new System.Exception("无角色，无法设置皮肤");
+    //
+    //    //implement this function
+    //    //mainPlayer
+    //}
 }

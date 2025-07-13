@@ -43,8 +43,6 @@ public class ResourcesFactory
         return newWeapon;
     }
 
-    
-
     public RuntimeAnimatorController GetPlayerSkin(string name)
     {
         return Resources.LoadAll<RuntimeAnimatorController>(playerSkinPath + name).Where(x => x.name == name).ToArray()[0];
@@ -55,9 +53,14 @@ public class ResourcesFactory
     {
         Type type = typeof(T);
         string path = dataPath;
-        if(type == typeof(PlayerScriptableObject))
+
+        if (type == typeof(PlayerSO))
         {
             path += "PlayerData";
+        }
+        if (type == typeof(PlayerSkinSO))
+        {
+            path += "PlayerSkinData";
         }
 
         return Resources.Load<T>(path);

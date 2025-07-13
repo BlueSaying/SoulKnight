@@ -1,7 +1,7 @@
 ﻿using System;
 
 [Serializable]
-public class PlayerShareAttr : CharacterShareAttr
+public class PlayerStaticAttr : CharacterStaticAttr
 {
     // 角色类型
     public PlayerType playerType;

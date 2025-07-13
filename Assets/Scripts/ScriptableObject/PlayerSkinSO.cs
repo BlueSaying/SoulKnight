@@ -8,7 +8,7 @@ public class PlayerSkinSO : ScriptableObject
 
     // 储存所有角色皮肤的列表
     [SerializeField]
-    public List<PlayerSkinAttr> playerSkinAttrs = new List<PlayerSkinAttr>();
+    public List<PlayerSkinStaticAttr> playerSkinAttrs = new List<PlayerSkinStaticAttr>();
 
     private void OnValidate()
     {

@@ -12,5 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b14d3f27c6c50647be023c5df4b0080, type: 3}
   m_Name: PlayerSkinData
   m_EditorClassIdentifier: 
-  textAsset: {fileID: 0}
-  playerSkinAttrs: []
+  textAsset: {fileID: 4900000, guid: ae6410f0ae54dee4ab02b619ae6f1b3d, type: 3}
+  playerSkinAttrs:
+  - playerType: 0
+    playerSkinTypes: 0100000000000000
+  - playerType: 1
+    playerSkinTypes: 0200000003000000

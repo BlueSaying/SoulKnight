@@ -24,6 +24,7 @@ public class ModelContainer
         modelDic = new Dictionary<Type, AbstractModel>();
         AddModel(new SceneModel());
         AddModel(new PlayerModel());
+        AddModel(new PlayerSkinModel());
     }
 
     public T GetModel<T>() where T : AbstractModel

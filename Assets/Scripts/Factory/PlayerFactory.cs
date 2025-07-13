@@ -35,6 +35,36 @@ public class PlayerFactory
     public IPlayer GetPlayer(PlayerType playerType)
     {
         GameObject obj = GameObject.Find(playerType.ToString());
+        IPlayer player = GetPlayerObject(playerType, obj);
+
+
+        if (!UnityTools.Instance.GetComponentFromChildren<Symbol>(obj, "BulletCheckBox"))
+        {
+            UnityTools.Instance.GetTransformFromChildren(obj, "BulletCheckBox").AddComponent<Symbol>();
+        }
+        UnityTools.Instance.GetComponentFromChildren<Symbol>(obj, "BulletCheckBox").SetCharacter(player);
+
+        return player;
+    }
+
+    public IPlayer GetPlayer(PlayerStaticAttr staticAttr)
+    {
+        GameObject obj = GameObject.Find(staticAttr.playerType.ToString());
+        IPlayer player = GetPlayerObject(staticAttr.playerType, obj);
+
+        // TODO:player.SetAttr()
+
+        if (!UnityTools.Instance.GetComponentFromChildren<Symbol>(obj, "BulletCheckBox"))
+        {
+            UnityTools.Instance.GetTransformFromChildren(obj, "BulletCheckBox").AddComponent<Symbol>();
+        }
+        UnityTools.Instance.GetComponentFromChildren<Symbol>(obj, "BulletCheckBox").SetCharacter(player);
+
+        return player;
+    }
+
+    private IPlayer GetPlayerObject(PlayerType playerType, GameObject obj)
+    {
         IPlayer player = null;
 
         switch (playerType)
@@ -46,11 +76,6 @@ public class PlayerFactory
                 player = new Rogue(obj);
                 break;
         }
-        if (!UnityTools.Instance.GetComponentFromChildren<Symbol>(obj, "BulletCheckBox"))
-        {
-            UnityTools.Instance.GetTransformFromChildren(obj, "BulletCheckBox").AddComponent<Symbol>();
-        }
-        UnityTools.Instance.GetComponentFromChildren<Symbol>(obj, "BulletCheckBox").SetCharacter(player);
 
         return player;
     }
