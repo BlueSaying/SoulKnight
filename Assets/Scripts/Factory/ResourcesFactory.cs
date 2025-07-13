@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.Build.Reporting;
 using UnityEngine;
 
 // 专门用来管理从Resources文件加载东西的类
@@ -27,25 +28,34 @@ public class ResourcesFactory
     private Dictionary<string, GameObject> weaponDic;
     private string weaponPath = "Prefabs/Weapon/";
 
+    // 子弹路径
+
+    private string bulletPath = "Prefabs/Bullets/";
+
     // 角色皮肤路径
     private string playerSkinPath = "Animation/Characters/Players/";
 
     // 数据路径
     private string dataPath = "Datas/";
 
-    public GameObject GetWeapon(string name)
+    public GameObject GetWeapon(string weaponName)
     {
-        if (weaponDic.ContainsKey(name)) return weaponDic[name];
+        if (weaponDic.ContainsKey(weaponName)) return weaponDic[weaponName];
 
         // NOTE:此处可优化，因为每次都要遍历整个文件
-        GameObject newWeapon = Resources.LoadAll<GameObject>(weaponPath).Where(x => x.name == name).ToArray()[0];
-        weaponDic.Add(name, newWeapon);
+        GameObject newWeapon = Resources.LoadAll<GameObject>(weaponPath).Where(x => x.name == weaponName).ToArray()[0];
+        weaponDic.Add(weaponName, newWeapon);
         return newWeapon;
     }
 
-    public RuntimeAnimatorController GetPlayerSkin(string name)
+    public GameObject GetBullet(string bulletName)
     {
-        return Resources.LoadAll<RuntimeAnimatorController>(playerSkinPath + name).Where(x => x.name == name).ToArray()[0];
+        return Resources.LoadAll<GameObject>(bulletPath).Where(x=>x.name==bulletName).ToArray()[0];
+    }
+
+    public RuntimeAnimatorController GetPlayerSkin(string playerSkinName)
+    {
+        return Resources.LoadAll<RuntimeAnimatorController>(playerSkinPath + playerSkinName).Where(x => x.name == playerSkinName).ToArray()[0];
     }
 
     // 读取SO数据

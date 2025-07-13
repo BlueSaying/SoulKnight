@@ -1,22 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 
 public abstract class IWeapon
 {
-    public GameObject gameObject { get;protected set; }
+    // 武器的游戏物体
+    public GameObject gameObject { get; protected set; }
     public Transform transform => gameObject.transform;
-    protected ICharacter character;// ? 为什么要加这个成员变量
+    protected ICharacter character; // 代表哪个角色拥有该武器
+    protected GameObject firePoint;
 
     // 武器能否旋转
     protected bool canRotate;
 
     private bool isInit;
     private bool isEnter;
-    public IWeapon(GameObject gameObject,ICharacter character)
+    public IWeapon(GameObject gameObject, ICharacter character)
     {
         this.gameObject = gameObject;
         this.character = character;
@@ -34,14 +31,17 @@ public abstract class IWeapon
         OnUpdate();
     }
 
-    protected virtual void OnInit() { }
+    protected virtual void OnInit()
+    {
+        firePoint = UnityTools.Instance.GetTransformFromChildren(gameObject, "FirePoint").gameObject;
+    }
 
     // 每次切换至此武器时调用一次
     protected virtual void OnEnter() { }
 
     protected virtual void OnUpdate()
     {
-        if(!isEnter)
+        if (!isEnter)
         {
             isEnter = true;
             OnEnter();

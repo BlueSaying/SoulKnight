@@ -2,39 +2,44 @@
 {
     public class Facade : AbstractFacade
     {
-        private InputController _inputController;
-        private PlayerController _playerController;
-        private UIController _uiController;
+        private ItemController itemController;
+        private InputController inputController;
+        private PlayerController playerController;
+        private UIController uiController;
 
         private CameraSystem _cameraSystem;
 
         protected override void OnInit()
         {
             base.OnInit();
-            _inputController = new InputController();
-            _playerController = new PlayerController();
-            _uiController = new UIController();
+
+            itemController = new ItemController();
+            inputController = new InputController();
+            playerController = new PlayerController();
+            uiController = new UIController();
 
             _cameraSystem = new CameraSystem();
 
-            GameMediator.Instance.RegisterController(_inputController);
-            GameMediator.Instance.RegisterController(_playerController);
-            GameMediator.Instance.RegisterController(_uiController);
+            GameMediator.Instance.RegisterController(itemController);
+            GameMediator.Instance.RegisterController(inputController);
+            GameMediator.Instance.RegisterController(playerController);
+            GameMediator.Instance.RegisterController(uiController);
 
             GameMediator.Instance.RegisterSystem(_cameraSystem);
 
             EventCenter.Instance.RigisterEvent(EventType.OnSelectPlayerComplete, false, () =>
             {
-                _playerController.TurnOnController();
+                playerController.TurnOnController();
             });
 
         }
         protected override void OnUpdate()
         {
             base.OnUpdate();
-            _inputController.GameUpdate();
-            _playerController.GameUpdate();
-            _uiController.GameUpdate();
+            itemController.GameUpdate();
+            inputController.GameUpdate();
+            playerController.GameUpdate();
+            uiController.GameUpdate();
         }
     }
 }

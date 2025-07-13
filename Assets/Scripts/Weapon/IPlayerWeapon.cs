@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 
 public abstract class IPlayerWeapon : IWeapon
 {
@@ -11,17 +6,15 @@ public abstract class IPlayerWeapon : IWeapon
 
     protected GameObject rotOrigin;
 
-    private bool isAttackKeyDown;
     public bool isUsing;
 
     public IPlayerWeapon(GameObject gameObject, ICharacter character) : base(gameObject, character) { }
 
     public void ControlWeapon(bool isAttack)
     {
-        if (isAttack && !isAttackKeyDown)
+        if (isAttack)
         {
             OnFire();
-            isAttackKeyDown = true;
         }
     }
 

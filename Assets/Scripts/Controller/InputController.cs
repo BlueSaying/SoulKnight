@@ -20,6 +20,11 @@ public enum KeyInputType
     /// 玩家释放技能
     /// </summary>
     releaseSkill,
+
+    /// <summary>
+    /// 玩家射击
+    /// </summary>
+    shoot,
 }
 
 public class InputController : AbstractController
@@ -35,17 +40,8 @@ public class InputController : AbstractController
         // OPTIMIZE:实现玩家自定义按键
         inputDic[KeyInputType.pickUp] = KeyCode.F;
         inputDic[KeyInputType.switchWeapon] = KeyCode.R;
+        inputDic[KeyInputType.shoot]= KeyCode.J;
         inputDic[KeyInputType.releaseSkill] = KeyCode.Space;
-    }
-
-    protected override void OnInit()
-    {
-        base.OnInit();
-    }
-
-    protected override void AlwaysUpdate()
-    {
-        base.AlwaysUpdate();
     }
 
     public Vector2 GetMovementInput()

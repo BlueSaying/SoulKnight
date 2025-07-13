@@ -15,11 +15,11 @@ public class ICharacter
         {
             if (value)
             {
-                transform.localScale = new Vector3(-1, 1, 0);
+                transform.rotation = Quaternion.Euler(0, 180, 0);
             }
             else
             {
-                transform.localScale = new Vector3(1, 1, 0);
+                transform.rotation = Quaternion.identity;
             }
             _isLeft = value;
 

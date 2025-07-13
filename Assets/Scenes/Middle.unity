@@ -27715,7 +27715,7 @@ GameObject:
   m_Component:
   - component: {fileID: 791508179}
   m_Layer: 0
-  m_Name: Environment
+  m_Name: Entity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29600,7 +29600,7 @@ GameObject:
   - component: {fileID: 1157165001}
   - component: {fileID: 1157165000}
   - component: {fileID: 1157165002}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TilemapWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
