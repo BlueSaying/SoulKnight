@@ -6,7 +6,7 @@ public class IPlayer : ICharacter
     public new PlayerDynamicAttr dynamicAttr { get => base.dynamicAttr as PlayerDynamicAttr; set => base.dynamicAttr = value; }
 
     protected Animator animator;
-    protected PlayerStateMachine _playerStateMachine;
+    protected PlayerStateMachine playerStateMachine;
 
     protected List<IPlayerWeapon> weapons;
     protected IPlayerWeapon usingWeapon;
@@ -16,20 +16,20 @@ public class IPlayer : ICharacter
     protected override void OnInit()
     {
         base.OnInit();
-        _playerStateMachine = new PlayerStateMachine(this);
         weapons = new List<IPlayerWeapon>();
         animator = transform.Find("Sprite").GetComponent<Animator>();
     }
+
     protected override void OnCharacterUpdate()
     {
         base.OnCharacterUpdate();
-        _playerStateMachine.GameUpdate();
+        playerStateMachine.GameUpdate();
 
         if (usingWeapon != null)
         {
             usingWeapon.GameUpdate();
             usingWeapon.ControlWeapon(GameMediator.Instance.GetController<InputController>().GetKeyInput(KeyInputType.shoot));
-            usingWeapon.RotateWeapon(GameMediator.Instance.GetController<InputController>().GetMovementInput());
+            usingWeapon.RotateWeapon(GameMediator.Instance.GetController<InputController>().GetMoveInput());
         }
 
         if (Input.GetKeyDown(KeyCode.R))

@@ -4,10 +4,10 @@ public class Rogue : IPlayer
 {
     public Rogue(GameObject obj) : base(obj) { }
 
-    protected override void OnInit()
+    protected override void OnCharacterStart()
     {
-        base.OnInit();
-        _playerStateMachine.SwitchState<RogueIdleState>();
+        base.OnCharacterStart();
+        playerStateMachine = new RogueStateMachine(this);
     }
-    
+
 }

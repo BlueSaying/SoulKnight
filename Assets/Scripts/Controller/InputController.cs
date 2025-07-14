@@ -44,7 +44,7 @@ public class InputController : AbstractController
         inputDic[KeyInputType.releaseSkill] = KeyCode.Space;
     }
 
-    public Vector2 GetMovementInput()
+    public Vector2 GetMoveInput()
     {
         return new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
     }

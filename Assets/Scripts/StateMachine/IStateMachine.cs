@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public abstract class IStateMachine
 {
     private Dictionary<Type, IState> stateDic;
-    private IState currentState;
+    protected IState currentState;
+
     public IStateMachine()
     {
         stateDic = new Dictionary<Type, IState>();
@@ -24,12 +26,17 @@ public abstract class IStateMachine
 
         currentState = stateDic[typeof(T)];
     }
+
     public void StopCurrentState()
     {
         currentState?.OnExit();
     }
+
     public void GameUpdate()
     {
         currentState?.GameUpdate();
+        OnUpdate();
     }
+
+    protected virtual void OnUpdate() { }
 }

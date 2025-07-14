@@ -3,10 +3,10 @@
 public class Knight : IPlayer
 {
     public Knight(GameObject obj) : base(obj) { }
-    protected override void OnInit()
+
+    protected override void OnCharacterStart()
     {
-        base.OnInit();
-        _playerStateMachine.SwitchState<KnightIdleState>();
+        base.OnCharacterStart();
+        playerStateMachine = new KnightStateMachine(this);
     }
-    
 }
