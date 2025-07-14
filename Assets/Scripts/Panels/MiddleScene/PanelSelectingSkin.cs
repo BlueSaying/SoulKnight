@@ -24,8 +24,6 @@ namespace MiddleScene
         {
             base.OnInit();
 
-
-
             // 返回上级菜单
             UnityTools.Instance.GetComponentFromChildren<Button>(panel, "ButtonBack").onClick.AddListener(() =>
             {
@@ -35,7 +33,9 @@ namespace MiddleScene
             // 下一步
             UnityTools.Instance.GetComponentFromChildren<Button>(panel, "ButtonNext").onClick.AddListener(() =>
             {
-                EventCenter.Instance.NotifyEvent(EventType.OnSelectSkinComplete);
+                EventCenter.Instance.NotifyEvent(EventType.OnSelectSkinComplete);// TODO:读取数据填写UI
+                // 解除冻结位置，即仅设置冻结旋转
+                GameMediator.Instance.GetController<PlayerController>().mainPlayer.rb.constraints = RigidbodyConstraints2D.FreezeRotation;
                 panel.SetActive(false);
                 EnterPanel<PanelBattle>();
             });
@@ -54,18 +54,12 @@ namespace MiddleScene
                 curSkinIndex = (curSkinIndex + 1) % playerSkins.Count;
                 selectingPlayer.transform.Find("Sprite").GetComponent<Animator>().runtimeAnimatorController =
                 ResourcesFactory.Instance.GetPlayerSkin(playerSkins[curSkinIndex].ToString());
-                // GameMediator.Instance.GetController<PlayerController>().SetMainPlayerSkin(Enum.Parse<PlayerSkinType>(skinName));
             });
 
             EventCenter.Instance.RigisterEvent(EventType.OnSelectSkinComplete, false, () =>
             {
                 panel.SetActive(false);
             });
-        }
-
-        protected override void OnEnter()
-        {
-            base.OnEnter();
         }
 
         public void SetSelectingPlayer(GameObject selectingPlayer)

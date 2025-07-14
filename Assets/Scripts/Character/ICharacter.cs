@@ -2,10 +2,11 @@
 
 public class ICharacter
 {
-    public CharacterDynamicAttr dynamicAttr {  get; protected set; }
+    public CharacterDynamicAttr dynamicAttr { get; protected set; }
 
     public GameObject gameObject { get; protected set; }
     public Transform transform => gameObject.transform;
+    public Rigidbody2D rb => gameObject.GetComponent<Rigidbody2D>();
 
     private bool _isLeft;
     public bool isLeft

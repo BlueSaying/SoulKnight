@@ -8,10 +8,10 @@ public class PlayerSO : ScriptableObject
 
     // 储存所有角色的列表
     [SerializeField]
-    public List<PlayerStaticAttr> playershareAttrs = new List<PlayerStaticAttr>();
+    public List<PlayerStaticAttr> attrs = new List<PlayerStaticAttr>();
 
     private void OnValidate()
     {
-        UnityTools.Instance.WriteDataToList(playershareAttrs, textAsset);
+        UnityTools.Instance.WriteDataToList(attrs, textAsset);
     }
 }

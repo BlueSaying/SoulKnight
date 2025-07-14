@@ -1,5 +1,29 @@
 ﻿using UnityEngine;
 
+public enum WeaponCategory
+{
+    Pistol,
+    Rifle,
+    Missile,
+    Staff,
+    Other,
+    Shotgun,
+    ThrownWeapon,
+    Bow,
+    CloseCombat,
+}
+
+public enum QualityType
+{
+    White,
+    Green,
+    Blue,
+    Purple,
+    Orange,
+    Red,
+    colorful,
+}
+
 public abstract class IWeapon
 {
     // 武器的游戏物体

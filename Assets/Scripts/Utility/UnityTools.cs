@@ -5,7 +5,7 @@ using System.Reflection;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class UnityTools:Singleton<UnityTools>
+public class UnityTools : Singleton<UnityTools>
 {
     private UnityTools() { }
 
@@ -66,7 +66,12 @@ public class UnityTools:Singleton<UnityTools>
         return default;
     }
 
-    // 检查一个类型是否继承或实现了特定的泛型类型（包括泛型接口）
+    /// <summary>
+    /// 检查一个类型是否继承或实现了特定的泛型类型（包括泛型接口）
+    /// </summary>
+    /// <param name="type"></param>
+    /// <param name="genericType"></param>
+    /// <returns></returns>
     public bool isGenericType(Type type, Type genericType)
     {
         if (type == null || genericType == null) return false;
@@ -89,7 +94,12 @@ public class UnityTools:Singleton<UnityTools>
         }
     }
 
-    // 将字符串转换为指定类型的值
+    /// <summary>
+    /// 将字符串转换为指定类型的值
+    /// </summary>
+    /// <param name="s"></param>
+    /// <param name="type"></param>
+    /// <returns></returns>
     public object ConvertType(string s, Type type)
     {
         if (s == "TRUE")
@@ -104,7 +114,15 @@ public class UnityTools:Singleton<UnityTools>
         // 检查type是否是枚举类型
         if (typeof(Enum).IsAssignableFrom(type))
         {
-            return Enum.Parse(type, s);
+
+            if (Enum.TryParse(type, s, out object result))
+            {
+                return result;
+            }
+            else
+            {
+                return default;
+            }
         }
 
         return Convert.ChangeType(s, type);
@@ -117,7 +135,13 @@ public class UnityTools:Singleton<UnityTools>
         public MethodInfo addMethod;
     }
 
-    // 将文本写入list中
+    /// <summary>
+    /// 将文本写入list中
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="list"></param>
+    /// <param name="textAsset"></param>
+    /// <exception cref="Exception"></exception>
     public void WriteDataToList<T>(List<T> list, TextAsset textAsset) where T : new()
     {
         if (textAsset == null) return;
@@ -187,19 +211,22 @@ public class UnityTools:Singleton<UnityTools>
                     {
                         if (fieldInfo == info.fieldInfo)
                         {
+                            object val = ConvertType(columes[j], fieldInfo.FieldType.GenericTypeArguments[0]);
+                            if (val == null) throw new Exception("无法转换类型" + fieldInfo.FieldType);
                             // Invoke用于执行Add方法
-                            info.addMethod.Invoke(fieldInfo.GetValue(obj), new object[] { ConvertType(columes[j], fieldInfo.FieldType.GenericTypeArguments[0]) });
+                            info.addMethod.Invoke(fieldInfo.GetValue(obj), new object[] { val });
                         }
                     }
                 }
                 else
                 {
-                    fieldInfo.SetValue(obj, ConvertType(columes[j], fieldInfo.FieldType));
+                    object val = ConvertType(columes[j], fieldInfo.FieldType);
+                    if (val == null) throw new Exception("无法转换类型" + fieldInfo.FieldType);
+                    fieldInfo.SetValue(obj, val);
                 }
             }
 
             list.Add(obj);
         }
     }
-
 }

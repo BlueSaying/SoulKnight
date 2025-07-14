@@ -7,7 +7,7 @@ public class PlayerModel : AbstractModel
     protected override void OnInit()
     {
         base.OnInit();
-        datas = ResourcesFactory.Instance.GetScriptableObject<PlayerSO>().playershareAttrs;
+        datas = ResourcesFactory.Instance.GetScriptableObject<PlayerSO>().attrs;
     }
 
     

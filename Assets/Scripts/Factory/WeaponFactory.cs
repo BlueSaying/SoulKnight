@@ -3,7 +3,33 @@
 public enum PlayerWeaponType
 {
     BadPistol,
-    Ak47
+    Ak47,
+    H2O,
+    P250Pistol,
+    Furnace,
+    Icebreaker,
+    PKP,
+    AK47,
+    UZI,
+    SnowFoxL,
+    AssaultRifle,
+    MissileBattery,
+    TheCode,
+    TheCodePlus,
+    CrimsonWineGlass,
+    DesertEagle,
+    GrenadePistol,
+    NextNextNextGenSMG,
+    EagleOfIceAndFire,
+    DormantBubbleMachine,
+    Basketball,
+    Bow,
+    Shower,
+    GatlingGun,
+    DoubleBladeSword,
+    WoodenCross,
+    BlueFireGatling,
+    RainbowGatling,
 }
 
 public class WeaponFactory

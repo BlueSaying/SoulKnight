@@ -8,8 +8,6 @@ public class PickUpableWeapon : MonoBehaviour
 
     private IPlayer player;
 
-    private void Start() { }
-
     private void Update()
     {
         if (isPlayerEnter)

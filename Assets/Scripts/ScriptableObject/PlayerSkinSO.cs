@@ -8,10 +8,10 @@ public class PlayerSkinSO : ScriptableObject
 
     // 储存所有角色皮肤的列表
     [SerializeField]
-    public List<PlayerSkinStaticAttr> playerSkinAttrs = new List<PlayerSkinStaticAttr>();
+    public List<PlayerSkinStaticAttr> attrs = new List<PlayerSkinStaticAttr>();
 
     private void OnValidate()
     {
-        UnityTools.Instance.WriteDataToList(playerSkinAttrs, textAsset);
+        UnityTools.Instance.WriteDataToList(attrs, textAsset);
     }
 }

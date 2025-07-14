@@ -7,6 +7,6 @@ public class PlayerSkinModel : AbstractModel
     protected override void OnInit()
     {
         base.OnInit();
-        datas = ResourcesFactory.Instance.GetScriptableObject<PlayerSkinSO>().playerSkinAttrs;
+        datas = ResourcesFactory.Instance.GetScriptableObject<PlayerSkinSO>().attrs;
     }
 }
