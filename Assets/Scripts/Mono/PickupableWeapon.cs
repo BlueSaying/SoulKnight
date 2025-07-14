@@ -20,7 +20,6 @@ public class PickUpableWeapon : MonoBehaviour
                 // TODO:捡起武器后按F仍有效果bug
                 player.AddWeapon(System.Enum.Parse<PlayerWeaponType>(name));
                 Destroy(gameObject);
-                Debug.Log("捡起武器");
             }
         }
     }

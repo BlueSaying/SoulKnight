@@ -2,21 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ModelContainer
+public class ModelContainer : Singleton<ModelContainer>
 {
-    private static ModelContainer _instance;
-    public static ModelContainer Instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = new ModelContainer();
-            }
-            return _instance;
-        }
-    }
-
     private Dictionary<Type, AbstractModel> modelDic;
 
     private ModelContainer()

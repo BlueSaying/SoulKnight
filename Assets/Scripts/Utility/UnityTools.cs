@@ -5,20 +5,8 @@ using System.Reflection;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class UnityTools
+public class UnityTools:Singleton<UnityTools>
 {
-    private static UnityTools _instance;
-    public static UnityTools Instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = new UnityTools();
-            }
-            return _instance;
-        }
-    }
     private UnityTools() { }
 
     /// <summary>

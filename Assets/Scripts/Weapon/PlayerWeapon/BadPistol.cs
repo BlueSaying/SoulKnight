@@ -8,10 +8,8 @@ public class BadPistol : IPlayerWeapon
     {
         base.OnFire();
 
-        Quaternion quaternion = rotOrigin.transform.rotation;
-        GameObject obj = Object.Instantiate(ResourcesFactory.Instance.GetBullet("Bullet_5"), firePoint.transform.position, quaternion);
-        Bullet_5 bullet = new Bullet_5(obj);
-        
+        Bullet_5 bullet = ItemFactory.Instance.GetPlayerBullet(PlayerBulletType.Bullet_5, firePoint.transform.position, rotOrigin.transform.rotation) as Bullet_5;
+
         bullet.ManagedToController();
     }
 }

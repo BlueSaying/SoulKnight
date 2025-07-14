@@ -4,21 +4,13 @@ public class Bullet_5 : BasePlayerBullet
 {
     public Bullet_5(GameObject gameObject) : base(gameObject) { }
 
-    public override void OnEnter()
+    protected override void OnHitObstacle()
     {
-        base.OnEnter();
-    }
+        base.OnHitObstacle();
 
-    protected override void OnUpdate()
-    {
-        base.OnUpdate();
+        EffectBoom effect = ItemFactory.Instance.GetEffect(EffectType.EffectBoom, position, Quaternion.identity) as EffectBoom;
 
-        if (Physics2D.OverlapCircle(position, 0.01f, LayerMask.GetMask("Obstacle")))
-        {
-            Remove();
-        }
-
-        transform.position += rotation * Vector2.right * 30 * Time.deltaTime;
+        effect.ManagedToController();
     }
 
 }

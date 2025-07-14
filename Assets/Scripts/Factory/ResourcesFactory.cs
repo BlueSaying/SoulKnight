@@ -26,11 +26,13 @@ public class ResourcesFactory
 
     // 用于储存已经加载过的武器
     private Dictionary<string, GameObject> weaponDic;
-    private string weaponPath = "Prefabs/Weapon/";
+    private string weaponPath = "Prefabs/Weapons/";
 
     // 子弹路径
-
     private string bulletPath = "Prefabs/Bullets/";
+
+    // 特效路径
+    private string effectPath = "Prefabs/Effects/";
 
     // 角色皮肤路径
     private string playerSkinPath = "Animation/Characters/Players/";
@@ -50,7 +52,12 @@ public class ResourcesFactory
 
     public GameObject GetBullet(string bulletName)
     {
-        return Resources.LoadAll<GameObject>(bulletPath).Where(x=>x.name==bulletName).ToArray()[0];
+        return Resources.LoadAll<GameObject>(bulletPath).Where(x => x.name == bulletName).ToArray()[0];
+    }
+
+    public GameObject GetEffect(string effectName)
+    {
+        return Resources.LoadAll<GameObject>(effectPath).Where(x => x.name == effectName).ToArray()[0];
     }
 
     public RuntimeAnimatorController GetPlayerSkin(string playerSkinName)

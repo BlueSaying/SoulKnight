@@ -25,7 +25,7 @@ public class Item
             OnExit();
             hasRemoved = true;
         }
-        Debug.Log("zidan   "+hasRemoved);
+
         OnUpdate();
     }
 

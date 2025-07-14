@@ -5,34 +5,34 @@ using UnityEngine;
 
 public class ItemController : AbstractController
 {
-    private List<Item> bullets;
+    private List<Item> items;
 
     protected override void OnInit()
     {
         base.OnInit();
-        bullets = new List<Item>();
+        items = new List<Item>();
     }
 
     protected override void AlwaysUpdate()
     {
         base.AlwaysUpdate();
 
-        for (int i = 0; i < bullets.Count; i++)
+        for (int i = 0; i < items.Count; i++)
         {
-            if (bullets[i].hasRemoved)
+            if (items[i].hasRemoved)
             {
                 // TODO:实现删除游戏物体
-                bullets.RemoveAt(i);
+                items.RemoveAt(i);
             }
             else
             {
-                bullets[i].GameUpdate();
+                items[i].GameUpdate();
             }
         }
     }
 
-    public void AddItem(Item bullet)
+    public void AddItem(Item item)
     {
-        bullets.Add(bullet);
+        items.Add(item);
     }
 }

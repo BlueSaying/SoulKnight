@@ -54,5 +54,5 @@ public abstract class IWeapon
     }
 
     // 发射时执行
-    protected virtual void OnFire() { Debug.Log("开炮！！！"); }
+    protected virtual void OnFire() { }
 }
