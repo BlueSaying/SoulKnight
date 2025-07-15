@@ -53,6 +53,7 @@ public class WeaponFactory
     public IPlayerWeapon GetPlayerWeapon(PlayerWeaponType type, ICharacter character)
     {
         GameObject GunOriginPoint = UnityTools.Instance.GetTransformFromChildren(character.gameObject, "GunOriginPoint").gameObject;
+        PlayerWeaponStaticAttr staticAttr = WeaponCommand.Instance.GetPlayerWeaponStaticAttr(type);
         // TODO:应该设置预制件中无pickupable脚本，仅在生成武器时添加pickupable脚本
         GameObject obj = Object.Instantiate(ResourcesFactory.Instance.GetWeapon(type.ToString()), GunOriginPoint.transform);
         obj.name = type.ToString();
@@ -63,12 +64,14 @@ public class WeaponFactory
         switch (type)
         {
             case PlayerWeaponType.BadPistol:
-                weapon = new BadPistol(obj, character);
+                weapon = new BadPistol(obj, character, staticAttr);
                 break;
             case PlayerWeaponType.Ak47:
-                weapon = new Ak47(obj, character);
+                weapon = new Ak47(obj, character, staticAttr);
                 break;
         }
+
+        Debug.Log(weapon.staticAttr.fireRate);
 
         return weapon;
     }

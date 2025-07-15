@@ -2,30 +2,13 @@
 
 public class Ak47 : IPlayerWeapon
 {
-    public Ak47(GameObject gameObject, ICharacter character) : base(gameObject, character) { }
-
-    public override void OnExit()
-    {
-        base.OnExit();
-    }
-
-    protected override void OnEnter()
-    {
-        base.OnEnter();
-    }
+    public Ak47(GameObject gameObject, ICharacter character, PlayerWeaponStaticAttr staticAttr) : base(gameObject, character, staticAttr) { }
 
     protected override void OnFire()
     {
         base.OnFire();
-    }
 
-    protected override void OnInit()
-    {
-        base.OnInit();
-    }
-
-    protected override void OnUpdate()
-    {
-        base.OnUpdate();
+        Bullet_5 bullet = ItemFactory.Instance.GetPlayerBullet(PlayerBulletType.Bullet_5, firePoint.transform.position, rotOrigin.transform.rotation) as Bullet_5;
+        bullet.ManagedToController();
     }
 }

@@ -79,6 +79,10 @@ public class ResourcesFactory
         {
             path += "PlayerSkinData";
         }
+        if (type == typeof(PlayerWeaponSO))
+        {
+            path += "PlayerWeaponData";
+        }
 
         return Resources.Load<T>(path);
     }

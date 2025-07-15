@@ -32,7 +32,7 @@ public class IPlayer : ICharacter
         if (usingWeapon != null)
         {
             usingWeapon.GameUpdate();
-            usingWeapon.ControlWeapon(GameMediator.Instance.GetController<InputController>().GetKeyDownInput(KeyInputType.shoot));
+            usingWeapon.ControlWeapon(GameMediator.Instance.GetController<InputController>().GetKeyInput(KeyInputType.shoot));
             usingWeapon.RotateWeapon(GameMediator.Instance.GetController<InputController>().GetMoveInput());
         }
 

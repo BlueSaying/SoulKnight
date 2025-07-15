@@ -3,17 +3,42 @@
 public abstract class IPlayerWeapon : IWeapon
 {
     public IPlayer player { get => base.character as IPlayer; set => base.character = value; }
+    public PlayerWeaponStaticAttr staticAttr { get; protected set; }
 
     protected GameObject rotOrigin;
 
+    // 射击冷却计时器
+    private float fireTimer;
     public bool isUsing;
 
-    public IPlayerWeapon(GameObject gameObject, ICharacter character) : base(gameObject, character) { }
+    public IPlayerWeapon(GameObject gameObject, ICharacter character, PlayerWeaponStaticAttr staticAttr) : base(gameObject, character)
+    {
+        this.staticAttr = staticAttr;
+    }
+
+    protected override void OnInit()
+    {
+        base.OnInit();
+        rotOrigin = UnityTools.Instance.GetTransformFromChildren(gameObject, "RotOrigin").gameObject;
+    }
+
+    protected override void OnEnter()
+    {
+        base.OnEnter();
+        fireTimer = 1 / staticAttr.fireRate;
+    }
+
+    protected override void OnUpdate()
+    {
+        base.OnUpdate();
+        fireTimer += Time.deltaTime;
+    }
 
     public void ControlWeapon(bool isAttack)
     {
-        if (isAttack)
+        if (isAttack && fireTimer >= 1 / staticAttr.fireRate)
         {
+            fireTimer = 0f;// NOTE:删除此语句解除武器限制
             OnFire();
         }
     }
@@ -34,11 +59,5 @@ public abstract class IPlayerWeapon : IWeapon
 
             rotOrigin.transform.localRotation = Quaternion.Euler(0, 0, angle);
         }
-    }
-
-    protected override void OnInit()
-    {
-        base.OnInit();
-        rotOrigin = UnityTools.Instance.GetTransformFromChildren(gameObject, "RotOrigin").gameObject;
     }
 }
