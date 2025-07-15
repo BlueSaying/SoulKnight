@@ -15,20 +15,8 @@ public enum PlayerSkinType
     RogueKun,
 }
 
-public class PlayerFactory
+public class PlayerFactory:Singleton<PlayerFactory>
 {
-    private static PlayerFactory _instance;
-    public static PlayerFactory Instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = new PlayerFactory();
-            }
-            return _instance;
-        }
-    }
     private PlayerFactory() { }
 
     // NOTE:给定playerType，返回相应的IPlayer 每次创建新角色后都应该在此处书写

@@ -5,39 +5,31 @@ using UnityEditor.Build.Reporting;
 using UnityEngine;
 
 // 专门用来管理从Resources文件加载东西的类
-public class ResourcesFactory
+public class ResourcesFactory : Singleton<ResourcesFactory>
 {
-    private static ResourcesFactory _instance;
-    public static ResourcesFactory Instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = new ResourcesFactory();
-            }
-            return _instance;
-        }
-    }
     private ResourcesFactory()
     {
         weaponDic = new Dictionary<string, GameObject>();
+        bulletDic = new Dictionary<string, GameObject>();
+        effectDic = new Dictionary<string, GameObject>();
     }
 
-    // 用于储存已经加载过的武器
+    // 武器
     private Dictionary<string, GameObject> weaponDic;
     private string weaponPath = "Prefabs/Weapons/";
 
-    // 子弹路径
+    // 子弹
+    private Dictionary<string, GameObject> bulletDic;
     private string bulletPath = "Prefabs/Bullets/";
 
-    // 特效路径
+    // 特效
+    private Dictionary<string, GameObject> effectDic;
     private string effectPath = "Prefabs/Effects/";
 
-    // 角色皮肤路径
+    // 角色皮肤
     private string playerSkinPath = "Animation/Characters/Players/";
 
-    // 数据路径
+    // 数据
     private string dataPath = "Datas/";
 
     public GameObject GetWeapon(string weaponName)
@@ -52,12 +44,20 @@ public class ResourcesFactory
 
     public GameObject GetBullet(string bulletName)
     {
-        return Resources.LoadAll<GameObject>(bulletPath).Where(x => x.name == bulletName).ToArray()[0];
+        if (bulletDic.ContainsKey(bulletName)) return bulletDic[bulletName];
+
+        GameObject newBullet = Resources.LoadAll<GameObject>(bulletPath).Where(x => x.name == bulletName).ToArray()[0];
+        bulletDic.Add(bulletName, newBullet);
+        return newBullet;
     }
 
     public GameObject GetEffect(string effectName)
     {
-        return Resources.LoadAll<GameObject>(effectPath).Where(x => x.name == effectName).ToArray()[0];
+        if (effectDic.ContainsKey(effectName)) return effectDic[effectName];
+
+        GameObject newEffect = Resources.LoadAll<GameObject>(effectPath).Where(x => x.name == effectName).ToArray()[0];
+        effectDic.Add(effectName, newEffect);
+        return newEffect;
     }
 
     public RuntimeAnimatorController GetPlayerSkin(string playerSkinName)

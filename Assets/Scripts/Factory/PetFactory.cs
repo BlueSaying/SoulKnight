@@ -13,6 +13,7 @@ public class PetFactory : Singleton<PetFactory>
 
     public BasePet GetPet(PetType type, IPlayer owner)
     {
+        // TOD:modify it later
         GameObject obj = GameObject.Find(type.ToString());
         BasePet pet = null;
 

@@ -32,20 +32,8 @@ public enum PlayerWeaponType
     RainbowGatling,
 }
 
-public class WeaponFactory
+public class WeaponFactory:Singleton<WeaponFactory>
 {
-    private static WeaponFactory _instance;
-    public static WeaponFactory Instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = new WeaponFactory();
-            }
-            return _instance;
-        }
-    }
     private WeaponFactory() { }
 
     // 给*character*角色添加一个*type*类型的武器并
@@ -70,8 +58,6 @@ public class WeaponFactory
                 weapon = new Ak47(obj, character, staticAttr);
                 break;
         }
-
-        Debug.Log(weapon.staticAttr.fireRate);
 
         return weapon;
     }
