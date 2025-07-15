@@ -1,4 +1,4 @@
-﻿public class PlayerDynamicAttr:CharacterDynamicAttr
+﻿public class PlayerDynamicAttr : CharacterDynamicAttr
 {
     public PlayerSkinType playerSkinType;
 }

@@ -7,4 +7,9 @@ public class AttributeFactory : Singleton<AttributeFactory>
     //{
     //    return new PlayerDynamicAttr(PlayerCommand.Instance.GetPlayerStaticAttr(playerType));
     //}
+
+    public PetStaticAttr GetPetStaticAttr(PetType petType)
+    {
+        return null;
+    }
 }

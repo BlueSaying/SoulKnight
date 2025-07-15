@@ -7,7 +7,7 @@ public class Rogue : IPlayer
     protected override void OnCharacterStart()
     {
         base.OnCharacterStart();
-        playerStateMachine = new RogueStateMachine(this);
+        stateMachine = new RogueStateMachine(this);
     }
 
 }

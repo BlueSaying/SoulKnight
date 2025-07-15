@@ -2,6 +2,7 @@
 
 public class ICharacter
 {
+    public CharacterStaticAttr staticAttr { get;protected set; }
     public CharacterDynamicAttr dynamicAttr { get; protected set; }
 
     public GameObject gameObject { get; protected set; }

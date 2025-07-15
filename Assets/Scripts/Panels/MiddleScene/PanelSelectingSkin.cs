@@ -67,7 +67,7 @@ namespace MiddleScene
             this.selectingPlayer = selectingPlayer;
 
             // 同时获取该角色的皮肤
-            playerSkins = PlayerCommand.Instance.GetPlayerSkinStaticTypes(Enum.Parse<PlayerType>(selectingPlayer.name));
+            playerSkins = PlayerCommand.Instance.GetPlayerSkinTypes(Enum.Parse<PlayerType>(selectingPlayer.name));
         }
     }
 }

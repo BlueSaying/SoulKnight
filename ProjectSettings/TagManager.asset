@@ -13,7 +13,7 @@ TagManager:
   - UI
   - Player
   - Obstacle
-  - 
+  - Pet
   - 
   - 
   - 
@@ -43,6 +43,9 @@ TagManager:
     locked: 0
   - name: Floor
     uniqueID: 357371293
+    locked: 0
+  - name: Pet
+    uniqueID: 748954443
     locked: 0
   - name: Player
     uniqueID: 1083438317

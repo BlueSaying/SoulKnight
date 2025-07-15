@@ -7,6 +7,6 @@ public class Knight : IPlayer
     protected override void OnCharacterStart()
     {
         base.OnCharacterStart();
-        playerStateMachine = new KnightStateMachine(this);
+        stateMachine = new KnightStateMachine(this);
     }
 }

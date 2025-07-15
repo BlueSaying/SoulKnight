@@ -11,21 +11,21 @@ public class RogueStateMachine : PlayerStateMachine
     {
         base.OnUpdate();
 
-        if (currentState is PlayerIdleState)
+        if (curState is PlayerIdleState)
         {
             if (GameMediator.Instance.GetController<InputController>().GetMoveInput() != Vector2.zero)
             {
                 SwitchState<PlayerRunState>();
             }
         }
-        if (currentState is PlayerRunState)
+        if (curState is PlayerRunState)
         {
             if (GameMediator.Instance.GetController<InputController>().GetMoveInput() == Vector2.zero)
             {
                 SwitchState<PlayerIdleState>();
             }
         }
-        if(currentState is PlayerRollState)
+        if(curState is PlayerRollState)
         {
             
         }

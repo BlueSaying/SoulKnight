@@ -26,7 +26,7 @@ public class PlayerCommand : Singleton<PlayerCommand>
     }
 
     // 获取特定角色类型的所有皮肤
-    public List<PlayerSkinType> GetPlayerSkinStaticTypes(PlayerType playerType)
+    public List<PlayerSkinType> GetPlayerSkinTypes(PlayerType playerType)
     {
         foreach(var playerSkin in playerSkinModel.datas)
         {

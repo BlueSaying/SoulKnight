@@ -102,6 +102,8 @@ public class UnityTools : Singleton<UnityTools>
     /// <returns></returns>
     public object ConvertType(string s, Type type)
     {
+        if (s == "None") return null;
+
         if (s == "TRUE")
         {
             return true;
@@ -121,11 +123,19 @@ public class UnityTools : Singleton<UnityTools>
             }
             else
             {
-                return default;
+                throw new Exception("无法转换类型" + type);
             }
         }
 
-        return Convert.ChangeType(s, type);
+        object obj = Convert.ChangeType(s, type);
+        if (obj == null)
+        {
+            throw new Exception("无法转换类型" + type);
+        }
+        else
+        {
+            return obj;
+        }
     }
 
 
@@ -212,7 +222,7 @@ public class UnityTools : Singleton<UnityTools>
                         if (fieldInfo == info.fieldInfo)
                         {
                             object val = ConvertType(columes[j], fieldInfo.FieldType.GenericTypeArguments[0]);
-                            if (val == null) throw new Exception("无法转换类型" + fieldInfo.FieldType);
+                            if (val == null) continue;
                             // Invoke用于执行Add方法
                             info.addMethod.Invoke(fieldInfo.GetValue(obj), new object[] { val });
                         }
@@ -221,7 +231,7 @@ public class UnityTools : Singleton<UnityTools>
                 else
                 {
                     object val = ConvertType(columes[j], fieldInfo.FieldType);
-                    if (val == null) throw new Exception("无法转换类型" + fieldInfo.FieldType);
+                    if (val == null) continue;
                     fieldInfo.SetValue(obj, val);
                 }
             }

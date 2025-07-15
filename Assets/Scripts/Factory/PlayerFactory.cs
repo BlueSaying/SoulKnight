@@ -37,7 +37,6 @@ public class PlayerFactory
         GameObject obj = GameObject.Find(playerType.ToString());
         IPlayer player = GetPlayerObject(playerType, obj);
 
-
         if (!UnityTools.Instance.GetComponentFromChildren<Symbol>(obj, "BulletCheckBox"))
         {
             UnityTools.Instance.GetTransformFromChildren(obj, "BulletCheckBox").AddComponent<Symbol>();

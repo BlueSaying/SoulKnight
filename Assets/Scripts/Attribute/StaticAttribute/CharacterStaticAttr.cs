@@ -4,12 +4,18 @@ using System;
 [Serializable]
 public abstract class CharacterStaticAttr
 {
-    // 角色名称
+    /// <summary>
+    /// 角色名称
+    /// </summary>
     public string name;
 
-    // 最大生命值
+    /// <summary>
+    /// 最大生命值
+    /// </summary>
     public int maxHp;
 
-    // 移动速度
+    /// <summary>
+    /// 移动速度
+    /// </summary>
     public float speed;
 }
