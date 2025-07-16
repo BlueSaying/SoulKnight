@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Knight : IPlayer
+public class Knight : Player
 {
     public Knight(GameObject obj) : base(obj) { }
 

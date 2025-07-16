@@ -15,7 +15,7 @@ public class ItemFactory : Singleton<ItemFactory>
 {
     private ItemFactory() { }
 
-    public BasePlayerBullet GetPlayerBullet(PlayerBulletType playerBulletType, Vector3 position, Quaternion quaternion)
+    public BasePlayerBullet CreatePlayerBullet(PlayerBulletType playerBulletType, Vector3 position, Quaternion quaternion)
     {
         GameObject obj = Object.Instantiate(ResourcesFactory.Instance.GetBullet(playerBulletType.ToString()), position, quaternion);
         BasePlayerBullet bullet = null;
@@ -30,12 +30,11 @@ public class ItemFactory : Singleton<ItemFactory>
         return bullet;
     }
 
-    public BaseEffect GetEffect(EffectType effectType, Vector3 position, Quaternion quaternion)
+    public BaseEffect CreateEffect(EffectType effectType, Vector3 position, Quaternion quaternion)
     {
         GameObject obj = Object.Instantiate(ResourcesFactory.Instance.GetEffect(effectType.ToString()), position, quaternion);
-
         BaseEffect effect = null;
-    
+        
         switch (effectType)
         {
             case EffectType.EffectBoom:

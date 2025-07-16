@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace MiddleScene
 {
-    public class PanelRoot : IPanel
+    public class PanelRoot : BasePanel
     {
         public PanelRoot() : base(null)
         {

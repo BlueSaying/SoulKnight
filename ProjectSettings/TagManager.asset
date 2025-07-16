@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -14,7 +15,7 @@ TagManager:
   - Player
   - Obstacle
   - Pet
-  - 
+  - Enemy
   - 
   - 
   - 
@@ -43,6 +44,9 @@ TagManager:
     locked: 0
   - name: Floor
     uniqueID: 357371293
+    locked: 0
+  - name: Enemy
+    uniqueID: 2928306575
     locked: 0
   - name: Pet
     uniqueID: 748954443

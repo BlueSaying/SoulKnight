@@ -2,7 +2,7 @@
 
 public class KnightStateMachine : PlayerStateMachine
 {
-    public KnightStateMachine(IPlayer player) : base(player)
+    public KnightStateMachine(Player player) : base(player)
     {
         SwitchState<PlayerIdleState>();
     }

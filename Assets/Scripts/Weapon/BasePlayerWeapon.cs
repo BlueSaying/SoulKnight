@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-public abstract class IPlayerWeapon : IWeapon
+public abstract class BasePlayerWeapon : BaseWeapon
 {
-    public IPlayer player { get => base.character as IPlayer; set => base.character = value; }
+    public Player player { get => base.character as Player; set => base.character = value; }
     public PlayerWeaponStaticAttr staticAttr { get; protected set; }
 
     protected GameObject rotOrigin;
@@ -11,7 +11,7 @@ public abstract class IPlayerWeapon : IWeapon
     private float fireTimer;
     public bool isUsing;
 
-    public IPlayerWeapon(GameObject gameObject, ICharacter character, PlayerWeaponStaticAttr staticAttr) : base(gameObject, character)
+    public BasePlayerWeapon(GameObject gameObject, Character character, PlayerWeaponStaticAttr staticAttr) : base(gameObject, character)
     {
         this.staticAttr = staticAttr;
     }

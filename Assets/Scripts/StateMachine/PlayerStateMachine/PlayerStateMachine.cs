@@ -1,8 +1,8 @@
 ﻿
 public class PlayerStateMachine : BaseStateMachine
 {
-    public IPlayer player { get;protected set; }
-    public PlayerStateMachine(IPlayer player):base()
+    public Player player { get;protected set; }
+    public PlayerStateMachine(Player player):base()
     {
         this.player = player;
     }

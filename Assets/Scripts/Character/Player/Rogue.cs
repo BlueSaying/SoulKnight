@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Rogue : IPlayer
+public class Rogue : Player
 {
     public Rogue(GameObject obj) : base(obj) { }
 

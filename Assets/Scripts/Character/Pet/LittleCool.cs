@@ -3,7 +3,7 @@
 public class LittleCool : BasePet
 {
 
-    public LittleCool(GameObject obj, IPlayer owner) : base(obj, owner) { }
+    public LittleCool(GameObject obj, Player owner) : base(obj, owner) { }
 
     protected override void OnCharacterStart()
     {

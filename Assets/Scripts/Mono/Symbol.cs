@@ -2,9 +2,9 @@
 
 public class Symbol : MonoBehaviour
 {
-    public ICharacter character { get; protected set; }
+    public Character character { get; protected set; }
 
-    public void SetCharacter(ICharacter character)
+    public void SetCharacter(Character character)
     {
         this.character = character;
     }

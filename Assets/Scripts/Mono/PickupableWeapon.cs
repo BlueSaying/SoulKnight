@@ -6,7 +6,7 @@ public class PickUpableWeapon : MonoBehaviour
     // 使得Update方法只在玩家进入可拾取范围时调用
     private bool isPlayerEnter;
 
-    private IPlayer player;
+    private Player player;
 
     private void Update()
     {
@@ -28,7 +28,7 @@ public class PickUpableWeapon : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             isPlayerEnter = true;
-            player = collision.GetComponent<Symbol>().character as IPlayer;
+            player = collision.GetComponent<Symbol>().character as Player;
         }
     }
 

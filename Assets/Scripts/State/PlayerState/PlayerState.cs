@@ -3,7 +3,7 @@
 public abstract class PlayerState : BaseState
 {
     public new PlayerStateMachine stateMachine { get => base.stateMachine as PlayerStateMachine; set => base.stateMachine = value; }
-    protected IPlayer player;
+    protected Player player;
     protected GameObject gameObject;
     protected Transform transform => gameObject.transform;
     protected Rigidbody2D rb;

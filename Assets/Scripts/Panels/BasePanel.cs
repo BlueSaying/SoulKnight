@@ -3,14 +3,14 @@ using System.Linq;
 using UnityEngine;
 
 // NOTE:组合模式 使用树形结构，使得客户端可以统一处理单个对象和组合对象
-public abstract class IPanel
+public abstract class BasePanel
 {
     public GameObject panel { get; protected set; }
     public Transform transform => panel.transform;
     public RectTransform rectTransform { get; protected set; }
 
-    protected IPanel parent;
-    protected List<IPanel> children;
+    protected BasePanel parent;
+    protected List<BasePanel> children;
 
     // OPTIMIZE:使用状态机而替换bool变量
     private bool isInit;
@@ -18,10 +18,10 @@ public abstract class IPanel
     private bool isSuspend;
     protected bool isShowAfterExit;
 
-    public IPanel(IPanel parent)
+    public BasePanel(BasePanel parent)
     {
         this.parent = parent;
-        children = new List<IPanel>();
+        children = new List<BasePanel>();
     }
 
     // 由控制器调用以启用panel
@@ -95,9 +95,9 @@ public abstract class IPanel
         Suspend();
     }
 
-    public void EnterPanel<T>() where T : IPanel
+    public void EnterPanel<T>() where T : BasePanel
     {
-        IPanel panel;
+        BasePanel panel;
 
         try
         {
@@ -114,7 +114,7 @@ public abstract class IPanel
     }
 
     // OPTIMIZE:使用字典缓存加速
-    public T GetPanel<T>() where T : IPanel
+    public T GetPanel<T>() where T : BasePanel
     {
         return children.Where(x => x is T).ToArray()[0] as T;
     }

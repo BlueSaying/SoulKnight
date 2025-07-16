@@ -2,7 +2,7 @@
 
 public class UIController : AbstractController
 {
-    private IPanel rootPanel;
+    private BasePanel rootPanel;
     public UIController() { }
 
     protected override void OnInit()

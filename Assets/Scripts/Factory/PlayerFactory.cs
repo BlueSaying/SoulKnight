@@ -20,39 +20,10 @@ public class PlayerFactory:Singleton<PlayerFactory>
     private PlayerFactory() { }
 
     // NOTE:给定playerType，返回相应的IPlayer 每次创建新角色后都应该在此处书写
-    public IPlayer GetPlayer(PlayerType playerType)
+    public Player GetPlayer(PlayerType playerType)
     {
         GameObject obj = GameObject.Find(playerType.ToString());
-        IPlayer player = GetPlayerObject(playerType, obj);
-
-        if (!UnityTools.Instance.GetComponentFromChildren<Symbol>(obj, "BulletCheckBox"))
-        {
-            UnityTools.Instance.GetTransformFromChildren(obj, "BulletCheckBox").AddComponent<Symbol>();
-        }
-        UnityTools.Instance.GetComponentFromChildren<Symbol>(obj, "BulletCheckBox").SetCharacter(player);
-
-        return player;
-    }
-
-    public IPlayer GetPlayer(PlayerStaticAttr staticAttr)
-    {
-        GameObject obj = GameObject.Find(staticAttr.playerType.ToString());
-        IPlayer player = GetPlayerObject(staticAttr.playerType, obj);
-
-        // TODO:player.SetAttr()
-
-        if (!UnityTools.Instance.GetComponentFromChildren<Symbol>(obj, "BulletCheckBox"))
-        {
-            UnityTools.Instance.GetTransformFromChildren(obj, "BulletCheckBox").AddComponent<Symbol>();
-        }
-        UnityTools.Instance.GetComponentFromChildren<Symbol>(obj, "BulletCheckBox").SetCharacter(player);
-
-        return player;
-    }
-
-    private IPlayer GetPlayerObject(PlayerType playerType, GameObject obj)
-    {
-        IPlayer player = null;
+        Player player = null;
 
         switch (playerType)
         {
@@ -64,6 +35,37 @@ public class PlayerFactory:Singleton<PlayerFactory>
                 break;
         }
 
+        if (!UnityTools.Instance.GetComponentFromChildren<Symbol>(obj, "BulletCheckBox"))
+        {
+            UnityTools.Instance.GetTransformFromChildren(obj, "BulletCheckBox").AddComponent<Symbol>();
+        }
+        UnityTools.Instance.GetComponentFromChildren<Symbol>(obj, "BulletCheckBox").SetCharacter(player);
+
         return player;
     }
+
+    //public Player GetPlayer(PlayerStaticAttr staticAttr)
+    //{
+    //    GameObject obj = GameObject.Find(staticAttr.playerType.ToString());
+    //    Player player = GetPlayerObject(staticAttr.playerType, obj);
+    //
+    //    // TODO:player.SetAttr()
+    //
+    //    if (!UnityTools.Instance.GetComponentFromChildren<Symbol>(obj, "BulletCheckBox"))
+    //    {
+    //        UnityTools.Instance.GetTransformFromChildren(obj, "BulletCheckBox").AddComponent<Symbol>();
+    //    }
+    //    UnityTools.Instance.GetComponentFromChildren<Symbol>(obj, "BulletCheckBox").SetCharacter(player);
+    //
+    //    return player;
+    //}
+
+    //private Player GetPlayerObject(PlayerType playerType, GameObject obj)
+    //{
+    //    Player player = null;
+    //
+    //    
+    //
+    //    return player;
+    //}
 }

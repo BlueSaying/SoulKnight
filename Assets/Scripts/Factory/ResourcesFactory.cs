@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.Build.Reporting;
 using UnityEngine;
 
 // 专门用来管理从Resources文件加载东西的类
@@ -21,6 +20,10 @@ public class ResourcesFactory : Singleton<ResourcesFactory>
     // 子弹
     private Dictionary<string, GameObject> bulletDic;
     private string bulletPath = "Prefabs/Bullets/";
+
+    // 敌人
+    private Dictionary<string, GameObject> enemyDic;
+    private string enemyPath = "Prefabs/Enemies/";
 
     // 特效
     private Dictionary<string, GameObject> effectDic;
@@ -49,6 +52,15 @@ public class ResourcesFactory : Singleton<ResourcesFactory>
         GameObject newBullet = Resources.LoadAll<GameObject>(bulletPath).Where(x => x.name == bulletName).ToArray()[0];
         bulletDic.Add(bulletName, newBullet);
         return newBullet;
+    }
+
+    public GameObject GetEnemy(string enemyName)
+    {
+        if (enemyDic.ContainsKey(enemyName)) return enemyDic[enemyName];
+
+        GameObject newEnemy = Resources.LoadAll<GameObject>(enemyPath).Where(x => x.name == enemyName).ToArray()[0];
+        enemyDic.Add(enemyName, newEnemy);
+        return newEnemy;
     }
 
     public GameObject GetEffect(string effectName)

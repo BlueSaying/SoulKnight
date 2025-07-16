@@ -2,7 +2,7 @@
 
 public class RogueStateMachine : PlayerStateMachine
 {
-    public RogueStateMachine(IPlayer player) : base(player)
+    public RogueStateMachine(Player player) : base(player)
     {
         SwitchState<PlayerIdleState>();
     }

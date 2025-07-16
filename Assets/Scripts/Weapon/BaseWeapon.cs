@@ -24,12 +24,12 @@ public enum QualityType
     colorful,
 }
 
-public abstract class IWeapon
+public abstract class BaseWeapon
 {
     // 武器的游戏物体
     public GameObject gameObject { get; protected set; }
     public Transform transform => gameObject.transform;
-    protected ICharacter character; // 代表哪个角色拥有该武器
+    protected Character character; // 代表哪个角色拥有该武器
     protected GameObject firePoint;
 
     // 武器能否旋转
@@ -37,7 +37,7 @@ public abstract class IWeapon
 
     private bool isInit;
     private bool isEnter;
-    public IWeapon(GameObject gameObject, ICharacter character)
+    public BaseWeapon(GameObject gameObject, Character character)
     {
         this.gameObject = gameObject;
         this.character = character;

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace MiddleScene
 {
-    public class PanelSelectingSkin : IPanel
+    public class PanelSelectingSkin : BasePanel
     {
         // 当前选中的角色
         private GameObject selectingPlayer;
@@ -15,7 +15,7 @@ namespace MiddleScene
         private List<PlayerSkinType> playerSkins;
         private int curSkinIndex;
 
-        public PanelSelectingSkin(IPanel parent) : base(parent)
+        public PanelSelectingSkin(BasePanel parent) : base(parent)
         {
             children.Add(new PanelBattle(this));
         }

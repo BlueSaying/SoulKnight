@@ -1,14 +1,14 @@
 ﻿using UnityEngine;
 
-public class BasePet : ICharacter
+public class BasePet : Character
 {
     public new PetStaticAttr staticAttr { get => base.staticAttr as PetStaticAttr; set => base.staticAttr = value; }
     public new PetDynamicAttr dynamicAttr { get => base.dynamicAttr as PetDynamicAttr; set => base.dynamicAttr = value; }
 
     protected PetStateMachine stateMachine;
-    public IPlayer owner { get; protected set; }
+    public Player owner { get; protected set; }
 
-    public BasePet(GameObject obj, IPlayer owner) : base(obj)
+    public BasePet(GameObject obj, Player owner) : base(obj)
     {
         staticAttr = AttributeFactory.Instance.GetPetStaticAttr(PetType.LittleCool);
         this.owner = owner;

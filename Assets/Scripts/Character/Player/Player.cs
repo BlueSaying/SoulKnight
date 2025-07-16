@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class IPlayer : ICharacter
+public class Player : Character
 {
     public new PlayerStaticAttr staticAttr { get => base.staticAttr as PlayerStaticAttr; set => base.staticAttr = value; }
     public new PlayerDynamicAttr dynamicAttr { get => base.dynamicAttr as PlayerDynamicAttr; set => base.dynamicAttr = value; }
@@ -9,15 +9,15 @@ public class IPlayer : ICharacter
     protected Animator animator;
     protected PlayerStateMachine stateMachine;
 
-    protected List<IPlayerWeapon> weapons;
-    protected IPlayerWeapon usingWeapon;
+    protected List<BasePlayerWeapon> weapons;
+    protected BasePlayerWeapon usingWeapon;
 
-    public IPlayer(GameObject obj) : base(obj) { }
+    public Player(GameObject obj) : base(obj) { }
 
     protected override void OnInit()
     {
         base.OnInit();
-        weapons = new List<IPlayerWeapon>();
+        weapons = new List<BasePlayerWeapon>();
         animator = transform.Find("Sprite").GetComponent<Animator>();
 
         // NOTE:角色初始化时，添加阿凉为宠物
@@ -46,7 +46,7 @@ public class IPlayer : ICharacter
 
     public void AddWeapon(PlayerWeaponType type)
     {
-        IPlayerWeapon newWeapon = WeaponFactory.Instance.GetPlayerWeapon(type, this);
+        BasePlayerWeapon newWeapon = WeaponFactory.Instance.GetPlayerWeapon(type, this);
 
         if (usingWeapon != null)
         {
@@ -65,7 +65,7 @@ public class IPlayer : ICharacter
 
         int usingWeaponIndex = 0;
 
-        foreach (IPlayerWeapon weapon in weapons)
+        foreach (BasePlayerWeapon weapon in weapons)
         {
             if (weapon.isUsing)
             {
@@ -80,7 +80,7 @@ public class IPlayer : ICharacter
         UseWeapon(weapons[usingWeaponIndex]);
     }
 
-    public void UseWeapon(IPlayerWeapon weapon)
+    public void UseWeapon(BasePlayerWeapon weapon)
     {
         weapon.isUsing = true;
         weapon.gameObject.SetActive(true);
@@ -94,7 +94,7 @@ public class IPlayer : ICharacter
         usingWeapon.gameObject.SetActive(false);
     }
 
-    public IPlayerWeapon GetUsingWeapon()
+    public BasePlayerWeapon GetUsingWeapon()
     {
         return usingWeapon;
     }

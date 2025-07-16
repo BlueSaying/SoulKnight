@@ -7,9 +7,9 @@ using UnityEngine;
 
 namespace MiddleScene
 {
-    public class PanelBattle : IPanel
+    public class PanelBattle : BasePanel
     {
-        public PanelBattle(IPanel parent) : base(parent) { }
+        public PanelBattle(BasePanel parent) : base(parent) { }
 
         protected override void OnEnter()
         {

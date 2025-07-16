@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerController : AbstractController
 {
-    public IPlayer mainPlayer { get; protected set; }
+    public Player mainPlayer { get; protected set; }
     private List<BasePet> pets;
     public PlayerController() { }
 
@@ -34,7 +34,7 @@ public class PlayerController : AbstractController
         //mainPlayer.SetPlayerInput(GameMediator.Instance.GetController<InputController>().input);
     }
 
-    public void AddPlayerPet(PetType type,IPlayer owner)
+    public void AddPlayerPet(PetType type,Player owner)
     {
         pets.Add(PetFactory.Instance.GetPet(type, owner));
     }

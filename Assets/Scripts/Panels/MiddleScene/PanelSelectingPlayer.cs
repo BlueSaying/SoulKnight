@@ -4,11 +4,11 @@ using UnityEngine.UI;
 
 namespace MiddleScene
 {
-    public class PanelSelectingPlayer : IPanel
+    public class PanelSelectingPlayer : BasePanel
     {
         private GameObject selectingPlayer;
 
-        public PanelSelectingPlayer(IPanel parent) : base(parent)
+        public PanelSelectingPlayer(BasePanel parent) : base(parent)
         {
             children.Add(new PanelSelectingSkin(this));
         }

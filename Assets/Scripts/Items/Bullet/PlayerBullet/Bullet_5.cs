@@ -8,8 +8,7 @@ public class Bullet_5 : BasePlayerBullet
     {
         base.OnHitObstacle();
 
-        EffectBoom effect = ItemFactory.Instance.GetEffect(EffectType.EffectBoom, position, Quaternion.identity) as EffectBoom;
-
+        EffectBoom effect = ItemFactory.Instance.CreateEffect(EffectType.EffectBoom, position, Quaternion.identity) as EffectBoom;
         effect.ManagedToController();
     }
 

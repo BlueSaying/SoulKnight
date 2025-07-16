@@ -1,13 +1,15 @@
 ﻿using UnityEngine;
 
-public class ICharacter
+public class Character
 {
-    public CharacterStaticAttr staticAttr { get;protected set; }
+    public CharacterStaticAttr staticAttr { get; protected set; }
     public CharacterDynamicAttr dynamicAttr { get; protected set; }
 
     public GameObject gameObject { get; protected set; }
     public Transform transform => gameObject.transform;
-    public Rigidbody2D rb => gameObject.GetComponent<Rigidbody2D>();
+    public Rigidbody2D rb;
+
+    public GameObject bulletCheckBox { get; protected set; }
 
     private bool _isLeft;
     public bool isLeft
@@ -33,9 +35,28 @@ public class ICharacter
     private bool isShouldRemove;
     private bool isAlreadyRemove;
 
-    public ICharacter(GameObject obj)
+    public Character(GameObject obj)
     {
         gameObject = obj;
+
+        try
+        {
+            rb = gameObject.GetComponent<Rigidbody2D>();
+        }
+        catch (System.Exception)
+        {
+            throw new System.Exception("无法获取" + gameObject.name + "的RigidBody2D组件,请检查是否已经添加");
+        }
+
+        try
+        {
+            bulletCheckBox = UnityTools.Instance.GetTransformFromChildren(gameObject, "BulletCheckBox").gameObject;
+        }
+        catch (System.Exception)
+        {
+            throw new System.Exception("无法获取" + gameObject.name + "的BulletCheckBox子物体,请检查是否已经添加");
+        }
+
     }
 
     public void SetDynamicAttr(CharacterDynamicAttr dynamicAttr)
