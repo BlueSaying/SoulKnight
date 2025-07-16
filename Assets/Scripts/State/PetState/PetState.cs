@@ -1,7 +1,7 @@
 ﻿using Pathfinding;
 using UnityEngine;
 
-public class PetState : BaseState
+public class PetState : State
 {
     public new PetStateMachine stateMachine { get => base.stateMachine as PetStateMachine; set => base.stateMachine = value; }
     protected BasePet pet;
@@ -14,7 +14,7 @@ public class PetState : BaseState
     protected Seeker seeker;
     protected Path path;
 
-    public PetState(BaseStateMachine stateMachine) : base(stateMachine) { }
+    public PetState(StateMachine stateMachine) : base(stateMachine) { }
 
     protected override void OnInit()
     {

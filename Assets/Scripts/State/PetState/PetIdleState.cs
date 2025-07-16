@@ -2,7 +2,7 @@
 
 public class PetIdleState : PetState
 {
-    public PetIdleState(BaseStateMachine stateMachine) : base(stateMachine) { }
+    public PetIdleState(StateMachine stateMachine) : base(stateMachine) { }
 
 
     protected override void OnEnter()

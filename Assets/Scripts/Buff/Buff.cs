@@ -6,7 +6,7 @@
     Poisoning,
 }
 
-public class BaseBuff
+public class Buff
 {
 
 }

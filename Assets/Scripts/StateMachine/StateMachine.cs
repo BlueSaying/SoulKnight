@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class BaseStateMachine
+public abstract class StateMachine
 {
-    private Dictionary<Type, BaseState> stateDic;
-    protected BaseState curState;
+    private Dictionary<Type, State> stateDic;
+    protected State curState;
 
-    public BaseStateMachine()
+    public StateMachine()
     {
-        stateDic = new Dictionary<Type, BaseState>();
+        stateDic = new Dictionary<Type, State>();
     }
 
     // NOTE:给定要切换的状态T
@@ -19,7 +19,7 @@ public abstract class BaseStateMachine
         if (!stateDic.ContainsKey(typeof(T)))
         {
             // 填写this代表新实例化的IState隶属于此状态机
-            stateDic.Add(typeof(T), Activator.CreateInstance(typeof(T), this) as BaseState);
+            stateDic.Add(typeof(T), Activator.CreateInstance(typeof(T), this) as State);
         }
 
         curState?.OnExit();

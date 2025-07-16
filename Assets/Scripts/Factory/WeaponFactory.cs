@@ -38,7 +38,7 @@ public class WeaponFactory:Singleton<WeaponFactory>
 
     // 给*character*角色添加一个*type*类型的武器并
     // 放于GunOriginPoint物体下，返回该武器
-    public BasePlayerWeapon GetPlayerWeapon(PlayerWeaponType type, Character character)
+    public PlayerWeapon GetPlayerWeapon(PlayerWeaponType type, Character character)
     {
         GameObject GunOriginPoint = UnityTools.Instance.GetTransformFromChildren(character.gameObject, "GunOriginPoint").gameObject;
         PlayerWeaponStaticAttr staticAttr = WeaponCommand.Instance.GetPlayerWeaponStaticAttr(type);
@@ -48,7 +48,7 @@ public class WeaponFactory:Singleton<WeaponFactory>
 
         obj.transform.localPosition = Vector3.zero;
 
-        BasePlayerWeapon weapon = null;
+        PlayerWeapon weapon = null;
         switch (type)
         {
             case PlayerWeaponType.BadPistol:

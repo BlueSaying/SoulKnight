@@ -57,7 +57,6 @@ public class Item
     public void Remove()
     {
         beingRemoved = true;
-
     }
 
     // 将*this*托管到ItemController中

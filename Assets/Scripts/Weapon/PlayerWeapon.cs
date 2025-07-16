@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public abstract class BasePlayerWeapon : BaseWeapon
+public abstract class PlayerWeapon : Weapon
 {
     public Player player { get => base.character as Player; set => base.character = value; }
     public PlayerWeaponStaticAttr staticAttr { get; protected set; }
@@ -11,7 +11,7 @@ public abstract class BasePlayerWeapon : BaseWeapon
     private float fireTimer;
     public bool isUsing;
 
-    public BasePlayerWeapon(GameObject gameObject, Character character, PlayerWeaponStaticAttr staticAttr) : base(gameObject, character)
+    public PlayerWeapon(GameObject gameObject, Character character, PlayerWeaponStaticAttr staticAttr) : base(gameObject, character)
     {
         this.staticAttr = staticAttr;
     }

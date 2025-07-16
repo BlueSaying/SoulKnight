@@ -3,11 +3,11 @@ using UnityEngine;
 
 namespace MiddleScene
 {
-    public class PanelRoom : BasePanel
+    public class PanelRoom : Panel
     {
         private Collider2D collider;
 
-        public PanelRoom(BasePanel parent) : base(parent)
+        public PanelRoom(Panel parent) : base(parent)
         {
             children.Add(new PanelSelectingPlayer(this));
         }

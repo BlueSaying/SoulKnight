@@ -9,15 +9,15 @@ public class Player : Character
     protected Animator animator;
     protected PlayerStateMachine stateMachine;
 
-    protected List<BasePlayerWeapon> weapons;
-    protected BasePlayerWeapon usingWeapon;
+    protected List<PlayerWeapon> weapons;
+    protected PlayerWeapon usingWeapon;
 
     public Player(GameObject obj) : base(obj) { }
 
     protected override void OnInit()
     {
         base.OnInit();
-        weapons = new List<BasePlayerWeapon>();
+        weapons = new List<PlayerWeapon>();
         animator = transform.Find("Sprite").GetComponent<Animator>();
 
         // NOTE:角色初始化时，添加阿凉为宠物
@@ -46,7 +46,7 @@ public class Player : Character
 
     public void AddWeapon(PlayerWeaponType type)
     {
-        BasePlayerWeapon newWeapon = WeaponFactory.Instance.GetPlayerWeapon(type, this);
+        PlayerWeapon newWeapon = WeaponFactory.Instance.GetPlayerWeapon(type, this);
 
         if (usingWeapon != null)
         {
@@ -65,7 +65,7 @@ public class Player : Character
 
         int usingWeaponIndex = 0;
 
-        foreach (BasePlayerWeapon weapon in weapons)
+        foreach (PlayerWeapon weapon in weapons)
         {
             if (weapon.isUsing)
             {
@@ -80,7 +80,7 @@ public class Player : Character
         UseWeapon(weapons[usingWeaponIndex]);
     }
 
-    public void UseWeapon(BasePlayerWeapon weapon)
+    public void UseWeapon(PlayerWeapon weapon)
     {
         weapon.isUsing = true;
         weapon.gameObject.SetActive(true);
@@ -94,7 +94,7 @@ public class Player : Character
         usingWeapon.gameObject.SetActive(false);
     }
 
-    public BasePlayerWeapon GetUsingWeapon()
+    public PlayerWeapon GetUsingWeapon()
     {
         return usingWeapon;
     }

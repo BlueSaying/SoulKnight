@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 
-public abstract class BaseState
+public abstract class State
 {
-    public BaseStateMachine stateMachine { get; protected set; }
+    public StateMachine stateMachine { get; protected set; }
 
     private bool isInit;
     private bool isEnter;
 
-    public BaseState(BaseStateMachine stateMachine)
+    public State(StateMachine stateMachine)
     {
         this.stateMachine = stateMachine;
     }

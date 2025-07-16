@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public abstract class PlayerState : BaseState
+public abstract class PlayerState : State
 {
     public new PlayerStateMachine stateMachine { get => base.stateMachine as PlayerStateMachine; set => base.stateMachine = value; }
     protected Player player;

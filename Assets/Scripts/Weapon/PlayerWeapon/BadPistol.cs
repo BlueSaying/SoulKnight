@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class BadPistol : BasePlayerWeapon
+public class BadPistol : PlayerWeapon
 {
     public BadPistol(GameObject gameObject, Character character, PlayerWeaponStaticAttr staticAttr) : base(gameObject, character, staticAttr) { }
 

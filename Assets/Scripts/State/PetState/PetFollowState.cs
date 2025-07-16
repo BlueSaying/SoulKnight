@@ -7,7 +7,7 @@ public class PetFollowState : PetState
 
     private int curPathIndex;
 
-    public PetFollowState(BaseStateMachine stateMachine) : base(stateMachine) { }
+    public PetFollowState(StateMachine stateMachine) : base(stateMachine) { }
 
     protected override void OnEnter()
     {

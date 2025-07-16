@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace MainMenuScene
 {
-    public class PanelRoot : BasePanel
+    public class PanelRoot : Panel
     {
         public PanelRoot() : base(null) { }
         protected override void OnInit()

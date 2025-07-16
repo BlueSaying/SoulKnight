@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Bullet_5 : BasePlayerBullet
+public class Bullet_5 : PlayerBullet
 {
     public Bullet_5(GameObject gameObject) : base(gameObject) { }
 

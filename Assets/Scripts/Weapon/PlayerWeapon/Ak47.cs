@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Ak47 : BasePlayerWeapon
+public class Ak47 : PlayerWeapon
 {
     public Ak47(GameObject gameObject, Character character, PlayerWeaponStaticAttr staticAttr) : base(gameObject, character, staticAttr) { }
 

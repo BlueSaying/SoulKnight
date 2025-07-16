@@ -24,7 +24,7 @@ public enum QualityType
     colorful,
 }
 
-public abstract class BaseWeapon
+public abstract class Weapon
 {
     // 武器的游戏物体
     public GameObject gameObject { get; protected set; }
@@ -37,7 +37,7 @@ public abstract class BaseWeapon
 
     private bool isInit;
     private bool isEnter;
-    public BaseWeapon(GameObject gameObject, Character character)
+    public Weapon(GameObject gameObject, Character character)
     {
         this.gameObject = gameObject;
         this.character = character;

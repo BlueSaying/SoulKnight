@@ -1,4 +1,4 @@
-﻿public class PetStateMachine : BaseStateMachine
+﻿public class PetStateMachine : StateMachine
 {
     public BasePet pet { get; protected set; }
     public PetStateMachine(BasePet pet) : base()

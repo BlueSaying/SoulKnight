@@ -15,10 +15,10 @@ public class ItemFactory : Singleton<ItemFactory>
 {
     private ItemFactory() { }
 
-    public BasePlayerBullet CreatePlayerBullet(PlayerBulletType playerBulletType, Vector3 position, Quaternion quaternion)
+    public PlayerBullet CreatePlayerBullet(PlayerBulletType playerBulletType, Vector3 position, Quaternion quaternion)
     {
         GameObject obj = Object.Instantiate(ResourcesFactory.Instance.GetBullet(playerBulletType.ToString()), position, quaternion);
-        BasePlayerBullet bullet = null;
+        PlayerBullet bullet = null;
 
         switch (playerBulletType)
         {

@@ -13,5 +13,5 @@ public class Enemy : Character
     //protected BasePlayerWeapon usingWeapon;
 
     public Enemy(GameObject obj) : base(obj) { }
-    
+
 }
