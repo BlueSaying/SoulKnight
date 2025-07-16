@@ -8,7 +8,5 @@ public class PlayerModel : AbstractModel
     {
         base.OnInit();
         datas = ResourcesFactory.Instance.GetScriptableObject<PlayerSO>().attrs;
-    }
-
-    
+    }   
 }

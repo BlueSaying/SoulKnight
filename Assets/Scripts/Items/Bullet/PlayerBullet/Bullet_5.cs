@@ -12,4 +12,14 @@ public class Bullet_5 : PlayerBullet
         effect.ManagedToController();
     }
 
+    protected override void OnHitEnemy(Enemy enemy)
+    {
+        base.OnHitEnemy(enemy);
+
+        // HACK
+        //enemy.TakeDamage(5);
+
+        EffectBoom effect = ItemFactory.Instance.CreateEffect(EffectType.EffectBoom, position, Quaternion.identity) as EffectBoom;
+        effect.ManagedToController();
+    }
 }

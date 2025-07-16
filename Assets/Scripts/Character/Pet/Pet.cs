@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class BasePet : Character
+public class Pet : Character
 {
     public new PetStaticAttr staticAttr { get => base.staticAttr as PetStaticAttr; set => base.staticAttr = value; }
     public new PetDynamicAttr dynamicAttr { get => base.dynamicAttr as PetDynamicAttr; set => base.dynamicAttr = value; }
@@ -8,9 +8,9 @@ public class BasePet : Character
     protected PetStateMachine stateMachine;
     public Player owner { get; protected set; }
 
-    public BasePet(GameObject obj, Player owner) : base(obj)
+    public Pet(GameObject obj, PetStaticAttr staticAttr, Player owner) : base(obj, staticAttr)
     {
-        staticAttr = AttributeFactory.Instance.GetPetStaticAttr(PetType.LittleCool);
+        //staticAttr = DynamicAttrFactory.Instance.GetPetStaticAttr(PetType.LittleCool);
         this.owner = owner;
     }
 

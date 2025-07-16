@@ -9,10 +9,13 @@ public class ModelContainer : Singleton<ModelContainer>
     private ModelContainer()
     {
         modelDic = new Dictionary<Type, AbstractModel>();
+
+        // NOTE:在此处添加新Model
         AddModel(new SceneModel());
         AddModel(new PlayerModel());
         AddModel(new PlayerSkinModel());
         AddModel(new WeaponModel());
+        AddModel(new EnemyModel());
     }
 
     public T GetModel<T>() where T : AbstractModel

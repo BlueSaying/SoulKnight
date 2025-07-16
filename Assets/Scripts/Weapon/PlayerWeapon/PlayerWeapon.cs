@@ -1,5 +1,37 @@
 ﻿using UnityEngine;
 
+public enum PlayerWeaponType
+{
+    BadPistol,
+    Ak47,
+    H2O,
+    P250Pistol,
+    Furnace,
+    Icebreaker,
+    PKP,
+    AK47,
+    UZI,
+    SnowFoxL,
+    AssaultRifle,
+    MissileBattery,
+    TheCode,
+    TheCodePlus,
+    CrimsonWineGlass,
+    DesertEagle,
+    GrenadePistol,
+    NextNextNextGenSMG,
+    EagleOfIceAndFire,
+    DormantBubbleMachine,
+    Basketball,
+    Bow,
+    Shower,
+    GatlingGun,
+    DoubleBladeSword,
+    WoodenCross,
+    BlueFireGatling,
+    RainbowGatling,
+}
+
 public abstract class PlayerWeapon : Weapon
 {
     public Player player { get => base.character as Player; set => base.character = value; }

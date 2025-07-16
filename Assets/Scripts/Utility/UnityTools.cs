@@ -102,7 +102,7 @@ public class UnityTools : Singleton<UnityTools>
     /// <returns></returns>
     public object ConvertType(string s, Type type)
     {
-        if (s == "None") return null;
+        if (s == "None" || s == "") return null;
 
         if (s == "TRUE")
         {
@@ -209,6 +209,7 @@ public class UnityTools : Singleton<UnityTools>
                 info.fieldInfo.SetValue(obj, Activator.CreateInstance(typeof(List<>).MakeGenericType(info.fieldInfo.FieldType.GenericTypeArguments)));
             }
 
+            bool isValidData = false;
             for (int j = 0; j < columes.Length; j++)
             {
                 FieldInfo fieldInfo = type.GetField(fieldNames[j]);
@@ -225,6 +226,7 @@ public class UnityTools : Singleton<UnityTools>
                             if (val == null) continue;
                             // Invoke用于执行Add方法
                             info.addMethod.Invoke(fieldInfo.GetValue(obj), new object[] { val });
+                            isValidData = true;
                         }
                     }
                 }
@@ -233,10 +235,13 @@ public class UnityTools : Singleton<UnityTools>
                     object val = ConvertType(columes[j], fieldInfo.FieldType);
                     if (val == null) continue;
                     fieldInfo.SetValue(obj, val);
+                    isValidData = true;
                 }
             }
-
-            list.Add(obj);
+            if(isValidData)
+            {
+                list.Add(obj);
+            }
         }
     }
 }

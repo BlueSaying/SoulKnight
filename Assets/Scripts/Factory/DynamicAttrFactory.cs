@@ -1,9 +1,9 @@
 ﻿
-public class AttributeFactory : Singleton<AttributeFactory>
+public class DynamicAttrFactory : Singleton<DynamicAttrFactory>
 {
-    private AttributeFactory() { }
+    private DynamicAttrFactory() { }
 
-    //public PlayerDynamicAttr GetPlayerDynamicAttr(PlayerType playerType)
+    //public PlayerStaticAttr GetPlayerDynamicAttr(PlayerType playerType)
     //{
     //    return new PlayerDynamicAttr(PlayerCommand.Instance.GetPlayerStaticAttr(playerType));
     //}

@@ -2,7 +2,7 @@
 
 public class Knight : Player
 {
-    public Knight(GameObject obj) : base(obj) { }
+    public Knight(GameObject obj, PlayerStaticAttr staticAttr) : base(obj, staticAttr) { }
 
     protected override void OnCharacterStart()
     {

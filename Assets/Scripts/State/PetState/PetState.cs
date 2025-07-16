@@ -4,7 +4,7 @@ using UnityEngine;
 public class PetState : State
 {
     public new PetStateMachine stateMachine { get => base.stateMachine as PetStateMachine; set => base.stateMachine = value; }
-    protected BasePet pet;
+    protected Pet pet;
 
     protected GameObject gameObject;
     protected Transform transform => gameObject.transform;

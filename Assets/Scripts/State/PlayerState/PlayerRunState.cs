@@ -9,11 +9,11 @@ public class PlayerRunState : PlayerState
         base.OnUpdate();
 
         // 测试代码
-        Vector2 moveDir= ((Vector2)GameMediator.Instance.GetController<InputController>().GetMoveInput());
+        Vector2 moveDir = ((Vector2)GameMediator.Instance.GetController<InputController>().GetMoveInput());
         if (moveDir.magnitude > 0)
         {
             // TODO: 手感调优：自己写一个更平滑的移动函数
-            rb.velocity = moveDir.normalized * 8;
+            rb.velocity = moveDir.normalized * player.staticAttr.speed;
         }
         if (moveDir.x > 0)
         {

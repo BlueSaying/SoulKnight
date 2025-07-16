@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 
-public class LittleCool : BasePet
+public class LittleCool : Pet
 {
 
-    public LittleCool(GameObject obj, Player owner) : base(obj, owner) { }
+    public LittleCool(GameObject obj, PetStaticAttr staticAttr, Player owner) : base(obj, staticAttr, owner) { }
 
     protected override void OnCharacterStart()
     {

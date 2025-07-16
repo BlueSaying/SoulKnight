@@ -11,16 +11,16 @@ public class PetFactory : Singleton<PetFactory>
 {
     private PetFactory() { }
 
-    public BasePet GetPet(PetType type, Player owner)
+    public Pet GetPet(PetType type, Player owner)
     {
         // TOD:modify it later
         GameObject obj = GameObject.Find(type.ToString());
-        BasePet pet = null;
+        Pet pet = null;
 
         switch (type)
         {
             case PetType.LittleCool:
-                pet = new LittleCool(obj, owner);
+                pet = new LittleCool(obj, new PetStaticAttr(),owner);   // HACK
                 break;
         }
 

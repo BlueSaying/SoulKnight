@@ -21,14 +21,9 @@ public class Bullet : Item
         }
         triggerDetector.AddTriggerListener(TriggerEventType.OnTriggerEnter2D, "Obstacle", (obj) =>
         {
-            Remove();
             OnHitObstacle();
         });
-        triggerDetector.AddTriggerListener(TriggerEventType.OnTriggerEnter2D, "Enemy", (obj) =>
-        {
-            Remove();
-            OnHitObstacle();
-        });
+        
     }
 
     protected override void OnExit()
@@ -41,18 +36,9 @@ public class Bullet : Item
     {
         base.OnUpdate();
 
-        //if (Physics2D.OverlapCircle(position, 0.01f, LayerMask.GetMask("Obstacle")))
-        //{
-        //    Remove();
-        //    if (hasRemoved == true)
-        //    {
-        //        OnHitObstacle();
-        //    }
-        //}
-
         // TODO:后期改为BaseBullet.speed
         transform.position += rotation * Vector2.right * speed * Time.deltaTime;
     }
 
-    protected virtual void OnHitObstacle() { }
+    protected virtual void OnHitObstacle() { Remove(); }
 }

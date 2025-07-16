@@ -95,6 +95,10 @@ public class ResourcesFactory : Singleton<ResourcesFactory>
         {
             path += "PlayerWeaponData";
         }
+        if (type == typeof(EnemySO))
+        {
+            path += "EnemyData";
+        }
 
         return Resources.Load<T>(path);
     }

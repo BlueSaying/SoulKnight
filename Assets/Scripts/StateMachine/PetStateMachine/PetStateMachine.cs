@@ -1,7 +1,7 @@
 ﻿public class PetStateMachine : StateMachine
 {
-    public BasePet pet { get; protected set; }
-    public PetStateMachine(BasePet pet) : base()
+    public Pet pet { get; protected set; }
+    public PetStateMachine(Pet pet) : base()
     {
         this.pet = pet;
     }

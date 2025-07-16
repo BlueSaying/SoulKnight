@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : Character
+public class Player : Character, IDamageable
 {
     public new PlayerStaticAttr staticAttr { get => base.staticAttr as PlayerStaticAttr; set => base.staticAttr = value; }
     public new PlayerDynamicAttr dynamicAttr { get => base.dynamicAttr as PlayerDynamicAttr; set => base.dynamicAttr = value; }
@@ -12,7 +12,7 @@ public class Player : Character
     protected List<PlayerWeapon> weapons;
     protected PlayerWeapon usingWeapon;
 
-    public Player(GameObject obj) : base(obj) { }
+    public Player(GameObject obj, PlayerStaticAttr staticAttr) : base(obj, staticAttr) { }
 
     protected override void OnInit()
     {
@@ -97,5 +97,11 @@ public class Player : Character
     public PlayerWeapon GetUsingWeapon()
     {
         return usingWeapon;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        //dynamicAttr.Hp -= damage;
+        Debug.Log(dynamicAttr.Hp);
     }
 }

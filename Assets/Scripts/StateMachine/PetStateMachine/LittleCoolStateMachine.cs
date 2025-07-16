@@ -1,7 +1,7 @@
 ﻿
 public class LittleCoolStateMachine : PetStateMachine
 {
-    public LittleCoolStateMachine(BasePet pet) : base(pet)
+    public LittleCoolStateMachine(Pet pet) : base(pet)
     {
         SwitchState<PetIdleState>();
     }

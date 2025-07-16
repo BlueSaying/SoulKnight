@@ -2,7 +2,7 @@
 
 public class Rogue : Player
 {
-    public Rogue(GameObject obj) : base(obj) { }
+    public Rogue(GameObject obj, PlayerStaticAttr staticAttr) : base(obj, staticAttr) { }
 
     protected override void OnCharacterStart()
     {

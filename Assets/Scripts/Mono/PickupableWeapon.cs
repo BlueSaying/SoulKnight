@@ -12,7 +12,6 @@ public class PickUpableWeapon : MonoBehaviour
     {
         if (isPlayerEnter)
         {
-            //if (Input.GetKeyDown(KeyCode.F))
             if (GameMediator.Instance.GetController<InputController>().GetKeyDownInput(KeyInputType.pickUp))
             {
                 // TODO:捡起武器后按F仍有效果bug

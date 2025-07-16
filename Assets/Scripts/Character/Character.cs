@@ -35,9 +35,10 @@ public class Character
     private bool isShouldRemove;
     private bool isAlreadyRemove;
 
-    public Character(GameObject obj)
+    public Character(GameObject obj, CharacterStaticAttr staticAttr)
     {
         gameObject = obj;
+        this.staticAttr = staticAttr;
 
         try
         {

@@ -1,13 +1,12 @@
 ﻿using UnityEngine;
-using MiddleScene;
 
 public class MiddleSceneGameLoop : MonoBehaviour
 {
-    private Facade facade;
+    private MiddleScene.Facade facade;
 
     void Start()
     {
-        facade = new Facade();
+        facade = new MiddleScene.Facade();
     }
 
     void Update()

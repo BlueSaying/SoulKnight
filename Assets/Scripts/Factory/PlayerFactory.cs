@@ -1,4 +1,5 @@
-﻿using Unity.VisualScripting;
+﻿using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum PlayerType
@@ -15,7 +16,7 @@ public enum PlayerSkinType
     RogueKun,
 }
 
-public class PlayerFactory:Singleton<PlayerFactory>
+public class PlayerFactory : Singleton<PlayerFactory>
 {
     private PlayerFactory() { }
 
@@ -23,15 +24,16 @@ public class PlayerFactory:Singleton<PlayerFactory>
     public Player GetPlayer(PlayerType playerType)
     {
         GameObject obj = GameObject.Find(playerType.ToString());
+        PlayerStaticAttr staticAttr = PlayerCommand.Instance.GetPlayerStaticAttr(playerType);
         Player player = null;
 
         switch (playerType)
         {
             case PlayerType.Knight:
-                player = new Knight(obj);
+                player = new Knight(obj, staticAttr);
                 break;
             case PlayerType.Rogue:
-                player = new Rogue(obj);
+                player = new Rogue(obj, staticAttr);
                 break;
         }
 
@@ -49,7 +51,7 @@ public class PlayerFactory:Singleton<PlayerFactory>
     //    GameObject obj = GameObject.Find(staticAttr.playerType.ToString());
     //    Player player = GetPlayerObject(staticAttr.playerType, obj);
     //
-    //    // TODO:player.SetAttr()
+    //    
     //
     //    if (!UnityTools.Instance.GetComponentFromChildren<Symbol>(obj, "BulletCheckBox"))
     //    {
