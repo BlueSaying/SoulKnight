@@ -50,10 +50,10 @@ public class Player : Character, IDamageable
 
         if (usingWeapon != null)
         {
-            RemoveWeapon();
+            UnequipWeapon();
         }
 
-        UseWeapon(newWeapon);
+        EquipWeapon(newWeapon);
         weapons.Add(newWeapon);
     }
 
@@ -76,18 +76,18 @@ public class Player : Character, IDamageable
 
         usingWeaponIndex = (usingWeaponIndex + 1) % weapons.Count;
 
-        RemoveWeapon();
-        UseWeapon(weapons[usingWeaponIndex]);
+        UnequipWeapon();
+        EquipWeapon(weapons[usingWeaponIndex]);
     }
 
-    public void UseWeapon(PlayerWeapon weapon)
+    public void EquipWeapon(PlayerWeapon weapon)
     {
         weapon.isUsing = true;
         weapon.gameObject.SetActive(true);
         usingWeapon = weapon;
     }
 
-    public void RemoveWeapon()
+    public void UnequipWeapon()
     {
         usingWeapon.isUsing = false;
         usingWeapon.OnExit();

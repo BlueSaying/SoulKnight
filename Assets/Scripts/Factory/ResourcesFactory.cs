@@ -10,6 +10,7 @@ public class ResourcesFactory : Singleton<ResourcesFactory>
     {
         weaponDic = new Dictionary<string, GameObject>();
         bulletDic = new Dictionary<string, GameObject>();
+        enemyDic = new Dictionary<string, GameObject>();
         effectDic = new Dictionary<string, GameObject>();
     }
 

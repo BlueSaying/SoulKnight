@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting;
+using UnityEngine;
 
 public class EnemyFactory : Singleton<EnemyFactory>
 {
@@ -16,6 +17,12 @@ public class EnemyFactory : Singleton<EnemyFactory>
                 enemy = new Stake(obj, new EnemyStaticAttr());
                 break;
         }
+
+        if (!UnityTools.Instance.GetComponentFromChildren<Symbol>(obj, "BulletCheckBox"))
+        {
+            UnityTools.Instance.GetTransformFromChildren(obj, "BulletCheckBox").AddComponent<Symbol>();
+        }
+        UnityTools.Instance.GetComponentFromChildren<Symbol>(obj, "BulletCheckBox").SetCharacter(enemy);
 
         return enemy;
     }

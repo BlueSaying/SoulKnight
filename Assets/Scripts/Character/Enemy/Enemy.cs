@@ -28,7 +28,8 @@ public class Enemy : Character, IDamageable
 
     public virtual void TakeDamage(int damage)
     {
-        dynamicAttr.Hp -= damage;
-        Debug.Log(dynamicAttr.Hp);
+
+        //dynamicAttr.Hp -= damage;
+        Debug.Log(gameObject.ToString() + "受到了" + damage.ToString() + "伤害");
     }
 }

@@ -8,7 +8,7 @@ public class Ak47 : PlayerWeapon
     {
         base.OnFire();
 
-        Bullet_5 bullet = ItemFactory.Instance.CreatePlayerBullet(PlayerBulletType.Bullet_5, firePoint.transform.position, rotOrigin.transform.rotation) as Bullet_5;
+        Bullet_34 bullet = ItemFactory.Instance.CreatePlayerBullet(PlayerBulletType.Bullet_34, firePoint.transform.position, rotOrigin.transform.rotation) as Bullet_34;
         bullet.ManagedToController();
     }
 }

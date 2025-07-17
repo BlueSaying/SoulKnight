@@ -45,29 +45,4 @@ public class PlayerFactory : Singleton<PlayerFactory>
 
         return player;
     }
-
-    //public Player GetPlayer(PlayerStaticAttr staticAttr)
-    //{
-    //    GameObject obj = GameObject.Find(staticAttr.playerType.ToString());
-    //    Player player = GetPlayerObject(staticAttr.playerType, obj);
-    //
-    //    
-    //
-    //    if (!UnityTools.Instance.GetComponentFromChildren<Symbol>(obj, "BulletCheckBox"))
-    //    {
-    //        UnityTools.Instance.GetTransformFromChildren(obj, "BulletCheckBox").AddComponent<Symbol>();
-    //    }
-    //    UnityTools.Instance.GetComponentFromChildren<Symbol>(obj, "BulletCheckBox").SetCharacter(player);
-    //
-    //    return player;
-    //}
-
-    //private Player GetPlayerObject(PlayerType playerType, GameObject obj)
-    //{
-    //    Player player = null;
-    //
-    //    
-    //
-    //    return player;
-    //}
 }

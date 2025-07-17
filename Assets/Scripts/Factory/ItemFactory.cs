@@ -3,7 +3,7 @@
 public enum PlayerBulletType
 {
     Bullet_5,
-
+    Bullet_34,
 }
 
 public enum EffectType
@@ -25,6 +25,9 @@ public class ItemFactory : Singleton<ItemFactory>
             case PlayerBulletType.Bullet_5:
                 bullet = new Bullet_5(obj);
                 break;
+            case PlayerBulletType.Bullet_34:
+                bullet = new Bullet_34(obj);
+                break;
         }
 
         return bullet;
@@ -34,14 +37,14 @@ public class ItemFactory : Singleton<ItemFactory>
     {
         GameObject obj = Object.Instantiate(ResourcesFactory.Instance.GetEffect(effectType.ToString()), position, quaternion);
         BaseEffect effect = null;
-        
+
         switch (effectType)
         {
             case EffectType.EffectBoom:
                 effect = new EffectBoom(obj);
                 break;
         }
-    
+
         return effect;
     }
 }

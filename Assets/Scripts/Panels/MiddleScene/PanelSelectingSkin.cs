@@ -34,10 +34,6 @@ namespace MiddleScene
             UnityTools.Instance.GetComponentFromChildren<Button>(panel, "ButtonNext").onClick.AddListener(() =>
             {
                 EventCenter.Instance.NotifyEvent(EventType.OnSelectSkinComplete);// TODO:读取数据填写UI
-                // 解除冻结位置，即仅设置冻结旋转
-                GameMediator.Instance.GetController<PlayerController>().mainPlayer.rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-                panel.SetActive(false);
-                EnterPanel<PanelBattle>();
             });
 
             // 切换上一个皮肤
@@ -58,7 +54,13 @@ namespace MiddleScene
 
             EventCenter.Instance.RigisterEvent(EventType.OnSelectSkinComplete, false, () =>
             {
+                // 解除冻结位置，即仅设置冻结旋转
+                GameMediator.Instance.GetController<PlayerController>().mainPlayer.rb.constraints = RigidbodyConstraints2D.FreezeRotation;
                 panel.SetActive(false);
+                EnterPanel<PanelBattle>();
+
+                // HACK
+                GameMediator.Instance.GetController<EnemyController>().AddEnemy(EnemyType.Stake, Vector2.zero, Quaternion.identity);
             });
         }
 
