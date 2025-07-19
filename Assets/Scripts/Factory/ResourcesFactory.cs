@@ -12,6 +12,7 @@ public class ResourcesFactory : Singleton<ResourcesFactory>
         bulletDic = new Dictionary<string, GameObject>();
         enemyDic = new Dictionary<string, GameObject>();
         effectDic = new Dictionary<string, GameObject>();
+        canvasDic = new Dictionary<string, GameObject>();
     }
 
     // 武器
@@ -29,6 +30,10 @@ public class ResourcesFactory : Singleton<ResourcesFactory>
     // 特效
     private Dictionary<string, GameObject> effectDic;
     private string effectPath = "Prefabs/Effects/";
+
+    // Canvas
+    private Dictionary<string, GameObject> canvasDic;
+    private string canvasPath = "Prefabs/Canvas/";
 
     // 角色皮肤
     private string playerSkinPath = "Animation/Characters/Players/";
@@ -76,14 +81,23 @@ public class ResourcesFactory : Singleton<ResourcesFactory>
         return newEffect;
     }
 
-    public GameObject GetLevelRoom(string levelName, string roomName)
+    public GameObject GetCanvas(string canvasName)
     {
-        return Resources.LoadAll<GameObject>(levelRoomPath + levelName).Where(x => x.name == roomName).ToArray()[0];
+        if (canvasDic.ContainsKey(canvasName)) return canvasDic[canvasName];
+
+        GameObject newCanvas = Resources.LoadAll<GameObject>(canvasPath).Where(x => x.name == canvasName).ToArray()[0];
+        canvasDic.Add(canvasName, newCanvas);
+        return newCanvas;
     }
 
     public RuntimeAnimatorController GetPlayerSkin(string playerSkinName)
     {
         return Resources.LoadAll<RuntimeAnimatorController>(playerSkinPath + playerSkinName).Where(x => x.name == playerSkinName).ToArray()[0];
+    }
+
+    public GameObject GetLevelRoom(string levelName, string roomName)
+    {
+        return Resources.LoadAll<GameObject>(levelRoomPath + levelName).Where(x => x.name == roomName).ToArray()[0];
     }
 
     // 读取SO数据

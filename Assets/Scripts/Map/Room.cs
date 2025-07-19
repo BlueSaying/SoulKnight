@@ -18,24 +18,24 @@ public class Room
 {
     public LevelType levelType;
 
-    private RoomType _roomType;
-    public RoomType roomType
-    {
-        get
-        {
-            return _roomType;
-        }
-        set
-        {
-            _roomType = value;
-
-            if (_roomType != RoomType.Empty)
-            {
-                gameObject = ResourcesFactory.Instance.GetLevelRoom(levelType.ToString(), _roomType.ToString());
-            }
-            else gameObject = null;
-        }
-    }
+    //private RoomType _roomType;
+    public RoomType roomType;
+    //{
+    //    get
+    //    {
+    //        return _roomType;
+    //    }
+    //    set
+    //    {
+    //        _roomType = value;
+    //
+    //        if (_roomType != RoomType.Empty)
+    //        {
+    //            gameObject = ResourcesFactory.Instance.GetLevelRoom(levelType.ToString(), _roomType.ToString());
+    //        }
+    //        else gameObject = null;
+    //    }
+    //}
 
     //public int height, width;
     public Vector2Int roomPos;

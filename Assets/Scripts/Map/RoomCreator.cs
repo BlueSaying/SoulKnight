@@ -42,6 +42,45 @@ public class RoomCreator : MonoBehaviour
         }
     }
 
+    private void OpenDoor(Room room1, Room room2)
+    {
+        Vector2Int pos1 = room1.roomPos;
+        Vector2Int pos2 = room2.roomPos;
+        Transform grad1 = room1.gameObject.transform.Find("Grid");
+        Transform grad2 = room2.gameObject.transform.Find("Grid");
+
+        if (Mathf.Abs(pos1.x - pos2.x) + Mathf.Abs(pos1.y - pos2.y) > 1) return;
+
+        if (pos1.x == pos2.x)
+        {
+            if (pos1.y > pos2.y)
+            {
+                grad1.Find("WallDoorDown").gameObject.SetActive(false);
+                grad2.Find("WallDoorUp").gameObject.SetActive(false);
+            }
+            else
+            {
+                grad1.Find("WallDoorUp").gameObject.SetActive(false);
+                grad2.Find("WallDoorDown").gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            if (pos1.x > pos2.x)
+            {
+                grad1.Find("WallDoorLeft").gameObject.SetActive(false);
+                grad2.Find("WallDoorRight").gameObject.SetActive(false);
+            }
+            else
+            {
+                grad1.Find("WallDoorRight").gameObject.SetActive(false);
+                grad2.Find("WallDoorLeft").gameObject.SetActive(false);
+            }
+        }
+
+        
+    }
+
     private GameObject InstantiatePath(Room room1, Room room2)
     {
         Vector2Int pos1 = room1.roomPos;
@@ -65,7 +104,8 @@ public class RoomCreator : MonoBehaviour
 
     private GameObject InstantiateRoom(Room room)
     {
-        return Instantiate(room.gameObject, (Vector2)room.roomPos * UnitSize, Quaternion.identity, transform);
+        GameObject roomPrefab = ResourcesFactory.Instance.GetLevelRoom(curLevel.ToString(), room.roomType.ToString());
+        return Instantiate(roomPrefab, (Vector2)room.roomPos * UnitSize, Quaternion.identity, transform);
     }
 
     private void AddPath(Room room1, Room room2)
@@ -246,12 +286,12 @@ public class RoomCreator : MonoBehaviour
             curRoomCount++;
         }
 
-        CreateMap();
+        InstantiateLevel();
 
         Debug.Log(roomCount + "个房间");
     }
 
-    private void CreateMap()
+    private void InstantiateLevel()
     {
         Queue<Vector2Int> queue = new Queue<Vector2Int>();
         queue.Enqueue(birthPos);
@@ -259,19 +299,48 @@ public class RoomCreator : MonoBehaviour
         for (int i = 0; i < RoomSize; i++)
             for (int j = 0; j < RoomSize; j++)
                 visited[i, j] = false;
-        visited[birthPos.x, birthPos.y] = true;
         Vector2Int curPos = birthPos;
 
         while (queue.Count > 0)
         {
             Vector2Int roomPos = queue.Dequeue();
-            InstantiateRoom(roomMatrix[roomPos.x, roomPos.y]);
+
+            roomMatrix[roomPos.x,roomPos.y].gameObject = InstantiateRoom(roomMatrix[roomPos.x, roomPos.y]);
             foreach (Vector2Int path in roomMatrix[roomPos.x, roomPos.y].pathConnection)
             {
                 Vector2Int newPos = roomPos + path;
                 if (visited[newPos.x, newPos.y]) continue;
 
                 InstantiatePath(roomMatrix[roomPos.x, roomPos.y], roomMatrix[newPos.x, newPos.y]);
+                queue.Enqueue(newPos);
+            }
+
+            visited[roomPos.x, roomPos.y] = true;
+        }
+
+        OpenAllDoor();
+    }
+
+    private void OpenAllDoor()
+    {
+        Queue<Vector2Int> queue = new Queue<Vector2Int>();
+        queue.Enqueue(birthPos);
+        bool[,] visited = new bool[RoomSize, RoomSize];
+        for (int i = 0; i < RoomSize; i++)
+            for (int j = 0; j < RoomSize; j++)
+                visited[i, j] = false;
+        Vector2Int curPos = birthPos;
+
+        while (queue.Count > 0)
+        {
+            Vector2Int roomPos = queue.Dequeue();
+
+            foreach (Vector2Int path in roomMatrix[roomPos.x, roomPos.y].pathConnection)
+            {
+                Vector2Int newPos = roomPos + path;
+                if (visited[newPos.x, newPos.y]) continue;
+
+                OpenDoor(roomMatrix[roomPos.x, roomPos.y], roomMatrix[newPos.x, newPos.y]);
                 queue.Enqueue(newPos);
             }
 

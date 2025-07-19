@@ -26,8 +26,22 @@ public class Enemy : Character, IDamageable
 
     public Enemy(GameObject obj, EnemyStaticAttr staticAttr) : base(obj, staticAttr) { }
 
+    protected override void OnInit()
+    {
+        base.OnInit();
+        animator = transform.Find("Sprite").GetComponent<Animator>();
+    }
+
     public virtual void TakeDamage(int damage)
     {
+        // HACK
+        Color color = Color.red;
+        Transform damageNumPoint = transform.Find("DamageNumPoint");
+
+        DamageNum damageNum = ItemFactory.Instance.CreateDamageNum("DamageNum", damageNumPoint, damage, color);
+        damageNum.ManagedToController();
+
+        animator.SetTrigger("BeAttack");
 
         //dynamicAttr.Hp -= damage;
         Debug.Log(gameObject.ToString() + "受到了" + damage.ToString() + "伤害");

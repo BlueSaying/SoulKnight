@@ -3,12 +3,12 @@
 public class BaseEffect : Item
 {
     protected float effectTimer;
-    protected float effectTime; // 特效持续时间
+    protected float duration; // 特效持续时间
 
     public BaseEffect(GameObject gameObject) : base(gameObject)
     {
         effectTimer = 0f;
-        effectTime = 0.5f;
+        duration = 0.5f;
     }
 
     protected override void OnExit()

@@ -9,7 +9,7 @@ public class EffectBoom : BaseEffect
         base.OnUpdate();
 
         effectTimer += Time.deltaTime;
-        if (effectTimer > effectTime)
+        if (effectTimer > duration)
         {
             Remove();
         }

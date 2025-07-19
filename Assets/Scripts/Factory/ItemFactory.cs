@@ -47,4 +47,12 @@ public class ItemFactory : Singleton<ItemFactory>
 
         return effect;
     }
+
+    public DamageNum CreateDamageNum(string canvasName, Transform parent, int damage, Color color)
+    {
+        GameObject obj = Object.Instantiate(ResourcesFactory.Instance.GetCanvas(canvasName), parent);
+        DamageNum damageNum = new DamageNum(obj, damage, color);
+
+        return damageNum;
+    }
 }

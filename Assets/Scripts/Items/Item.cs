@@ -20,6 +20,12 @@ public class Item
 
     public void GameUpdate()
     {
+        if (!isInit)
+        {
+            isInit = true;
+            OnInit();
+        }
+
         if (beingRemoved && !hasRemoved)
         {
             OnExit();
@@ -33,11 +39,7 @@ public class Item
 
     public virtual void OnEnter()
     {
-        if (!isInit)
-        {
-            isInit = true;
-            OnInit();
-        }
+        
 
         beingRemoved = false;
         hasRemoved = false;
