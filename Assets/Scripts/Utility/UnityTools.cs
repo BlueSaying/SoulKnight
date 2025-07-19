@@ -2,12 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class UnityTools : Singleton<UnityTools>
 {
     private UnityTools() { }
+
+    public int GetRandomInt(int min, int max)
+    {
+        return UnityEngine.Random.Range(min, max + 1);
+    }
+
+    public float GetRandomFloat(float min, float max)
+    {
+        return UnityEngine.Random.Range(min, max);
+    }
 
     /// <summary>
     /// 在父对象的所有子层级中查找指定名称的物体，并获取其上的指定类型组件
@@ -238,7 +247,7 @@ public class UnityTools : Singleton<UnityTools>
                     isValidData = true;
                 }
             }
-            if(isValidData)
+            if (isValidData)
             {
                 list.Add(obj);
             }

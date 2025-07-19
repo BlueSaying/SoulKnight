@@ -1083,7 +1083,7 @@ GameObject:
   - component: {fileID: 271681758}
   - component: {fileID: 271681757}
   m_Layer: 0
-  m_Name: TilemapFloor
+  m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1143,7 +1143,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 357371293
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0.00003129244, y: 0.00003129244, z: 0}
@@ -27371,7 +27371,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1083438317
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: -469424233, guid: 3df08d6eb03fc604c9ad0f94e0fb820d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -29657,7 +29657,7 @@ GameObject:
   - component: {fileID: 1157165000}
   - component: {fileID: 1157165002}
   m_Layer: 7
-  m_Name: TilemapWall
+  m_Name: Wall
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29716,8 +29716,8 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1743514903
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0.00003129244, y: 0.00003129244, z: 0}
@@ -72091,7 +72091,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1083438317
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 1349475191, guid: bd02d7111ec486b4d9a638aee6c1ae20, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

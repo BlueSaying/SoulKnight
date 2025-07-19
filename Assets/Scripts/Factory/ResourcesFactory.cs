@@ -33,6 +33,9 @@ public class ResourcesFactory : Singleton<ResourcesFactory>
     // 角色皮肤
     private string playerSkinPath = "Animation/Characters/Players/";
 
+    // 关卡房间
+    private string levelRoomPath = "Prefabs/Rooms/";
+
     // 数据
     private string dataPath = "Datas/";
 
@@ -71,6 +74,11 @@ public class ResourcesFactory : Singleton<ResourcesFactory>
         GameObject newEffect = Resources.LoadAll<GameObject>(effectPath).Where(x => x.name == effectName).ToArray()[0];
         effectDic.Add(effectName, newEffect);
         return newEffect;
+    }
+
+    public GameObject GetLevelRoom(string levelName, string roomName)
+    {
+        return Resources.LoadAll<GameObject>(levelRoomPath + levelName).Where(x => x.name == roomName).ToArray()[0];
     }
 
     public RuntimeAnimatorController GetPlayerSkin(string playerSkinName)
