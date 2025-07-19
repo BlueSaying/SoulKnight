@@ -4,7 +4,6 @@ using UnityEngine;
 public class PetFollowState : PetState
 {
     private const float minDistance = 1f;
-
     private int curPathIndex;
 
     public PetFollowState(StateMachine stateMachine) : base(stateMachine) { }

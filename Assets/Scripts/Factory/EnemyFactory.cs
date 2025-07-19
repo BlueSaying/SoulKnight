@@ -7,23 +7,38 @@ public class EnemyFactory : Singleton<EnemyFactory>
 
     public Enemy CreateEnemy(EnemyType enemyType, Vector3 position, Quaternion quaternion)
     {
-        GameObject obj = Object.Instantiate(ResourcesFactory.Instance.GetEnemy(enemyType.ToString()), position, quaternion);
+        GameObject newEnemy = InstantiateEnemy(enemyType, position, quaternion);
         EnemyStaticAttr staticAttr = EnemyCommand.Instance.GetEnemyStaticAttr(enemyType);
         Enemy enemy = null;
 
         switch (enemyType)
         {
             case EnemyType.Stake:
-                enemy = new Stake(obj, new EnemyStaticAttr());
+                enemy = new Stake(newEnemy, new EnemyStaticAttr()); // HACK
                 break;
         }
 
-        if (!UnityTools.Instance.GetComponentFromChildren<Symbol>(obj, "BulletCheckBox"))
-        {
-            UnityTools.Instance.GetTransformFromChildren(obj, "BulletCheckBox").AddComponent<Symbol>();
-        }
-        UnityTools.Instance.GetComponentFromChildren<Symbol>(obj, "BulletCheckBox").SetCharacter(enemy);
+        UnityTools.Instance.GetComponentFromChildren<Symbol>(newEnemy, "BulletCheckBox").SetCharacter(enemy);
 
         return enemy;
+    }
+
+    // 实例化一个敌人的游戏物体
+    public GameObject InstantiateEnemy(EnemyType type, Vector3 position, Quaternion quaternion, Transform parent = null)
+    {
+        GameObject enemyPrefab = ResourcesFactory.Instance.GetEnemy(type.ToString());
+        GameObject newEnemy = null;
+
+        if (parent != null)
+        {
+            newEnemy = Object.Instantiate(enemyPrefab, position, quaternion, parent);
+        }
+        else
+        {
+            newEnemy = Object.Instantiate(enemyPrefab, position, quaternion);
+        }
+
+        newEnemy.name = type.ToString();
+        return newEnemy;
     }
 }

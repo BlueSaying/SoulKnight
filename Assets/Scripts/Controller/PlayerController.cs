@@ -31,11 +31,11 @@ public class PlayerController : AbstractController
 
     public void SetMainPlayer(PlayerType playerType)
     {
-        mainPlayer = PlayerFactory.Instance.GetPlayer(playerType);
+        mainPlayer = PlayerFactory.Instance.CreatePlayer(playerType);
     }
 
     public void AddPlayerPet(PetType type, Player owner)
     {
-        pets.Add(PetFactory.Instance.GetPet(type, owner));
+        pets.Add(PetFactory.Instance.CreatePet(type, owner, new Vector2(-1, -2), Quaternion.identity));
     }
 }

@@ -10,17 +10,17 @@ public class LittleCoolStateMachine : PetStateMachine
     {
         base.OnUpdate();
 
-        if(curState is PetIdleState)
+        if (curState is PetIdleState)
         {
-            if(pet.DistanceToOwner()>5f)
+            if (pet.DistanceToOwner() > 5f)
             {
                 SwitchState<PetFollowState>();
             }
         }
 
-        if(curState is PetFollowState)
+        if (curState is PetFollowState)
         {
-            if(pet.DistanceToOwner()<2f)
+            if (pet.DistanceToOwner() < 2f)
             {
                 SwitchState<PetIdleState>();
             }

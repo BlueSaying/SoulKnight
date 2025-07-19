@@ -22,7 +22,7 @@ public class PetState : State
         pet = stateMachine.pet;
         gameObject = pet.gameObject;
         rb = transform.GetComponent<Rigidbody2D>();
-        animator = transform.GetComponent<Animator>();
+        animator = transform.Find("Sprite").GetComponent<Animator>();
         seeker = transform.GetComponent<Seeker>();
     }
 }

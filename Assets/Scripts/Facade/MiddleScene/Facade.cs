@@ -8,7 +8,8 @@
         private EnemyController enemyController;
         private UIController uiController;
 
-        private CameraSystem _cameraSystem;
+        private CameraSystem cameraSystem;
+        private MusicSystem musicSystem;
 
         protected override void OnInit()
         {
@@ -20,7 +21,8 @@
             enemyController = new EnemyController();
             uiController = new UIController();
 
-            _cameraSystem = new CameraSystem();
+            cameraSystem = new CameraSystem();
+            musicSystem = new MusicSystem();
 
             GameMediator.Instance.RegisterController(itemController);
             GameMediator.Instance.RegisterController(inputController);
@@ -28,7 +30,8 @@
             GameMediator.Instance.RegisterController(enemyController);
             GameMediator.Instance.RegisterController(uiController);
 
-            GameMediator.Instance.RegisterSystem(_cameraSystem);
+            GameMediator.Instance.RegisterSystem(cameraSystem);
+            GameMediator.Instance.RegisterSystem(musicSystem);
 
             EventCenter.Instance.RigisterEvent(EventType.OnSelectPlayerComplete, false, () =>
             {

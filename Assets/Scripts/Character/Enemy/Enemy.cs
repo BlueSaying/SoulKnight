@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public enum EnemyType
 {
@@ -24,12 +25,21 @@ public class Enemy : Character, IDamageable
     //protected List<BasePlayerWeapon> weapons;
     //protected BasePlayerWeapon usingWeapon;
 
+    // 当前是否为受击闪烁状态
+    private bool isFlashing = false;
+
     public Enemy(GameObject obj, EnemyStaticAttr staticAttr) : base(obj, staticAttr) { }
 
     protected override void OnInit()
     {
         base.OnInit();
         animator = transform.Find("Sprite").GetComponent<Animator>();
+    }
+
+    protected override void OnCharacterDieStart()
+    {
+        base.OnCharacterDieStart();
+        CoroutinePool.Instance.StopAllCoroutine(this);
     }
 
     public virtual void TakeDamage(int damage)
@@ -42,8 +52,27 @@ public class Enemy : Character, IDamageable
         damageNum.ManagedToController();
 
         animator.SetTrigger("BeAttack");
+        if (!isFlashing)
+        {
+            CoroutinePool.Instance.StartCoroutine(this, BeWhite());
+        }
 
         //dynamicAttr.Hp -= damage;
         Debug.Log(gameObject.ToString() + "受到了" + damage.ToString() + "伤害");
+    }
+
+    private IEnumerator BeWhite()
+    {
+        isFlashing = true;
+
+        SpriteRenderer render = transform.Find("Sprite").GetComponent<SpriteRenderer>();
+
+        render.color = new Color(render.color.r, render.color.g, render.color.b, 0.5f);
+
+        yield return new WaitForSeconds(0.05f);
+
+        render.color = new Color(render.color.r, render.color.g, render.color.b, 1f);
+
+        isFlashing = false;
     }
 }

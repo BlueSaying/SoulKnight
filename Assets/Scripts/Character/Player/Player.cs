@@ -6,7 +6,7 @@ public class Player : Character, IDamageable
     public new PlayerStaticAttr staticAttr { get => base.staticAttr as PlayerStaticAttr; set => base.staticAttr = value; }
     public new PlayerDynamicAttr dynamicAttr { get => base.dynamicAttr as PlayerDynamicAttr; set => base.dynamicAttr = value; }
 
-    protected Animator animator;
+    //protected Animator animator;
     protected PlayerStateMachine stateMachine;
 
     protected List<PlayerWeapon> weapons;
@@ -18,7 +18,7 @@ public class Player : Character, IDamageable
     {
         base.OnInit();
         weapons = new List<PlayerWeapon>();
-        animator = transform.Find("Sprite").GetComponent<Animator>();
+        //animator = transform.Find("Sprite").GetComponent<Animator>();
 
         // NOTE:角色初始化时，添加阿凉为宠物
         GameMediator.Instance.GetController<PlayerController>().AddPlayerPet(PetType.LittleCool, this);
@@ -102,6 +102,6 @@ public class Player : Character, IDamageable
     public void TakeDamage(int damage)
     {
         //dynamicAttr.Hp -= damage;
-        Debug.Log(dynamicAttr.Hp);
+        Debug.Log(damage);
     }
 }

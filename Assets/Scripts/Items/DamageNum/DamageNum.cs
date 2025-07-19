@@ -3,7 +3,6 @@ using UnityEngine.UI;
 
 public class DamageNum : Item
 {
-    private static readonly float risingSpeed = 1f;
     private static readonly float duration = 1f;    // 持续时间
 
     private float timer = 0f;
@@ -14,6 +13,8 @@ public class DamageNum : Item
         text = transform.Find("Text").GetComponent<Text>();
         text.text = damage.ToString();
         text.color = color;
+
+        gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(UnityTools.Instance.GetRandomFloat(-1, 1), 2).normalized * 5;
     }
 
     protected override void OnUpdate()
@@ -22,9 +23,7 @@ public class DamageNum : Item
 
         if (timer < duration)
         {
-            gameObject.transform.position += (Vector3)Vector2.up * risingSpeed * Time.deltaTime;
-            Color textColor = text.color;
-            textColor.a = 1 - timer / duration;
+            text.color = new Color(text.color.r, text.color.g, text.color.b, 1 - 0.8f * timer / duration);
             timer += Time.deltaTime;
         }
         else

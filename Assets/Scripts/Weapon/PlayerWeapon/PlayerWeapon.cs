@@ -9,7 +9,6 @@ public enum PlayerWeaponType
     Furnace,
     Icebreaker,
     PKP,
-    AK47,
     UZI,
     SnowFoxL,
     AssaultRifle,
@@ -70,7 +69,7 @@ public abstract class PlayerWeapon : Weapon
     {
         if (isAttack && fireTimer >= 1 / staticAttr.fireRate)
         {
-            fireTimer = 0f;// NOTE:删除此语句解除武器限制
+            if (GameMediator.Instance.GetController<InputController>().isLimitedWeapon) fireTimer = 0f;// NOTE:删除此语句解除武器限制
             OnFire();
         }
     }

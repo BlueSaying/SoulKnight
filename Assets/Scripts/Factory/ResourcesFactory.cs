@@ -35,8 +35,14 @@ public class ResourcesFactory : Singleton<ResourcesFactory>
     private Dictionary<string, GameObject> canvasDic;
     private string canvasPath = "Prefabs/Canvas/";
 
+    // 音效
+    private string audioPath = "Audios/";
+
+    // 宠物
+    private string petPath = "Prefabs/Pets/";
+
     // 角色皮肤
-    private string playerSkinPath = "Animation/Characters/Players/";
+    private string playerSkinPath = "Animatior/Characters/Players/";
 
     // 关卡房间
     private string levelRoomPath = "Prefabs/Rooms/";
@@ -88,6 +94,16 @@ public class ResourcesFactory : Singleton<ResourcesFactory>
         GameObject newCanvas = Resources.LoadAll<GameObject>(canvasPath).Where(x => x.name == canvasName).ToArray()[0];
         canvasDic.Add(canvasName, newCanvas);
         return newCanvas;
+    }
+
+    public AudioClip GetAudioClip(string audioName)
+    {
+        return Resources.LoadAll<AudioClip>(audioPath).Where(x => x.name == audioName).ToArray()[0];
+    }
+
+    public GameObject GetPet(string petName)
+    {
+        return Resources.LoadAll<GameObject>(petPath).Where(x => x.name == petName).ToArray()[0];
     }
 
     public RuntimeAnimatorController GetPlayerSkin(string playerSkinName)

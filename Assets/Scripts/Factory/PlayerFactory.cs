@@ -21,7 +21,7 @@ public class PlayerFactory : Singleton<PlayerFactory>
     private PlayerFactory() { }
 
     // NOTE:给定playerType，返回相应的IPlayer 每次创建新角色后都应该在此处书写
-    public Player GetPlayer(PlayerType playerType)
+    public Player CreatePlayer(PlayerType playerType)
     {
         GameObject obj = GameObject.Find(playerType.ToString());
         PlayerStaticAttr staticAttr = PlayerCommand.Instance.GetPlayerStaticAttr(playerType);

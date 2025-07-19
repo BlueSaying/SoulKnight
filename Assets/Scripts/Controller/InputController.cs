@@ -49,6 +49,9 @@ public enum KeyInputType
 
 public class InputController : AbstractController
 {
+    // HACK
+    public bool isLimitedWeapon = true;
+
     // 储存按键设置
     private Dictionary<KeyInputType, KeyCode> inputDic;
 
@@ -103,7 +106,7 @@ public class InputController : AbstractController
             throw new System.Exception("未储存关于" + type.ToString() + "相应键值对");
         }
     }
-    
+
 
     public bool GetKeyUpInput(KeyInputType type)
     {

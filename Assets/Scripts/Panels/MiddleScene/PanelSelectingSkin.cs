@@ -60,6 +60,9 @@ namespace MiddleScene
                 EnterPanel<PanelBattle>();
 
                 // HACK
+                WeaponFactory.Instance.InstantiatePlayerWeapon(PlayerWeaponType.Ak47, new Vector2(5, 0), Quaternion.identity);
+                WeaponFactory.Instance.InstantiatePlayerWeapon(PlayerWeaponType.BadPistol, new Vector2(3,0), Quaternion.identity);
+
                 GameMediator.Instance.GetController<EnemyController>().AddEnemy(EnemyType.Stake, Vector2.zero, Quaternion.identity);
             });
         }
