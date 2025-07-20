@@ -12,7 +12,6 @@ public class MiddleSceneGameLoop : MonoBehaviour
     void Update()
     {
         facade.GameUpdate();
-        Debug.Log(GameMediator.Instance.controllers.Count);
-        if (Input.GetKeyDown(KeyCode.U)) GameMediator.Instance.GetController<InputController>().isLimitedWeapon = false;
+        if (Input.GetKeyDown(KeyCode.U)) GameMediator.Instance.GetSystem<InputSystem>().isLimitedWeapon = false;
     }
 }

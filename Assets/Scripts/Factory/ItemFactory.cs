@@ -17,7 +17,7 @@ public class ItemFactory : Singleton<ItemFactory>
 
     public PlayerBullet CreatePlayerBullet(PlayerBulletType playerBulletType, Vector3 position, Quaternion quaternion)
     {
-        GameObject obj = Object.Instantiate(ResourcesFactory.Instance.GetBullet(playerBulletType.ToString()), position, quaternion);
+        GameObject obj = Object.Instantiate(ResourcesLoader.Instance.GetBullet(playerBulletType.ToString()), position, quaternion);
         PlayerBullet bullet = null;
 
         switch (playerBulletType)
@@ -35,7 +35,7 @@ public class ItemFactory : Singleton<ItemFactory>
 
     public BaseEffect CreateEffect(EffectType effectType, Vector3 position, Quaternion quaternion)
     {
-        GameObject obj = Object.Instantiate(ResourcesFactory.Instance.GetEffect(effectType.ToString()), position, quaternion);
+        GameObject obj = Object.Instantiate(ResourcesLoader.Instance.GetEffect(effectType.ToString()), position, quaternion);
         BaseEffect effect = null;
 
         switch (effectType)
@@ -50,7 +50,7 @@ public class ItemFactory : Singleton<ItemFactory>
 
     public DamageNum CreateDamageNum(string canvasName, Transform parent, int damage, Color color)
     {
-        GameObject obj = Object.Instantiate(ResourcesFactory.Instance.GetCanvas(canvasName), parent);
+        GameObject obj = Object.Instantiate(ResourcesLoader.Instance.GetCanvas(canvasName), parent);
         DamageNum damageNum = new DamageNum(obj, damage, color);
 
         return damageNum;

@@ -13,14 +13,14 @@ public class RogueStateMachine : PlayerStateMachine
 
         if (curState is PlayerIdleState)
         {
-            if (GameMediator.Instance.GetController<InputController>().GetMoveInput() != Vector2.zero)
+            if (GameMediator.Instance.GetSystem<InputSystem>().GetMoveInput() != Vector2.zero)
             {
                 SwitchState<PlayerRunState>();
             }
         }
         if (curState is PlayerRunState)
         {
-            if (GameMediator.Instance.GetController<InputController>().GetMoveInput() == Vector2.zero)
+            if (GameMediator.Instance.GetSystem<InputSystem>().GetMoveInput() == Vector2.zero)
             {
                 SwitchState<PlayerIdleState>();
             }

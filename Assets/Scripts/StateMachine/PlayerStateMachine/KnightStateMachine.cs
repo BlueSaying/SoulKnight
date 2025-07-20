@@ -10,17 +10,18 @@ public class KnightStateMachine : PlayerStateMachine
     protected override void OnUpdate()
     {
         base.OnUpdate();
-        //Debug.Log("角色当前状态" + currentState.ToString());
+
         if (curState is PlayerIdleState)
         {
-            if (GameMediator.Instance.GetController<InputController>().GetMoveInput() != Vector2.zero)
+            if (GameMediator.Instance.GetSystem<InputSystem>().GetMoveInput() != Vector2.zero)
             {
                 SwitchState<PlayerRunState>();
             }
         }
+
         if (curState is PlayerRunState)
         {
-            if (GameMediator.Instance.GetController<InputController>().GetMoveInput() == Vector2.zero)
+            if (GameMediator.Instance.GetSystem<InputSystem>().GetMoveInput() == Vector2.zero)
             {
                 SwitchState<PlayerIdleState>();
             }

@@ -4,14 +4,14 @@ namespace BattleScene
 {
     public class Facade : AbstractFacade
     {
-        private ItemController itemController;
-        private InputController inputController;
-        private PlayerController playerController;
-        private EnemyController enemyController;
-        private UIController uiController;
+        private ItemSystem itemSystem;
+        private InputSystem inputSystem;
+        private PlayerSystem playerSystem;
+        private EnemySystem enemySystem;
+        private UISystem uiSystem;
 
         private CameraSystem cameraSystem;
-        //private MusicSystem musicSystem;
+        private AudioSystem audioSystem;
 
         protected override void OnInit()
         {
@@ -19,42 +19,46 @@ namespace BattleScene
 
             RoomCreator.Instance.CreateLevel(LevelType.Forest);
 
-            itemController = new ItemController();
-            inputController = new InputController();
-            playerController = new PlayerController();
-            enemyController = new EnemyController();
-            uiController = new UIController();
+            itemSystem = new ItemSystem();
+            inputSystem = new InputSystem();
+            playerSystem = new PlayerSystem();
+            enemySystem = new EnemySystem();
+            uiSystem = new UISystem();
 
             cameraSystem = new CameraSystem();
-            //musicSystem = new MusicSystem();
+            audioSystem = new AudioSystem();
 
-            GameMediator.Instance.RegisterController(itemController);
-            GameMediator.Instance.RegisterController(inputController);
-            GameMediator.Instance.RegisterController(playerController);
-            GameMediator.Instance.RegisterController(enemyController);
-            GameMediator.Instance.RegisterController(uiController);
+            GameMediator.Instance.RegisterSystem(itemSystem);
+            GameMediator.Instance.RegisterSystem(inputSystem);
+            GameMediator.Instance.RegisterSystem(playerSystem);
+            GameMediator.Instance.RegisterSystem(enemySystem);
+            GameMediator.Instance.RegisterSystem(uiSystem);
 
             GameMediator.Instance.RegisterSystem(cameraSystem);
-            //GameMediator.Instance.RegisterSystem(musicSystem);
+            GameMediator.Instance.RegisterSystem(audioSystem);
 
             EventCenter.Instance.RigisterEvent(EventType.OnFinishRoomCreate, false, () =>
             {
-                itemController.TurnOnController();
-                inputController.TurnOnController();
-                playerController.TurnOnController();
-                enemyController.TurnOnController();
-                uiController.TurnOnController();
+                itemSystem.TurnOnController();
+                inputSystem.TurnOnController();
+                playerSystem.TurnOnController();
+                enemySystem.TurnOnController();
+                uiSystem.TurnOnController();
+                cameraSystem.TurnOnController();
+                audioSystem.TurnOnController();
             });
         }
 
         protected override void OnUpdate()
         {
             base.OnUpdate();
-            itemController.GameUpdate();
-            inputController.GameUpdate();
-            playerController.GameUpdate();
-            enemyController.GameUpdate();
-            uiController.GameUpdate();
+            itemSystem.GameUpdate();
+            inputSystem.GameUpdate();
+            playerSystem.GameUpdate();
+            enemySystem.GameUpdate();
+            uiSystem.GameUpdate();
+            cameraSystem.GameUpdate();
+            audioSystem.GameUpdate();
         }
     }
 }

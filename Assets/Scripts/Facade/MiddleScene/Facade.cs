@@ -2,53 +2,55 @@
 {
     public class Facade : AbstractFacade
     {
-        private ItemController itemController;
-        private InputController inputController;
-        private PlayerController playerController;
-        private EnemyController enemyController;
-        private UIController uiController;
+        private ItemSystem itemSystem;
+        private InputSystem inputSystem;
+        private PlayerSystem playerSystem;
+        private EnemySystem enemySystem;
+        private UISystem uiSystem;
 
         private CameraSystem cameraSystem;
-        private MusicSystem musicSystem;
+        private AudioSystem musicSystem;
 
         protected override void OnInit()
         {
             base.OnInit();
 
-            itemController = new ItemController();
-            inputController = new InputController();
-            playerController = new PlayerController();
-            enemyController = new EnemyController();
-            uiController = new UIController();
+            itemSystem = new ItemSystem();
+            inputSystem = new InputSystem();
+            playerSystem = new PlayerSystem();
+            enemySystem = new EnemySystem();
+            uiSystem = new UISystem();
 
             cameraSystem = new CameraSystem();
-            musicSystem = new MusicSystem();
+            musicSystem = new AudioSystem();
 
-            GameMediator.Instance.RegisterController(itemController);
-            GameMediator.Instance.RegisterController(inputController);
-            GameMediator.Instance.RegisterController(playerController);
-            GameMediator.Instance.RegisterController(enemyController);
-            GameMediator.Instance.RegisterController(uiController);
+            GameMediator.Instance.RegisterSystem(itemSystem);
+            GameMediator.Instance.RegisterSystem(inputSystem);
+            GameMediator.Instance.RegisterSystem(playerSystem);
+            GameMediator.Instance.RegisterSystem(enemySystem);
+            GameMediator.Instance.RegisterSystem(uiSystem);
 
             GameMediator.Instance.RegisterSystem(cameraSystem);
             GameMediator.Instance.RegisterSystem(musicSystem);
 
             EventCenter.Instance.RigisterEvent(EventType.OnSelectSkinComplete, false, () =>
             {
-                playerController.TurnOnController();
+                playerSystem.TurnOnController();
             });
 
             // HACK
-            enemyController.TurnOnController();
+            enemySystem.TurnOnController();
         }
         protected override void OnUpdate()
         {
             base.OnUpdate();
-            itemController.GameUpdate();
-            inputController.GameUpdate();
-            playerController.GameUpdate();
-            enemyController.GameUpdate();
-            uiController.GameUpdate();
+            itemSystem.GameUpdate();
+            inputSystem.GameUpdate();
+            playerSystem.GameUpdate();
+            enemySystem.GameUpdate();
+            uiSystem.GameUpdate();
+            cameraSystem.GameUpdate();
+            musicSystem.GameUpdate();
         }
     }
 }

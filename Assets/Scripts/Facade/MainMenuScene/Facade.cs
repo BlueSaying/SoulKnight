@@ -2,12 +2,12 @@
 {
     public class Facade : AbstractFacade
     {
-        private UIController _uiController;
+        private UISystem _uiController;
         protected override void OnInit()
         {
             base.OnInit();
-            _uiController = new UIController();
-            GameMediator.Instance.RegisterController(_uiController);
+            _uiController = new UISystem();
+            GameMediator.Instance.RegisterSystem(_uiController);
         }
         protected override void OnUpdate()
         {

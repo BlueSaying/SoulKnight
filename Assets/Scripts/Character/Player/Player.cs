@@ -21,7 +21,7 @@ public class Player : Character, IDamageable
         //animator = transform.Find("Sprite").GetComponent<Animator>();
 
         // NOTE:角色初始化时，添加阿凉为宠物
-        GameMediator.Instance.GetController<PlayerController>().AddPlayerPet(PetType.LittleCool, this);
+        GameMediator.Instance.GetSystem<PlayerSystem>().AddPlayerPet(PetType.LittleCool, this);
     }
 
     protected override void OnCharacterUpdate()
@@ -32,8 +32,8 @@ public class Player : Character, IDamageable
         if (usingWeapon != null)
         {
             usingWeapon.GameUpdate();
-            usingWeapon.ControlWeapon(GameMediator.Instance.GetController<InputController>().GetKeyInput(KeyInputType.shoot));
-            usingWeapon.RotateWeapon(GameMediator.Instance.GetController<InputController>().GetMoveInput());
+            usingWeapon.ControlWeapon(GameMediator.Instance.GetSystem<InputSystem>().GetKeyInput(KeyInputType.shoot));
+            usingWeapon.RotateWeapon(GameMediator.Instance.GetSystem<InputSystem>().GetMoveInput());
         }
 
         if (Input.GetKeyDown(KeyCode.R))

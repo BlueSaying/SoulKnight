@@ -26,7 +26,7 @@ public class EnemyFactory : Singleton<EnemyFactory>
     // 实例化一个敌人的游戏物体
     public GameObject InstantiateEnemy(EnemyType type, Vector3 position, Quaternion quaternion, Transform parent = null)
     {
-        GameObject enemyPrefab = ResourcesFactory.Instance.GetEnemy(type.ToString());
+        GameObject enemyPrefab = ResourcesLoader.Instance.GetEnemy(type.ToString());
         GameObject newEnemy = null;
 
         if (parent != null)
