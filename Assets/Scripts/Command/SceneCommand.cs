@@ -13,6 +13,7 @@ public class SceneCommand : Singleton<SceneCommand>
 
     public void LoadScene(SceneName sceneName)
     {
+        EventCenter.Instance.NotifyEvent(EventType.OnSceneSwitchStart);
         op = SceneManager.LoadSceneAsync((int)sceneName);
         op.completed += OnSceneSwitchComplete;
     }

@@ -6,6 +6,11 @@ using UnityEngine.Events;
 public enum EventType
 {
     /// <summary>
+    /// 当场景开始切换
+    /// </summary>
+    OnSceneSwitchStart,
+
+    /// <summary>
     /// 当场景完成切换
     /// </summary>
     OnSceneSwitchComplete,

@@ -1,25 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace MiddleScene
 {
-    public class PanelBattle : Panel
+    public class BattlePanel : Panel
     {
-        public PanelBattle(Panel parent) : base(parent) { }
-
-        protected override void OnEnter()
+        protected override void Awake()
         {
-            base.OnEnter();
+            base.Awake();
+
             GameMediator.Instance.GetSystem<CameraSystem>().SwitchCamera(CameraType.followCamera);
 
             // 设置相机跟随目标
             GameMediator.Instance.GetSystem<CameraSystem>()
                 .SetCameraTarget(CameraType.followCamera, GameMediator.Instance.GetSystem<PlayerSystem>().mainPlayer.transform);
-
         }
     }
 }

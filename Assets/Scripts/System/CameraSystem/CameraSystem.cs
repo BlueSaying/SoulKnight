@@ -38,6 +38,9 @@ public class CameraSystem : AbstractSystem
         staticCamera = UnityTools.Instance.GetComponentFromChildren<CinemachineVirtualCamera>(cameras, "StaticCamera");
         selectingCamera = UnityTools.Instance.GetComponentFromChildren<CinemachineVirtualCamera>(cameras, "SelectingCamera");
         followCamera = UnityTools.Instance.GetComponentFromChildren<CinemachineVirtualCamera>(cameras, "FollowCamera");
+
+        // HACK
+        SwitchCamera(CameraType.staticCamera);
     }
 
     public void SetCameraTarget(CameraType type, Transform trans)

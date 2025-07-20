@@ -8,7 +8,7 @@ namespace BattleScene
         private InputSystem inputSystem;
         private PlayerSystem playerSystem;
         private EnemySystem enemySystem;
-        private UISystem uiSystem;
+        //private UISystem uiSystem;
 
         private CameraSystem cameraSystem;
         private AudioSystem audioSystem;
@@ -23,7 +23,7 @@ namespace BattleScene
             inputSystem = new InputSystem();
             playerSystem = new PlayerSystem();
             enemySystem = new EnemySystem();
-            uiSystem = new UISystem();
+            //uiSystem = new UISystem();
 
             cameraSystem = new CameraSystem();
             audioSystem = new AudioSystem();
@@ -32,7 +32,7 @@ namespace BattleScene
             GameMediator.Instance.RegisterSystem(inputSystem);
             GameMediator.Instance.RegisterSystem(playerSystem);
             GameMediator.Instance.RegisterSystem(enemySystem);
-            GameMediator.Instance.RegisterSystem(uiSystem);
+            //GameMediator.Instance.RegisterSystem(uiSystem);
 
             GameMediator.Instance.RegisterSystem(cameraSystem);
             GameMediator.Instance.RegisterSystem(audioSystem);
@@ -43,7 +43,7 @@ namespace BattleScene
                 inputSystem.TurnOnController();
                 playerSystem.TurnOnController();
                 enemySystem.TurnOnController();
-                uiSystem.TurnOnController();
+                //uiSystem.TurnOnController();
                 cameraSystem.TurnOnController();
                 audioSystem.TurnOnController();
             });
@@ -56,7 +56,7 @@ namespace BattleScene
             inputSystem.GameUpdate();
             playerSystem.GameUpdate();
             enemySystem.GameUpdate();
-            uiSystem.GameUpdate();
+            //uiSystem.GameUpdate();
             cameraSystem.GameUpdate();
             audioSystem.GameUpdate();
         }

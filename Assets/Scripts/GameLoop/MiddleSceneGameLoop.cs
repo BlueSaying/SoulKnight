@@ -1,17 +1,23 @@
 ﻿using UnityEngine;
 
-public class MiddleSceneGameLoop : MonoBehaviour
+namespace MiddleScene
 {
-    private MiddleScene.Facade facade;
-
-    void Awake()
+    public class MiddleSceneGameLoop : MonoBehaviour
     {
-        facade = new MiddleScene.Facade();
-    }
+        private Facade facade;
 
-    void Update()
-    {
-        facade.GameUpdate();
-        if (Input.GetKeyDown(KeyCode.U)) GameMediator.Instance.GetSystem<InputSystem>().isLimitedWeapon = false;
+        void Awake()
+        {
+            UIManager.Instance.OpenPanel(PanelName.RoomPanel.ToString());
+            UIManager.Instance.OpenPanel(PanelName.GemPanel.ToString());
+
+            facade = new Facade();
+        }
+
+        void Update()
+        {
+            facade.GameUpdate();
+            if (Input.GetKeyDown(KeyCode.U)) GameMediator.Instance.GetSystem<InputSystem>().isLimitedWeapon = false;
+        }
     }
 }

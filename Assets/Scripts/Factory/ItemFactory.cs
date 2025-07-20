@@ -50,7 +50,7 @@ public class ItemFactory : Singleton<ItemFactory>
 
     public DamageNum CreateDamageNum(string canvasName, Transform parent, int damage, Color color)
     {
-        GameObject obj = Object.Instantiate(ResourcesLoader.Instance.GetCanvas(canvasName), parent);
+        GameObject obj = Object.Instantiate(ResourcesLoader.Instance.GetPanel(SceneName.BattleScene.ToString(), canvasName), parent);
         DamageNum damageNum = new DamageNum(obj, damage, color);
 
         return damageNum;

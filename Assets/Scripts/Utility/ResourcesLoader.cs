@@ -12,7 +12,7 @@ public class ResourcesLoader : Singleton<ResourcesLoader>
         bulletDic = new Dictionary<string, GameObject>();
         enemyDic = new Dictionary<string, GameObject>();
         effectDic = new Dictionary<string, GameObject>();
-        canvasDic = new Dictionary<string, GameObject>();
+        panelDic = new Dictionary<string, GameObject>();
     }
 
     // 武器
@@ -31,9 +31,9 @@ public class ResourcesLoader : Singleton<ResourcesLoader>
     private Dictionary<string, GameObject> effectDic;
     private string effectPath = "Prefabs/Effects/";
 
-    // Canvas
-    private Dictionary<string, GameObject> canvasDic;
-    private string canvasPath = "Prefabs/Canvas/";
+    // UI
+    private Dictionary<string, GameObject> panelDic;
+    private string panelPath = "Prefabs/Panels/";
 
     // 音效
     private string audioPath = "Audios/";
@@ -87,18 +87,18 @@ public class ResourcesLoader : Singleton<ResourcesLoader>
         return newEffect;
     }
 
-    public GameObject GetCanvas(string canvasName)
+    public GameObject GetPanel(string sceneName, string panelName)
     {
-        if (canvasDic.ContainsKey(canvasName)) return canvasDic[canvasName];
+        if (panelDic.ContainsKey(panelName)) return panelDic[panelName];
 
-        GameObject newCanvas = Resources.LoadAll<GameObject>(canvasPath).Where(x => x.name == canvasName).ToArray()[0];
-        canvasDic.Add(canvasName, newCanvas);
-        return newCanvas;
+        GameObject newPanel = Resources.LoadAll<GameObject>(panelPath ).Where(x => x.name == panelName).ToArray()[0];
+        panelDic.Add(panelName, newPanel);
+        return newPanel;
     }
 
     public AudioClip GetAudioClip(string audioType, string audioName)
     {
-        return Resources.LoadAll<AudioClip>(audioPath + audioType + "/").Where(x => x.name == audioName).ToArray()[0];
+        return Resources.LoadAll<AudioClip>(audioPath + audioType).Where(x => x.name == audioName).ToArray()[0];
     }
 
     public GameObject GetPet(string petName)

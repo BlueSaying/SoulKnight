@@ -1,16 +1,21 @@
 using UnityEngine;
 
-public class MainMenuSceneGameLoop : MonoBehaviour
+namespace MainMenuScene
 {
-    private MainMenuScene.Facade facade;
-
-    void Awake()
+    public class MainMenuSceneGameLoop : MonoBehaviour
     {
-        facade = new MainMenuScene.Facade();
-    }
+        private Facade facade;
 
-    void Update()
-    {
-        facade.GameUpdate();
+        void Awake()
+        {
+            UIManager.Instance.OpenPanel(PanelName.MainMenuPanel.ToString());
+
+            facade = new Facade();
+        }
+
+        void Update()
+        {
+            facade.GameUpdate();
+        }
     }
 }

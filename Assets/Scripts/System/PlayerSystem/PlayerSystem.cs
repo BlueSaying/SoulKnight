@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerSystem : AbstractSystem
 {
+    public GameObject playerGameObject;
     public Player mainPlayer { get; protected set; }
     private List<Pet> pets;
 
@@ -12,6 +14,12 @@ public class PlayerSystem : AbstractSystem
     {
         base.OnInit();
         pets = new List<Pet>();
+
+        EventCenter.Instance.RigisterEvent(EventType.OnSelectSkinComplete, false, () =>
+        {
+            mainPlayer = PlayerFactory.Instance.CreatePlayer(Enum.Parse<PlayerType>(playerGameObject.name));
+            mainPlayer.rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        });
     }
 
     protected override void OnAfterRunUpdate()
@@ -29,9 +37,9 @@ public class PlayerSystem : AbstractSystem
         }
     }
 
-    public void SetMainPlayer(PlayerType playerType)
+    public void SetMainPlayerType(GameObject selectingGameObject)
     {
-        mainPlayer = PlayerFactory.Instance.CreatePlayer(playerType);
+        this.playerGameObject = selectingGameObject;
     }
 
     public void AddPlayerPet(PetType type, Player owner)
