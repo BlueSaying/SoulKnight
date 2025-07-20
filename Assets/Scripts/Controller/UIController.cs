@@ -17,6 +17,7 @@ public class UIController : AbstractController
                 rootPanel = new MiddleScene.PanelRoot();
                 break;
             case SceneName.BattleScene:
+                rootPanel = new BattleScene.PanelRoot();
                 break;
         }
     }

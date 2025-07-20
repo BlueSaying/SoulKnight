@@ -4,7 +4,7 @@ public class MiddleSceneGameLoop : MonoBehaviour
 {
     private MiddleScene.Facade facade;
 
-    void Start()
+    void Awake()
     {
         facade = new MiddleScene.Facade();
     }
@@ -12,7 +12,7 @@ public class MiddleSceneGameLoop : MonoBehaviour
     void Update()
     {
         facade.GameUpdate();
-
+        Debug.Log(GameMediator.Instance.controllers.Count);
         if (Input.GetKeyDown(KeyCode.U)) GameMediator.Instance.GetController<InputController>().isLimitedWeapon = false;
     }
 }

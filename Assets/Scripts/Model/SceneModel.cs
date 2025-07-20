@@ -4,7 +4,7 @@ public enum SceneName
 {
     MainMenuScene,
     MiddleScene,
-    BattleScene
+    BattleScene,
 }
 
 public class SceneModel : AbstractModel

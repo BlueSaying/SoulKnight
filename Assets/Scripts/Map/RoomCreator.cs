@@ -6,7 +6,7 @@ public enum LevelType
     Forest,
 }
 
-public class RoomCreator : MonoBehaviour
+public class RoomCreator : Singleton<RoomCreator> // : MonoBehaviour
 {
     private static readonly int RoomSize = 5;
     private static readonly int UnitSize = 35;
@@ -18,19 +18,29 @@ public class RoomCreator : MonoBehaviour
 
     private Room[,] roomMatrix = new Room[RoomSize, RoomSize];
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            CreateLevel(LevelType.Forest);
-        }
-    }
+    // rooms的父物体
+    Transform transform;
+
+    //private void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.G))
+    //    {
+    //        CreateLevel(LevelType.Forest);
+    //    }
+    //}
+    //
+    //private void OnEnable()
+    //{
+    //    CreateLevel(LevelType.Forest);
+    //}
+
+    private RoomCreator() { }
 
     private void Refresh()
     {
         for (int i = 0; i < transform.childCount; i++)
         {
-            Destroy(transform.GetChild(i).gameObject);
+            Object.Destroy(transform.GetChild(i).gameObject);
         }
 
         for (int i = 0; i < RoomSize; i++)
@@ -78,7 +88,7 @@ public class RoomCreator : MonoBehaviour
             }
         }
 
-        
+
     }
 
     private GameObject InstantiatePath(Room room1, Room room2)
@@ -99,13 +109,13 @@ public class RoomCreator : MonoBehaviour
         else pathPrefab = ResourcesFactory.Instance.GetLevelRoom(curLevel.ToString(), RoomType.PathHor.ToString());
 
         Vector2 pathPos = leftDwonPos * UnitSize;
-        return Instantiate(pathPrefab, pathPos, Quaternion.identity, transform);
+        return Object.Instantiate(pathPrefab, pathPos, Quaternion.identity, transform);
     }
 
     private GameObject InstantiateRoom(Room room)
     {
         GameObject roomPrefab = ResourcesFactory.Instance.GetLevelRoom(curLevel.ToString(), room.roomType.ToString());
-        return Instantiate(roomPrefab, (Vector2)room.roomPos * UnitSize, Quaternion.identity, transform);
+        return Object.Instantiate(roomPrefab, (Vector2)room.roomPos * UnitSize, Quaternion.identity, transform);
     }
 
     private void AddPath(Room room1, Room room2)
@@ -243,6 +253,13 @@ public class RoomCreator : MonoBehaviour
 
     public void CreateLevel(LevelType levelType)
     {
+        transform = GameObject.Find("Rooms").transform;
+
+        if (transform == null)
+        {
+            throw new System.Exception("无法找到游戏物体Rooms，请添加");
+        }
+
         curLevel = levelType;
         Refresh();
 
@@ -287,8 +304,10 @@ public class RoomCreator : MonoBehaviour
         }
 
         InstantiateLevel();
+        OpenAllDoor();
 
         Debug.Log(roomCount + "个房间");
+        EventCenter.Instance.NotifyEvent(EventType.OnFinishRoomCreate);
     }
 
     private void InstantiateLevel()
@@ -305,7 +324,7 @@ public class RoomCreator : MonoBehaviour
         {
             Vector2Int roomPos = queue.Dequeue();
 
-            roomMatrix[roomPos.x,roomPos.y].gameObject = InstantiateRoom(roomMatrix[roomPos.x, roomPos.y]);
+            roomMatrix[roomPos.x, roomPos.y].gameObject = InstantiateRoom(roomMatrix[roomPos.x, roomPos.y]);
             foreach (Vector2Int path in roomMatrix[roomPos.x, roomPos.y].pathConnection)
             {
                 Vector2Int newPos = roomPos + path;
@@ -317,8 +336,6 @@ public class RoomCreator : MonoBehaviour
 
             visited[roomPos.x, roomPos.y] = true;
         }
-
-        OpenAllDoor();
     }
 
     private void OpenAllDoor()

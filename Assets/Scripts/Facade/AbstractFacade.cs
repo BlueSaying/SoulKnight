@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 public abstract class AbstractFacade
 {
@@ -8,6 +5,12 @@ public abstract class AbstractFacade
 
     public void GameUpdate()
     {
+        if (!isInit)
+        {
+            isInit = true;
+            OnInit();
+        }
+
         OnUpdate();
     }
 
@@ -15,10 +18,6 @@ public abstract class AbstractFacade
 
     protected virtual void OnUpdate()
     {
-        if(!isInit)
-        {
-            isInit = true;
-            OnInit();
-        }
+        
     }
 }

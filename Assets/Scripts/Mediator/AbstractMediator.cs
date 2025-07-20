@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 public abstract class AbstractMediator
 {
-    private List<AbstractController> controllers;
+    public List<AbstractController> controllers;
     private List<AbstractSystem> systems;
 
     public AbstractMediator()

@@ -16,6 +16,7 @@ public class ModelContainer : Singleton<ModelContainer>
         AddModel(new PlayerSkinModel());
         AddModel(new WeaponModel());
         AddModel(new EnemyModel());
+        AddModel(new MemoryModel());
     }
 
     public T GetModel<T>() where T : AbstractModel

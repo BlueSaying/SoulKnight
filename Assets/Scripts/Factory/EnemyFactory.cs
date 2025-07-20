@@ -14,7 +14,7 @@ public class EnemyFactory : Singleton<EnemyFactory>
         switch (enemyType)
         {
             case EnemyType.Stake:
-                enemy = new Stake(newEnemy, new EnemyStaticAttr()); // HACK
+                enemy = new Stake(newEnemy, staticAttr); // HACK
                 break;
         }
 

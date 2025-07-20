@@ -11,14 +11,19 @@ public enum EventType
     OnSceneSwitchComplete,
 
     /// <summary>
-    /// 当选择角色结束
+    /// 当角色选择完毕
     /// </summary>
     OnSelectPlayerComplete,
 
     /// <summary>
-    /// 当选择皮肤结束
+    /// 当皮肤选择完毕
     /// </summary>
     OnSelectSkinComplete,
+
+    /// <summary>
+    /// 当房间生成完毕
+    /// </summary>
+    OnFinishRoomCreate,
 }
 
 public class EventCenter : Singleton<EventCenter>

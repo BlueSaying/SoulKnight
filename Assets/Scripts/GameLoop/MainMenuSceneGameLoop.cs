@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class MainMenuGameLoop : MonoBehaviour
+public class MainMenuSceneGameLoop : MonoBehaviour
 {
     private MainMenuScene.Facade facade;
 
-    void Start()
+    void Awake()
     {
         facade = new MainMenuScene.Facade();
     }
