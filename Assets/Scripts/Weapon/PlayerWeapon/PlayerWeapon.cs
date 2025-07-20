@@ -70,7 +70,7 @@ public abstract class PlayerWeapon : Weapon
         if (isAttack && fireTimer >= 1 / staticAttr.fireRate)
         {
             if (GameMediator.Instance.GetController<InputController>().isLimitedWeapon) fireTimer = 0f;// NOTE:删除此语句解除武器限制
-            OnFire();
+                OnFire();
         }
     }
 

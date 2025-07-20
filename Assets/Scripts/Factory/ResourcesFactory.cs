@@ -96,9 +96,9 @@ public class ResourcesFactory : Singleton<ResourcesFactory>
         return newCanvas;
     }
 
-    public AudioClip GetAudioClip(string audioName)
+    public AudioClip GetAudioClip(string audioType, string audioName)
     {
-        return Resources.LoadAll<AudioClip>(audioPath).Where(x => x.name == audioName).ToArray()[0];
+        return Resources.LoadAll<AudioClip>(audioPath + audioType + "/").Where(x => x.name == audioName).ToArray()[0];
     }
 
     public GameObject GetPet(string petName)

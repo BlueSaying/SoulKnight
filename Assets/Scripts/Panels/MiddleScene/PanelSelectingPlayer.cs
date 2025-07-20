@@ -23,15 +23,13 @@ namespace MiddleScene
             });
             UnityTools.Instance.GetComponentFromChildren<Button>(panel, "ButtonNext").onClick.AddListener(() =>
             {
-                GameMediator.Instance.GetController<PlayerController>().SetMainPlayer(Enum.Parse<PlayerType>(selectingPlayer.name));
                 EventCenter.Instance.NotifyEvent(EventType.OnSelectPlayerComplete);
-                panel.SetActive(false);
-                GetPanel<PanelSelectingSkin>().SetSelectingPlayer(selectingPlayer);
-                EnterPanel<PanelSelectingSkin>();
             });
 
             EventCenter.Instance.RigisterEvent(EventType.OnSelectPlayerComplete, false, () =>
             {
+                GetPanel<PanelSelectingSkin>().SetSelectingPlayer(selectingPlayer);
+                EnterPanel<PanelSelectingSkin>();
                 panel.SetActive(false);
             });
         }

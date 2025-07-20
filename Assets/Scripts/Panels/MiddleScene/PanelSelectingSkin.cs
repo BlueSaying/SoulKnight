@@ -55,9 +55,11 @@ namespace MiddleScene
             EventCenter.Instance.RigisterEvent(EventType.OnSelectSkinComplete, false, () =>
             {
                 // 解除冻结位置，即仅设置冻结旋转
+                GameMediator.Instance.GetController<PlayerController>().SetMainPlayer(Enum.Parse<PlayerType>(selectingPlayer.name));
                 GameMediator.Instance.GetController<PlayerController>().mainPlayer.rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-                panel.SetActive(false);
+                
                 EnterPanel<PanelBattle>();
+                panel.SetActive(false);
 
                 // HACK
                 WeaponFactory.Instance.InstantiatePlayerWeapon(PlayerWeaponType.Ak47, new Vector2(5, 0), Quaternion.identity);
