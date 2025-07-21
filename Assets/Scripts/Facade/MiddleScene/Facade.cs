@@ -7,7 +7,6 @@
         private PlayerSystem playerSystem;
         private EnemySystem enemySystem;
         private WeaponSystem weaponSystem;
-        //private UISystem uiSystem;
 
         private CameraSystem cameraSystem;
         private AudioSystem musicSystem;
@@ -21,7 +20,6 @@
             playerSystem = new PlayerSystem();
             enemySystem = new EnemySystem();
             weaponSystem = new WeaponSystem();
-            //uiSystem = new UISystem();
 
             cameraSystem = new CameraSystem();
             musicSystem = new AudioSystem();
@@ -31,7 +29,6 @@
             GameMediator.Instance.RegisterSystem(playerSystem);
             GameMediator.Instance.RegisterSystem(enemySystem);
             GameMediator.Instance.RegisterSystem(weaponSystem);
-            //GameMediator.Instance.RegisterSystem(uiSystem);
 
             GameMediator.Instance.RegisterSystem(cameraSystem);
             GameMediator.Instance.RegisterSystem(musicSystem);
@@ -52,7 +49,6 @@
             playerSystem.GameUpdate();
             enemySystem.GameUpdate();
             weaponSystem.GameUpdate();
-            //uiSystem.GameUpdate();
             cameraSystem.GameUpdate();
             musicSystem.GameUpdate();
         }

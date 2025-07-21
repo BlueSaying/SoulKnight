@@ -92,8 +92,8 @@ public class RoomCreator : Singleton<RoomCreator>
         else { leftDwonPos = pos2; rightUpPos = pos1; }
 
         GameObject pathPrefab;
-        if (leftDwonPos.x == rightUpPos.x) pathPrefab = ResourcesLoader.Instance.GetLevelRoom(curLevel.ToString(), RoomType.PathVer.ToString());
-        else pathPrefab = ResourcesLoader.Instance.GetLevelRoom(curLevel.ToString(), RoomType.PathHor.ToString());
+        if (leftDwonPos.x == rightUpPos.x) pathPrefab = ResourcesLoader.Instance.LoadLevelRoom(curLevel.ToString(), RoomType.PathVer.ToString());
+        else pathPrefab = ResourcesLoader.Instance.LoadLevelRoom(curLevel.ToString(), RoomType.PathHor.ToString());
 
         Vector2 pathPos = leftDwonPos * UnitSize;
         return Object.Instantiate(pathPrefab, pathPos, Quaternion.identity, transform);
@@ -101,7 +101,7 @@ public class RoomCreator : Singleton<RoomCreator>
 
     private GameObject InstantiateRoom(Room room)
     {
-        GameObject roomPrefab = ResourcesLoader.Instance.GetLevelRoom(curLevel.ToString(), room.roomType.ToString());
+        GameObject roomPrefab = ResourcesLoader.Instance.LoadLevelRoom(curLevel.ToString(), room.roomType.ToString());
         return Object.Instantiate(roomPrefab, (Vector2)room.roomPos * UnitSize, Quaternion.identity, transform);
     }
 

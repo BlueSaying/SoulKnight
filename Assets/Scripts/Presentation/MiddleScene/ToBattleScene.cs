@@ -19,12 +19,12 @@ public class ToBattleScene : MonoBehaviour
         triggerDetector.AddTriggerListener(TriggerEventType.OnTriggerEnter2D, "Player", (obj) =>
         {
             // 处理场景加载前的逻辑
-            memoryModel.playerStaticAttr = obj.GetComponent<Symbol>().character.model.staticAttr as PlayerStaticAttr;
-            memoryModel.playerDynamicAttr = obj.GetComponent<Symbol>().character.model.dynamicAttr as PlayerDynamicAttr;
+            //memoryModel.playerStaticAttr = obj.GetComponent<Symbol>().character.model.staticAttr as PlayerStaticAttr;
+            //memoryModel.playerDynamicAttr = obj.GetComponent<Symbol>().character.model.dynamicAttr as PlayerDynamicAttr;
             //DontDestroyOnLoad(obj);
 
             // 加载Battle场景
-            SceneCommand.Instance.LoadScene(SceneName.BattleScene);
+            //SceneCommand.Instance.LoadScene(SceneName.BattleScene);
         });
     }
 }

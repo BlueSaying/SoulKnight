@@ -7,17 +7,17 @@ public class EnemyFactory : Singleton<EnemyFactory>
     public Enemy CreateEnemy(EnemyModel enemymodel, Vector3 position, Quaternion quaternion)
     {
         EnemyType enemyType = enemymodel.staticAttr.enemyType;
-        GameObject newEnemy = InstantiateEnemy(enemyType, position, quaternion);
+        GameObject obj = InstantiateEnemy(enemyType, position, quaternion);
         Enemy enemy = null;
 
         switch (enemyType)
         {
             case EnemyType.Stake:
-                enemy = new Stake(newEnemy, enemymodel);
+                enemy = new Stake(obj, enemymodel);
                 break;
         }
 
-        UnityTools.Instance.GetComponentFromChildren<Symbol>(newEnemy, "BulletCheckBox").SetCharacter(enemy);
+        UnityTools.Instance.GetComponentFromChildren<Symbol>(obj, "BulletCheckBox").SetCharacter(enemy);
 
         return enemy;
     }
@@ -25,7 +25,7 @@ public class EnemyFactory : Singleton<EnemyFactory>
     // 实例化一个敌人的游戏物体
     public GameObject InstantiateEnemy(EnemyType type, Vector3 position, Quaternion quaternion, Transform parent = null)
     {
-        GameObject enemyPrefab = ResourcesLoader.Instance.GetEnemy(type.ToString());
+        GameObject enemyPrefab = ResourcesLoader.Instance.LoadEnemy(type.ToString());
         GameObject newEnemy = null;
 
         if (parent != null)

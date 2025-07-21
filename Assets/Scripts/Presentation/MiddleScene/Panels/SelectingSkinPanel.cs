@@ -51,7 +51,7 @@ namespace MiddleScene
             {
                 curSkinIndex = (curSkinIndex + playerSkins.Count - 1) % playerSkins.Count;
                 selectingPlayer.transform.Find("Sprite").GetComponent<Animator>().runtimeAnimatorController =
-                    ResourcesLoader.Instance.GetPlayerSkin(playerSkins[curSkinIndex].ToString());
+                    ResourcesLoader.Instance.LoadPlayerSkin(playerSkins[curSkinIndex].ToString());
             });
 
             //切换下一个皮肤
@@ -59,7 +59,7 @@ namespace MiddleScene
             {
                 curSkinIndex = (curSkinIndex + 1) % playerSkins.Count;
                 selectingPlayer.transform.Find("Sprite").GetComponent<Animator>().runtimeAnimatorController =
-                    ResourcesLoader.Instance.GetPlayerSkin(playerSkins[curSkinIndex].ToString());
+                    ResourcesLoader.Instance.LoadPlayerSkin(playerSkins[curSkinIndex].ToString());
             });
         }
     }

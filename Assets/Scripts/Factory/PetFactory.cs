@@ -30,7 +30,7 @@ public class PetFactory : Singleton<PetFactory>
     // 实例化一个宠物的游戏物体
     public GameObject InstantiatePet(PetType type, Vector3 position, Quaternion quaternion, Transform parent = null)
     {
-        GameObject petPrefab = ResourcesLoader.Instance.GetPet(type.ToString());
+        GameObject petPrefab = ResourcesLoader.Instance.LoadPet(type.ToString());
         GameObject newPet = null;
 
         if (parent != null)

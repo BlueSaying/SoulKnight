@@ -11,7 +11,7 @@ public class WeaponFactory : Singleton<WeaponFactory>
         PlayerWeaponType type = model.staticAttr.playerWeaponType;
         GameObject GunOriginPoint = UnityTools.Instance.GetTransformFromChildren(character.gameObject, "GunOriginPoint").gameObject;        
 
-        GameObject obj = Object.Instantiate(ResourcesLoader.Instance.GetWeapon(type.ToString()), GunOriginPoint.transform);
+        GameObject obj = Object.Instantiate(ResourcesLoader.Instance.LoadWeapon(type.ToString()), GunOriginPoint.transform);
         obj.name = type.ToString();
 
         obj.transform.localPosition = Vector3.zero;
@@ -33,7 +33,7 @@ public class WeaponFactory : Singleton<WeaponFactory>
     // 在地上生成武器
     public GameObject InstantiatePlayerWeapon(PlayerWeaponType type, Vector3 position, Quaternion quaternion, Transform parent = null)
     {
-        GameObject playerWeaponPrefab = ResourcesLoader.Instance.GetWeapon(type.ToString());
+        GameObject playerWeaponPrefab = ResourcesLoader.Instance.LoadWeapon(type.ToString());
 
         GameObject newPlayerWeapon;
         if (parent != null)

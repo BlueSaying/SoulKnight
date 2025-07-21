@@ -9,6 +9,7 @@ public class ResourcesLoader : Singleton<ResourcesLoader>
     {
         weaponDic = new Dictionary<string, GameObject>();
         bulletDic = new Dictionary<string, GameObject>();
+        playerDic = new Dictionary<string, GameObject>();
         enemyDic = new Dictionary<string, GameObject>();
         effectDic = new Dictionary<string, GameObject>();
         panelDic = new Dictionary<string, GameObject>();
@@ -21,6 +22,10 @@ public class ResourcesLoader : Singleton<ResourcesLoader>
     // 子弹
     private Dictionary<string, GameObject> bulletDic;
     private string bulletPath = "Prefabs/Bullets/";
+
+    // 玩家
+    private Dictionary<string, GameObject> playerDic;
+    private string playerPath = "Prefabs/Player";
 
     // 敌人
     private Dictionary<string, GameObject> enemyDic;
@@ -46,7 +51,7 @@ public class ResourcesLoader : Singleton<ResourcesLoader>
     // 关卡房间
     private string levelRoomPath = "Prefabs/Rooms/";
 
-    public GameObject GetWeapon(string weaponName)
+    public GameObject LoadWeapon(string weaponName)
     {
         if (weaponDic.ContainsKey(weaponName)) return weaponDic[weaponName];
 
@@ -56,7 +61,7 @@ public class ResourcesLoader : Singleton<ResourcesLoader>
         return newWeapon;
     }
 
-    public GameObject GetBullet(string bulletName)
+    public GameObject LoadBullet(string bulletName)
     {
         if (bulletDic.ContainsKey(bulletName)) return bulletDic[bulletName];
 
@@ -65,7 +70,16 @@ public class ResourcesLoader : Singleton<ResourcesLoader>
         return newBullet;
     }
 
-    public GameObject GetEnemy(string enemyName)
+    public GameObject LoadPlayer(string playerName)
+    {
+        if (playerDic.ContainsKey(playerName)) return playerDic[playerName];
+
+        GameObject newPlayer = Resources.LoadAll<GameObject>(playerPath).Where(x => x.name == playerName).ToArray()[0];
+        playerDic.Add(playerName, newPlayer);
+        return newPlayer;
+    }
+
+    public GameObject LoadEnemy(string enemyName)
     {
         if (enemyDic.ContainsKey(enemyName)) return enemyDic[enemyName];
 
@@ -74,7 +88,7 @@ public class ResourcesLoader : Singleton<ResourcesLoader>
         return newEnemy;
     }
 
-    public GameObject GetEffect(string effectName)
+    public GameObject LoadEffect(string effectName)
     {
         if (effectDic.ContainsKey(effectName)) return effectDic[effectName];
 
@@ -83,34 +97,34 @@ public class ResourcesLoader : Singleton<ResourcesLoader>
         return newEffect;
     }
 
-    public GameObject GetPanel(string sceneName, string panelName)
+    public GameObject LoadPanel(string sceneName, string panelName)
     {
         if (panelDic.ContainsKey(panelName)) return panelDic[panelName];
 
-        GameObject newPanel = Resources.LoadAll<GameObject>(panelPath ).Where(x => x.name == panelName).ToArray()[0];
+        GameObject newPanel = Resources.LoadAll<GameObject>(panelPath).Where(x => x.name == panelName).ToArray()[0];
         panelDic.Add(panelName, newPanel);
         return newPanel;
     }
 
-    public AudioClip GetAudioClip(string audioType, string audioName)
+    public AudioClip LoadAudioClip(string audioType, string audioName)
     {
         return Resources.LoadAll<AudioClip>(audioPath + audioType).Where(x => x.name == audioName).ToArray()[0];
     }
 
-    public GameObject GetPet(string petName)
+    public GameObject LoadPet(string petName)
     {
         return Resources.LoadAll<GameObject>(petPath).Where(x => x.name == petName).ToArray()[0];
     }
 
-    public RuntimeAnimatorController GetPlayerSkin(string playerSkinName)
+    public RuntimeAnimatorController LoadPlayerSkin(string playerSkinName)
     {
         return Resources.LoadAll<RuntimeAnimatorController>(playerSkinPath + playerSkinName).Where(x => x.name == playerSkinName).ToArray()[0];
     }
 
-    public GameObject GetLevelRoom(string levelName, string roomName)
+    public GameObject LoadLevelRoom(string levelName, string roomName)
     {
         return Resources.LoadAll<GameObject>(levelRoomPath + levelName).Where(x => x.name == roomName).ToArray()[0];
     }
 
-    
+
 }

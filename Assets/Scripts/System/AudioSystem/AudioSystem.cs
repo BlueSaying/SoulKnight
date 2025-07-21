@@ -23,7 +23,7 @@ public class AudioSystem : AbstractSystem
 
     public void PlayAudio(AudioType audioType, AudioName audioName)
     {
-        AudioClip audioClip = ResourcesLoader.Instance.GetAudioClip(audioType.ToString(), audioName.ToString());
+        AudioClip audioClip = ResourcesLoader.Instance.LoadAudioClip(audioType.ToString(), audioName.ToString());
 
         audioSource.PlayOneShot(audioClip);
     }

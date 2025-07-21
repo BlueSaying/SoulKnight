@@ -1,5 +1,4 @@
-﻿using System;
-using Unity.VisualScripting;
+﻿using Unity.VisualScripting;
 using UnityEngine;
 
 public enum PlayerType
@@ -44,5 +43,24 @@ public class PlayerFactory : Singleton<PlayerFactory>
         UnityTools.Instance.GetComponentFromChildren<Symbol>(obj, "BulletCheckBox").SetCharacter(player);
 
         return player;
+    }
+
+    // 实例化一个玩家的游戏物体
+    public GameObject InstantiatePlayer(PlayerType type, Vector3 position, Quaternion quaternion, Transform parent = null)
+    {
+        GameObject playerPrefab = ResourcesLoader.Instance.LoadPlayer(type.ToString());
+        GameObject newPlayer = null;
+
+        if (parent != null)
+        {
+            newPlayer = Object.Instantiate(playerPrefab, position, quaternion, parent);
+        }
+        else
+        {
+            newPlayer = Object.Instantiate(playerPrefab, position, quaternion);
+        }
+
+        newPlayer.name = type.ToString();
+        return newPlayer;
     }
 }
