@@ -1,8 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
+public enum MouseInputType
+{
+    leftButton,
+    rightButton,
+    middleButton,
+}
+
 /// <summary>
-/// 玩家所有输入类型之枚举
+/// 键盘输入之类型之枚举
 /// </summary>
 public enum KeyInputType
 {
@@ -71,8 +79,6 @@ public class InputSystem : AbstractSystem
         inputDic[KeyInputType.releaseSkill] = KeyCode.Space;
     }
 
-
-
     public Vector2 GetMoveInput()
     {
         Vector2 dir = Vector2.zero;
@@ -107,7 +113,6 @@ public class InputSystem : AbstractSystem
         }
     }
 
-
     public bool GetKeyUpInput(KeyInputType type)
     {
         try
@@ -118,6 +123,21 @@ public class InputSystem : AbstractSystem
         {
             throw new System.Exception("未储存关于" + type.ToString() + "相应键值对");
         }
+    }
+
+    public bool GetMouseButtonInput(MouseInputType type)
+    {
+        return Input.GetMouseButton((int)type);
+    }
+
+    public bool GetMouseButtonDownInput(MouseInputType type)
+    {
+        return Input.GetMouseButtonDown((int)type);
+    }
+
+    public bool GetMouseButtonUpInput(MouseInputType type)
+    {
+        return Input.GetMouseButtonUp((int)type);
     }
 
     // 改变键位设置

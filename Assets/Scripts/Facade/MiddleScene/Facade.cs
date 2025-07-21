@@ -33,7 +33,7 @@
             GameMediator.Instance.RegisterSystem(cameraSystem);
             GameMediator.Instance.RegisterSystem(musicSystem);
 
-            EventCenter.Instance.RigisterEvent(EventType.OnSelectSkinComplete, false, () =>
+            EventCenter.Instance.ReigisterEvent(EventType.OnSelectSkinComplete, false, () =>
             {
                 playerSystem.TurnOnController();
             });

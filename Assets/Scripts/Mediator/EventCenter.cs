@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine.Events;
 
 // NOTE:在此处注册事件
@@ -84,7 +85,7 @@ public class EventCenter : Singleton<EventCenter>
         eventDic = new Dictionary<EventType, List<IEventInfo>>();
     }
 
-    public void RigisterEvent(EventType type, bool isPermanent, UnityAction action)
+    public void ReigisterEvent(EventType type, bool isPermanent, UnityAction action)
     {
         if (eventDic.ContainsKey(type))
         {
@@ -102,7 +103,7 @@ public class EventCenter : Singleton<EventCenter>
         }
     }
 
-    public void RigisterEvent<T>(EventType type, bool isPermanent, UnityAction<T> action)
+    public void RegisterEvent<T>(EventType type, bool isPermanent, UnityAction<T> action)
     {
         if (eventDic.ContainsKey(type))
         {
@@ -144,6 +145,29 @@ public class EventCenter : Singleton<EventCenter>
                 (info as EventInfo<T>).action.Invoke(param);
             }
         }
+    }
+
+    public void RemoveEvent(EventType type, UnityAction action)
+    {
+        if (!eventDic.TryGetValue(type, out var infoList)) return;
+
+        for (int i = 0; i < infoList.Count; i++)
+        {
+            if (infoList[i] is EventInfo eventInfo)
+            {
+                eventInfo.action -= action;
+
+                // 如果委托为空且非永久事件，移除容器
+                if (eventInfo.action == null && !eventInfo.isPermanent)
+                {
+                    infoList.RemoveAt(i);
+                    i--;
+                }
+            }
+        }
+
+        // 清理空事件类型
+        if (infoList.Count == 0) eventDic.Remove(type);
     }
 
     public void ClearNonPermanentEvents()

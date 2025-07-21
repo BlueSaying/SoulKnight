@@ -33,7 +33,7 @@ public class UIManager
     //构造函数
     private UIManager()
     {
-        EventCenter.Instance.RigisterEvent(EventType.OnSceneSwitchStart, false, () =>
+        EventCenter.Instance.ReigisterEvent(EventType.OnSceneSwitchStart, false, () =>
         {
             panelDictionary.Clear();
         });
@@ -46,7 +46,8 @@ public class UIManager
     /// </summary>
     private void InitDictionary()
     {
-        panelDictionary = new Dictionary<string, Panel>();//界面名称，界面类
+        // 界面名称，界面类
+        panelDictionary = new Dictionary<string, Panel>();
     }
 
     /// <summary>
@@ -79,7 +80,7 @@ public class UIManager
         GameObject panelPrefab = ResourcesLoader.Instance.GetPanel(curSceneName, panelName);
 
         //打开UI界面
-        GameObject panelObject = Object.Instantiate(panelPrefab, UIRoot, false);//从预制体中实例化一个新的界面
+        GameObject panelObject = Object.Instantiate(panelPrefab, UIRoot, false);    //从预制体中实例化一个新的界面
         panel = panelObject.GetComponent<Panel>();
 
         if (panel == null)
@@ -106,6 +107,7 @@ public class UIManager
             return false;
         }
 
+        panelDictionary.Remove(panelname);
         panel.ClosePanel();
         return true;
     }

@@ -58,9 +58,9 @@ public class Panel : MonoBehaviour
         Destroy(gameObject);
 
         //移除缓存，表示界面关闭
-        if (UIManager.Instance.panelDictionary.ContainsKey(name))//使用字典检查界面是否被打开
-        {
-            UIManager.Instance.panelDictionary.Remove(name);
-        }
+        //if (UIManager.Instance.panelDictionary.ContainsKey(name))//使用字典检查界面是否被打开
+        //{
+        //    UIManager.Instance.panelDictionary.Remove(name);
+        //}
     }
 }

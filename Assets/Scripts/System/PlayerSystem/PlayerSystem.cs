@@ -15,7 +15,7 @@ public class PlayerSystem : AbstractSystem
         base.OnInit();
         pets = new List<Pet>();
 
-        EventCenter.Instance.RigisterEvent(EventType.OnSelectSkinComplete, false, () =>
+        EventCenter.Instance.ReigisterEvent(EventType.OnSelectSkinComplete, false, () =>
         {
             mainPlayer = PlayerFactory.Instance.CreatePlayer(Enum.Parse<PlayerType>(playerGameObject.name));
             mainPlayer.rb.constraints = RigidbodyConstraints2D.FreezeRotation;

@@ -6,18 +6,20 @@ namespace MiddleScene
 {
     public class RoomPanel : Panel
     {
+        private Button UIbackButton;
+        private Button UIstoreButton;
+
         private Collider2D _collider;
 
         protected override void Awake()
         {
             base.Awake();
 
-            UnityTools.Instance.GetComponentFromChildren<Button>(gameObject, "ButtonBack")
-                .onClick.AddListener(() => { SceneCommand.Instance.LoadScene(SceneName.MainMenuScene); });
-            UnityTools.Instance.GetComponentFromChildren<Button>(gameObject, "ButtonStore")
-                .onClick.AddListener(() => { Debug.Log("打开商店"); });
+            UIbackButton = UnityTools.Instance.GetComponentFromChildren<Button>(gameObject, "ButtonBack");
+            UIstoreButton = UnityTools.Instance.GetComponentFromChildren<Button>(gameObject, "ButtonStore");
 
-            
+            UIbackButton.onClick.AddListener(() => { SceneCommand.Instance.LoadScene(SceneName.MainMenuScene); });
+            UIstoreButton.onClick.AddListener(() => { Debug.Log("打开商店"); });
         }
 
         protected override void Update()
@@ -25,7 +27,7 @@ namespace MiddleScene
             base.Update();
 
             // 检测鼠标是否点击并点击到了玩家上
-            if (Input.GetMouseButton(0))
+            if (GameMediator.Instance.GetSystem<InputSystem>().GetMouseButtonDownInput(MouseInputType.leftButton))
             {
                 // Physics2D.OverlapCircle(point,radius,layerMask)用于创建一个圆形区域的碰撞体
                 // Camera.main.ScreenToWorldPoint()鼠标的屏幕坐标转换为游戏世界坐标系中的位置（单位：Unity单位）
@@ -38,6 +40,7 @@ namespace MiddleScene
                     GameMediator.Instance.GetSystem<CameraSystem>().SetCameraTarget(CameraType.selectingCamera, _collider.transform.parent);
 
                     GameMediator.Instance.GetSystem<PlayerSystem>().SetMainPlayerType(_collider.transform.parent.gameObject);
+
                     UIManager.Instance.OpenPanel(PanelName.SelectingPlayerPanel.ToString());
                     UIManager.Instance.ClosePanel(PanelName.RoomPanel.ToString());
                 }
