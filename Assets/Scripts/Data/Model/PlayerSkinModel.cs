@@ -2,11 +2,10 @@
 
 public class PlayerSkinModel : AbstractModel
 {
-    public List<PlayerSkinStaticAttr> datas;
+    public PlayerSkinStaticAttr staticAttr;
 
-    protected override void OnInit()
+    public PlayerSkinModel(PlayerSkinStaticAttr staticAttr)
     {
-        base.OnInit();
-        datas = ResourcesLoader.Instance.GetScriptableObject<PlayerSkinSO>().attrs;
+        this.staticAttr = staticAttr;
     }
 }

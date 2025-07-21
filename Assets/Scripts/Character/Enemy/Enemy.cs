@@ -16,8 +16,7 @@ public enum EnemyType
 
 public class Enemy : Character, IDamageable
 {
-    public new EnemyStaticAttr staticAttr { get => base.staticAttr as EnemyStaticAttr; set => base.staticAttr = value; }
-    public new EnemyDynamicAttr dynamicAttr { get => base.dynamicAttr as EnemyDynamicAttr; set => base.dynamicAttr = value; }
+    public new EnemyModel model { get => base.model as EnemyModel; set => base.model = value; }
 
     protected Animator animator;
     //protected PlayerStateMachine stateMachine;
@@ -28,7 +27,7 @@ public class Enemy : Character, IDamageable
     // 当前是否为受击闪烁状态
     private bool isFlashing = false;
 
-    public Enemy(GameObject obj, EnemyStaticAttr staticAttr) : base(obj, staticAttr) { }
+    public Enemy(GameObject obj, EnemyModel model) : base(obj) { }
 
     protected override void OnInit()
     {

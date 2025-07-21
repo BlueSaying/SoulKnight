@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PlayerSystem : AbstractSystem
 {
+    // 系统持有所有角色的属性仓库
+    private PlayerRepository playerRepository;
+    private PlayerSkinRepository skinRepository;
+
     public GameObject playerGameObject;
     public Player mainPlayer { get; protected set; }
     private List<Pet> pets;
@@ -14,10 +18,12 @@ public class PlayerSystem : AbstractSystem
     {
         base.OnInit();
         pets = new List<Pet>();
+        playerRepository = new PlayerRepository();
+        skinRepository = new PlayerSkinRepository();
 
         EventCenter.Instance.ReigisterEvent(EventType.OnSelectSkinComplete, false, () =>
         {
-            mainPlayer = PlayerFactory.Instance.CreatePlayer(Enum.Parse<PlayerType>(playerGameObject.name));
+            mainPlayer = PlayerFactory.Instance.CreatePlayer(playerRepository.GetPlayerModel(Enum.Parse<PlayerType>(playerGameObject.name)));
             mainPlayer.rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         });
     }
@@ -37,9 +43,15 @@ public class PlayerSystem : AbstractSystem
         }
     }
 
-    public void SetMainPlayerType(GameObject selectingGameObject)
+    // 获取特定角色类型的所有皮肤
+    public PlayerSkinModel GetPlayerSkinModel(PlayerType playerType)
     {
-        this.playerGameObject = selectingGameObject;
+        return skinRepository.GetPlayerSkinModel(playerType);
+    }
+
+    public void SetMainPlayer(GameObject gameObject)
+    {
+        playerGameObject = gameObject;
     }
 
     public void AddPlayerPet(PetType type, Player owner)

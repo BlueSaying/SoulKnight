@@ -1,13 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Assets.Scripts.System
+﻿
+public class WeaponSystem : AbstractSystem
 {
-    internal class WeaponSystem
-    {
+    // 系统持有的武器库
+    private PlayerWeaponRepository playerWeaponRepository;
+    //enemyWeaponRepository
 
+    public WeaponSystem() { }
+
+    protected override void OnInit()
+    {
+        base.OnInit();
+        playerWeaponRepository = new PlayerWeaponRepository();
+    }
+
+    public PlayerWeaponModel GetPlayerWeaponModel(PlayerWeaponType playerWeaponType)
+    {
+        return playerWeaponRepository.GetPlayerWeaponModel(playerWeaponType);
     }
 }

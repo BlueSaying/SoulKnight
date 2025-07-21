@@ -10,7 +10,7 @@ public class ToBattleScene : MonoBehaviour
 
     private void Awake()
     {
-        memoryModel = ModelContainer.Instance.GetModel<MemoryModel>();
+        //memoryModel = ModelContainer.Instance.GetModel<MemoryModel>();
         triggerDetector = gameObject.GetComponent<TriggerDetector>();
     }
 
@@ -19,8 +19,8 @@ public class ToBattleScene : MonoBehaviour
         triggerDetector.AddTriggerListener(TriggerEventType.OnTriggerEnter2D, "Player", (obj) =>
         {
             // 处理场景加载前的逻辑
-            memoryModel.playerStaticAttr = obj.GetComponent<Symbol>().character.staticAttr as PlayerStaticAttr;
-            memoryModel.playerDynamicAttr = obj.GetComponent<Symbol>().character.dynamicAttr as PlayerDynamicAttr;
+            memoryModel.playerStaticAttr = obj.GetComponent<Symbol>().character.model.staticAttr as PlayerStaticAttr;
+            memoryModel.playerDynamicAttr = obj.GetComponent<Symbol>().character.model.dynamicAttr as PlayerDynamicAttr;
             //DontDestroyOnLoad(obj);
 
             // 加载Battle场景

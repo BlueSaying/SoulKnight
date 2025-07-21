@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -46,9 +45,6 @@ public class ResourcesLoader : Singleton<ResourcesLoader>
 
     // 关卡房间
     private string levelRoomPath = "Prefabs/Rooms/";
-
-    // 数据
-    private string dataPath = "Datas/";
 
     public GameObject GetWeapon(string weaponName)
     {
@@ -116,29 +112,5 @@ public class ResourcesLoader : Singleton<ResourcesLoader>
         return Resources.LoadAll<GameObject>(levelRoomPath + levelName).Where(x => x.name == roomName).ToArray()[0];
     }
 
-    // 读取SO数据
-    public T GetScriptableObject<T>() where T : ScriptableObject
-    {
-        Type type = typeof(T);
-        string path = dataPath;
-
-        if (type == typeof(PlayerSO))
-        {
-            path += "PlayerData";
-        }
-        if (type == typeof(PlayerSkinSO))
-        {
-            path += "PlayerSkinData";
-        }
-        if (type == typeof(PlayerWeaponSO))
-        {
-            path += "PlayerWeaponData";
-        }
-        if (type == typeof(EnemySO))
-        {
-            path += "EnemyData";
-        }
-
-        return Resources.Load<T>(path);
-    }
+    
 }

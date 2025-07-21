@@ -2,7 +2,7 @@
 
 public class Stake : Enemy
 {
-    public Stake(GameObject obj, EnemyStaticAttr staticAttr) : base(obj, staticAttr)
+    public Stake(GameObject obj, EnemyModel model) : base(obj, model)
     {
 
     }

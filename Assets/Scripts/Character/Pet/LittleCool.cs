@@ -3,7 +3,7 @@
 public class LittleCool : Pet
 {
 
-    public LittleCool(GameObject obj, PetStaticAttr staticAttr, Player owner) : base(obj, staticAttr, owner) { }
+    public LittleCool(GameObject obj, PetModel model, Player owner) : base(obj, model, owner) { }
 
     protected override void OnCharacterStart()
     {

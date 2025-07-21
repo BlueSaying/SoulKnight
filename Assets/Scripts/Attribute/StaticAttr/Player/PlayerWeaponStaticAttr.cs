@@ -9,7 +9,7 @@ public class PlayerWeaponStaticAttr : WeaponStaticAttr
     /// <summary>
     /// 武器类型
     /// </summary>
-    public PlayerWeaponType weaponType;
+    public PlayerWeaponType playerWeaponType;
 
     /// <summary>
     /// 品质

@@ -13,13 +13,14 @@ public class PetFactory : Singleton<PetFactory>
     // 实例化一个宠物及其游戏物体
     public Pet CreatePet(PetType type, Player owner, Vector3 position, Quaternion quaternion, Transform parent = null)
     {
+        // HACK:目前不涉及数据
         GameObject newPet = InstantiatePet(type, position, quaternion, parent);
         Pet pet = null;
 
         switch (type)
         {
             case PetType.LittleCool:
-                pet = new LittleCool(newPet, new PetStaticAttr(), owner);   // HACK
+                pet = new LittleCool(newPet, new PetModel(new PetStaticAttr(), new PetDynamicAttr()), owner);   // HACK
                 break;
         }
 

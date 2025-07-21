@@ -8,7 +8,7 @@ public class SceneCommand : Singleton<SceneCommand>
 
     private SceneCommand()
     {
-        sceneModel = ModelContainer.Instance.GetModel<SceneModel>();
+        sceneModel = new SceneModel();
     }
 
     public void LoadScene(SceneName sceneName)

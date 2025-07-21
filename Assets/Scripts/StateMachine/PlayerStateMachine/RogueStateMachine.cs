@@ -18,6 +18,7 @@ public class RogueStateMachine : PlayerStateMachine
                 SwitchState<PlayerRunState>();
             }
         }
+
         if (curState is PlayerRunState)
         {
             if (GameMediator.Instance.GetSystem<InputSystem>().GetMoveInput() == Vector2.zero)
@@ -25,6 +26,7 @@ public class RogueStateMachine : PlayerStateMachine
                 SwitchState<PlayerIdleState>();
             }
         }
+
         if(curState is PlayerRollState)
         {
             

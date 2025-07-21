@@ -1,24 +1,13 @@
-﻿using UnityEditor.U2D.Aseprite;
+﻿//using UnityEditor.U2D.Aseprite;
 
-public class WeaponCommand : Singleton<WeaponCommand>
-{
-    private WeaponModel weaponModel;
+//public class WeaponCommand : Singleton<WeaponCommand>
+//{
+//    private WeaponModel weaponModel;
 
-    private WeaponCommand()
-    {
-        weaponModel = ModelContainer.Instance.GetModel<WeaponModel>();
-    }
+//    private WeaponCommand()
+//    {
+//        weaponModel = ModelContainer.Instance.GetModel<WeaponModel>();
+//    }
 
-    public PlayerWeaponStaticAttr GetPlayerWeaponStaticAttr(PlayerWeaponType weaponType)
-    {
-        foreach (var attr in weaponModel.datas)
-        {
-            if (attr.weaponType == weaponType)
-            {
-                return attr;
-            }
-        }
-
-        return default;
-    }
-}
+ 
+//}

@@ -1,20 +1,19 @@
-﻿using Unity.VisualScripting;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EnemyFactory : Singleton<EnemyFactory>
 {
     private EnemyFactory() { }
 
-    public Enemy CreateEnemy(EnemyType enemyType, Vector3 position, Quaternion quaternion)
+    public Enemy CreateEnemy(EnemyModel enemymodel, Vector3 position, Quaternion quaternion)
     {
+        EnemyType enemyType = enemymodel.staticAttr.enemyType;
         GameObject newEnemy = InstantiateEnemy(enemyType, position, quaternion);
-        EnemyStaticAttr staticAttr = EnemyCommand.Instance.GetEnemyStaticAttr(enemyType);
         Enemy enemy = null;
 
         switch (enemyType)
         {
             case EnemyType.Stake:
-                enemy = new Stake(newEnemy, staticAttr); // HACK
+                enemy = new Stake(newEnemy, enemymodel);
                 break;
         }
 

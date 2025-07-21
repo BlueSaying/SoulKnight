@@ -26,6 +26,8 @@ public enum QualityType
 
 public abstract class Weapon
 {
+    public WeaponModel model { get; protected set; }
+
     // 武器的游戏物体
     public GameObject gameObject { get; protected set; }
     public Transform transform => gameObject.transform;
@@ -37,10 +39,13 @@ public abstract class Weapon
 
     private bool isInit;
     private bool isEnter;
-    public Weapon(GameObject gameObject, Character character)
+    public Weapon(GameObject gameObject, Character character, WeaponModel model)
     {
         this.gameObject = gameObject;
         this.character = character;
+        this.model = model;
+
+        //HACK
         canRotate = true;
     }
 

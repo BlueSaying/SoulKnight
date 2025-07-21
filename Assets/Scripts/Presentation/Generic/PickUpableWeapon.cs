@@ -14,8 +14,8 @@ public class PickUpableWeapon : MonoBehaviour
         {
             if (GameMediator.Instance.GetSystem<InputSystem>().GetKeyDownInput(KeyInputType.pickUp))
             {
-                // TODO:捡起武器后按F仍有效果bug
-                player.AddWeapon(System.Enum.Parse<PlayerWeaponType>(name));
+                PlayerWeaponModel model = GameMediator.Instance.GetSystem<WeaponSystem>().GetPlayerWeaponModel(System.Enum.Parse<PlayerWeaponType>(name));
+                player.AddWeapon(model);
                 Destroy(gameObject);
             }
         }

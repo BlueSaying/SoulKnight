@@ -1,12 +1,8 @@
-﻿using System.Collections.Generic;
-
-public class PlayerModel : AbstractModel
+﻿
+public class PlayerModel : CharacterModel
 {
-    public List<PlayerStaticAttr> datas;
+    public new PlayerStaticAttr staticAttr { get => base.staticAttr as PlayerStaticAttr; set => base.staticAttr = value; }
+    public new PlayerDynamicAttr dynamicAttr { get => base.dynamicAttr as PlayerDynamicAttr; set => base.dynamicAttr = value; }
 
-    protected override void OnInit()
-    {
-        base.OnInit();
-        datas = ResourcesLoader.Instance.GetScriptableObject<PlayerSO>().attrs;
-    }   
+    public PlayerModel(PlayerStaticAttr staticAttr, PlayerDynamicAttr dynamicAttr) : base(staticAttr, dynamicAttr) { }
 }

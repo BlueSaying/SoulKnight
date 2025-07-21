@@ -17,6 +17,7 @@ public abstract class PlayerState : State
         rb = transform.GetComponent<Rigidbody2D>();
         animator = UnityTools.Instance.GetComponentFromChildren<Animator>(gameObject, "Sprite");
     }
+
     protected override void OnEnter()
     {
         base.OnEnter();

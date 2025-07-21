@@ -2,7 +2,7 @@
 
 public class BadPistol : PlayerWeapon
 {
-    public BadPistol(GameObject gameObject, Character character, PlayerWeaponStaticAttr staticAttr) : base(gameObject, character, staticAttr) { }
+    public BadPistol(GameObject gameObject, Character character,PlayerWeaponModel model) : base(gameObject, character, model) { }
 
     protected override void OnFire()
     {

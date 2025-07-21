@@ -2,8 +2,7 @@
 
 public class Character
 {
-    public CharacterStaticAttr staticAttr { get; protected set; }
-    public CharacterDynamicAttr dynamicAttr { get; protected set; }
+    public CharacterModel model { get; protected set; }
 
     public GameObject gameObject { get; protected set; }
     public Transform transform => gameObject.transform;
@@ -35,10 +34,9 @@ public class Character
     private bool isShouldRemove;
     private bool isAlreadyRemove;
 
-    public Character(GameObject obj, CharacterStaticAttr staticAttr)
+    public Character(GameObject obj)
     {
         gameObject = obj;
-        this.staticAttr = staticAttr;
 
         try
         {
@@ -60,10 +58,7 @@ public class Character
 
     }
 
-    public void SetDynamicAttr(CharacterDynamicAttr dynamicAttr)
-    {
-        this.dynamicAttr = dynamicAttr;
-    }
+
 
     public void GameUpdate()
     {

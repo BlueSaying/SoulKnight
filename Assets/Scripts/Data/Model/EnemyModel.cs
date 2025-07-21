@@ -1,12 +1,8 @@
-﻿using System.Collections.Generic;
-
-public class EnemyModel : AbstractModel
+﻿
+public class EnemyModel : CharacterModel
 {
-    public List<EnemyStaticAttr> datas;
+    public new EnemyStaticAttr staticAttr { get => base.staticAttr as EnemyStaticAttr; set => base.staticAttr = value; }
+    public new EnemyDynamicAttr dynamicAttr { get => base.dynamicAttr as EnemyDynamicAttr; set => base.dynamicAttr = value; }
 
-    protected override void OnInit()
-    {
-        base.OnInit();
-        datas = ResourcesLoader.Instance.GetScriptableObject<EnemySO>().attrs;
-    }
+    public EnemyModel(EnemyStaticAttr staticAttr, EnemyDynamicAttr dynamicAttr) : base(staticAttr, dynamicAttr) { }
 }

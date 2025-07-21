@@ -39,7 +39,9 @@ namespace MiddleScene
                     GameMediator.Instance.GetSystem<CameraSystem>().SwitchCamera(CameraType.selectingCamera);
                     GameMediator.Instance.GetSystem<CameraSystem>().SetCameraTarget(CameraType.selectingCamera, _collider.transform.parent);
 
-                    GameMediator.Instance.GetSystem<PlayerSystem>().SetMainPlayerType(_collider.transform.parent.gameObject);
+                    // HACK:后期应该移动至表现层
+                    GameObject selectingGameObject = _collider.transform.parent.gameObject;
+                    GameMediator.Instance.GetSystem<PlayerSystem>().SetMainPlayer(selectingGameObject);
 
                     UIMediator.Instance.OpenPanel(PanelName.SelectingPlayerPanel.ToString());
                     UIMediator.Instance.ClosePanel(PanelName.RoomPanel.ToString());

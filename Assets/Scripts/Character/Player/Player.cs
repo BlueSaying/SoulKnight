@@ -3,22 +3,23 @@ using UnityEngine;
 
 public class Player : Character, IDamageable
 {
-    public new PlayerStaticAttr staticAttr { get => base.staticAttr as PlayerStaticAttr; set => base.staticAttr = value; }
-    public new PlayerDynamicAttr dynamicAttr { get => base.dynamicAttr as PlayerDynamicAttr; set => base.dynamicAttr = value; }
+    public new  PlayerModel model { get => base.model as PlayerModel; set => base.model = value; }
 
-    //protected Animator animator;
     protected PlayerStateMachine stateMachine;
 
     protected List<PlayerWeapon> weapons;
     protected PlayerWeapon usingWeapon;
 
-    public Player(GameObject obj, PlayerStaticAttr staticAttr) : base(obj, staticAttr) { }
+    public Player(GameObject obj, PlayerModel model) : base(obj)
+    {
+        this.model = model;
+    }
 
     protected override void OnInit()
     {
         base.OnInit();
+
         weapons = new List<PlayerWeapon>();
-        //animator = transform.Find("Sprite").GetComponent<Animator>();
 
         // NOTE:角色初始化时，添加阿凉为宠物
         GameMediator.Instance.GetSystem<PlayerSystem>().AddPlayerPet(PetType.LittleCool, this);
@@ -40,13 +41,11 @@ public class Player : Character, IDamageable
         {
             SwitchWeapon();
         }
-
-        //Debug.Log("当前武器数量"+weapons.Count);
     }
 
-    public void AddWeapon(PlayerWeaponType type)
+    public void AddWeapon(PlayerWeaponModel model)
     {
-        PlayerWeapon newWeapon = WeaponFactory.Instance.GetPlayerWeapon(type, this);
+        PlayerWeapon newWeapon = WeaponFactory.Instance.GetPlayerWeapon(model, this);
 
         if (usingWeapon != null)
         {

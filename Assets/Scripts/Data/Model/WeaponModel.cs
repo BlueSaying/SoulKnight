@@ -2,11 +2,10 @@
 
 public class WeaponModel : AbstractModel
 {
-    public List<PlayerWeaponStaticAttr> datas;
+    public WeaponStaticAttr staticAttr { get;protected set; }
 
-    protected override void OnInit()
+    public WeaponModel(WeaponStaticAttr staticAttr)
     {
-        base.OnInit();
-        datas = ResourcesLoader.Instance.GetScriptableObject<PlayerWeaponSO>().attrs;
+        this.staticAttr = staticAttr;
     }
 }

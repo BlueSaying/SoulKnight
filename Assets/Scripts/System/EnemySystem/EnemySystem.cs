@@ -1,22 +1,26 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-internal class EnemySystem : AbstractSystem
+public class EnemySystem : AbstractSystem
 {
+    private EnemyRepository enemyRepository;
+
     private List<Enemy> enemies;
     public EnemySystem() { }
 
     protected override void OnInit()
     {
         base.OnInit();
+
         enemies = new List<Enemy>();
+        enemyRepository = new EnemyRepository();
     }
 
     protected override void OnAfterRunUpdate()
     {
         base.OnAfterRunUpdate();
 
-        foreach(Enemy enemy in enemies)
+        foreach (Enemy enemy in enemies)
         {
             enemy.GameUpdate();
         }
@@ -24,6 +28,6 @@ internal class EnemySystem : AbstractSystem
 
     public void AddEnemy(EnemyType enemyType, Vector3 position, Quaternion quaternion)
     {
-        enemies.Add(EnemyFactory.Instance.CreateEnemy(enemyType, position, quaternion));
+        enemies.Add(EnemyFactory.Instance.CreateEnemy(enemyRepository.GetEnemyModel(enemyType), position, quaternion));
     }
 }

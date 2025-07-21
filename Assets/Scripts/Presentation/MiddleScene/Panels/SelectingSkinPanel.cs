@@ -20,7 +20,8 @@ namespace MiddleScene
 
             selectingPlayer = GameMediator.Instance.GetSystem<PlayerSystem>().playerGameObject;
             // 同时获取该角色的皮肤
-            playerSkins = PlayerCommand.Instance.GetPlayerSkinTypes(Enum.Parse<PlayerType>(selectingPlayer.name));
+            playerSkins = GameMediator.Instance.GetSystem<PlayerSystem>().
+                GetPlayerSkinModel(Enum.Parse<PlayerType>(selectingPlayer.name)).staticAttr.playerSkinTypes;
 
             // 返回
             UnityTools.Instance.GetComponentFromChildren<Button>(gameObject, "ButtonBack").onClick.AddListener(() =>

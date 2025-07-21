@@ -33,8 +33,9 @@ public enum PlayerWeaponType
 
 public abstract class PlayerWeapon : Weapon
 {
+    public new PlayerWeaponModel model { get => base.model as PlayerWeaponModel; set => base.model = value; }
+
     public Player player { get => base.character as Player; set => base.character = value; }
-    public PlayerWeaponStaticAttr staticAttr { get; protected set; }
 
     protected GameObject rotOrigin;
 
@@ -42,10 +43,7 @@ public abstract class PlayerWeapon : Weapon
     private float fireTimer;
     public bool isUsing;
 
-    public PlayerWeapon(GameObject gameObject, Character character, PlayerWeaponStaticAttr staticAttr) : base(gameObject, character)
-    {
-        this.staticAttr = staticAttr;
-    }
+    public PlayerWeapon(GameObject gameObject, Character character, PlayerWeaponModel model) : base(gameObject, character, model) { }
 
     protected override void OnInit()
     {
@@ -56,7 +54,7 @@ public abstract class PlayerWeapon : Weapon
     protected override void OnEnter()
     {
         base.OnEnter();
-        fireTimer = 1 / staticAttr.fireRate;
+        fireTimer = 1 / model.staticAttr.fireRate;
     }
 
     protected override void OnUpdate()
@@ -67,10 +65,10 @@ public abstract class PlayerWeapon : Weapon
 
     public void ControlWeapon(bool isAttack)
     {
-        if (isAttack && fireTimer >= 1 / staticAttr.fireRate)
+        if (isAttack && fireTimer >= 1 / model.staticAttr.fireRate)
         {
             if (GameMediator.Instance.GetSystem<InputSystem>().isLimitedWeapon) fireTimer = 0f;// NOTE:删除此语句解除武器限制
-                OnFire();
+            OnFire();
         }
     }
 
