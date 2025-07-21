@@ -41,8 +41,8 @@ namespace MiddleScene
 
                     GameMediator.Instance.GetSystem<PlayerSystem>().SetMainPlayerType(_collider.transform.parent.gameObject);
 
-                    UIManager.Instance.OpenPanel(PanelName.SelectingPlayerPanel.ToString());
-                    UIManager.Instance.ClosePanel(PanelName.RoomPanel.ToString());
+                    UIMediator.Instance.OpenPanel(PanelName.SelectingPlayerPanel.ToString());
+                    UIMediator.Instance.ClosePanel(PanelName.RoomPanel.ToString());
                 }
             }
         }

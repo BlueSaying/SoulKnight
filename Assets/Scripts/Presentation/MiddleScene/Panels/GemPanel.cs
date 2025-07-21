@@ -19,7 +19,7 @@ namespace MiddleScene
 
         private void CloseGemPanel()
         {
-            UIManager.Instance.ClosePanel(PanelName.GemPanel.ToString());
+            UIMediator.Instance.ClosePanel(PanelName.GemPanel.ToString());
         }
     }
 }

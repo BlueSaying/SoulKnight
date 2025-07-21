@@ -8,8 +8,8 @@ namespace MiddleScene
 
         void Awake()
         {
-            UIManager.Instance.OpenPanel(PanelName.RoomPanel.ToString());
-            UIManager.Instance.OpenPanel(PanelName.GemPanel.ToString());
+            UIMediator.Instance.OpenPanel(PanelName.RoomPanel.ToString());
+            UIMediator.Instance.OpenPanel(PanelName.GemPanel.ToString());
 
             facade = new Facade();
         }

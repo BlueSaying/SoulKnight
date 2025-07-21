@@ -22,17 +22,17 @@ namespace MiddleScene
             {
                 GameMediator.Instance.GetSystem<CameraSystem>().SwitchCamera(CameraType.staticCamera);
 
-                UIManager.Instance.OpenPanel(PanelName.RoomPanel.ToString());
+                UIMediator.Instance.OpenPanel(PanelName.RoomPanel.ToString());
                 //UIManager.Instance.OpenPanel(PanelName.GemPanel.ToString());
-                UIManager.Instance.ClosePanel(PanelName.SelectingPlayerPanel.ToString());
+                UIMediator.Instance.ClosePanel(PanelName.SelectingPlayerPanel.ToString());
             });
 
             // 下一步
             UInextButton.onClick.AddListener(() =>
             {
                 EventCenter.Instance.NotifyEvent(EventType.OnSelectPlayerComplete);
-                UIManager.Instance.OpenPanel(PanelName.SelectingSkinPanel.ToString());
-                UIManager.Instance.ClosePanel(PanelName.SelectingPlayerPanel.ToString());
+                UIMediator.Instance.OpenPanel(PanelName.SelectingSkinPanel.ToString());
+                UIMediator.Instance.ClosePanel(PanelName.SelectingPlayerPanel.ToString());
             });
         }
     }

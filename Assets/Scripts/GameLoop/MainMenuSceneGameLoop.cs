@@ -8,7 +8,7 @@ namespace MainMenuScene
 
         void Awake()
         {
-            UIManager.Instance.OpenPanel(PanelName.MainMenuPanel.ToString());
+            UIMediator.Instance.OpenPanel(PanelName.MainMenuPanel.ToString());
 
             facade = new Facade();
         }

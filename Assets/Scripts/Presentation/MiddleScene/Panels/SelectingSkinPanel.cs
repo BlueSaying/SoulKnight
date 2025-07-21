@@ -25,8 +25,8 @@ namespace MiddleScene
             // 返回
             UnityTools.Instance.GetComponentFromChildren<Button>(gameObject, "ButtonBack").onClick.AddListener(() =>
             {
-                UIManager.Instance.OpenPanel(PanelName.SelectingPlayerPanel.ToString());
-                UIManager.Instance.ClosePanel(PanelName.SelectingSkinPanel.ToString());
+                UIMediator.Instance.OpenPanel(PanelName.SelectingPlayerPanel.ToString());
+                UIMediator.Instance.ClosePanel(PanelName.SelectingSkinPanel.ToString());
             });
 
             // 下一步
@@ -35,8 +35,8 @@ namespace MiddleScene
                 EventCenter.Instance.NotifyEvent(EventType.OnSelectSkinComplete);// TODO:读取数据填写UI
 
                 // 解除冻结位置，即仅设置冻结旋转
-                UIManager.Instance.OpenPanel(PanelName.BattlePanel.ToString());
-                UIManager.Instance.ClosePanel(PanelName.SelectingSkinPanel.ToString());
+                UIMediator.Instance.OpenPanel(PanelName.BattlePanel.ToString());
+                UIMediator.Instance.ClosePanel(PanelName.SelectingSkinPanel.ToString());
 
                 // HACK
                 WeaponFactory.Instance.InstantiatePlayerWeapon(PlayerWeaponType.Ak47, new Vector2(5, 0), Quaternion.identity);
