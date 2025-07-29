@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerSystem : AbstractSystem
+public class PlayerSystem : BaseSystem
 {
     // 系统持有所有角色的属性仓库
     private PlayerRepository playerRepository;

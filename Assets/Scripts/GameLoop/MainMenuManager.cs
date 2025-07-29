@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace MainMenuScene
 {
-    public class MainMenuSceneGameLoop : MonoBehaviour
+    public class MainMenuManager : MonoBehaviour
     {
         private Facade facade;
 

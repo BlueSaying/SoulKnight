@@ -1,56 +1,43 @@
-﻿namespace MiddleScene
+﻿using System;
+using System.Collections.Generic;
+
+namespace MiddleScene
 {
     public class Facade : AbstractFacade
     {
-        private ItemSystem itemSystem;
-        private InputSystem inputSystem;
-        private PlayerSystem playerSystem;
-        private EnemySystem enemySystem;
-        private WeaponSystem weaponSystem;
-
-        private CameraSystem cameraSystem;
-        private AudioSystem musicSystem;
+        // 当前场景需要的Systems
+        private Dictionary<Type, BaseSystem> systems;
 
         protected override void OnInit()
         {
             base.OnInit();
 
-            itemSystem = new ItemSystem();
-            inputSystem = new InputSystem();
-            playerSystem = new PlayerSystem();
-            enemySystem = new EnemySystem();
-            weaponSystem = new WeaponSystem();
-
-            cameraSystem = new CameraSystem();
-            musicSystem = new AudioSystem();
-
-            GameMediator.Instance.RegisterSystem(itemSystem);
-            GameMediator.Instance.RegisterSystem(inputSystem);
-            GameMediator.Instance.RegisterSystem(playerSystem);
-            GameMediator.Instance.RegisterSystem(enemySystem);
-            GameMediator.Instance.RegisterSystem(weaponSystem);
-
-            GameMediator.Instance.RegisterSystem(cameraSystem);
-            GameMediator.Instance.RegisterSystem(musicSystem);
+            systems=new Dictionary<Type, BaseSystem>();
+            
+            systems.Add(typeof(ItemSystem),SystemRepository.Instance.GetSystem<ItemSystem>());
+            systems.Add(typeof(InputSystem),SystemRepository.Instance.GetSystem<InputSystem>());
+            systems.Add(typeof(PlayerSystem),SystemRepository.Instance.GetSystem<PlayerSystem>());
+            systems.Add(typeof(EnemySystem),SystemRepository.Instance.GetSystem<EnemySystem>());
+            systems.Add(typeof(WeaponSystem),SystemRepository.Instance.GetSystem<WeaponSystem>());
+            systems.Add(typeof(CameraSystem),SystemRepository.Instance.GetSystem<CameraSystem>());
+            systems.Add(typeof(AudioSystem),SystemRepository.Instance.GetSystem<AudioSystem>());
 
             EventCenter.Instance.ReigisterEvent(EventType.OnSelectSkinComplete, false, () =>
             {
-                playerSystem.TurnOnController();
+                systems[typeof(PlayerSystem)].TurnOnController();
             });
 
             // HACK
-            enemySystem.TurnOnController();
+            systems[typeof(EnemySystem)].TurnOnController();
         }
         protected override void OnUpdate()
         {
             base.OnUpdate();
-            itemSystem.GameUpdate();
-            inputSystem.GameUpdate();
-            playerSystem.GameUpdate();
-            enemySystem.GameUpdate();
-            weaponSystem.GameUpdate();
-            cameraSystem.GameUpdate();
-            musicSystem.GameUpdate();
+
+            foreach (var system in systems.Values)
+            {
+                system.GameUpdate();
+            }
         }
     }
 }

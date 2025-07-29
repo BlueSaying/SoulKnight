@@ -19,7 +19,7 @@ public enum CameraType
     followCamera
 }
 
-public class CameraSystem : AbstractSystem
+public class CameraSystem : BaseSystem
 {
     private GameObject cameras;
 

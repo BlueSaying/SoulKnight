@@ -2,12 +2,13 @@
 
 namespace MiddleScene
 {
-    public class MiddleSceneGameLoop : MonoBehaviour
+    public class MiddleSceneManager : MonoBehaviour
     {
         private Facade facade;
 
         void Awake()
         {
+            // 打开场景最初UI界面
             UIMediator.Instance.OpenPanel(PanelName.RoomPanel.ToString());
             UIMediator.Instance.OpenPanel(PanelName.GemPanel.ToString());
 
@@ -21,7 +22,8 @@ namespace MiddleScene
         void Update()
         {
             facade.GameUpdate();
-            if (Input.GetKeyDown(KeyCode.U)) GameMediator.Instance.GetSystem<InputSystem>().isLimitedWeapon = false;
+
+            if (Input.GetKeyDown(KeyCode.U)) TestManager.Instance.isUnlockWeapon = !TestManager.Instance.isUnlockWeapon;
         }
     }
 }

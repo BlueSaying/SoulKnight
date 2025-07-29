@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class ItemSystem : AbstractSystem
+public class ItemSystem : BaseSystem
 {
     private List<Item> items;
 

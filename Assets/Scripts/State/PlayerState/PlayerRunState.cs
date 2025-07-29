@@ -9,7 +9,7 @@ public class PlayerRunState : PlayerState
         base.OnUpdate();
 
         // 测试代码
-        Vector2 moveDir = (GameMediator.Instance.GetSystem<InputSystem>().GetMoveInput());
+        Vector2 moveDir = (SystemRepository.Instance.GetSystem<InputSystem>().GetMoveInput());
         if (moveDir.magnitude > 0)
         {
             // TODO: 手感调优：自己写一个更平滑的移动函数

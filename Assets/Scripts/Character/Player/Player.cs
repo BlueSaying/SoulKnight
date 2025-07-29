@@ -22,7 +22,7 @@ public class Player : Character, IDamageable
         weapons = new List<PlayerWeapon>();
 
         // NOTE:角色初始化时，添加阿凉为宠物
-        GameMediator.Instance.GetSystem<PlayerSystem>().AddPlayerPet(PetType.LittleCool, this);
+        SystemRepository.Instance.GetSystem<PlayerSystem>().AddPlayerPet(PetType.LittleCool, this);
     }
 
     protected override void OnCharacterUpdate()
@@ -33,8 +33,8 @@ public class Player : Character, IDamageable
         if (usingWeapon != null)
         {
             usingWeapon.GameUpdate();
-            usingWeapon.ControlWeapon(GameMediator.Instance.GetSystem<InputSystem>().GetKeyInput(KeyInputType.shoot));
-            usingWeapon.RotateWeapon(GameMediator.Instance.GetSystem<InputSystem>().GetMoveInput());
+            usingWeapon.ControlWeapon(SystemRepository.Instance.GetSystem<InputSystem>().GetKeyInput(KeyInputType.shoot));
+            usingWeapon.RotateWeapon(SystemRepository.Instance.GetSystem<InputSystem>().GetMoveInput());
         }
 
         if (Input.GetKeyDown(KeyCode.R))

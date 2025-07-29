@@ -1,5 +1,5 @@
 ﻿
-public abstract class AbstractSystem
+public abstract class BaseSystem
 {
     private bool isRun;
     private bool isInit;

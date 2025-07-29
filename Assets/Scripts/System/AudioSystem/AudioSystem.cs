@@ -10,7 +10,7 @@ public enum AudioName
     fx_gun_1,
 }
 
-public class AudioSystem : AbstractSystem
+public class AudioSystem : BaseSystem
 {
     private AudioSource audioSource;
 

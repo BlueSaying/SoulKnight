@@ -18,9 +18,9 @@ namespace MiddleScene
         {
             base.Awake();
 
-            selectingPlayer = GameMediator.Instance.GetSystem<PlayerSystem>().playerGameObject;
+            selectingPlayer = SystemRepository.Instance.GetSystem<PlayerSystem>().playerGameObject;
             // 同时获取该角色的皮肤
-            playerSkins = GameMediator.Instance.GetSystem<PlayerSystem>().
+            playerSkins = SystemRepository.Instance.GetSystem<PlayerSystem>().
                 GetPlayerSkinModel(Enum.Parse<PlayerType>(selectingPlayer.name)).staticAttr.playerSkinTypes;
 
             // 返回
@@ -43,7 +43,7 @@ namespace MiddleScene
                 WeaponFactory.Instance.InstantiatePlayerWeapon(PlayerWeaponType.Ak47, new Vector2(5, 0), Quaternion.identity);
                 WeaponFactory.Instance.InstantiatePlayerWeapon(PlayerWeaponType.BadPistol, new Vector2(3, 0), Quaternion.identity);
 
-                GameMediator.Instance.GetSystem<EnemySystem>().AddEnemy(EnemyType.Stake, Vector2.zero, Quaternion.identity);
+                SystemRepository.Instance.GetSystem<EnemySystem>().AddEnemy(EnemyType.Stake, Vector2.zero, Quaternion.identity);
             });
 
             // 切换上一个皮肤

@@ -64,6 +64,6 @@ public class Item
     // 将*this*托管到ItemController中
     public void ManagedToController()
     {
-        GameMediator.Instance.GetSystem<ItemSystem>().AddItem(this);
+        SystemRepository.Instance.GetSystem<ItemSystem>().AddItem(this);
     }
 }

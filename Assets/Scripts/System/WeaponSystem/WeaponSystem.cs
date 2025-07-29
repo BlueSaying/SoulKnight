@@ -1,5 +1,5 @@
 ﻿
-public class WeaponSystem : AbstractSystem
+public class WeaponSystem : BaseSystem
 {
     // 系统持有的武器库
     private PlayerWeaponRepository playerWeaponRepository;

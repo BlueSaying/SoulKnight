@@ -30,7 +30,7 @@ public class UIRenderer
     public Panel InstantiatePanel(string panelName)
     {
         //使用缓存的预制件
-        string curSceneName = SceneCommand.Instance.GetActiveSceneName().ToString();
+        string curSceneName = SceneFacade.Instance.GetActiveSceneName().ToString();
         GameObject panelPrefab = ResourcesLoader.Instance.LoadPanel(curSceneName, panelName);
 
         //打开UI界面

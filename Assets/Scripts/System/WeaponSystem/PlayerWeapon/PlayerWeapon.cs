@@ -67,7 +67,7 @@ public abstract class PlayerWeapon : Weapon
     {
         if (isAttack && fireTimer >= 1 / model.staticAttr.fireRate)
         {
-            if (GameMediator.Instance.GetSystem<InputSystem>().isLimitedWeapon) fireTimer = 0f;// NOTE:删除此语句解除武器限制
+            if (!TestManager.Instance.isUnlockWeapon) fireTimer = 0f;
             OnFire();
         }
     }

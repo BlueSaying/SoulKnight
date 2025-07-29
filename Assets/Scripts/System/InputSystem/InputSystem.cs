@@ -55,10 +55,9 @@ public enum KeyInputType
     shoot,
 }
 
-public class InputSystem : AbstractSystem
+public class InputSystem : BaseSystem
 {
-    // HACK
-    public bool isLimitedWeapon = true;
+    
 
     // 储存按键设置
     private Dictionary<KeyInputType, KeyCode> inputDic;

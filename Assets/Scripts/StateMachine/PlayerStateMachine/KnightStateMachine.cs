@@ -13,7 +13,7 @@ public class KnightStateMachine : PlayerStateMachine
 
         if (curState is PlayerIdleState)
         {
-            if (GameMediator.Instance.GetSystem<InputSystem>().GetMoveInput() != Vector2.zero)
+            if (SystemRepository.Instance.GetSystem<InputSystem>().GetMoveInput() != Vector2.zero)
             {
                 SwitchState<PlayerRunState>();
             }
@@ -21,7 +21,7 @@ public class KnightStateMachine : PlayerStateMachine
 
         if (curState is PlayerRunState)
         {
-            if (GameMediator.Instance.GetSystem<InputSystem>().GetMoveInput() == Vector2.zero)
+            if (SystemRepository.Instance.GetSystem<InputSystem>().GetMoveInput() == Vector2.zero)
             {
                 SwitchState<PlayerIdleState>();
             }

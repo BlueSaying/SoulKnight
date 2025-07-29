@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class BattleGameLoop : MonoBehaviour
+public class BattleGameManager : MonoBehaviour
 {
     private BattleScene.Facade facade;
 

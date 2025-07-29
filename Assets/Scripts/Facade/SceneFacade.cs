@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneCommand : Singleton<SceneCommand>
+public class SceneFacade :Singleton<SceneFacade>
 {
     private SceneModel sceneModel;
     private AsyncOperation op;
 
-    private SceneCommand()
+    private SceneFacade()
     {
         sceneModel = new SceneModel();
     }
@@ -22,8 +22,8 @@ public class SceneCommand : Singleton<SceneCommand>
     {
         sceneModel.SetData();
 
-        EventCenter.Instance.NotifyEvent(EventType.OnSceneSwitchComplete);
         EventCenter.Instance.ClearNonPermanentEvents();
+        EventCenter.Instance.NotifyEvent(EventType.OnSceneSwitchComplete);
     }
 
     public SceneName GetActiveSceneName()

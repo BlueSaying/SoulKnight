@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySystem : AbstractSystem
+public class EnemySystem : BaseSystem
 {
     private EnemyRepository enemyRepository;
 

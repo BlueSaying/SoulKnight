@@ -20,7 +20,7 @@ namespace MainMenuScene
 
             UIstartButton.onClick.AddListener(() =>
             {
-                SceneCommand.Instance.LoadScene(SceneName.MiddleScene);
+                SceneFacade.Instance.LoadScene(SceneName.MiddleScene);
             });
         }
     }
