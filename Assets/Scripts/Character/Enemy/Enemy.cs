@@ -57,7 +57,7 @@ public class Enemy : Character, IDamageable
         }
 
         //dynamicAttr.Hp -= damage;
-        Debug.Log(gameObject.ToString() + "受到了" + damage.ToString() + "伤害");
+        //Debug.Log(gameObject.ToString() + "受到了" + damage.ToString() + "伤害");
     }
 
     private IEnumerator BeWhite()

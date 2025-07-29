@@ -238,6 +238,61 @@ public class RoomCreator : Singleton<RoomCreator>
         return roomPos;
     }
 
+    private void InstantiateLevel()
+    {
+        Queue<Vector2Int> queue = new Queue<Vector2Int>();
+        queue.Enqueue(birthPos);
+        bool[,] visited = new bool[RoomSize, RoomSize];
+        for (int i = 0; i < RoomSize; i++)
+            for (int j = 0; j < RoomSize; j++)
+                visited[i, j] = false;
+        Vector2Int curPos = birthPos;
+
+        while (queue.Count > 0)
+        {
+            Vector2Int roomPos = queue.Dequeue();
+
+            roomMatrix[roomPos.x, roomPos.y].gameObject = InstantiateRoom(roomMatrix[roomPos.x, roomPos.y]);
+            foreach (Vector2Int path in roomMatrix[roomPos.x, roomPos.y].pathConnection)
+            {
+                Vector2Int newPos = roomPos + path;
+                if (visited[newPos.x, newPos.y]) continue;
+
+                InstantiatePath(roomMatrix[roomPos.x, roomPos.y], roomMatrix[newPos.x, newPos.y]);
+                queue.Enqueue(newPos);
+            }
+
+            visited[roomPos.x, roomPos.y] = true;
+        }
+    }
+
+    private void OpenAllDoor()
+    {
+        Queue<Vector2Int> queue = new Queue<Vector2Int>();
+        queue.Enqueue(birthPos);
+        bool[,] visited = new bool[RoomSize, RoomSize];
+        for (int i = 0; i < RoomSize; i++)
+            for (int j = 0; j < RoomSize; j++)
+                visited[i, j] = false;
+        Vector2Int curPos = birthPos;
+
+        while (queue.Count > 0)
+        {
+            Vector2Int roomPos = queue.Dequeue();
+
+            foreach (Vector2Int path in roomMatrix[roomPos.x, roomPos.y].pathConnection)
+            {
+                Vector2Int newPos = roomPos + path;
+                if (visited[newPos.x, newPos.y]) continue;
+
+                OpenDoor(roomMatrix[roomPos.x, roomPos.y], roomMatrix[newPos.x, newPos.y]);
+                queue.Enqueue(newPos);
+            }
+
+            visited[roomPos.x, roomPos.y] = true;
+        }
+    }
+
     public void CreateLevel(LevelType levelType)
     {
         transform = GameObject.Find("Rooms").transform;
@@ -294,60 +349,5 @@ public class RoomCreator : Singleton<RoomCreator>
 
         Debug.Log(roomCount + "个房间");
         EventCenter.Instance.NotifyEvent(EventType.OnFinishRoomCreate);
-    }
-
-    private void InstantiateLevel()
-    {
-        Queue<Vector2Int> queue = new Queue<Vector2Int>();
-        queue.Enqueue(birthPos);
-        bool[,] visited = new bool[RoomSize, RoomSize];
-        for (int i = 0; i < RoomSize; i++)
-            for (int j = 0; j < RoomSize; j++)
-                visited[i, j] = false;
-        Vector2Int curPos = birthPos;
-
-        while (queue.Count > 0)
-        {
-            Vector2Int roomPos = queue.Dequeue();
-
-            roomMatrix[roomPos.x, roomPos.y].gameObject = InstantiateRoom(roomMatrix[roomPos.x, roomPos.y]);
-            foreach (Vector2Int path in roomMatrix[roomPos.x, roomPos.y].pathConnection)
-            {
-                Vector2Int newPos = roomPos + path;
-                if (visited[newPos.x, newPos.y]) continue;
-
-                InstantiatePath(roomMatrix[roomPos.x, roomPos.y], roomMatrix[newPos.x, newPos.y]);
-                queue.Enqueue(newPos);
-            }
-
-            visited[roomPos.x, roomPos.y] = true;
-        }
-    }
-
-    private void OpenAllDoor()
-    {
-        Queue<Vector2Int> queue = new Queue<Vector2Int>();
-        queue.Enqueue(birthPos);
-        bool[,] visited = new bool[RoomSize, RoomSize];
-        for (int i = 0; i < RoomSize; i++)
-            for (int j = 0; j < RoomSize; j++)
-                visited[i, j] = false;
-        Vector2Int curPos = birthPos;
-
-        while (queue.Count > 0)
-        {
-            Vector2Int roomPos = queue.Dequeue();
-
-            foreach (Vector2Int path in roomMatrix[roomPos.x, roomPos.y].pathConnection)
-            {
-                Vector2Int newPos = roomPos + path;
-                if (visited[newPos.x, newPos.y]) continue;
-
-                OpenDoor(roomMatrix[roomPos.x, roomPos.y], roomMatrix[newPos.x, newPos.y]);
-                queue.Enqueue(newPos);
-            }
-
-            visited[roomPos.x, roomPos.y] = true;
-        }
     }
 }

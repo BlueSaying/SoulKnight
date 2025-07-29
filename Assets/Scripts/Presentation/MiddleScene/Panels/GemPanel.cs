@@ -9,7 +9,7 @@ namespace MiddleScene
         {
             base.Awake();
 
-            EventCenter.Instance.ReigisterEvent(EventType.OnSelectSkinComplete, false, CloseGemPanel);
+            EventCenter.Instance.RegisterEvent(EventType.OnSelectSkinComplete, false, CloseGemPanel);
         }
 
         private void OnDestroy()

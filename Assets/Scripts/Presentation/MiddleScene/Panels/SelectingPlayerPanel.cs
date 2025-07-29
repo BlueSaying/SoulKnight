@@ -20,7 +20,7 @@ namespace MiddleScene
             // 返回
             UIbackButton.onClick.AddListener(() =>
             {
-                SystemRepository.Instance.GetSystem<CameraSystem>().SwitchCamera(CameraType.staticCamera);
+                SystemRepository.Instance.GetSystem<CameraSystem>().SwitchCamera(CameraType.StaticCamera);
 
                 UIMediator.Instance.OpenPanel(PanelName.RoomPanel.ToString());
                 //UIManager.Instance.OpenPanel(PanelName.GemPanel.ToString());

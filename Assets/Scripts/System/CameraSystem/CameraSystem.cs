@@ -1,31 +1,56 @@
 ﻿using Cinemachine;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
-public enum CameraType
+namespace MainMenuScene
 {
-    /// <summary>
-    /// 刚进游戏时，选择角色时的相机
-    /// </summary>
-    staticCamera,
+    public enum CameraType
+    {
 
-    /// <summary>
-    /// 选中某个角色后，对该角色特写的相机
-    /// </summary>
-    selectingCamera,
-
-    /// <summary>
-    /// 角色选择完成后，始终跟随角色的相机
-    /// </summary>
-    followCamera
+    }
 }
+
+namespace MiddleScene
+{
+    public enum CameraType
+    {
+        /// <summary>
+        /// 刚进游戏时，选择角色时的相机
+        /// </summary>
+        StaticCamera,
+
+        /// <summary>
+        /// 选中某个角色后，对该角色特写的相机
+        /// </summary>
+        SelectingCamera,
+
+        /// <summary>
+        /// 角色选择完成后，始终跟随角色的相机
+        /// </summary>
+        FollowCamera
+    }
+}
+
+namespace BattleScene
+{
+    public enum CameraType
+    {
+
+    }
+}
+
+
 
 public class CameraSystem : BaseSystem
 {
-    private GameObject cameras;
+    private SceneName CurSceneName => SceneFacade.Instance.GetActiveSceneName();
 
-    public CinemachineVirtualCamera staticCamera;
-    public CinemachineVirtualCamera selectingCamera;
-    public CinemachineVirtualCamera followCamera;
+    private GameObject cameraParent;
+
+    private Dictionary<MainMenuScene.CameraType, CinemachineVirtualCamera> MainMenuSceneCameras;
+    private Dictionary<MiddleScene.CameraType, CinemachineVirtualCamera> MiddleSceneCameras;
+    private Dictionary<BattleScene.CameraType, CinemachineVirtualCamera> BattleSceneCameras;
 
     public CameraSystem() { }
 
@@ -33,52 +58,75 @@ public class CameraSystem : BaseSystem
     {
         base.OnInit();
 
-        // BUG:切换场景后相机组件丢失
-        cameras = GameObject.Find("Cameras");
-        staticCamera = UnityTools.Instance.GetComponentFromChildren<CinemachineVirtualCamera>(cameras, "StaticCamera");
-        selectingCamera = UnityTools.Instance.GetComponentFromChildren<CinemachineVirtualCamera>(cameras, "SelectingCamera");
-        followCamera = UnityTools.Instance.GetComponentFromChildren<CinemachineVirtualCamera>(cameras, "FollowCamera");
-
-        // HACK
-        SwitchCamera(CameraType.staticCamera);
+        MainMenuSceneCameras = new Dictionary<MainMenuScene.CameraType, CinemachineVirtualCamera>();
+        MiddleSceneCameras = new Dictionary<MiddleScene.CameraType, CinemachineVirtualCamera>();
+        BattleSceneCameras = new Dictionary<BattleScene.CameraType, CinemachineVirtualCamera>();
     }
 
-    public void SetCameraTarget(CameraType type, Transform trans)
+    protected override void OnEnter()
     {
-        switch (type)
+        base.OnEnter();
+
+        cameraParent = GameObject.Find("Cameras");
+
+        if (cameraParent == null)
         {
-            case CameraType.staticCamera:
-                staticCamera.Follow = trans;
+            throw new Exception("场景中无Cameras游戏物体！");
+        }
+
+        switch (CurSceneName)
+        {
+            case SceneName.MainMenuScene:
                 break;
-            case CameraType.selectingCamera:
-                selectingCamera.Follow = trans;
+            case SceneName.MiddleScene:
+                foreach (var cameraName in Enum.GetNames(typeof(MiddleScene.CameraType)))
+                {
+                    var cameraType = Enum.Parse<MiddleScene.CameraType>(cameraName);
+                    var camera = UnityTools.Instance.GetComponentFromChildren<CinemachineVirtualCamera>(cameraParent, cameraName);
+                    MiddleSceneCameras.Add(cameraType, camera);
+                }
+                SwitchCamera(MiddleScene.CameraType.StaticCamera);
                 break;
-            case CameraType.followCamera:
-                followCamera.Follow = trans;
+            case SceneName.BattleScene:
+                break;
+        }
+
+
+    }
+
+    protected override void OnExit()
+    {
+        base.OnExit();
+
+        cameraParent = null;
+        switch (CurSceneName)
+        {
+            case SceneName.MainMenuScene:
+                MainMenuSceneCameras.Clear();
+                break;
+            case SceneName.MiddleScene:
+                MiddleSceneCameras.Clear();
+                break;
+            case SceneName.BattleScene:
+                BattleSceneCameras.Clear();
                 break;
         }
     }
 
-    // NOTE:每次调用完，记得同时调用SetCameraTarget，因为每一个相机的target不一样
-    public void SwitchCamera(CameraType type)
+    public void SetCameraTarget(MiddleScene.CameraType type, Transform trans)
     {
-        switch (type)
+        MiddleSceneCameras[type].Follow = trans;
+    }
+
+    // NOTE:每次调用完，记得同时调用SetCameraTarget
+    public void SwitchCamera(MiddleScene.CameraType type)
+    {
+        // 全部禁用
+        foreach (var camera in MiddleSceneCameras.Values)
         {
-            case CameraType.staticCamera:
-                staticCamera.gameObject.SetActive(true);
-                selectingCamera.gameObject.SetActive(false);
-                followCamera.gameObject.SetActive(false);
-                break;
-            case CameraType.selectingCamera:
-                staticCamera.gameObject.SetActive(false);
-                selectingCamera.gameObject.SetActive(true);
-                followCamera.gameObject.SetActive(false);
-                break;
-            case CameraType.followCamera:
-                staticCamera.gameObject.SetActive(false);
-                selectingCamera.gameObject.SetActive(false);
-                followCamera.gameObject.SetActive(true);
-                break;
+            camera.gameObject.SetActive(false);
         }
+
+        MiddleSceneCameras[type].gameObject.SetActive(true);
     }
 }

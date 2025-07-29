@@ -37,15 +37,15 @@ namespace BattleScene
             GameMediator.Instance.RegisterSystem(cameraSystem);
             GameMediator.Instance.RegisterSystem(audioSystem);
 
-            EventCenter.Instance.ReigisterEvent(EventType.OnFinishRoomCreate, false, () =>
+            EventCenter.Instance.RegisterEvent(EventType.OnFinishRoomCreate, false, () =>
             {
-                itemSystem.TurnOnController();
-                inputSystem.TurnOnController();
-                playerSystem.TurnOnController();
-                enemySystem.TurnOnController();
+                itemSystem.TurnOn();
+                inputSystem.TurnOn();
+                playerSystem.TurnOn();
+                enemySystem.TurnOn();
                 //uiSystem.TurnOnController();
-                cameraSystem.TurnOnController();
-                audioSystem.TurnOnController();
+                cameraSystem.TurnOn();
+                audioSystem.TurnOn();
             });
         }
 

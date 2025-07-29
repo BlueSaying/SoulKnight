@@ -1,10 +1,9 @@
 ﻿
 public abstract class BaseSystem
 {
-    private bool isRun;
     private bool isInit;
-    private bool isBeforeRunStart;
-    private bool isAfterRunStart;
+    private bool isEnter;
+    private bool isEnable;
 
     public void GameUpdate()
     {
@@ -14,51 +13,39 @@ public abstract class BaseSystem
             OnInit();
         }
 
-        if(!isRun)
+        if (isEnable)
         {
-            OnBeforeRunUpdate();
+            OnUpdate();
         }
-        else
-        {
-            OnAfterRunUpdate();
-        }
-
-        AlwaysUpdate();
     }
 
     protected virtual void OnInit() { }
 
-    protected virtual void OnBeforeRunStart() { }
+    protected virtual void OnEnter() { }
 
-    protected virtual void OnBeforeRunUpdate()
+    protected virtual void OnExit() { }
+
+    protected virtual void OnUpdate()
     {
-        if(!isBeforeRunStart)
+        if (!isEnter)
         {
-            isBeforeRunStart = true;
-            OnBeforeRunStart();
+            isEnter = true;
+            OnEnter();
         }
     }
 
-    protected virtual void OnAfterRunStart() { }
-
-    protected virtual void OnAfterRunUpdate()
+    public void TurnOn()
     {
-        if(!isAfterRunStart)
+        isEnable = true;
+    }
+
+    public void TurnOff()
+    {
+        if (isEnable)
         {
-            isAfterRunStart = true;
-            OnAfterRunStart();
+            isEnable = false;
+            isEnter = false;
+            OnExit();
         }
-    }
-
-    protected virtual void AlwaysUpdate() { }
-
-    public void TurnOnController()
-    {
-        isRun = true;
-    }
-
-    public void TurnOffController()
-    {
-        isRun = false;
     }
 }

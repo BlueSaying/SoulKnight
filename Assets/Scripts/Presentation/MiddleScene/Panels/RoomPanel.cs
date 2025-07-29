@@ -34,8 +34,8 @@ namespace MiddleScene
                 if (_collider)
                 {
                     // 设置相机
-                    SystemRepository.Instance.GetSystem<CameraSystem>().SwitchCamera(CameraType.selectingCamera);
-                    SystemRepository.Instance.GetSystem<CameraSystem>().SetCameraTarget(CameraType.selectingCamera, _collider.transform.parent);
+                    SystemRepository.Instance.GetSystem<CameraSystem>().SwitchCamera(CameraType.SelectingCamera);
+                    SystemRepository.Instance.GetSystem<CameraSystem>().SetCameraTarget(CameraType.SelectingCamera, _collider.transform.parent);
 
                     // HACK:后期应该移动至表现层
                     GameObject selectingGameObject = _collider.transform.parent.gameObject;

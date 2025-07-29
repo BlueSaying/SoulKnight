@@ -26,7 +26,6 @@ public class SystemRepository : Singleton<SystemRepository>
         foreach (var systemName in Enum.GetNames(typeof(SystemType)))
         {
             Type systemType = Type.GetType(systemName);
-            Debug.Log(systemType);
             BaseSystem system = Activator.CreateInstance(systemType) as BaseSystem;
             systemDic.Add(systemType, system);
         }

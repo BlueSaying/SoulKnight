@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Player : Character, IDamageable
 {
-    public new  PlayerModel model { get => base.model as PlayerModel; set => base.model = value; }
+    public new PlayerModel model { get => base.model as PlayerModel; set => base.model = value; }
 
     protected PlayerStateMachine stateMachine;
 
@@ -73,10 +73,10 @@ public class Player : Character, IDamageable
             usingWeaponIndex++;
         }
 
-        usingWeaponIndex = (usingWeaponIndex + 1) % weapons.Count;
+        PlayerWeapon newWeapon = weapons[(usingWeaponIndex + 1) % weapons.Count];
 
         UnequipWeapon();
-        EquipWeapon(weapons[usingWeaponIndex]);
+        EquipWeapon(newWeapon);
     }
 
     public void EquipWeapon(PlayerWeapon weapon)

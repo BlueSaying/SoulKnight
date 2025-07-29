@@ -16,9 +16,9 @@ public class EnemySystem : BaseSystem
         enemyRepository = new EnemyRepository();
     }
 
-    protected override void OnAfterRunUpdate()
+    protected override void OnUpdate()
     {
-        base.OnAfterRunUpdate();
+        base.OnUpdate();
 
         foreach (Enemy enemy in enemies)
         {

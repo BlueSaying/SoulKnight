@@ -13,9 +13,9 @@ public class ItemSystem : BaseSystem
         items = new List<Item>();
     }
 
-    protected override void AlwaysUpdate()
+    protected override void OnUpdate()
     {
-        base.AlwaysUpdate();
+        base.OnUpdate();
 
         for (int i = 0; i < items.Count; i++)
         {

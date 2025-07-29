@@ -16,7 +16,7 @@
 
     private GameMediator()
     {
-        EventCenter.Instance.ReigisterEvent(EventType.OnSceneSwitchStart, true, () =>
+        EventCenter.Instance.RegisterEvent(EventType.OnSceneSwitchStart, true, () =>
         {
             //systems.Clear();
         });

@@ -57,8 +57,6 @@ public enum KeyInputType
 
 public class InputSystem : BaseSystem
 {
-    
-
     // 储存按键设置
     private Dictionary<KeyInputType, KeyCode> inputDic;
 

@@ -20,17 +20,24 @@ public class PlayerSystem : BaseSystem
         pets = new List<Pet>();
         playerRepository = new PlayerRepository();
         skinRepository = new PlayerSkinRepository();
-
-        EventCenter.Instance.ReigisterEvent(EventType.OnSelectSkinComplete, false, () =>
-        {
-            mainPlayer = PlayerFactory.Instance.CreatePlayer(playerRepository.GetPlayerModel(Enum.Parse<PlayerType>(playerGameObject.name)));
-            mainPlayer.rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-        });
     }
 
-    protected override void OnAfterRunUpdate()
+    protected override void OnEnter()
     {
-        base.OnAfterRunUpdate();
+        base.OnEnter();
+        EventCenter.Instance.RegisterEvent(EventType.OnSelectSkinComplete, false, OnSelectSkinComplete);
+    }
+
+    protected override void OnExit()
+    {
+        base.OnExit();
+
+        EventCenter.Instance.RemoveEvent(EventType.OnSelectSkinComplete, OnSelectSkinComplete);
+    }
+
+    protected override void OnUpdate()
+    {
+        base.OnUpdate();
 
         if (mainPlayer != null)
         {
@@ -58,4 +65,12 @@ public class PlayerSystem : BaseSystem
     {
         pets.Add(PetFactory.Instance.CreatePet(type, owner, new Vector2(-1, -2), Quaternion.identity));
     }
+
+    #region 事件集
+    public void OnSelectSkinComplete()
+    {
+        mainPlayer = PlayerFactory.Instance.CreatePlayer(playerRepository.GetPlayerModel(Enum.Parse<PlayerType>(playerGameObject.name)));
+        mainPlayer.rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+    }
+    #endregion
 }

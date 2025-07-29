@@ -83,7 +83,7 @@ public class EventCenter : Singleton<EventCenter>
         eventDic = new Dictionary<EventType, List<IEventInfo>>();
     }
 
-    public void ReigisterEvent(EventType type, bool isPermanent, UnityAction action)
+    public void RegisterEvent(EventType type, bool isPermanent, UnityAction action)
     {
         if (eventDic.ContainsKey(type))
         {
