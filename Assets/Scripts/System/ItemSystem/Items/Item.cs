@@ -1,5 +1,4 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Item
 {
@@ -39,8 +38,6 @@ public class Item
 
     public virtual void OnEnter()
     {
-        
-
         beingRemoved = false;
         hasRemoved = false;
     }

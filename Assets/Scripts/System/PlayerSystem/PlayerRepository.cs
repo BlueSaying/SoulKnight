@@ -12,7 +12,7 @@ public class PlayerRepository
         models = new List<PlayerModel>();
         for (int i = 0; i < playerStaticData.Count; i++)
         {
-            models.Add(new PlayerModel(playerStaticData[i], new PlayerDynamicAttr()));
+            models.Add(new PlayerModel(playerStaticData[i], /*HACK*/new PlayerDynamicAttr()));
         }
     }
 

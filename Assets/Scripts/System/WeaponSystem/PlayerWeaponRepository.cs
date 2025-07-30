@@ -2,7 +2,7 @@
 
 public class PlayerWeaponRepository
 {
-    // 储存所有角色的数据
+    // 储存所有角色武器的数据
     private List<PlayerWeaponModel> models;
 
     public PlayerWeaponRepository()

@@ -7,22 +7,22 @@ public class Player : Character, IDamageable
 
     protected PlayerStateMachine stateMachine;
 
-    protected List<PlayerWeapon> weapons;
+    public List<PlayerWeapon> weapons;
     protected PlayerWeapon usingWeapon;
 
     public Player(GameObject obj, PlayerModel model) : base(obj)
     {
         this.model = model;
+
+        weapons = new List<PlayerWeapon>();
     }
 
     protected override void OnInit()
     {
         base.OnInit();
-
-        weapons = new List<PlayerWeapon>();
-
+        
         // NOTE:角色初始化时，添加阿凉为宠物
-        SystemRepository.Instance.GetSystem<PlayerSystem>().AddPlayerPet(PetType.LittleCool, this);
+        //SystemRepository.Instance.GetSystem<PlayerSystem>().AddPlayerPet(PetType.LittleCool, this);
     }
 
     protected override void OnCharacterUpdate()
@@ -37,7 +37,7 @@ public class Player : Character, IDamageable
             usingWeapon.RotateWeapon(SystemRepository.Instance.GetSystem<InputSystem>().GetMoveInput());
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
+        if (SystemRepository.Instance.GetSystem<InputSystem>().GetKeyDownInput(KeyInputType.switchWeapon))
         {
             SwitchWeapon();
         }
@@ -91,11 +91,6 @@ public class Player : Character, IDamageable
         usingWeapon.isUsing = false;
         usingWeapon.OnExit();
         usingWeapon.gameObject.SetActive(false);
-    }
-
-    public PlayerWeapon GetUsingWeapon()
-    {
-        return usingWeapon;
     }
 
     public void TakeDamage(int damage)

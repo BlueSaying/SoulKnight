@@ -1,60 +1,34 @@
-﻿using UnityEngine;
-
+﻿
 namespace BattleScene
 {
     public class Facade : AbstractFacade
     {
-        private ItemSystem itemSystem;
-        private InputSystem inputSystem;
-        private PlayerSystem playerSystem;
-        private EnemySystem enemySystem;
-        //private UISystem uiSystem;
-
-        private CameraSystem cameraSystem;
-        private AudioManager audioSystem;
-
         protected override void OnInit()
         {
             base.OnInit();
 
-            RoomCreator.Instance.CreateLevel(LevelType.Forest);
-
-            itemSystem = new ItemSystem();
-            inputSystem = new InputSystem();
-            playerSystem = new PlayerSystem();
-            enemySystem = new EnemySystem();
-            //uiSystem = new UISystem();
-
-            cameraSystem = new CameraSystem();
-
-            GameMediator.Instance.RegisterSystem(itemSystem);
-            GameMediator.Instance.RegisterSystem(inputSystem);
-            GameMediator.Instance.RegisterSystem(playerSystem);
-            GameMediator.Instance.RegisterSystem(enemySystem);
-            //GameMediator.Instance.RegisterSystem(uiSystem);
-
-            GameMediator.Instance.RegisterSystem(cameraSystem);
-
-            EventCenter.Instance.RegisterEvent(EventType.OnFinishRoomCreate, false, () =>
-            {
-                itemSystem.TurnOn();
-                inputSystem.TurnOn();
-                playerSystem.TurnOn();
-                enemySystem.TurnOn();
-                //uiSystem.TurnOnController();
-                cameraSystem.TurnOn();
-            });
+            AddSystem<ItemSystem>();
+            AddSystem<InputSystem>();
+            AddSystem<CameraSystem>();
+            AddSystem<PlayerSystem>();
+            AddSystem<EnemySystem>();
+            AddSystem<WeaponSystem>();
         }
 
-        protected override void OnUpdate()
+        protected override void OnEnter()
         {
-            base.OnUpdate();
-            itemSystem.GameUpdate();
-            inputSystem.GameUpdate();
-            playerSystem.GameUpdate();
-            enemySystem.GameUpdate();
-            //uiSystem.GameUpdate();
-            cameraSystem.GameUpdate();
+            base.OnEnter();
+            systems[typeof(ItemSystem)].TurnOn();
+            systems[typeof(InputSystem)].TurnOn();
+            systems[typeof(CameraSystem)].TurnOn();
+            systems[typeof(PlayerSystem)].TurnOn();
+            systems[typeof(EnemySystem)].TurnOn();
+            systems[typeof(WeaponSystem)].TurnOn();
+            
         }
+
+        #region 事件集
+
+        #endregion
     }
 }

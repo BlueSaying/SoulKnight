@@ -31,6 +31,12 @@ public class ItemSystem : BaseSystem
         }
     }
 
+    protected override void OnExit()
+    {
+        base.OnExit();
+        items.Clear();
+    }
+
     public void AddItem(Item item)
     {
         items.Add(item);

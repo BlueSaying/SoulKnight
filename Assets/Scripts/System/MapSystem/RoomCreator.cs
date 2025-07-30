@@ -8,11 +8,11 @@ public enum LevelType
 
 public class RoomCreator : Singleton<RoomCreator>
 {
-    private static readonly int RoomSize = 5;
-    private static readonly int UnitSize = 35;
-    private static readonly Vector2Int[] Dir = { Vector2Int.down, Vector2Int.left, Vector2Int.right, Vector2Int.up };
+    public static readonly int RoomSize = 5;
+    public static readonly int UnitSize = 35;
+    public static readonly Vector2Int[] Dir = { Vector2Int.down, Vector2Int.left, Vector2Int.right, Vector2Int.up };
 
-    private static readonly Vector2Int birthPos = new Vector2Int(2, 2);
+    public static readonly Vector2Int birthPos = new Vector2Int(2, 2);
 
     private LevelType curLevel;
 
@@ -34,7 +34,7 @@ public class RoomCreator : Singleton<RoomCreator>
         {
             for (int j = 0; j < RoomSize; j++)
             {
-                roomMatrix[i, j] = new Room(curLevel, RoomType.Empty, Vector2Int.zero);
+                roomMatrix[i, j] = new Room(curLevel, RoomType.Empty, Vector2Int.zero, null);
             }
         }
     }
@@ -99,10 +99,10 @@ public class RoomCreator : Singleton<RoomCreator>
         return Object.Instantiate(pathPrefab, pathPos, Quaternion.identity, transform);
     }
 
-    private GameObject InstantiateRoom(Room room)
+    private GameObject InstantiateRoom(RoomType roomType, Vector2 roomPos)
     {
-        GameObject roomPrefab = ResourcesLoader.Instance.LoadLevelRoom(curLevel.ToString(), room.roomType.ToString());
-        return Object.Instantiate(roomPrefab, (Vector2)room.roomPos * UnitSize, Quaternion.identity, transform);
+        GameObject roomPrefab = ResourcesLoader.Instance.LoadLevelRoom(curLevel.ToString(), roomType.ToString());
+        return Object.Instantiate(roomPrefab, roomPos, Quaternion.identity, transform);
     }
 
     private void AddPath(Room room1, Room room2)
@@ -252,7 +252,6 @@ public class RoomCreator : Singleton<RoomCreator>
         {
             Vector2Int roomPos = queue.Dequeue();
 
-            roomMatrix[roomPos.x, roomPos.y].gameObject = InstantiateRoom(roomMatrix[roomPos.x, roomPos.y]);
             foreach (Vector2Int path in roomMatrix[roomPos.x, roomPos.y].pathConnection)
             {
                 Vector2Int newPos = roomPos + path;
@@ -312,7 +311,7 @@ public class RoomCreator : Singleton<RoomCreator>
         // 构建大本营
         Vector2Int curPos = birthPos;
 
-        roomMatrix[curPos.x, curPos.y] = new BirthRoom(curLevel, RoomType.Birth, curPos);
+        roomMatrix[curPos.x, curPos.y] = new BirthRoom(curLevel, RoomType.Birth, curPos, InstantiateRoom(RoomType.Birth, curPos * UnitSize));
         curRoomCount++;
 
         // 构建第一个房间
@@ -320,7 +319,7 @@ public class RoomCreator : Singleton<RoomCreator>
         curPos = birthPos + Dir[UnityTools.Instance.GetRandomInt(0, 3)];
 
         //生成房间
-        roomMatrix[curPos.x, curPos.y] = new NormalRoom(curLevel, RoomType.Normal, curPos);
+        roomMatrix[curPos.x, curPos.y] = new NormalRoom(curLevel, RoomType.Normal, curPos, InstantiateRoom(RoomType.Normal, curPos * UnitSize));
         AddPath(roomMatrix[curPos.x, curPos.y], roomMatrix[birthPos.x, birthPos.y]);
         curRoomCount++;
 
@@ -333,11 +332,11 @@ public class RoomCreator : Singleton<RoomCreator>
             // 生成房间
             if (curRoomCount == roomCount - 1)
             {
-                roomMatrix[curPos.x, curPos.y] = new TransmissionRoom(curLevel, RoomType.Transmission, curPos);
+                roomMatrix[curPos.x, curPos.y] = new TransmissionRoom(curLevel, RoomType.Transmission, curPos, InstantiateRoom(RoomType.Transmission, curPos * UnitSize));
             }
             else
             {
-                roomMatrix[curPos.x, curPos.y] = new NormalRoom(curLevel, RoomType.Normal, curPos);
+                roomMatrix[curPos.x, curPos.y] = new NormalRoom(curLevel, RoomType.Normal, curPos, InstantiateRoom(RoomType.Normal, curPos * UnitSize));
             }
 
             AddPath(roomMatrix[curPos.x, curPos.y], roomMatrix[extendablePos.x, extendablePos.y]);

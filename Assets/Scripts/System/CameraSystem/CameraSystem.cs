@@ -7,7 +7,7 @@ namespace MainMenuScene
 {
     public enum CameraType
     {
-
+        
     }
 }
 
@@ -36,17 +36,28 @@ namespace BattleScene
 {
     public enum CameraType
     {
-
+        /// <summary>
+        /// 跟随玩家的摄像机
+        /// </summary>
+        FollowCamera,
     }
 }
-
-
 
 public class CameraSystem : BaseSystem
 {
     private SceneName CurSceneName => SceneFacade.Instance.GetActiveSceneName();
 
     private GameObject cameraParent;
+
+    public GameObject CameraParent
+    {
+        get
+        {
+            if (cameraParent == null) cameraParent = GameObject.Find("Cameras");
+            if(cameraParent == null) throw new Exception("场景中无Cameras游戏物体！");
+            return cameraParent;
+        }
+    }
 
     private Dictionary<MainMenuScene.CameraType, CinemachineVirtualCamera> MainMenuSceneCameras;
     private Dictionary<MiddleScene.CameraType, CinemachineVirtualCamera> MiddleSceneCameras;
@@ -67,13 +78,6 @@ public class CameraSystem : BaseSystem
     {
         base.OnEnter();
 
-        cameraParent = GameObject.Find("Cameras");
-
-        if (cameraParent == null)
-        {
-            throw new Exception("场景中无Cameras游戏物体！");
-        }
-
         switch (CurSceneName)
         {
             case SceneName.MainMenuScene:
@@ -82,12 +86,19 @@ public class CameraSystem : BaseSystem
                 foreach (var cameraName in Enum.GetNames(typeof(MiddleScene.CameraType)))
                 {
                     var cameraType = Enum.Parse<MiddleScene.CameraType>(cameraName);
-                    var camera = UnityTools.Instance.GetComponentFromChildren<CinemachineVirtualCamera>(cameraParent, cameraName);
+                    var camera = UnityTools.Instance.GetComponentFromChildren<CinemachineVirtualCamera>(CameraParent, cameraName);
                     MiddleSceneCameras.Add(cameraType, camera);
                 }
                 SwitchCamera(MiddleScene.CameraType.StaticCamera);
                 break;
             case SceneName.BattleScene:
+                foreach (var cameraName in Enum.GetNames(typeof(BattleScene.CameraType)))
+                {
+                    var cameraType = Enum.Parse<BattleScene.CameraType>(cameraName);
+                    var camera = UnityTools.Instance.GetComponentFromChildren<CinemachineVirtualCamera>(CameraParent, cameraName);
+                    BattleSceneCameras.Add(cameraType, camera);
+                }
+                SwitchCamera(BattleScene.CameraType.FollowCamera);
                 break;
         }
     }
@@ -96,7 +107,6 @@ public class CameraSystem : BaseSystem
     {
         base.OnExit();
 
-        cameraParent = null;
         switch (CurSceneName)
         {
             case SceneName.MainMenuScene:
@@ -111,20 +121,48 @@ public class CameraSystem : BaseSystem
         }
     }
 
+    public void SetCameraTarget(MainMenuScene.CameraType type, Transform trans)
+    {
+        MainMenuSceneCameras[type].Follow = trans;
+    }
+
     public void SetCameraTarget(MiddleScene.CameraType type, Transform trans)
     {
         MiddleSceneCameras[type].Follow = trans;
     }
 
-    // NOTE:每次调用完，记得同时调用SetCameraTarget
+    public void SetCameraTarget(BattleScene.CameraType type, Transform trans)
+    {
+        BattleSceneCameras[type].Follow = trans;
+    }
+
+    public void SwitchCamera(MainMenuScene.CameraType type)
+    {
+        foreach (var camera in MainMenuSceneCameras.Values)
+        {
+            camera.gameObject.SetActive(false);
+        }
+
+        MainMenuSceneCameras[type].gameObject.SetActive(true);
+    }
+
     public void SwitchCamera(MiddleScene.CameraType type)
     {
-        // 全部禁用
         foreach (var camera in MiddleSceneCameras.Values)
         {
             camera.gameObject.SetActive(false);
         }
 
         MiddleSceneCameras[type].gameObject.SetActive(true);
+    }
+
+    public void SwitchCamera(BattleScene.CameraType type)
+    {
+        foreach (var camera in BattleSceneCameras.Values)
+        {
+            camera.gameObject.SetActive(false);
+        }
+
+        BattleSceneCameras[type].gameObject.SetActive(true);
     }
 }

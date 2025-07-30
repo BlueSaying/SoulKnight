@@ -27,12 +27,12 @@ public enum KeyInputType
     /// <summary>
     /// 左移
     /// </summary>
-    leftwark,
+    leftward,
 
     /// <summary>
     /// 右移
     /// </summary>
-    rightwark,
+    rightward,
 
     /// <summary>
     /// 玩家拾取物品
@@ -68,8 +68,8 @@ public class InputSystem : BaseSystem
         // OPTIMIZE:实现玩家自定义按键
         inputDic[KeyInputType.upward] = KeyCode.W;
         inputDic[KeyInputType.downward] = KeyCode.S;
-        inputDic[KeyInputType.leftwark] = KeyCode.A;
-        inputDic[KeyInputType.rightwark] = KeyCode.D;
+        inputDic[KeyInputType.leftward] = KeyCode.A;
+        inputDic[KeyInputType.rightward] = KeyCode.D;
         inputDic[KeyInputType.pickUp] = KeyCode.F;
         inputDic[KeyInputType.switchWeapon] = KeyCode.R;
         inputDic[KeyInputType.shoot] = KeyCode.J;
@@ -81,8 +81,8 @@ public class InputSystem : BaseSystem
         Vector2 dir = Vector2.zero;
         if (GetKeyInput(KeyInputType.upward)) dir += Vector2.up;
         if (GetKeyInput(KeyInputType.downward)) dir += Vector2.down;
-        if (GetKeyInput(KeyInputType.leftwark)) dir += Vector2.left;
-        if (GetKeyInput(KeyInputType.rightwark)) dir += Vector2.right;
+        if (GetKeyInput(KeyInputType.leftward)) dir += Vector2.left;
+        if (GetKeyInput(KeyInputType.rightward)) dir += Vector2.right;
         return dir.normalized;
     }
 

@@ -13,6 +13,7 @@ public class Bullet : Item
     {
         base.OnInit();
 
+        transform.GetComponent<Rigidbody2D>().velocity = rotation * Vector2.right * speed;
         try
         {
             triggerDetector = gameObject.GetComponent<TriggerDetector>();
@@ -40,7 +41,7 @@ public class Bullet : Item
         base.OnUpdate();
 
         // TODO:后期改为BaseBullet.speed
-        transform.position += rotation * Vector2.right * speed * Time.deltaTime;
+        //transform.position += rotation * Vector2.right * speed * Time.deltaTime;
     }
 
     protected virtual void OnHitObstacle() { Remove(); }

@@ -67,4 +67,9 @@ public abstract class AbstractFacade
             OnExit();
         }
     }
+
+    public void AddSystem<T>() where T : BaseSystem
+    {
+        systems.Add(typeof(T), SystemRepository.Instance.GetSystem<T>());
+    }
 }

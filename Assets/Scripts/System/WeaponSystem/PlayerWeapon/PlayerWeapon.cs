@@ -68,6 +68,7 @@ public abstract class PlayerWeapon : Weapon
         if (isAttack && fireTimer >= 1 / model.staticAttr.fireRate)
         {
             if (!TestManager.Instance.isUnlockWeapon) fireTimer = 0f;
+            else fireTimer = 0.9f / model.staticAttr.fireRate;  // 10倍射速
             OnFire();
         }
     }

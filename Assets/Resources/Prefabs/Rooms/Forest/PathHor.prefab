@@ -92,9 +92,9 @@ GameObject:
   - component: {fileID: 4893640709551078123}
   - component: {fileID: 2532909551693421819}
   - component: {fileID: 2924411558981683227}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wall
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1031,7 +1031,7 @@ CompositeCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
+  m_GeometryType: 1
   m_GenerationType: 0
   m_EdgeRadius: 0
   m_ColliderPaths:
@@ -1055,16 +1055,24 @@ CompositeCollider2D:
         Y: -46250076
   m_CompositePaths:
     m_Paths:
-    - - {x: 26.000002, y: 1.3749921}
-      - {x: 26.000002, y: 3.0000312}
-      - {x: 7.999969, y: 3.0000021}
-      - {x: 7.9999986, y: 1.3749921}
-    - - {x: 26.000002, y: -4.6250076}
-      - {x: 26.000002, y: -2.9999688}
-      - {x: 7.999969, y: -2.999998}
-      - {x: 7.9999986, y: -4.6250076}
+    - - {x: 26.00003, y: 1.6093067}
+      - {x: 26.00003, y: 2.7657166}
+      - {x: 25.765715, y: 3.0000312}
+      - {x: 8.234283, y: 3.0000312}
+      - {x: 7.999969, y: 2.7657166}
+      - {x: 7.999969, y: 1.6093067}
+      - {x: 8.234283, y: 1.3749921}
+      - {x: 25.765715, y: 1.3749921}
+    - - {x: 26.00003, y: -4.3906927}
+      - {x: 26.00003, y: -3.2342834}
+      - {x: 25.765715, y: -2.9999688}
+      - {x: 8.234283, y: -2.9999688}
+      - {x: 7.999969, y: -3.2342834}
+      - {x: 7.999969, y: -4.3906927}
+      - {x: 8.234283, y: -4.6250076}
+      - {x: 25.765715, y: -4.6250076}
   m_VertexDistance: 0.0005
-  m_OffsetDistance: 0.00005
+  m_OffsetDistance: 0.4
   m_UseDelaunayMesh: 0
   m_CompositeGameObject: {fileID: 6776498804620825086}
 --- !u!19719996 &2924411558981683227

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace MainMenuScene
 {
-    public class MainMenuManager : MonoBehaviour
+    public class MainMenuSceneManager : MonoBehaviour
     {
         private Facade facade;
 
@@ -13,9 +13,19 @@ namespace MainMenuScene
             facade = new Facade();
         }
 
+        private void OnEnable()
+        {
+            facade.TurnOn();
+        }
+
         void Update()
         {
             facade.GameUpdate();
+        }
+
+        private void OnDisable()
+        {
+            facade.TurnOff();
         }
     }
 }

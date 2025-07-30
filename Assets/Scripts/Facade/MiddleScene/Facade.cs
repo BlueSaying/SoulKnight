@@ -9,12 +9,12 @@ namespace MiddleScene
         {
             base.OnInit();
 
-            systems.Add(typeof(ItemSystem), SystemRepository.Instance.GetSystem<ItemSystem>());
-            systems.Add(typeof(InputSystem), SystemRepository.Instance.GetSystem<InputSystem>());
-            systems.Add(typeof(PlayerSystem), SystemRepository.Instance.GetSystem<PlayerSystem>());
-            systems.Add(typeof(EnemySystem), SystemRepository.Instance.GetSystem<EnemySystem>());
-            systems.Add(typeof(WeaponSystem), SystemRepository.Instance.GetSystem<WeaponSystem>());
-            systems.Add(typeof(CameraSystem), SystemRepository.Instance.GetSystem<CameraSystem>());
+            AddSystem<ItemSystem>();
+            AddSystem<InputSystem>();
+            AddSystem<PlayerSystem>();
+            AddSystem<EnemySystem>();
+            AddSystem<WeaponSystem>();
+            AddSystem<CameraSystem>();
         }
 
         protected override void OnEnter()

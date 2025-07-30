@@ -39,6 +39,9 @@ namespace MiddleScene
                 UIMediator.Instance.OpenPanel(PanelName.BattlePanel.ToString());
                 UIMediator.Instance.ClosePanel(PanelName.SelectingSkinPanel.ToString());
 
+                // 保存皮肤
+                SystemRepository.Instance.GetSystem<PlayerSystem>().SetMainPlayerSkin(playerSkins[curSkinIndex]);
+
                 // HACK
                 WeaponFactory.Instance.InstantiatePlayerWeapon(PlayerWeaponType.Ak47, new Vector2(5, 0), Quaternion.identity);
                 WeaponFactory.Instance.InstantiatePlayerWeapon(PlayerWeaponType.BadPistol, new Vector2(3, 0), Quaternion.identity);

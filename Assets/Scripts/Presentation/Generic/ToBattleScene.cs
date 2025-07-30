@@ -5,7 +5,7 @@ using UnityEngine.TextCore.Text;
 
 public class ToBattleScene : MonoBehaviour
 {
-    private MemoryModel memoryModel;
+    //private MemoryModel memoryModel;
     private TriggerDetector triggerDetector;
 
     private void Awake()
@@ -24,7 +24,7 @@ public class ToBattleScene : MonoBehaviour
             //DontDestroyOnLoad(obj);
 
             // 加载Battle场景
-            //SceneCommand.Instance.LoadScene(SceneName.BattleScene);
+            SceneFacade.Instance.LoadScene(SceneName.BattleScene);
         });
     }
 }

@@ -168,6 +168,96 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &950620399746152951
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 327369955882351961}
+  - component: {fileID: 3207853087291813665}
+  - component: {fileID: 7945848927551962296}
+  m_Layer: 0
+  m_Name: EnterRoomTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &327369955882351961
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 950620399746152951}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2259834184058486376}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3207853087291813665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 950620399746152951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35f7f34b6d2ca0e40b72116ff13d154c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!61 &7945848927551962296
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 950620399746152951}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 14, y: 14}
+  m_EdgeRadius: 0
 --- !u!1 &1199491549848524453
 GameObject:
   m_ObjectHideFlags: 0
@@ -177,9 +267,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9026804267654443878}
-  m_Layer: 0
+  - component: {fileID: 4209570616558736919}
+  - component: {fileID: 6334168209187197193}
+  m_Layer: 7
   m_Name: Down
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -204,6 +296,78 @@ Transform:
   - {fileID: 7056095123974900410}
   m_Father: {fileID: 7270730543832534588}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &4209570616558736919
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1199491549848524453}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!61 &6334168209187197193
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1199491549848524453}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -8}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 5, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &1705094894892746325
 GameObject:
   m_ObjectHideFlags: 0
@@ -218,9 +382,9 @@ GameObject:
   - component: {fileID: 5739174510975744293}
   - component: {fileID: 2382527204436457734}
   - component: {fileID: 7656953971003739437}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WallDoorLeft
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -523,7 +687,7 @@ CompositeCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
+  m_GeometryType: 1
   m_GenerationType: 0
   m_EdgeRadius: 0
   m_ColliderPaths:
@@ -539,12 +703,16 @@ CompositeCollider2D:
         Y: -30000312
   m_CompositePaths:
     m_Paths:
-    - - {x: -7.9999986, y: -3.0000312}
-      - {x: -7.9999986, y: 2.0000312}
-      - {x: -9.000031, y: 2.000002}
-      - {x: -9.000002, y: -3.0000312}
+    - - {x: -7.999969, y: -2.7657166}
+      - {x: -7.999969, y: 1.7657167}
+      - {x: -8.234283, y: 2.0000312}
+      - {x: -8.765717, y: 2.0000312}
+      - {x: -9.000031, y: 1.7657167}
+      - {x: -9.000031, y: -2.7657166}
+      - {x: -8.765717, y: -3.0000312}
+      - {x: -8.234283, y: -3.0000312}
   m_VertexDistance: 0.0005
-  m_OffsetDistance: 0.00005
+  m_OffsetDistance: 0.4
   m_UseDelaunayMesh: 0
   m_CompositeGameObject: {fileID: 1705094894892746325}
 --- !u!1 &1909210619235008065
@@ -561,9 +729,9 @@ GameObject:
   - component: {fileID: 6448872747717398230}
   - component: {fileID: 1884652398665285709}
   - component: {fileID: 2712570619041662151}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WallDoorDown
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -916,7 +1084,7 @@ CompositeCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
+  m_GeometryType: 1
   m_GenerationType: 0
   m_EdgeRadius: 0
   m_ColliderPaths:
@@ -932,12 +1100,16 @@ CompositeCollider2D:
         Y: -96250080
   m_CompositePaths:
     m_Paths:
-    - - {x: 2.000002, y: -9.625009}
-      - {x: 2.000002, y: -7.999969}
-      - {x: -3.0000312, y: -7.9999986}
-      - {x: -3.0000021, y: -9.625009}
+    - - {x: 2.0000312, y: -9.390694}
+      - {x: 2.0000312, y: -8.234283}
+      - {x: 1.7657167, y: -7.999969}
+      - {x: -2.7657166, y: -7.999969}
+      - {x: -3.0000312, y: -8.234283}
+      - {x: -3.0000312, y: -9.390694}
+      - {x: -2.7657166, y: -9.625009}
+      - {x: 1.7657167, y: -9.625009}
   m_VertexDistance: 0.0005
-  m_OffsetDistance: 0.00005
+  m_OffsetDistance: 0.4
   m_UseDelaunayMesh: 0
   m_CompositeGameObject: {fileID: 1909210619235008065}
 --- !u!1 &2170083659827076960
@@ -1152,9 +1324,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5916842679119541615}
-  m_Layer: 0
+  - component: {fileID: 8612845825645403822}
+  - component: {fileID: 1291647390628921387}
+  m_Layer: 7
   m_Name: Left
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1179,6 +1353,78 @@ Transform:
   - {fileID: 4143445899990067098}
   m_Father: {fileID: 7270730543832534588}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &8612845825645403822
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3212556825007809115}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!61 &1291647390628921387
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3212556825007809115}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -8, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 5}
+  m_EdgeRadius: 0
 --- !u!1 &3437342020717834203
 GameObject:
   m_ObjectHideFlags: 0
@@ -1440,9 +1686,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 452869783537504830}
-  m_Layer: 0
+  - component: {fileID: 6169168910735488899}
+  - component: {fileID: 3695021420768079321}
+  m_Layer: 7
   m_Name: Right
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1467,6 +1715,78 @@ Transform:
   - {fileID: 1218001267882923986}
   m_Father: {fileID: 7270730543832534588}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &6169168910735488899
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3728222542511781756}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!61 &3695021420768079321
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3728222542511781756}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 8, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 5}
+  m_EdgeRadius: 0
 --- !u!1 &4013464067440962077
 GameObject:
   m_ObjectHideFlags: 0
@@ -1560,9 +1880,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1568786158527367001}
-  m_Layer: 0
+  - component: {fileID: 2114215105584175495}
+  - component: {fileID: 2751211800692760774}
+  m_Layer: 7
   m_Name: Up
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1587,6 +1909,78 @@ Transform:
   - {fileID: 555341414590927952}
   m_Father: {fileID: 7270730543832534588}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &2114215105584175495
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4241500928662214949}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 8}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 5, y: 1}
+  m_EdgeRadius: 0
+--- !u!50 &2751211800692760774
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4241500928662214949}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1 &4243268563682929649
 GameObject:
   m_ObjectHideFlags: 0
@@ -1837,6 +2231,7 @@ Transform:
   m_Children:
   - {fileID: 47752033084910651}
   - {fileID: 7270730543832534588}
+  - {fileID: 327369955882351961}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5370715025022581862
@@ -1937,9 +2332,9 @@ GameObject:
   - component: {fileID: 3760726111513450484}
   - component: {fileID: 3527261093337837079}
   - component: {fileID: 14719303806523621}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WallDown
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2532,7 +2927,7 @@ CompositeCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
+  m_GeometryType: 1
   m_GenerationType: 0
   m_EdgeRadius: 0
   m_ColliderPaths:
@@ -2564,20 +2959,32 @@ CompositeCollider2D:
         Y: -96250080
   m_CompositePaths:
     m_Paths:
-    - - {x: 8.000002, y: -9.625009}
-      - {x: 8.000002, y: -2.9999688}
-      - {x: 6.999969, y: -2.999998}
-      - {x: 6.9999394, y: -7.999969}
-      - {x: 1.9999688, y: -7.9999986}
-      - {x: 1.999998, y: -9.625009}
-    - - {x: -2.999998, y: -9.625009}
-      - {x: -2.999998, y: -7.999969}
-      - {x: -7.999969, y: -7.9999394}
-      - {x: -7.9999986, y: -2.9999688}
-      - {x: -9.000031, y: -2.999998}
-      - {x: -9.000002, y: -9.625009}
+    - - {x: 8.000031, y: -9.390694}
+      - {x: 8.000031, y: -3.2342834}
+      - {x: 7.765717, y: -2.9999688}
+      - {x: 7.2342834, y: -2.9999688}
+      - {x: 6.999969, y: -3.2342834}
+      - {x: 6.999969, y: -7.7656546}
+      - {x: 6.7656546, y: -7.999969}
+      - {x: 2.2342834, y: -7.999969}
+      - {x: 1.9999688, y: -8.234283}
+      - {x: 1.9999688, y: -9.390694}
+      - {x: 2.2342834, y: -9.625009}
+      - {x: 7.765717, y: -9.625009}
+    - - {x: -2.9999688, y: -9.390694}
+      - {x: -2.9999688, y: -8.234283}
+      - {x: -3.2342834, y: -7.999969}
+      - {x: -7.7656546, y: -7.999969}
+      - {x: -7.999969, y: -7.7656546}
+      - {x: -7.999969, y: -3.2342834}
+      - {x: -8.234283, y: -2.9999688}
+      - {x: -8.765717, y: -2.9999688}
+      - {x: -9.000031, y: -3.2342834}
+      - {x: -9.000031, y: -9.390694}
+      - {x: -8.765717, y: -9.625009}
+      - {x: -3.2342834, y: -9.625009}
   m_VertexDistance: 0.0005
-  m_OffsetDistance: 0.00005
+  m_OffsetDistance: 0.4
   m_UseDelaunayMesh: 0
   m_CompositeGameObject: {fileID: 5657504504136064846}
 --- !u!1 &5812413866825965065
@@ -2594,9 +3001,9 @@ GameObject:
   - component: {fileID: 4977160725799822006}
   - component: {fileID: 4509667677738503737}
   - component: {fileID: 4937177978343750722}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WallDoorUp
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2949,7 +3356,7 @@ CompositeCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
+  m_GeometryType: 1
   m_GenerationType: 0
   m_EdgeRadius: 0
   m_ColliderPaths:
@@ -2965,12 +3372,16 @@ CompositeCollider2D:
         Y: 63749924
   m_CompositePaths:
     m_Paths:
-    - - {x: 2.000002, y: 6.3749924}
-      - {x: 2.000002, y: 8.000031}
-      - {x: -3.0000312, y: 8.000002}
-      - {x: -3.0000021, y: 6.3749924}
+    - - {x: 2.0000312, y: 6.6093073}
+      - {x: 2.0000312, y: 7.765717}
+      - {x: 1.7657167, y: 8.000031}
+      - {x: -2.7657166, y: 8.000031}
+      - {x: -3.0000312, y: 7.765717}
+      - {x: -3.0000312, y: 6.6093073}
+      - {x: -2.7657166, y: 6.3749924}
+      - {x: 1.7657167, y: 6.3749924}
   m_VertexDistance: 0.0005
-  m_OffsetDistance: 0.00005
+  m_OffsetDistance: 0.4
   m_UseDelaunayMesh: 0
   m_CompositeGameObject: {fileID: 5812413866825965065}
 --- !u!1 &6279848132095935722
@@ -6303,9 +6714,9 @@ GameObject:
   - component: {fileID: 8517927783910164331}
   - component: {fileID: 647878767188353723}
   - component: {fileID: 521237991986405026}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WallUp
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6898,7 +7309,7 @@ CompositeCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
+  m_GeometryType: 1
   m_GenerationType: 0
   m_EdgeRadius: 0
   m_ColliderPaths:
@@ -6930,20 +7341,32 @@ CompositeCollider2D:
         Y: 13749921
   m_CompositePaths:
     m_Paths:
-    - - {x: 8.000002, y: 1.3749921}
-      - {x: 8.000002, y: 8.000031}
-      - {x: 1.9999688, y: 8.000002}
-      - {x: 1.999998, y: 6.3749924}
-      - {x: 6.999969, y: 6.3749633}
-      - {x: 6.9999986, y: 1.3749921}
-    - - {x: -7.9999986, y: 1.3749921}
-      - {x: -7.9999394, y: 6.3749924}
-      - {x: -2.9999688, y: 6.3750215}
-      - {x: -2.999998, y: 8.000031}
-      - {x: -9.000031, y: 8.000002}
-      - {x: -9.000002, y: 1.3749921}
+    - - {x: 8.000031, y: 1.6093067}
+      - {x: 8.000031, y: 7.765717}
+      - {x: 7.765717, y: 8.000031}
+      - {x: 2.2342834, y: 8.000031}
+      - {x: 1.9999688, y: 7.765717}
+      - {x: 1.9999688, y: 6.6093073}
+      - {x: 2.2342834, y: 6.3749924}
+      - {x: 6.7656546, y: 6.3749924}
+      - {x: 6.999969, y: 6.1406775}
+      - {x: 6.999969, y: 1.6093067}
+      - {x: 7.2342834, y: 1.3749921}
+      - {x: 7.765717, y: 1.3749921}
+    - - {x: -7.999969, y: 1.6093067}
+      - {x: -7.999969, y: 6.1406775}
+      - {x: -7.7656546, y: 6.3749924}
+      - {x: -3.2342834, y: 6.3749924}
+      - {x: -2.9999688, y: 6.6093073}
+      - {x: -2.9999688, y: 7.765717}
+      - {x: -3.2342834, y: 8.000031}
+      - {x: -8.765717, y: 8.000031}
+      - {x: -9.000031, y: 7.765717}
+      - {x: -9.000031, y: 1.6093067}
+      - {x: -8.765717, y: 1.3749921}
+      - {x: -8.234283, y: 1.3749921}
   m_VertexDistance: 0.0005
-  m_OffsetDistance: 0.00005
+  m_OffsetDistance: 0.4
   m_UseDelaunayMesh: 0
   m_CompositeGameObject: {fileID: 6680575986734847434}
 --- !u!1 &6719171735806834437
@@ -7044,9 +7467,9 @@ GameObject:
   - component: {fileID: 3262819418884212211}
   - component: {fileID: 3492644928362738725}
   - component: {fileID: 3031722978623530960}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WallDoorRight
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7349,7 +7772,7 @@ CompositeCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
+  m_GeometryType: 1
   m_GenerationType: 0
   m_EdgeRadius: 0
   m_ColliderPaths:
@@ -7365,12 +7788,16 @@ CompositeCollider2D:
         Y: -30000312
   m_CompositePaths:
     m_Paths:
-    - - {x: 8.000002, y: -3.0000312}
-      - {x: 8.000002, y: 2.0000312}
-      - {x: 6.999969, y: 2.000002}
-      - {x: 6.9999986, y: -3.0000312}
+    - - {x: 8.000031, y: -2.7657166}
+      - {x: 8.000031, y: 1.7657167}
+      - {x: 7.765717, y: 2.0000312}
+      - {x: 7.2342834, y: 2.0000312}
+      - {x: 6.999969, y: 1.7657167}
+      - {x: 6.999969, y: -2.7657166}
+      - {x: 7.2342834, y: -3.0000312}
+      - {x: 7.765717, y: -3.0000312}
   m_VertexDistance: 0.0005
-  m_OffsetDistance: 0.00005
+  m_OffsetDistance: 0.4
   m_UseDelaunayMesh: 0
   m_CompositeGameObject: {fileID: 6772626083650161338}
 --- !u!1 &7386664373178652845

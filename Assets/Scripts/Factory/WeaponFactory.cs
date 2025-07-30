@@ -13,7 +13,7 @@ public class WeaponFactory : Singleton<WeaponFactory>
 
         GameObject obj = Object.Instantiate(ResourcesLoader.Instance.LoadWeapon(type.ToString()), GunOriginPoint.transform);
         obj.name = type.ToString();
-
+        
         obj.transform.localPosition = Vector3.zero;
 
         PlayerWeapon weapon = null;
@@ -26,7 +26,7 @@ public class WeaponFactory : Singleton<WeaponFactory>
                 weapon = new Ak47(obj, character, model);
                 break;
         }
-
+        
         return weapon;
     }
 

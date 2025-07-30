@@ -49,6 +49,9 @@ TagManager:
   - name: Wall
     uniqueID: 2551452393
     locked: 0
+  - name: Decoration
+    uniqueID: 4188522253
+    locked: 0
   - name: Enemy
     uniqueID: 2928306575
     locked: 0

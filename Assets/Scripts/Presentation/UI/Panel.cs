@@ -22,7 +22,10 @@ namespace MiddleScene
 
 namespace BattleScene
 {
+    public enum PanelName
+    {
 
+    }
 }
 
 

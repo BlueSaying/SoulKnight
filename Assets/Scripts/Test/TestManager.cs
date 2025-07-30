@@ -8,6 +8,4 @@ public class TestManager : Singleton<TestManager>
     {
         isUnlockWeapon = false;
     }
-
-    //if (Input.GetKeyDown(KeyCode.U)) GameMediator.Instance.GetSystem<InputSystem>().isLimitedWeapon = false;
 }
