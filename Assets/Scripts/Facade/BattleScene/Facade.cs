@@ -11,7 +11,7 @@ namespace BattleScene
         //private UISystem uiSystem;
 
         private CameraSystem cameraSystem;
-        private AudioSystem audioSystem;
+        private AudioManager audioSystem;
 
         protected override void OnInit()
         {
@@ -26,7 +26,6 @@ namespace BattleScene
             //uiSystem = new UISystem();
 
             cameraSystem = new CameraSystem();
-            audioSystem = new AudioSystem();
 
             GameMediator.Instance.RegisterSystem(itemSystem);
             GameMediator.Instance.RegisterSystem(inputSystem);
@@ -35,7 +34,6 @@ namespace BattleScene
             //GameMediator.Instance.RegisterSystem(uiSystem);
 
             GameMediator.Instance.RegisterSystem(cameraSystem);
-            GameMediator.Instance.RegisterSystem(audioSystem);
 
             EventCenter.Instance.RegisterEvent(EventType.OnFinishRoomCreate, false, () =>
             {
@@ -45,7 +43,6 @@ namespace BattleScene
                 enemySystem.TurnOn();
                 //uiSystem.TurnOnController();
                 cameraSystem.TurnOn();
-                audioSystem.TurnOn();
             });
         }
 
@@ -58,7 +55,6 @@ namespace BattleScene
             enemySystem.GameUpdate();
             //uiSystem.GameUpdate();
             cameraSystem.GameUpdate();
-            audioSystem.GameUpdate();
         }
     }
 }

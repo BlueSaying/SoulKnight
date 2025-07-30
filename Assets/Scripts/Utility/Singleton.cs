@@ -5,15 +5,15 @@ public abstract class Singleton<T> where T : Singleton<T>
 {
     protected Singleton() { }
 
-    protected static T _instance = null;
+    protected static T instance = null;
 
     public static T Instance
     {
         get
         {
-            if (_instance == null)
+            if (instance == null)
             {
-                // 以下方法用于实例化_instance变量
+                // 以下方法用于实例化instance变量
                 // 不使用new的原因是子类T的构造函数为private，必须使用反射特性绕开此限制
 
                 // 先获取所有非public构造方法
@@ -25,9 +25,9 @@ public abstract class Singleton<T> where T : Singleton<T>
                 {
                     throw new Exception("Non-public ctor() not  found in " + typeof(T).ToString());
                 }
-                _instance = ctor.Invoke(null) as T;
+                instance = ctor.Invoke(null) as T;
             }
-            return _instance;
+            return instance;
         }
     }
 }

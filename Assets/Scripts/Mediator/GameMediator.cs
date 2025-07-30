@@ -1,16 +1,16 @@
 ﻿public class GameMediator : AbstractMediator
 {
-    private static GameMediator _instance;
+    private static GameMediator instance;
 
     public static GameMediator Instance
     {
         get
         {
-            if (_instance == null)
+            if (instance == null)
             {
-                _instance = new GameMediator();
+                instance = new GameMediator();
             }
-            return _instance;
+            return instance;
         }
     }
 

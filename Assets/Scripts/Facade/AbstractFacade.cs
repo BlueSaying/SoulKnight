@@ -1,6 +1,11 @@
+using System;
+using System.Collections.Generic;
 
 public abstract class AbstractFacade
 {
+    // 场景需要的Systems
+    protected Dictionary<Type, BaseSystem> systems;
+
     private bool isInit;
     private bool isEnter;
     private bool isEnable;
@@ -19,11 +24,20 @@ public abstract class AbstractFacade
         }
     }
 
-    protected virtual void OnInit() { }
+    protected virtual void OnInit()
+    {
+        systems = new Dictionary<Type, BaseSystem>();
+    }
 
     protected virtual void OnEnter() { }
 
-    protected virtual void OnExit() { }
+    protected virtual void OnExit()
+    {
+        foreach (var system in systems.Values)
+        {
+            system.TurnOff();
+        }
+    }
 
     protected virtual void OnUpdate()
     {
@@ -31,6 +45,11 @@ public abstract class AbstractFacade
         {
             isEnter = true;
             OnEnter();
+        }
+
+        foreach (var system in systems.Values)
+        {
+            system.GameUpdate();
         }
     }
 

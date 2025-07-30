@@ -9,18 +9,18 @@ public class UIRenderer
         get
         {
             if (_uiRoot == null) _uiRoot = GameObject.Find("MainCanvas").transform;
-            if (_uiRoot == null) throw new System.Exception("未找到MainCanvas");
+            if (_uiRoot == null) throw new System.Exception("未找到MainCanvas!");
             return _uiRoot;
         }
     }
 
-    private static UIRenderer _instance;
+    private static UIRenderer instance;
     public static UIRenderer Instance
     {
         get
         {
-            if (_instance == null) _instance = new UIRenderer();
-            return _instance;
+            if (instance == null) instance = new UIRenderer();
+            return instance;
         }
     }
 

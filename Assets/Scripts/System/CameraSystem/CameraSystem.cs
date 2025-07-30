@@ -90,8 +90,6 @@ public class CameraSystem : BaseSystem
             case SceneName.BattleScene:
                 break;
         }
-
-
     }
 
     protected override void OnExit()

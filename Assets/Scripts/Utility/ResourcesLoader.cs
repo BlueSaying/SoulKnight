@@ -125,6 +125,4 @@ public class ResourcesLoader : Singleton<ResourcesLoader>
     {
         return Resources.LoadAll<GameObject>(levelRoomPath + levelName).Where(x => x.name == roomName).ToArray()[0];
     }
-
-
 }
