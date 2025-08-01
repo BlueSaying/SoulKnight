@@ -3159,7 +3159,7 @@ GameObject:
   - component: {fileID: 4606609803873480471}
   - component: {fileID: 4830546400602524066}
   - component: {fileID: 8570515116064248456}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: EnterRoomTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4092,7 +4092,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6050664885577430503
 Transform:
   m_ObjectHideFlags: 0
@@ -4986,7 +4986,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8461638750243617111
 Transform:
   m_ObjectHideFlags: 0
@@ -5611,7 +5611,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &513949044358601489
 Transform:
   m_ObjectHideFlags: 0
@@ -6057,7 +6057,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2997687786220353764
 Transform:
   m_ObjectHideFlags: 0
@@ -6982,7 +6982,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &175795144229884050
 Transform:
   m_ObjectHideFlags: 0

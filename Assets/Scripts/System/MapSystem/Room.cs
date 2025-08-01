@@ -45,10 +45,10 @@ public class Room
         Transform doors = gameObject.transform.Find("Doors");
         foreach(var dir in pathConnection)
         {
-            if(dir ==Vector2Int.up) doors.Find("Up").gameObject.SetActive(true);
-            if(dir ==Vector2Int.down) doors.Find("Down").gameObject.SetActive(true);
-            if(dir ==Vector2Int.left) doors.Find("Left").gameObject.SetActive(true);
-            if(dir ==Vector2Int.right) doors.Find("Right").gameObject.SetActive(true);
+            if(dir ==Vector2Int.up) doors.Find("Up").gameObject.SetActive(false);
+            if(dir ==Vector2Int.down) doors.Find("Down").gameObject.SetActive(false);
+            if(dir ==Vector2Int.left) doors.Find("Left").gameObject.SetActive(false);
+            if(dir ==Vector2Int.right) doors.Find("Right").gameObject.SetActive(false);
         }
     }
 
@@ -57,10 +57,10 @@ public class Room
         Transform doors = gameObject.transform.Find("Doors");
         foreach (var dir in pathConnection)
         {
-            if (dir == Vector2Int.up) doors.Find("Up").gameObject.SetActive(false);
-            if (dir == Vector2Int.down) doors.Find("Down").gameObject.SetActive(false);
-            if (dir == Vector2Int.left) doors.Find("Left").gameObject.SetActive(false);
-            if (dir == Vector2Int.right) doors.Find("Right").gameObject.SetActive(false);
+            if (dir == Vector2Int.up) doors.Find("Up").gameObject.SetActive(true);
+            if (dir == Vector2Int.down) doors.Find("Down").gameObject.SetActive(true);
+            if (dir == Vector2Int.left) doors.Find("Left").gameObject.SetActive(true);
+            if (dir == Vector2Int.right) doors.Find("Right").gameObject.SetActive(true);
         }
     }
 }

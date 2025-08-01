@@ -26,6 +26,11 @@ public class EnemySystem : BaseSystem
         }
     }
 
+    public EnemyModel GetEnemyModel(EnemyType enemyType)
+    {
+        return enemyRepository.GetEnemyModel(enemyType);
+    }
+
     public void AddEnemy(EnemyType enemyType, Vector3 position, Quaternion quaternion)
     {
         enemies.Add(EnemyFactory.Instance.CreateEnemy(enemyRepository.GetEnemyModel(enemyType), position, quaternion));

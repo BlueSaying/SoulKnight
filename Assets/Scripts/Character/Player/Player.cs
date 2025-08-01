@@ -10,7 +10,7 @@ public class Player : Character, IDamageable
     public List<PlayerWeapon> weapons;
     protected PlayerWeapon usingWeapon;
 
-    public Player(GameObject obj, PlayerModel model) : base(obj)
+    public Player(GameObject obj, PlayerModel model) : base(obj, model)
     {
         this.model = model;
 
@@ -20,7 +20,7 @@ public class Player : Character, IDamageable
     protected override void OnInit()
     {
         base.OnInit();
-        
+
         // NOTE:角色初始化时，添加阿凉为宠物
         //SystemRepository.Instance.GetSystem<PlayerSystem>().AddPlayerPet(PetType.LittleCool, this);
     }
@@ -93,9 +93,14 @@ public class Player : Character, IDamageable
         usingWeapon.gameObject.SetActive(false);
     }
 
-    public void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage, Color damageColor)
     {
         //dynamicAttr.Hp -= damage;
         Debug.Log(damage);
+    }
+
+    public virtual void Die()
+    {
+        EventCenter.Instance.NotifyEvent(EventType.OnPlayerDie);
     }
 }

@@ -4,51 +4,64 @@ using UnityEngine.Events;
 // NOTE:在此处注册事件
 public enum EventType
 {
+    #region 永久事件
     /// <summary>
-    /// 当场景开始切换
+    /// 场景开始切换
     /// </summary>
     OnSceneSwitchStart,
 
     /// <summary>
-    /// 当场景完成切换
+    /// 场景完成切换
     /// </summary>
     OnSceneSwitchComplete,
+    #endregion
 
     /// <summary>
-    /// 当角色选择完毕
+    /// 是否为永久事件分界点
+    /// </summary>
+    isPermanentPoint,
+
+    /// <summary>
+    /// 角色选择完毕
     /// </summary>
     OnSelectPlayerComplete,
 
     /// <summary>
-    /// 当皮肤选择完毕
+    /// 皮肤选择完毕
     /// </summary>
     OnSelectSkinComplete,
 
     /// <summary>
-    /// 当房间生成完毕
+    /// 房间生成完毕
     /// </summary>
     OnFinishRoomCreate,
+
+    /// <summary>
+    /// 敌人死亡
+    /// </summary>
+    OnEnemyDie,
+
+    /// <summary>
+    /// 玩家死亡
+    /// </summary>
+    OnPlayerDie,
+
+    /// <summary>
+    /// 战斗结束
+    /// </summary>
+    OnBattleFinish,
 }
 
 public class EventCenter : Singleton<EventCenter>
 {
-    public class IEventInfo
-    {
-        // 标识一个事件是否永久不被注销
-        public bool isPermanent;
-
-        public IEventInfo(bool isPermanent)
-        {
-            this.isPermanent = isPermanent;
-        }
-    }
+    public class IEventInfo { }
 
     // 无参事件
     public class EventInfo : IEventInfo
     {
         public UnityAction action;
 
-        public EventInfo(UnityAction action, bool isPermanent) : base(isPermanent)
+        public EventInfo(UnityAction action)
         {
             this.action = action;
         }
@@ -59,7 +72,7 @@ public class EventCenter : Singleton<EventCenter>
     {
         public UnityAction<T> action;
 
-        public EventInfo(UnityAction<T> action, bool isPermanent) : base(isPermanent)
+        public EventInfo(UnityAction<T> action)
         {
             this.action = action;
         }
@@ -83,40 +96,49 @@ public class EventCenter : Singleton<EventCenter>
         eventDic = new Dictionary<EventType, List<IEventInfo>>();
     }
 
-    public void RegisterEvent(EventType type, bool isPermanent, UnityAction action)
+    private bool isPermanentEvent(EventType eventType)
     {
-        if (eventDic.ContainsKey(type))
-        {
-            foreach (IEventInfo info in eventDic[type])
-            {
-                if (info is EventInfo)
-                {
-                    (info as EventInfo).action += action;
-                }
-            }
-        }
-        else
-        {
-            eventDic.Add(type, new List<IEventInfo> { new EventInfo(action, isPermanent) });
-        }
+        return eventType < EventType.isPermanentPoint;
     }
 
-    public void RegisterEvent<T>(EventType type, bool isPermanent, UnityAction<T> action)
+    public void RegisterEvent(EventType type, UnityAction action)
     {
-        if (eventDic.ContainsKey(type))
+        if (!eventDic.TryGetValue(type, out var infoList))
         {
-            foreach (IEventInfo info in eventDic[type])
+            infoList = new List<IEventInfo>();
+            eventDic.Add(type, infoList);
+        }
+
+        foreach (var info in infoList)
+        {
+            if (info is EventInfo)
             {
-                if (info is EventInfo<T>)
-                {
-                    (info as EventInfo<T>).action += action;
-                }
+                (info as EventInfo).action += action;
+                return;
             }
         }
-        else
+
+        infoList.Add(new EventInfo(action));
+    }
+
+    public void RegisterEvent<T>(EventType type, UnityAction<T> action)
+    {
+        if (!eventDic.TryGetValue(type, out var infoList))
         {
-            eventDic.Add(type, new List<IEventInfo> { new EventInfo<T>(action, isPermanent) });
+            infoList = new List<IEventInfo>();
+            eventDic.Add(type, infoList);
         }
+
+        foreach (var info in infoList)
+        {
+            if (info is EventInfo<T>)
+            {
+                (info as EventInfo<T>).action += action;
+                return;
+            }
+        }
+
+        infoList.Add(new EventInfo<T>(action));
     }
 
     public void NotifyEvent(EventType type)
@@ -149,55 +171,35 @@ public class EventCenter : Singleton<EventCenter>
     {
         if (!eventDic.TryGetValue(type, out var infoList)) return;
 
-        for (int i = 0; i < infoList.Count; i++)
+        foreach (var info in eventDic[type])
         {
-            if (infoList[i] is EventInfo eventInfo)
+            if (info is EventInfo eventInfo)
             {
                 eventInfo.action -= action;
-
-                // 如果委托为空且非永久事件，移除容器
-                if (eventInfo.action == null && !eventInfo.isPermanent)
-                {
-                    infoList.RemoveAt(i);
-                    i--;
-                }
             }
         }
+    }
 
-        // 清理空事件类型
-        if (infoList.Count == 0) eventDic.Remove(type);
+    public void RemoveEvent<T>(EventType type, UnityAction<T> action)
+    {
+        if (!eventDic.TryGetValue(type, out var infoList)) return;
+
+        foreach (var info in eventDic[type])
+        {
+            if (info is EventInfo<T> eventInfo)
+            {
+                eventInfo.action -= action;
+            }
+        }
     }
 
     public void ClearNonPermanentEvents()
     {
-        var keysToRemove = new List<EventType>();
-
         foreach (EventType type in eventDic.Keys)
         {
-            // 创建待删除项列表
-            var toRemove = new List<IEventInfo>();
+            if (isPermanentEvent(type)) continue;
 
-            foreach (var info in eventDic[type])
-            {
-                if (!info.isPermanent && UnityTools.Instance.isGenericType(info.GetType(), typeof(EventInfo<>)))
-                {
-                    toRemove.Add(info);
-                }
-            }
-            foreach (var item in toRemove)
-            {
-                eventDic[type].Remove(item);
-            }
-
-            if (eventDic[type].Count == 0)
-            {
-                keysToRemove.Add(type);
-            }
-        }
-
-        foreach (var key in keysToRemove)
-        {
-            eventDic.Remove(key);
+            eventDic[type].Clear();
         }
     }
 }

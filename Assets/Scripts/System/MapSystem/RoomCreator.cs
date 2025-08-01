@@ -19,15 +19,24 @@ public class RoomCreator : Singleton<RoomCreator>
     public Room[,] roomMatrix = new Room[RoomSize, RoomSize];
 
     // rooms的父物体
-    Transform transform;
+    private Transform roomParent;
+    public Transform RoomParent
+    {
+        get
+        {
+            if (roomParent == null) roomParent = GameObject.Find("Rooms").transform;
+            if (roomParent == null) throw new System.Exception("无法找到游戏物体Rooms，请添加");
+            return roomParent;
+        }
+    }
 
     private RoomCreator() { }
 
     private void Refresh()
     {
-        for (int i = 0; i < transform.childCount; i++)
+        for (int i = 0; i < RoomParent.childCount; i++)
         {
-            Object.Destroy(transform.GetChild(i).gameObject);
+            Object.Destroy(RoomParent.GetChild(i).gameObject);
         }
 
         for (int i = 0; i < RoomSize; i++)
@@ -96,13 +105,13 @@ public class RoomCreator : Singleton<RoomCreator>
         else pathPrefab = ResourcesLoader.Instance.LoadLevelRoom(curLevel.ToString(), RoomType.PathHor.ToString());
 
         Vector2 pathPos = leftDwonPos * UnitSize;
-        return Object.Instantiate(pathPrefab, pathPos, Quaternion.identity, transform);
+        return Object.Instantiate(pathPrefab, pathPos, Quaternion.identity, RoomParent);
     }
 
     private GameObject InstantiateRoom(RoomType roomType, Vector2 roomPos)
     {
         GameObject roomPrefab = ResourcesLoader.Instance.LoadLevelRoom(curLevel.ToString(), roomType.ToString());
-        return Object.Instantiate(roomPrefab, roomPos, Quaternion.identity, transform);
+        return Object.Instantiate(roomPrefab, roomPos, Quaternion.identity, RoomParent);
     }
 
     private void AddPath(Room room1, Room room2)
@@ -294,13 +303,6 @@ public class RoomCreator : Singleton<RoomCreator>
 
     public void CreateLevel(LevelType levelType)
     {
-        transform = GameObject.Find("Rooms").transform;
-
-        if (transform == null)
-        {
-            throw new System.Exception("无法找到游戏物体Rooms，请添加");
-        }
-
         curLevel = levelType;
         Refresh();
 

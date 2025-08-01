@@ -34,9 +34,10 @@ public class Character
     private bool isShouldRemove;
     private bool isAlreadyRemove;
 
-    public Character(GameObject obj)
+    public Character(GameObject obj,CharacterModel model)
     {
         gameObject = obj;
+        this.model = model;
 
         try
         {
@@ -49,11 +50,11 @@ public class Character
 
         try
         {
-            bulletCheckBox = UnityTools.Instance.GetTransformFromChildren(gameObject, "BulletCheckBox").gameObject;
+            bulletCheckBox = UnityTools.Instance.GetTransformFromChildren(gameObject, "Trigger").gameObject;
         }
         catch (System.Exception)
         {
-            throw new System.Exception("无法获取" + gameObject.name + "的BulletCheckBox子物体,请检查是否已经添加");
+            throw new System.Exception("无法获取" + gameObject.name + "的Trigger子物体,请检查是否已经添加");
         }
 
     }

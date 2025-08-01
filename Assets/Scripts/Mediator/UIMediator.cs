@@ -8,7 +8,7 @@ public class UIMediator : Singleton<UIMediator>
 
     private UIMediator()
     {
-        EventCenter.Instance.RegisterEvent(EventType.OnSceneSwitchStart, true, () =>
+        EventCenter.Instance.RegisterEvent(EventType.OnSceneSwitchStart, () =>
         {
             panelDictionary.Clear();
         });

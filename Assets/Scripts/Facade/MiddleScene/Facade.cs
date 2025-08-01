@@ -25,7 +25,7 @@ namespace MiddleScene
             systems[typeof(CameraSystem)].TurnOn();
             systems[typeof(PlayerSystem)].TurnOn();
 
-            EventCenter.Instance.RegisterEvent(EventType.OnSelectSkinComplete, false, OnSelectSkinComplete);
+            EventCenter.Instance.RegisterEvent(EventType.OnSelectSkinComplete, OnSelectSkinComplete);
         }
 
         protected override void OnExit()

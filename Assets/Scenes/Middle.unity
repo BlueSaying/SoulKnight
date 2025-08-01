@@ -24568,7 +24568,7 @@ GameObject:
   - component: {fileID: 1010230855}
   - component: {fileID: 1010230856}
   - component: {fileID: 1010230857}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ToBattleScene
   m_TagString: Untagged
   m_Icon: {fileID: 0}

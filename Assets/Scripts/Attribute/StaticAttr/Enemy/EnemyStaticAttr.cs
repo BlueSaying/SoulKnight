@@ -17,4 +17,16 @@ public class EnemyStaticAttr : CharacterStaticAttr
     /// 敌人武器类型
     /// </summary>
     public EnemyWeaponType enemyWeaponType;
+
+    public EnemyStaticAttr DeepCopy()
+    {
+        EnemyStaticAttr output = new EnemyStaticAttr();
+        output.enemyType = enemyType;
+        output.isElite = isElite;
+        output.enemyWeaponType = enemyWeaponType;
+        output.name = name;
+        output.maxHp = maxHp;
+        output.speed = speed;
+        return output;
+    }
 }

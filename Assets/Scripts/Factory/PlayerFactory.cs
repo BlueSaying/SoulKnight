@@ -36,11 +36,11 @@ public class PlayerFactory : Singleton<PlayerFactory>
                 break;
         }
 
-        if (!UnityTools.Instance.GetComponentFromChildren<Symbol>(obj, "BulletCheckBox"))
+        if (!UnityTools.Instance.GetComponentFromChildren<Symbol>(obj, "Trigger"))
         {
-            UnityTools.Instance.GetTransformFromChildren(obj, "BulletCheckBox").AddComponent<Symbol>();
+            UnityTools.Instance.GetTransformFromChildren(obj, "Trigger").AddComponent<Symbol>();
         }
-        UnityTools.Instance.GetComponentFromChildren<Symbol>(obj, "BulletCheckBox").SetCharacter(player);
+        UnityTools.Instance.GetComponentFromChildren<Symbol>(obj, "Trigger").SetCharacter(player);
 
         return player;
     }

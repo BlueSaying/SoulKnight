@@ -24,7 +24,6 @@ namespace BattleScene
             systems[typeof(PlayerSystem)].TurnOn();
             systems[typeof(EnemySystem)].TurnOn();
             systems[typeof(WeaponSystem)].TurnOn();
-            
         }
 
         #region 事件集

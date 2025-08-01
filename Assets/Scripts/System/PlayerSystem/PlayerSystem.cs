@@ -35,7 +35,7 @@ public class PlayerSystem : BaseSystem
             case SceneName.MainMenuScene:
                 break;
             case SceneName.MiddleScene:
-                EventCenter.Instance.RegisterEvent(EventType.OnSelectSkinComplete, false, OnSelectSkinComplete);
+                EventCenter.Instance.RegisterEvent(EventType.OnSelectSkinComplete, OnSelectSkinComplete);
                 break;
             case SceneName.BattleScene:
                 // 记录信息
@@ -128,7 +128,6 @@ public class PlayerSystem : BaseSystem
     public void SetMainPlayerSkin(PlayerSkinType skinType)
     {
         this.skinType = skinType;
-        Debug.Log(this.skinType.ToString());
     }
 
     public void AddPlayerPet(PetType type, Player owner)

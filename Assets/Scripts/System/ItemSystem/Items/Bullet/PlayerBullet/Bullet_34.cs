@@ -17,7 +17,7 @@ public class Bullet_34 : PlayerBullet
         base.OnHitEnemy(enemy);
 
         // HACK
-        enemy.TakeDamage(5);
+        enemy.TakeDamage(5, Color.red);
 
         EffectBoom effect = ItemFactory.Instance.CreateEffect(EffectType.EffectBoom, position, Quaternion.identity) as EffectBoom;
         effect.ManagedToController();

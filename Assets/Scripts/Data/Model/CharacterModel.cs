@@ -7,5 +7,11 @@
     {
         this.staticAttr = staticAttr;
         this.dynamicAttr = dynamicAttr;
+        Recover();
+    }
+
+    public void Recover()
+    {
+        dynamicAttr.curHP = staticAttr.maxHp;
     }
 }

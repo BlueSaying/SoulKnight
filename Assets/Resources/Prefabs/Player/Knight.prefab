@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 6249994417724976452}
   - component: {fileID: 3748869865789569221}
   - component: {fileID: 7386625165204946986}
-  m_Layer: 6
-  m_Name: BulletCheckBox
+  m_Layer: 14
+  m_Name: Trigger
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -62,7 +62,7 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.018247128, y: -0.17531276}
@@ -90,9 +90,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7515255074800222303}
   - component: {fileID: 514227944700312949}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -220,7 +220,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1083438317
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 1349475191, guid: bd02d7111ec486b4d9a638aee6c1ae20, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

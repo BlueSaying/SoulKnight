@@ -30,7 +30,7 @@ namespace MiddleScene
                 // Physics2D.OverlapCircle(point,radius,layerMask)用于创建一个圆形区域的碰撞体
                 // Camera.main.ScreenToWorldPoint()鼠标的屏幕坐标转换为游戏世界坐标系中的位置（单位：Unity单位）
                 // Input.mousePosition获取鼠标在屏幕坐标系中的坐标（单位：像素，原点在左下角）。
-                Collider2D _collider = Physics2D.OverlapCircle(Camera.main.ScreenToWorldPoint(Input.mousePosition), 0.1f, LayerMask.GetMask("Player"));
+                Collider2D _collider = Physics2D.OverlapCircle(Camera.main.ScreenToWorldPoint(Input.mousePosition), 0.1f, LayerMask.GetMask("PlayerTrigger"));
                 if (_collider)
                 {
                     // 设置相机

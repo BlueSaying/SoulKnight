@@ -22,7 +22,7 @@ public class EnemyRepository
         {
             if (model.staticAttr.enemyType == enemyType)
             {
-                return model;
+                return model.DeepCopy();
             }
         }
 

@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 2731563811260016384}
   - component: {fileID: 2331772821498180174}
   - component: {fileID: 7080673597801490692}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: BadPistol
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -6,4 +6,9 @@ public class DestroyAfterPlay : MonoBehaviour
     {
         Destroy(gameObject);
     }
+
+    public void DestroyParentGameObject()
+    {
+        Destroy(transform.parent.gameObject);
+    }
 }

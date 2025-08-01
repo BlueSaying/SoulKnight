@@ -17,11 +17,11 @@ TagManager:
   - Obstacle
   - Pet
   - Enemy
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Decoration
+  - Bullet
+  - PickUpable
+  - EnemyTrigger
+  - PlayerTrigger
   - 
   - 
   - 

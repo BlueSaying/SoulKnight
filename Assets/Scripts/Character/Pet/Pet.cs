@@ -7,7 +7,7 @@ public class Pet : Character
     protected PetStateMachine stateMachine;
     public Player owner { get; protected set; }
 
-    public Pet(GameObject obj, PetModel model, Player owner) : base(obj)
+    public Pet(GameObject obj, PetModel model, Player owner) : base(obj, model)
     {
         this.model = model;
         this.owner = owner;
