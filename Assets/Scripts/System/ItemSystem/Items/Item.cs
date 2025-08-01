@@ -5,7 +5,7 @@ public class Item
     public GameObject gameObject { get; protected set; }
     public Transform transform => gameObject.transform;
     public Vector2 position { get => transform.position; set => transform.position = value; }
-    public Quaternion rotation  { get => transform.rotation; set => transform.rotation = value; }
+    public Quaternion rotation { get => transform.rotation; set => transform.rotation = value; }
 
     private bool isInit;
     private bool isEnter;
@@ -15,6 +15,9 @@ public class Item
     public Item(GameObject gameObject)
     {
         this.gameObject = gameObject;
+
+        // 托管至ItemSystem
+        ManagedToController();
     }
 
     public void GameUpdate()
@@ -51,7 +54,7 @@ public class Item
         }
     }
 
-    protected virtual void OnExit() {  }
+    protected virtual void OnExit() { }
 
     public void Remove()
     {

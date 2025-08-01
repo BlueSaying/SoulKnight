@@ -1,0 +1,9 @@
+﻿using UnityEngine;
+
+public class AppearEffect : BaseEffect
+{
+    public AppearEffect(GameObject gameObject) : base(gameObject) 
+    {
+        duration = 0.333334f;
+    }
+}

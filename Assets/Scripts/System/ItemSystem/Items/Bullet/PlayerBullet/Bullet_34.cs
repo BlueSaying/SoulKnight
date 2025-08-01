@@ -8,8 +8,7 @@ public class Bullet_34 : PlayerBullet
     {
         base.OnHitObstacle();
 
-        EffectBoom effect = ItemFactory.Instance.CreateEffect(EffectType.EffectBoom, position, Quaternion.identity) as EffectBoom;
-        effect.ManagedToController();
+        BoomEffect effect = ItemFactory.Instance.CreateEffect(EffectType.BoomEffect, position, Quaternion.identity) as BoomEffect;
     }
 
     protected override void OnHitEnemy(Enemy enemy)
@@ -19,7 +18,6 @@ public class Bullet_34 : PlayerBullet
         // HACK
         enemy.TakeDamage(5, Color.red);
 
-        EffectBoom effect = ItemFactory.Instance.CreateEffect(EffectType.EffectBoom, position, Quaternion.identity) as EffectBoom;
-        effect.ManagedToController();
+        BoomEffect effect = ItemFactory.Instance.CreateEffect(EffectType.BoomEffect, position, Quaternion.identity) as BoomEffect;
     }
 }

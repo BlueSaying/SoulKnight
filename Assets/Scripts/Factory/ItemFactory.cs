@@ -8,7 +8,20 @@ public enum PlayerBulletType
 
 public enum EffectType
 {
-    EffectBoom,
+    /// <summary>
+    /// 子弹碰撞
+    /// </summary>
+    BoomEffect,
+
+    /// <summary>
+    /// 敌人生成
+    /// </summary>
+    SummonEffect,
+
+    /// <summary>
+    /// 敌人出现
+    /// </summary>
+    AppearEffect,
 }
 
 public class ItemFactory : Singleton<ItemFactory>
@@ -40,8 +53,14 @@ public class ItemFactory : Singleton<ItemFactory>
 
         switch (effectType)
         {
-            case EffectType.EffectBoom:
-                effect = new EffectBoom(obj);
+            case EffectType.BoomEffect:
+                effect = new BoomEffect(obj);
+                break;
+            case EffectType.SummonEffect:
+                effect = new SummonEffect(obj);
+                break;
+            case EffectType.AppearEffect:
+                effect = new AppearEffect(obj);
                 break;
         }
 

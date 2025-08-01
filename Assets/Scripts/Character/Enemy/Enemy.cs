@@ -52,7 +52,6 @@ public class Enemy : Character, IDamageable
         Transform damageNumPoint = transform.Find("DamageNumPoint");
 
         DamageNum damageNum = ItemFactory.Instance.CreateDamageNum("DamageNum", damageNumPoint, damage, damageColor);
-        damageNum.ManagedToController();
 
         Animator.SetTrigger("BeAttack");
 

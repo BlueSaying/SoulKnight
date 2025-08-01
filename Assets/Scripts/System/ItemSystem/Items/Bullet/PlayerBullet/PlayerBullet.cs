@@ -15,5 +15,6 @@ public class PlayerBullet : Bullet
             OnHitEnemy(obj.GetComponent<Symbol>().character as Enemy);
         });
     }
+
     protected virtual void OnHitEnemy(Enemy enemy) { Remove(); }
 }

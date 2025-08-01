@@ -9,8 +9,7 @@ public class Bullet_5 : PlayerBullet
         base.OnHitObstacle();
 
         // TODO:后期将effectType设为Bullet类的属性
-        EffectBoom effect = ItemFactory.Instance.CreateEffect(EffectType.EffectBoom, position, Quaternion.identity) as EffectBoom;
-        effect.ManagedToController();
+        BoomEffect effect = ItemFactory.Instance.CreateEffect(EffectType.BoomEffect, position, Quaternion.identity) as BoomEffect;
     }
 
     protected override void OnHitEnemy(Enemy enemy)
@@ -20,7 +19,6 @@ public class Bullet_5 : PlayerBullet
         // HACK:后期将伤害作为该函数的参数传入
         enemy.TakeDamage(5, Color.red);
 
-        EffectBoom effect = ItemFactory.Instance.CreateEffect(EffectType.EffectBoom, position, Quaternion.identity) as EffectBoom;
-        effect.ManagedToController();
+        BoomEffect effect = ItemFactory.Instance.CreateEffect(EffectType.BoomEffect, position, Quaternion.identity) as BoomEffect;
     }
 }
