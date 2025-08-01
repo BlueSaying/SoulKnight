@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class UnityTools : Singleton<UnityTools>
 {
@@ -16,6 +18,23 @@ public class UnityTools : Singleton<UnityTools>
     public float GetRandomFloat(float min, float max)
     {
         return UnityEngine.Random.Range(min, max);
+    }
+
+    /// <summary>
+    /// call function after seconds
+    /// </summary>
+    /// <param name="caller"></param>
+    /// <param name="waitTime"></param>
+    /// <param name="action"></param>
+    public void WaitThenCallFun(object caller, float waitTime, UnityAction action)
+    {
+        CoroutinePool.Instance.StartCoroutine(caller, WaitSecondsCallFun(waitTime, action));
+    }
+
+    private IEnumerator WaitSecondsCallFun(float waitTime, UnityAction action)
+    {
+        yield return new WaitForSeconds(waitTime);
+        action.Invoke();
     }
 
     /// <summary>
@@ -135,7 +154,7 @@ public class UnityTools : Singleton<UnityTools>
                 throw new Exception("无法转换类型" + type);
             }
         }
-        
+
         object obj = Convert.ChangeType(s, type);
         if (obj == null)
         {
@@ -146,7 +165,6 @@ public class UnityTools : Singleton<UnityTools>
             return obj;
         }
     }
-
 
     private class ListInfo
     {

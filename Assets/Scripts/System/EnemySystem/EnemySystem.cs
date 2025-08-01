@@ -1,14 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditorInternal.Profiling.Memory.Experimental.FileFormat;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class EnemySystem : BaseSystem
 {
     private EnemyRepository enemyRepository;
 
-    private List<Enemy> enemies;
+    public List<Enemy> enemies { get; private set; }
     public EnemySystem() { }
 
     protected override void OnInit()
@@ -29,6 +27,13 @@ public class EnemySystem : BaseSystem
         }
     }
 
+    protected override void OnExit()
+    {
+        base.OnExit();
+        
+        enemies.Clear();
+    }
+
     public EnemyModel GetEnemyModel(EnemyType enemyType)
     {
         return enemyRepository.GetEnemyModel(enemyType);
@@ -39,14 +44,15 @@ public class EnemySystem : BaseSystem
     {
         ItemFactory.Instance.CreateEffect(EffectType.SummonEffect, position, quaternion);
 
-        CoroutinePool.Instance.StartCoroutine(this, SummonEnemy(enemyType, position, quaternion));
-    }
+        UnityTools.Instance.WaitThenCallFun(this, 1f, () =>
+        {
+            ItemFactory.Instance.CreateEffect(EffectType.AppearEffect, position, quaternion);
+            UnityTools.Instance.WaitThenCallFun(this, 0.333334f, () =>
+            {
+                enemies.Add(EnemyFactory.Instance.CreateEnemy(enemyRepository.GetEnemyModel(enemyType), position, quaternion));
+            });
+        });
 
-    private IEnumerator SummonEnemy(EnemyType enemyType, Vector2 position, Quaternion quaternion)
-    {
-        yield return new WaitForSeconds(1f);
-
-        enemies.Add(EnemyFactory.Instance.CreateEnemy(enemyRepository.GetEnemyModel(enemyType), position, quaternion));
-        ItemFactory.Instance.CreateEffect(EffectType.AppearEffect, position, quaternion);
+        
     }
 }

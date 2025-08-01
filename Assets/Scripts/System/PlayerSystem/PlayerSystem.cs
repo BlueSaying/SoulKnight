@@ -38,6 +38,7 @@ public class PlayerSystem : BaseSystem
                 EventCenter.Instance.RegisterEvent(EventType.OnSelectSkinComplete, OnSelectSkinComplete);
                 break;
             case SceneName.BattleScene:
+
                 // 记录信息
                 PlayerType playerType = mainPlayer.model.staticAttr.playerType;
                 Vector2 playerPos = RoomCreator.birthPos * RoomCreator.UnitSize;
@@ -74,6 +75,13 @@ public class PlayerSystem : BaseSystem
 
                 // 设置相机
                 SystemRepository.Instance.GetSystem<CameraSystem>().SetCameraTarget(BattleScene.CameraType.FollowCamera, mainPlayer.transform);
+
+                // 玩家设置为不可见，1秒后可见
+                mainPlayer.gameObject.SetActive(false);
+                UnityTools.Instance.WaitThenCallFun(this, 1f, () =>
+                {
+                    mainPlayer.gameObject.SetActive(true);
+                });
 
                 break;
         }

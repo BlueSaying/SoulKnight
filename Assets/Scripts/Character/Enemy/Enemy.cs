@@ -94,10 +94,14 @@ public class Enemy : Character, IDamageable
         {
             isDead = true;
         }
+
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
         animator.SetTrigger("Die");
         transform.Find("Collider").gameObject.SetActive(false);
         transform.Find("Trigger").gameObject.SetActive(false);
+
+        SystemRepository.Instance.GetSystem<EnemySystem>().enemies.Remove(this);
+
         EventCenter.Instance.NotifyEvent(EventType.OnEnemyDie);
     }
 }

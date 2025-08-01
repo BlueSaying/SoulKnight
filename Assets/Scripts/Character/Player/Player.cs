@@ -34,7 +34,14 @@ public class Player : Character, IDamageable
         {
             usingWeapon.GameUpdate();
             usingWeapon.ControlWeapon(SystemRepository.Instance.GetSystem<InputSystem>().GetKeyInput(KeyInputType.shoot));
-            usingWeapon.RotateWeapon(SystemRepository.Instance.GetSystem<InputSystem>().GetMoveInput());
+
+            //usingWeapon.RotateWeapon(SystemRepository.Instance.GetSystem<InputSystem>().GetMoveInput());
+            Enemy cloestEnemy = GetClosestEnemy();
+            usingWeapon.RotateWeapon
+                (cloestEnemy == null
+                ? SystemRepository.Instance.GetSystem<InputSystem>().GetMoveInput()
+                : cloestEnemy.transform.position - transform.position);
+
         }
 
         if (SystemRepository.Instance.GetSystem<InputSystem>().GetKeyDownInput(KeyInputType.switchWeapon))
@@ -79,14 +86,14 @@ public class Player : Character, IDamageable
         EquipWeapon(newWeapon);
     }
 
-    public void EquipWeapon(PlayerWeapon weapon)
+    private void EquipWeapon(PlayerWeapon weapon)
     {
         weapon.isUsing = true;
         weapon.gameObject.SetActive(true);
         usingWeapon = weapon;
     }
 
-    public void UnequipWeapon()
+    private void UnequipWeapon()
     {
         usingWeapon.isUsing = false;
         usingWeapon.OnExit();
@@ -102,5 +109,26 @@ public class Player : Character, IDamageable
     public virtual void Die()
     {
         EventCenter.Instance.NotifyEvent(EventType.OnPlayerDie);
+    }
+
+    // 获取距离玩家最近的敌人
+    public Enemy GetClosestEnemy()
+    {
+        Enemy output = null;
+        float distance = float.MaxValue;
+
+        foreach (Enemy enemy in SystemRepository.Instance.GetSystem<EnemySystem>().enemies)
+        {
+            float x = (enemy.transform.position.x - transform.position.x);
+            float y = (enemy.transform.position.y - transform.position.y);
+
+            if (x * x + y * y < distance)
+            {
+                output = enemy;
+                distance = x * x + y * y;
+            }
+        }
+
+        return output;
     }
 }

@@ -13,7 +13,7 @@ public class BaseEffect : Item
     protected override void OnUpdate()
     {
         base.OnUpdate();
-        Debug.Log(effectTimer + "/" + duration);
+        
         effectTimer += Time.deltaTime;
         if (effectTimer > duration)
         {
@@ -24,7 +24,7 @@ public class BaseEffect : Item
     protected override void OnExit()
     {
         base.OnExit();
-        Debug.Log("Deleting");
+        
         Object.Destroy(gameObject);
     }
 }
