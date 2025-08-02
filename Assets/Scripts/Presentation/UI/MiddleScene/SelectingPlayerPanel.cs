@@ -14,6 +14,8 @@ namespace MiddleScene
         {
             base.Awake();
 
+            InitData();
+
             UIbackButton = UnityTools.Instance.GetComponentFromChildren<Button>(gameObject, "ButtonBack");
             UInextButton = UnityTools.Instance.GetComponentFromChildren<Button>(gameObject, "ButtonNext");
 
@@ -34,6 +36,38 @@ namespace MiddleScene
                 UIMediator.Instance.OpenPanel(PanelName.SelectingSkinPanel.ToString());
                 UIMediator.Instance.ClosePanel(PanelName.SelectingPlayerPanel.ToString());
             });
+        }
+
+        private void InitData()
+        {
+            Transform temp = null;
+            var playerSystem = SystemRepository.Instance.GetSystem<PlayerSystem>();
+            var playerModel = playerSystem.GetPlayerModel(Enum.Parse<PlayerType>(playerSystem.playerGameObject.name));
+
+            const int HPLimit = 12;
+            const int armorLimit = 10;
+            const int energyLimit = 320;
+            const int criticalLimit = 10;
+
+            // 生命
+            temp = UnityTools.Instance.GetTransformFromChildren(gameObject, "DivHor1");
+            temp.Find("Slider").GetComponent<Slider>().value = 1.0f * playerModel.staticAttr.maxHP / HPLimit;
+            temp.Find("Text").GetComponent<Text>().text = playerModel.staticAttr.maxHP.ToString();
+
+            // 护甲
+            temp = UnityTools.Instance.GetTransformFromChildren(gameObject, "DivHor2");
+            temp.Find("Slider").GetComponent<Slider>().value = 1.0f * playerModel.staticAttr.armor / armorLimit;
+            temp.Find("Text").GetComponent<Text>().text = playerModel.staticAttr.armor.ToString();
+
+            // 能量
+            temp = UnityTools.Instance.GetTransformFromChildren(gameObject, "DivHor3");
+            temp.Find("Slider").GetComponent<Slider>().value = 1.0f * playerModel.staticAttr.energy / energyLimit;
+            temp.Find("Text").GetComponent<Text>().text = playerModel.staticAttr.energy.ToString();
+
+            // 暴击
+            temp = UnityTools.Instance.GetTransformFromChildren(gameObject, "DivHor4");
+            temp.Find("Slider").GetComponent<Slider>().value = 1.0f * playerModel.staticAttr.critical / criticalLimit;
+            temp.Find("Text").GetComponent<Text>().text = playerModel.staticAttr.critical.ToString();
         }
     }
 }

@@ -12,7 +12,7 @@ public abstract class CharacterStaticAttr
     /// <summary>
     /// 最大生命值
     /// </summary>
-    public int maxHp;
+    public int maxHP;
 
     /// <summary>
     /// 移动速度

@@ -35,13 +35,16 @@ public class Player : Character, IDamageable
             usingWeapon.GameUpdate();
             usingWeapon.ControlWeapon(SystemRepository.Instance.GetSystem<InputSystem>().GetKeyInput(KeyInputType.Shoot));
 
-            //usingWeapon.RotateWeapon(SystemRepository.Instance.GetSystem<InputSystem>().GetMoveInput());
-            Enemy cloestEnemy = GetClosestEnemy();
-            usingWeapon.RotateWeapon
-                (cloestEnemy == null
-                ? SystemRepository.Instance.GetSystem<InputSystem>().GetMoveInput()
-                : cloestEnemy.transform.position - transform.position);
-
+            Enemy cloestEnemy = AutoAimingEnemy();
+            if (cloestEnemy == null)
+            {
+                usingWeapon.RotateWeapon(SystemRepository.Instance.GetSystem<InputSystem>().GetMoveInput());
+            }
+            else
+            {
+                usingWeapon.RotateWeapon(cloestEnemy.transform.position - transform.position);
+                isLeft = cloestEnemy.transform.position.x < transform.position.x;
+            }
         }
 
         if (SystemRepository.Instance.GetSystem<InputSystem>().GetKeyDownInput(KeyInputType.SwitchWeapon))
@@ -111,13 +114,16 @@ public class Player : Character, IDamageable
         EventCenter.Instance.NotifyEvent(EventType.OnPlayerDie);
     }
 
-    // 获取距离玩家最近的敌人
-    public Enemy GetClosestEnemy()
+    // 获取自动瞄准的敌人
+    public Enemy AutoAimingEnemy()
     {
-        Enemy output = null;
-        float distance = float.MaxValue;
+        // 仅10米内的敌人可以自动瞄准
+        const float AutoAimingDistance = 10f;
 
-        foreach (Enemy enemy in SystemRepository.Instance.GetSystem<EnemySystem>().enemies)
+        Enemy output = null;
+        float distance = AutoAimingDistance * AutoAimingDistance;
+
+        foreach (var enemy in SystemRepository.Instance.GetSystem<EnemySystem>().enemies)
         {
             float x = (enemy.transform.position.x - transform.position.x);
             float y = (enemy.transform.position.y - transform.position.y);

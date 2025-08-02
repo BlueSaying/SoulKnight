@@ -75,19 +75,19 @@ public abstract class PlayerWeapon : Weapon
 
     public void RotateWeapon(Vector2 weaponDir)
     {
-        if (canRotate)
-        {
-            float angle;
-            if (character.isLeft)
-            {
-                angle = -Vector2.SignedAngle(Vector2.left, weaponDir);
-            }
-            else
-            {
-                angle = Vector2.SignedAngle(Vector2.right, weaponDir);
-            }
+        if (!canRotate) return;
 
-            rotOrigin.transform.localRotation = Quaternion.Euler(0, 0, angle);
+        float angle;
+        if (character.isLeft)
+        {
+            angle = -Vector2.SignedAngle(Vector2.left, weaponDir);
         }
+        else
+        {
+            angle = Vector2.SignedAngle(Vector2.right, weaponDir);
+        }
+
+        rotOrigin.transform.localRotation = Quaternion.Euler(0, 0, angle);
+
     }
 }

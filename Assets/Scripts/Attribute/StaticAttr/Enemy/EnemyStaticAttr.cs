@@ -25,7 +25,7 @@ public class EnemyStaticAttr : CharacterStaticAttr
         output.isElite = isElite;
         output.enemyWeaponType = enemyWeaponType;
         output.name = name;
-        output.maxHp = maxHp;
+        output.maxHP = maxHP;
         output.speed = speed;
         return output;
     }
