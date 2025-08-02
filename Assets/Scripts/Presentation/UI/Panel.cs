@@ -5,6 +5,7 @@ namespace MainMenuScene
     public enum PanelName
     {
         MainMenuPanel,
+        KeyBoardPanel,
     }
 }
 

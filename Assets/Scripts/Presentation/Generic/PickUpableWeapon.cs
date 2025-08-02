@@ -12,7 +12,7 @@ public class PickUpableWeapon : MonoBehaviour
     {
         if (isPlayerEnter)
         {
-            if (SystemRepository.Instance.GetSystem<InputSystem>().GetKeyDownInput(KeyInputType.pickUp))
+            if (SystemRepository.Instance.GetSystem<InputSystem>().GetKeyDownInput(KeyInputType.PickUp))
             {
                 PlayerWeaponModel model = SystemRepository.Instance.GetSystem<WeaponSystem>().GetPlayerWeaponModel(System.Enum.Parse<PlayerWeaponType>(name));
                 player.AddWeapon(model);

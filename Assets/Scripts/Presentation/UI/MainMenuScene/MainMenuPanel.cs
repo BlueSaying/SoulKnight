@@ -1,12 +1,9 @@
 ﻿using UnityEngine.UI;
-using UnityEngine;
 
 namespace MainMenuScene
 {
     public class MainMenuPanel : Panel
     {
-        Button UIstartButton;
-
         protected override void Awake()
         {
             base.Awake();
@@ -16,11 +13,14 @@ namespace MainMenuScene
 
         private void InitUI()
         {
-            UIstartButton = UnityTools.Instance.GetComponentFromChildren<Button>(gameObject, "ButtonStart");
-
-            UIstartButton.onClick.AddListener(() =>
+            UnityTools.Instance.GetComponentFromChildren<Button>(gameObject, "ButtonStart").onClick.AddListener(() =>
             {
                 SceneFacade.Instance.LoadScene(SceneName.MiddleScene);
+            });
+
+            UnityTools.Instance.GetComponentFromChildren<Button>(gameObject, "ButtonSetting").onClick.AddListener(() =>
+            {
+                UIMediator.Instance.OpenPanel(PanelName.KeyBoardPanel.ToString());
             });
         }
     }

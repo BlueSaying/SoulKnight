@@ -17,72 +17,63 @@ public enum KeyInputType
     /// <summary>
     /// 上移
     /// </summary>
-    upward,
+    UpWard,
 
     /// <summary>
     /// 下移
     /// </summary>
-    downward,
+    DownWard,
 
     /// <summary>
     /// 左移
     /// </summary>
-    leftward,
+    LeftWard,
 
     /// <summary>
     /// 右移
     /// </summary>
-    rightward,
+    RightWard,
 
     /// <summary>
     /// 玩家拾取物品
     /// </summary>
-    pickUp,
+    PickUp,
 
     /// <summary>
     /// 玩家切换武器
     /// </summary>
-    switchWeapon,
+    SwitchWeapon,
 
     /// <summary>
     /// 玩家释放技能
     /// </summary>
-    releaseSkill,
+    ReleaseSkill,
 
     /// <summary>
     /// 玩家射击
     /// </summary>
-    shoot,
+    Shoot,
 }
 
 public class InputSystem : BaseSystem
 {
     // 储存按键设置
-    private Dictionary<KeyInputType, KeyCode> inputDic;
+    public Dictionary<KeyInputType, KeyCode> inputDic { get; private set; }
 
     public InputSystem()
     {
         inputDic = new Dictionary<KeyInputType, KeyCode>();
 
-        // NOTE:默认按键设置
-        // OPTIMIZE:实现玩家自定义按键
-        inputDic[KeyInputType.upward] = KeyCode.W;
-        inputDic[KeyInputType.downward] = KeyCode.S;
-        inputDic[KeyInputType.leftward] = KeyCode.A;
-        inputDic[KeyInputType.rightward] = KeyCode.D;
-        inputDic[KeyInputType.pickUp] = KeyCode.F;
-        inputDic[KeyInputType.switchWeapon] = KeyCode.R;
-        inputDic[KeyInputType.shoot] = KeyCode.J;
-        inputDic[KeyInputType.releaseSkill] = KeyCode.Space;
-    }
+        SetDefault();
+    }    
 
     public Vector2 GetMoveInput()
     {
         Vector2 dir = Vector2.zero;
-        if (GetKeyInput(KeyInputType.upward)) dir += Vector2.up;
-        if (GetKeyInput(KeyInputType.downward)) dir += Vector2.down;
-        if (GetKeyInput(KeyInputType.leftward)) dir += Vector2.left;
-        if (GetKeyInput(KeyInputType.rightward)) dir += Vector2.right;
+        if (GetKeyInput(KeyInputType.UpWard)) dir += Vector2.up;
+        if (GetKeyInput(KeyInputType.DownWard)) dir += Vector2.down;
+        if (GetKeyInput(KeyInputType.LeftWard)) dir += Vector2.left;
+        if (GetKeyInput(KeyInputType.RightWard)) dir += Vector2.right;
         return dir.normalized;
     }
 
@@ -148,5 +139,18 @@ public class InputSystem : BaseSystem
 
         inputDic[inputType] = keyCode;
         return true;
+    }
+
+    // 将按键更改为默认设置
+    public void SetDefault()
+    {
+        inputDic[KeyInputType.UpWard] = KeyCode.W;
+        inputDic[KeyInputType.DownWard] = KeyCode.S;
+        inputDic[KeyInputType.LeftWard] = KeyCode.A;
+        inputDic[KeyInputType.RightWard] = KeyCode.D;
+        inputDic[KeyInputType.PickUp] = KeyCode.F;
+        inputDic[KeyInputType.SwitchWeapon] = KeyCode.R;
+        inputDic[KeyInputType.Shoot] = KeyCode.J;
+        inputDic[KeyInputType.ReleaseSkill] = KeyCode.Space;
     }
 }

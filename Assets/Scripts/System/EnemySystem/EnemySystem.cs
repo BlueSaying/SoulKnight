@@ -47,7 +47,7 @@ public class EnemySystem : BaseSystem
         UnityTools.Instance.WaitThenCallFun(this, 1f, () =>
         {
             ItemFactory.Instance.CreateEffect(EffectType.AppearEffect, position, quaternion);
-            UnityTools.Instance.WaitThenCallFun(this, 0.333334f, () =>
+            UnityTools.Instance.WaitThenCallFun(this, 0.416667f, () =>
             {
                 enemies.Add(EnemyFactory.Instance.CreateEnemy(enemyRepository.GetEnemyModel(enemyType), position, quaternion));
             });

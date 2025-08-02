@@ -33,7 +33,7 @@ public class Player : Character, IDamageable
         if (usingWeapon != null)
         {
             usingWeapon.GameUpdate();
-            usingWeapon.ControlWeapon(SystemRepository.Instance.GetSystem<InputSystem>().GetKeyInput(KeyInputType.shoot));
+            usingWeapon.ControlWeapon(SystemRepository.Instance.GetSystem<InputSystem>().GetKeyInput(KeyInputType.Shoot));
 
             //usingWeapon.RotateWeapon(SystemRepository.Instance.GetSystem<InputSystem>().GetMoveInput());
             Enemy cloestEnemy = GetClosestEnemy();
@@ -44,7 +44,7 @@ public class Player : Character, IDamageable
 
         }
 
-        if (SystemRepository.Instance.GetSystem<InputSystem>().GetKeyDownInput(KeyInputType.switchWeapon))
+        if (SystemRepository.Instance.GetSystem<InputSystem>().GetKeyDownInput(KeyInputType.SwitchWeapon))
         {
             SwitchWeapon();
         }
