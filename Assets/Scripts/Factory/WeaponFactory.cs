@@ -5,13 +5,13 @@ public class WeaponFactory : Singleton<WeaponFactory>
     private WeaponFactory() { }
 
     // 给*character*角色添加一个*type*类型的武器并
-    // 放于GunOriginPoint物体下，返回该武器
+    // 放于WeaponOriginPoint物体下，返回该武器
     public PlayerWeapon GetPlayerWeapon(PlayerWeaponModel model, Character character)
     {
         PlayerWeaponType type = model.staticAttr.playerWeaponType;
-        GameObject GunOriginPoint = UnityTools.Instance.GetTransformFromChildren(character.gameObject, "GunOriginPoint").gameObject;        
+        GameObject WeaponOriginPoint = UnityTools.Instance.GetTransformFromChildren(character.gameObject, "WeaponOriginPoint").gameObject;        
 
-        GameObject obj = Object.Instantiate(ResourcesLoader.Instance.LoadWeapon(type.ToString()), GunOriginPoint.transform);
+        GameObject obj = Object.Instantiate(ResourcesLoader.Instance.LoadWeapon(type.ToString()), WeaponOriginPoint.transform);
         obj.name = type.ToString();
         
         obj.transform.localPosition = Vector3.zero;

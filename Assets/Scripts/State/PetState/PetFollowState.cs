@@ -35,11 +35,11 @@ public class PetFollowState : PetState
 
         if (dir.x > 0)
         {
-            pet.isLeft = false;
+            pet.ChangeLeft(false, false);
         }
         if (dir.x < 0)
         {
-            pet.isLeft = true;
+            pet.ChangeLeft(true, false);
         }
 
         float speed = 5f;//pet.staticAttr.speed;

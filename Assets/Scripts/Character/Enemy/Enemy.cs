@@ -17,7 +17,7 @@ public enum EnemyType
 public class Enemy : Character, IDamageable
 {
     public new EnemyModel model { get => base.model as EnemyModel; set => base.model = value; }
-    
+
     protected Animator animator;
     protected Animator Animator
     {
@@ -29,21 +29,19 @@ public class Enemy : Character, IDamageable
         }
     }
 
-    private bool isDead = false;
-    //protected PlayerStateMachine stateMachine;
+    protected EnemyStateMachine stateMachine;
 
-    //protected List<BasePlayerWeapon> weapons;
-    //protected BasePlayerWeapon usingWeapon;
+    private bool isDead = false;
 
     // 当前是否为受击闪烁状态
-    //private bool isFlashing = false;
+    private bool isFlashing = false;
 
     public Enemy(GameObject obj, EnemyModel model) : base(obj, model) { }
 
-    protected override void OnCharacterDieStart()
+    protected override void OnCharacterUpdate()
     {
-        base.OnCharacterDieStart();
-        CoroutinePool.Instance.StopAllCoroutine(this);
+        base.OnCharacterUpdate();
+        stateMachine?.GameUpdate();
     }
 
     public virtual void TakeDamage(int damage, Color damageColor)
@@ -53,40 +51,48 @@ public class Enemy : Character, IDamageable
 
         DamageNum damageNum = ItemFactory.Instance.CreateDamageNum("DamageNum", damageNumPoint, damage, damageColor);
 
-        Animator.SetTrigger("BeAttack");
-
         model.dynamicAttr.curHP -= damage;
-        //Debug.Log("剩余血量:" + model.dynamicAttr.curHP);
+
         if (model.dynamicAttr.curHP <= 0)
         {
             Die();
         }
-        //if (!isFlashing)
-        //{
-        //    CoroutinePool.Instance.StartCoroutine(this, BeWhite());
-        //}
-
-        //dynamicAttr.Hp -= damage;
+        if (!isFlashing)
+        {
+            CoroutinePool.Instance.StartCoroutine(this, BeWhite());
+        }
     }
 
-    //private IEnumerator BeWhite()
-    //{
-    //    isFlashing = true;
-    //
-    //    SpriteRenderer render = transform.Find("Sprite").GetComponent<SpriteRenderer>();
-    //
-    //    render.color = new Color(render.color.r, render.color.g, render.color.b, 0.5f);
-    //
-    //    yield return new WaitForSeconds(0.05f);
-    //
-    //    render.color = new Color(render.color.r, render.color.g, render.color.b, 1f);
-    //
-    //    isFlashing = false;
-    //}
+    private IEnumerator BeWhite()
+    {
+        isFlashing = true;
+
+        SpriteRenderer render = transform.Find("Sprite").GetComponent<SpriteRenderer>();
+
+        float timer = 0f;
+        float time = 0.15f;
+        while(timer< time)
+        {
+            render.color = new Color(render.color.r, render.color.g, render.color.b, 1-timer/time);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        timer = 0f;
+
+        while (timer < time)
+        {
+            render.color = new Color(render.color.r, render.color.g, render.color.b, timer / time);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        isFlashing = false;
+    }
 
     public virtual void Die()
     {
-        if(isDead)
+        if (isDead)
         {
             return;
         }
@@ -96,12 +102,14 @@ public class Enemy : Character, IDamageable
         }
 
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
-        animator.SetTrigger("Die");
+
+        Animator.SetTrigger("Die");
         transform.Find("Collider").gameObject.SetActive(false);
         transform.Find("Trigger").gameObject.SetActive(false);
 
         SystemRepository.Instance.GetSystem<EnemySystem>().enemies.Remove(this);
 
         EventCenter.Instance.NotifyEvent(EventType.OnEnemyDie);
+        //CoroutinePool.Instance.StopAllCoroutine(this);
     }
 }

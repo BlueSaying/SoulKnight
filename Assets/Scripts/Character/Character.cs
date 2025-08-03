@@ -8,33 +8,30 @@ public class Character
     public Transform transform => gameObject.transform;
     public Rigidbody2D rb;
 
-    public GameObject bulletCheckBox { get; protected set; }
+    public GameObject trigger { get; protected set; }
 
-    private bool _isLeft;
-    public bool isLeft
+    public bool isLeft { get; private set; }
+    protected bool isLeftAuto = false;
+    public void ChangeLeft(bool isLeft, bool isAuto)
     {
-        get => _isLeft;
-        set
-        {
-            if (value)
-            {
-                transform.rotation = Quaternion.Euler(0, 180, 0);
-            }
-            else
-            {
-                transform.rotation = Quaternion.identity;
-            }
-            _isLeft = value;
+        if (isLeftAuto && !isAuto) return;
+        isLeftAuto = isAuto;
 
+        if (isLeft)
+        {
+            transform.rotation = Quaternion.Euler(0, 180, 0);
         }
+        else
+        {
+            transform.rotation = Quaternion.identity;
+        }
+        this.isLeft = isLeft;
     }
 
     private bool isInit;
     private bool isStart;
-    private bool isShouldRemove;
-    private bool isAlreadyRemove;
 
-    public Character(GameObject obj,CharacterModel model)
+    public Character(GameObject obj, CharacterModel model)
     {
         gameObject = obj;
         this.model = model;
@@ -50,7 +47,7 @@ public class Character
 
         try
         {
-            bulletCheckBox = UnityTools.Instance.GetTransformFromChildren(gameObject, "Trigger").gameObject;
+            trigger = UnityTools.Instance.GetTransformFromChildren(gameObject, "Trigger").gameObject;
         }
         catch (System.Exception)
         {
@@ -58,8 +55,6 @@ public class Character
         }
 
     }
-
-
 
     public void GameUpdate()
     {
@@ -83,13 +78,5 @@ public class Character
             isStart = true;
             OnCharacterStart();
         }
-    }
-    protected virtual void OnCharacterDieStart() { }
-
-    protected virtual void OnCharacterDieUpdate() { }
-
-    public void Remove()
-    {
-        isShouldRemove = true;
     }
 }

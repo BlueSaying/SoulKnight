@@ -39,11 +39,12 @@ public class Player : Character, IDamageable
             if (cloestEnemy == null)
             {
                 usingWeapon.RotateWeapon(SystemRepository.Instance.GetSystem<InputSystem>().GetMoveInput());
+                isLeftAuto = false;
             }
             else
             {
                 usingWeapon.RotateWeapon(cloestEnemy.transform.position - transform.position);
-                isLeft = cloestEnemy.transform.position.x < transform.position.x;
+                ChangeLeft( cloestEnemy.transform.position.x < transform.position.x,true);
             }
         }
 

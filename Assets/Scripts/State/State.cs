@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public abstract class State
+﻿public abstract class State
 {
     public StateMachine stateMachine { get; protected set; }
 
@@ -16,7 +14,7 @@ public abstract class State
 
     protected virtual void OnEnter() { }
 
-    public virtual void GameUpdate()
+    public void GameUpdate()
     {
         if (!isInit)
         {

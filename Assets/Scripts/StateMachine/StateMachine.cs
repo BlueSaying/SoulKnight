@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 public abstract class StateMachine
 {
@@ -13,7 +12,7 @@ public abstract class StateMachine
     }
 
     // NOTE:给定要切换的状态T
-    public void SwitchState<T>()
+    public virtual void SwitchState<T>()
     {
         // NOTE:如果不存在状态T，那么向stateDic中添加状态T
         if (!stateDic.ContainsKey(typeof(T)))
@@ -25,11 +24,6 @@ public abstract class StateMachine
         curState?.OnExit();
 
         curState = stateDic[typeof(T)];
-    }
-
-    public void StopCurrentState()
-    {
-        curState?.OnExit();
     }
 
     public void GameUpdate()

@@ -2,10 +2,10 @@
 
 public class Bullet : Item
 {
-    protected TriggerDetector triggerDetector;
-
     // 子弹飞行速度
     private const float speed = 30f;
+
+    protected TriggerDetector triggerDetector;
 
     public Bullet(GameObject gameObject) : base(gameObject) { }
 
@@ -27,21 +27,18 @@ public class Bullet : Item
         {
             OnHitObstacle();
         });
-        
+        transform.GetComponent<BoxCollider2D>().enabled = true;
+        // 延迟开启碰撞箱
+        //UnityTools.Instance.WaitThenCallFun(this, 0.05f, () =>
+        //{
+        //    
+        //});
     }
 
     protected override void OnExit()
     {
         base.OnExit();
         Object.Destroy(gameObject);
-    }
-
-    protected override void OnUpdate()
-    {
-        base.OnUpdate();
-
-        // TODO:后期改为BaseBullet.speed
-        //transform.position += rotation * Vector2.right * speed * Time.deltaTime;
     }
 
     protected virtual void OnHitObstacle() { Remove(); }

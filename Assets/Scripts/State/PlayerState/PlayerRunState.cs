@@ -17,12 +17,11 @@ public class PlayerRunState : PlayerState
         }
         if (moveDir.x > 0)
         {
-            player.isLeft = false;
+            player.ChangeLeft(false, false);
         }
         else if (moveDir.x < 0)
         {
-            player.isLeft = true;
+            player.ChangeLeft(true, false);
         }
     }
-
 }

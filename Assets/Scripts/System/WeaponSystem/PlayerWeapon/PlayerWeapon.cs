@@ -76,7 +76,7 @@ public abstract class PlayerWeapon : Weapon
     public void RotateWeapon(Vector2 weaponDir)
     {
         if (!canRotate) return;
-
+        
         float angle;
         if (character.isLeft)
         {
@@ -88,6 +88,5 @@ public abstract class PlayerWeapon : Weapon
         }
 
         rotOrigin.transform.localRotation = Quaternion.Euler(0, 0, angle);
-
     }
 }
