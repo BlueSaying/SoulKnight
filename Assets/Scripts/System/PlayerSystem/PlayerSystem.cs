@@ -35,13 +35,15 @@ public class PlayerSystem : BaseSystem
             case SceneName.MainMenuScene:
                 break;
             case SceneName.MiddleScene:
+                playerGameObject = null;
+                mainPlayer = null;
+                pets.Clear();
                 EventCenter.Instance.RegisterEvent(EventType.OnSelectSkinComplete, OnSelectSkinComplete);
                 break;
             case SceneName.BattleScene:
-
                 // 记录信息
                 PlayerType playerType = mainPlayer.model.staticAttr.playerType;
-                Vector2 playerPos = RoomCreator.birthPos * RoomCreator.UnitSize;
+                Vector2 playerPos = SystemRepository.Instance.GetSystem<MapSystem>().roomMatrix[2, 2].bounds.center + Vector3.one;
                 PlayerWeaponType usingWeaponType = default;
                 List<PlayerWeaponType> weaponTypes = new List<PlayerWeaponType>();
                 foreach (var weapon in mainPlayer.weapons)
@@ -58,7 +60,6 @@ public class PlayerSystem : BaseSystem
                 mainPlayer.rb.constraints = RigidbodyConstraints2D.FreezeRotation;
 
                 // 设置角色皮肤
-
                 playerGameObject.transform.Find("Sprite").GetComponent<Animator>().runtimeAnimatorController =
                     ResourcesLoader.Instance.LoadPlayerSkin(skinType.ToString());
 
@@ -71,7 +72,12 @@ public class PlayerSystem : BaseSystem
                         mainPlayer.AddWeapon(SystemRepository.Instance.GetSystem<WeaponSystem>().GetPlayerWeaponModel(weaponType));
                     }
                 }
-                mainPlayer.AddWeapon(SystemRepository.Instance.GetSystem<WeaponSystem>().GetPlayerWeaponModel(usingWeaponType));
+
+                // 如果玩家有武器，那么才可以设置武器
+                if (weaponTypes.Count > 0)
+                {
+                    mainPlayer.AddWeapon(SystemRepository.Instance.GetSystem<WeaponSystem>().GetPlayerWeaponModel(usingWeaponType));
+                }
 
                 // 设置相机
                 SystemRepository.Instance.GetSystem<CameraSystem>().SetCameraTarget(BattleScene.CameraType.FollowCamera, mainPlayer.transform);

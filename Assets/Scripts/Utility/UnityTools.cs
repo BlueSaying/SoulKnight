@@ -10,12 +10,12 @@ public class UnityTools : Singleton<UnityTools>
 {
     private UnityTools() { }
 
-    public int GetRandomInt(int min, int max)
+    public static int GetRandomInt(int min, int max)
     {
         return UnityEngine.Random.Range(min, max + 1);
     }
 
-    public float GetRandomFloat(float min, float max)
+    public static float GetRandomFloat(float min, float max)
     {
         return UnityEngine.Random.Range(min, max);
     }

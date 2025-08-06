@@ -37,11 +37,12 @@ public class UIMediator : Singleton<UIMediator>
     public Panel OpenPanel(string panelName)
     {
         Panel panel = null;
-
+        //Debug.Log(panelDictionary.Count);
         //检查是否已经打开
         if (panelDictionary.TryGetValue(panelName, out panel))
         {
             Debug.Log("界面已打开" + panelName);
+            Debug.Log(panelDictionary.Count);
             return null;
         }
 

@@ -21,7 +21,7 @@ public class GoblinGuardStateMachine : EnemyStateMachine
         {
             if (timer <= -1f)
             {
-                timer = UnityTools.Instance.GetRandomFloat(0.8f * IdleTime, 1.25f * IdleTime);
+                timer = UnityTools.GetRandomFloat(0.8f * IdleTime, 1.25f * IdleTime);
             }
             else if (timer <= 0f)
             {

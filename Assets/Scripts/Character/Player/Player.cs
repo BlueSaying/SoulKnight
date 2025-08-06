@@ -44,7 +44,7 @@ public class Player : Character, IDamageable
             else
             {
                 usingWeapon.RotateWeapon(cloestEnemy.transform.position - transform.position);
-                ChangeLeft( cloestEnemy.transform.position.x < transform.position.x,true);
+                ChangeLeft(cloestEnemy.transform.position.x < transform.position.x, true);
             }
         }
 

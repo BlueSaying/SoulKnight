@@ -38,6 +38,7 @@ namespace MiddleScene
                 // 解除冻结位置，即仅设置冻结旋转
                 UIMediator.Instance.OpenPanel(PanelName.BattlePanel.ToString());
                 UIMediator.Instance.ClosePanel(PanelName.SelectingSkinPanel.ToString());
+                UIMediator.Instance.ClosePanel(PanelName.GemPanel.ToString());
 
                 // 保存皮肤
                 SystemRepository.Instance.GetSystem<PlayerSystem>().SetMainPlayerSkin(playerSkins[curSkinIndex]);

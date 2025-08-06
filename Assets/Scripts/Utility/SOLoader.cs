@@ -1,36 +1,39 @@
 ﻿using System;
 using UnityEngine;
 
-public class SOLoader : Singleton<SOLoader>
+public static class SOLoader
 {
-    private SOLoader() { }
-
     // 数据
-    private string dataPath = "Datas/";
+    private static string dataPath = "Datas/";
 
-    // 读取SO数据
-    public T LoadScriptableObject<T>() where T : ScriptableObject
+    private static string playerDataPath = "PlayerData";
+    private static string playerSkinDataPath = "PlayerSkinData";
+    private static string playerWeaponDataPath = "PlayerWeaponData";
+    private static string enemyDataPath = "EnemyData";
+    private static string levelDataPath = "Level/LevelData_";
+
+    public static PlayerSO GetPlayerSO()
     {
-        Type type = typeof(T);
-        string path = dataPath;
+        return Resources.Load<PlayerSO>(dataPath + playerDataPath);
+    }
 
-        if (type == typeof(PlayerSO))
-        {
-            path += "PlayerData";
-        }
-        if (type == typeof(PlayerSkinSO))
-        {
-            path += "PlayerSkinData";
-        }
-        if (type == typeof(PlayerWeaponSO))
-        {
-            path += "PlayerWeaponData";
-        }
-        if (type == typeof(EnemySO))
-        {
-            path += "EnemyData";
-        }
+    public static PlayerSkinSO GetPlayerSkinSO()
+    {
+        return Resources.Load<PlayerSkinSO>(dataPath + playerSkinDataPath);
+    }
 
-        return Resources.Load<T>(path);
+    public static PlayerWeaponSO GetPlayerWeaponSO()
+    {
+        return Resources.Load<PlayerWeaponSO>(dataPath + playerWeaponDataPath);
+    }
+
+    public static EnemySO GetEnemySO()
+    {
+        return Resources.Load<EnemySO>(dataPath + enemyDataPath);
+    }
+
+    public static LevelSO GetLevelSO(LevelType levelType)
+    {
+        return Resources.Load<LevelSO>(dataPath + levelDataPath + levelType.ToString());
     }
 }

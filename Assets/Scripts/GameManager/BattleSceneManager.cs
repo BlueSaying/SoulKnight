@@ -8,10 +8,6 @@ namespace BattleScene
 
         void Awake()
         {
-            RoomCreator.Instance.CreateLevel(LevelType.Forest);
-
-            //UIMediator.Instance.OpenPanel(Pan)
-
             facade = new Facade();
         }
 

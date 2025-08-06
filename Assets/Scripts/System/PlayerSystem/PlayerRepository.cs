@@ -7,7 +7,7 @@ public class PlayerRepository
 
     public PlayerRepository()
     {
-        List<PlayerStaticAttr> playerStaticData = SOLoader.Instance.LoadScriptableObject<PlayerSO>().attrs;
+        List<PlayerStaticAttr> playerStaticData = SOLoader.GetPlayerSO().attrs;
 
         models = new List<PlayerModel>();
         for (int i = 0; i < playerStaticData.Count; i++)

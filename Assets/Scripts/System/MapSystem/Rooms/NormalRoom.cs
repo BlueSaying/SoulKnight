@@ -17,18 +17,19 @@ public class NormalRoom : Room
     // 每波敌人数量
     public List<int> enemyCountPerWave;
 
-    public NormalRoom(LevelType levelType, RoomType roomType, Vector2Int roomPos, GameObject gameObject) : base(levelType, roomType, roomPos, gameObject)
+    public NormalRoom(LevelType levelType, RoomType roomType, BoundsInt bounds, GameObject gameObject)
+        : base(levelType, roomType, bounds, gameObject)
     {
-        waveCount = UnityTools.Instance.GetRandomInt(2, 3);
+        waveCount = UnityTools.GetRandomInt(2, 3);
         enemyCountPerWave = new List<int>();
         for (int i = 0; i < waveCount; i++)
         {
-            enemyCountPerWave.Add(UnityTools.Instance.GetRandomInt(5, 10 - i));
+            enemyCountPerWave.Add(UnityTools.GetRandomInt(5, 10 - i));
         }
         curEnemyCount = 0;
         curWaveCount = 0;
 
-        gameObject.transform.Find("EnterRoomTrigger").GetComponent<TriggerDetector>().
+        UnityTools.Instance.GetComponentFromChildren<TriggerDetector>(gameObject, "EnterRoomTrigger").
             AddTriggerListener(TriggerEventType.OnTriggerEnter2D, "Player", OnPlayerEnter);
     }
 
@@ -54,7 +55,7 @@ public class NormalRoom : Room
         for (int i = 0; i < enemyCountPerWave[curWaveCount]; i++)
         {
             EnemyType enemyType = EnemyType.GoblinGuard;  // HACK
-            Vector2 pos = roomPos * RoomCreator.UnitSize + new Vector2(UnityTools.Instance.GetRandomFloat(-5, 5), UnityTools.Instance.GetRandomFloat(-5, 5));
+            Vector2 pos = (Vector2)bounds.center + new Vector2(UnityTools.GetRandomFloat(-6, 6), UnityTools.GetRandomFloat(-6, 6)) + Vector2.one;
             SystemRepository.Instance.GetSystem<EnemySystem>().AddEnemy(enemyType, pos, Quaternion.identity);
         }
         curEnemyCount = enemyCountPerWave[curWaveCount];
@@ -83,6 +84,8 @@ public class NormalRoom : Room
     {
         OpenDoor();
         EventCenter.Instance.RemoveEvent(EventType.OnEnemyDie, OnEnemyDie);
+
+        //BUGS
         //EventCenter.Instance.RemoveEvent(EventType.OnBattleFinish, OnBattleFinish);
     }
     #endregion

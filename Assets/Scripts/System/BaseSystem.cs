@@ -1,4 +1,6 @@
 ﻿
+using UnityEngine;
+
 public abstract class BaseSystem
 {
     private bool isInit;

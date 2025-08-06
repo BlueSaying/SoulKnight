@@ -50,6 +50,11 @@ public enum EventType
     /// 战斗结束
     /// </summary>
     OnBattleFinish,
+
+    /// <summary>
+    /// 更新战斗界面
+    /// </summary>
+    UpdateBattlePanel,
 }
 
 public class EventCenter : Singleton<EventCenter>

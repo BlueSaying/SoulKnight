@@ -7,13 +7,13 @@ public class PlayerSkinRepository
 
     public PlayerSkinRepository()
     {
-        List<PlayerSkinStaticAttr> playerSkinStaticData = SOLoader.Instance.LoadScriptableObject<PlayerSkinSO>().attrs;
+        List<PlayerSkinStaticAttr> playerSkinStaticData = SOLoader.GetPlayerSkinSO().attrs;
 
         models = new List<PlayerSkinModel>();
         for (int i = 0; i < playerSkinStaticData.Count; i++)
         {
             models.Add(new PlayerSkinModel(playerSkinStaticData[i]));
-            
+
         }
     }
 

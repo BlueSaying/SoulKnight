@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c339db225d5c614cb9923882df9a43d, type: 3}
+  m_Name: LevelData_Forest
+  m_EditorClassIdentifier: 
+  attrs:
+    birthRoomStaticAttr:
+      floorTile: {fileID: 11400000, guid: 0712a189b1c93dc48986b2793510da14, type: 2}
+      wallTile: {fileID: 11400000, guid: 70eb74a393e6e4548a129f6c91080fd7, type: 2}
+      doorTile: {fileID: 11400000, guid: f26548a58648200408ef7e551d2a9694, type: 2}
+      hasCharacter: 0
+    normalRoomStaticAttr:
+      floorTile: {fileID: 11400000, guid: 0712a189b1c93dc48986b2793510da14, type: 2}
+      wallTile: {fileID: 11400000, guid: 70eb74a393e6e4548a129f6c91080fd7, type: 2}
+      doorTile: {fileID: 11400000, guid: f26548a58648200408ef7e551d2a9694, type: 2}
+      enemyType: 0
+    transmissionRoomStaticAttr:
+      floorTile: {fileID: 11400000, guid: 0712a189b1c93dc48986b2793510da14, type: 2}
+      wallTile: {fileID: 11400000, guid: 70eb74a393e6e4548a129f6c91080fd7, type: 2}
+      doorTile: {fileID: 11400000, guid: f26548a58648200408ef7e551d2a9694, type: 2}
+    corridorStaticAttr:
+      floorTile: {fileID: 11400000, guid: 0712a189b1c93dc48986b2793510da14, type: 2}
+      wallTile: {fileID: 11400000, guid: 70eb74a393e6e4548a129f6c91080fd7, type: 2}

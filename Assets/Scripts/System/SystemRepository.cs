@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 public enum SystemType
 {
@@ -9,7 +8,7 @@ public enum SystemType
     EnemySystem,
     InputSystem,
     ItemSystem,
-    //MapSystem,
+    MapSystem,
     PlayerSystem,
     WeaponSystem,
 }

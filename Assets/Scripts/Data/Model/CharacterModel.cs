@@ -7,6 +7,8 @@
     {
         this.staticAttr = staticAttr;
         this.dynamicAttr = dynamicAttr;
+
+        // HACK
         Recover();
     }
 

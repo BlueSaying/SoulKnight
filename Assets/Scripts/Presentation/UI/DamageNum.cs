@@ -14,7 +14,7 @@ public class DamageNum : Item
         text.text = damage.ToString();
         text.color = color;
 
-        gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(UnityTools.Instance.GetRandomFloat(-1, 1), 2).normalized * 5;
+        gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(UnityTools.GetRandomFloat(-1, 1), 2).normalized * 5;
     }
 
     protected override void OnUpdate()

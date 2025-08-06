@@ -7,7 +7,7 @@ public class PlayerWeaponRepository
 
     public PlayerWeaponRepository()
     {
-        List<PlayerWeaponStaticAttr> playerWeaponStaticData = SOLoader.Instance.LoadScriptableObject<PlayerWeaponSO>().attrs;
+        List<PlayerWeaponStaticAttr> playerWeaponStaticData = SOLoader.GetPlayerWeaponSO().attrs;
 
         models = new List<PlayerWeaponModel>();
         for (int i = 0; i < playerWeaponStaticData.Count; i++)

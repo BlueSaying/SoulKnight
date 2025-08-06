@@ -7,7 +7,7 @@ public class EnemyRepository
 
     public EnemyRepository()
     {
-        List<EnemyStaticAttr> enemyStaticData = SOLoader.Instance.LoadScriptableObject<EnemySO>().attrs;
+        List<EnemyStaticAttr> enemyStaticData = SOLoader.GetEnemySO().attrs;
 
         models = new List<EnemyModel>();
         for (int i = 0; i < enemyStaticData.Count; i++)

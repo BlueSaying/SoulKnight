@@ -9,6 +9,7 @@ namespace BattleScene
 
             AddSystem<ItemSystem>();
             AddSystem<InputSystem>();
+            AddSystem<MapSystem>();
             AddSystem<CameraSystem>();
             AddSystem<PlayerSystem>();
             AddSystem<EnemySystem>();
@@ -20,10 +21,20 @@ namespace BattleScene
             base.OnEnter();
             systems[typeof(ItemSystem)].TurnOn();
             systems[typeof(InputSystem)].TurnOn();
-            systems[typeof(CameraSystem)].TurnOn();
-            systems[typeof(PlayerSystem)].TurnOn();
-            systems[typeof(EnemySystem)].TurnOn();
-            systems[typeof(WeaponSystem)].TurnOn();
+            systems[typeof(MapSystem)].TurnOn();
+
+            EventCenter.Instance.RegisterEvent(EventType.OnFinishRoomCreate, () =>
+            {
+                systems[typeof(CameraSystem)].TurnOn();
+                systems[typeof(PlayerSystem)].TurnOn();
+                systems[typeof(EnemySystem)].TurnOn();
+                systems[typeof(WeaponSystem)].TurnOn();
+            });
+
+            UnityTools.Instance.WaitThenCallFun(this, 0.1f, () =>
+            {
+                (systems[typeof(MapSystem)] as MapSystem).CreateLevel(LevelType.Forest);
+            });
         }
 
         #region 事件集
