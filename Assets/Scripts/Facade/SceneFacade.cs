@@ -20,8 +20,6 @@ public class SceneFacade :Singleton<SceneFacade>
 
     private void OnSceneSwitchComplete(AsyncOperation op)
     {
-        sceneModel.SetData();
-
         EventCenter.Instance.ClearNonPermanentEvents();
         EventCenter.Instance.NotifyEvent(EventType.OnSceneSwitchComplete);
     }

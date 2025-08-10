@@ -101,7 +101,7 @@ public class ResourcesLoader : Singleton<ResourcesLoader>
     {
         if (panelDic.ContainsKey(panelName)) return panelDic[panelName];
 
-        GameObject newPanel = Resources.LoadAll<GameObject>(panelPath).Where(x => x.name == panelName).ToArray()[0];
+        GameObject newPanel = Resources.LoadAll<GameObject>(panelPath + sceneName).Where(x => x.name == panelName).ToArray()[0];
         panelDic.Add(panelName, newPanel);
         return newPanel;
     }

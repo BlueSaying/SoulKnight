@@ -11,8 +11,10 @@ public class PetState : State
     protected Rigidbody2D rb;
     protected Animator animator;
 
-    protected Seeker seeker;
-    protected Path path;
+    //protected Seeker seeker;
+    //protected Path path;
+
+    protected PathFinder pathFinder;
 
     public PetState(StateMachine stateMachine) : base(stateMachine) { }
 
@@ -23,6 +25,8 @@ public class PetState : State
         gameObject = pet.gameObject;
         rb = transform.GetComponent<Rigidbody2D>();
         animator = transform.Find("Sprite").GetComponent<Animator>();
-        seeker = transform.GetComponent<Seeker>();
+        //seeker = transform.GetComponent<Seeker>();
+
+        pathFinder = new PathFinder();
     }
 }

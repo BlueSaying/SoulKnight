@@ -8,6 +8,7 @@ public class PetIdleState : PetState
     protected override void OnEnter()
     {
         base.OnEnter();
+        rb.velocity = Vector2.zero;
         animator.SetBool("isIdle", true);
     }
 

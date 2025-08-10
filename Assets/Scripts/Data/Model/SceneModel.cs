@@ -20,17 +20,6 @@ public enum SceneName
 
 public class SceneModel : AbstractModel
 {
-    public int curSceneIndex;
-    public SceneName curSceneName;
-
-    public SceneModel()
-    {
-        SetData();
-    }
-
-    public void SetData()
-    {
-        curSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        curSceneName = (SceneName)curSceneIndex;
-    }
+    public int curSceneIndex => SceneManager.GetActiveScene().buildIndex;
+    public SceneName curSceneName => (SceneName)curSceneIndex;
 }

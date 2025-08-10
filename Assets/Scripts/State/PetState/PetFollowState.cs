@@ -1,10 +1,13 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PetFollowState : PetState
 {
     private const float minDistance = 1f;
     private int curPathIndex;
+
+    private List<Vector2> path;
 
     public PetFollowState(StateMachine stateMachine) : base(stateMachine) { }
 
@@ -29,10 +32,10 @@ public class PetFollowState : PetState
 
     private void MoveToTarget()
     {
-        if (path == null || curPathIndex >= path.vectorPath.Count) return;
+        if (path == null || curPathIndex >= path.Count) return;
 
-        Vector2 dir = (path.vectorPath[curPathIndex] - transform.position).normalized;
-
+        Vector2 dir = (path[curPathIndex] - (Vector2)transform.position).normalized;
+        Debug.Log(((Vector2)transform.position).ToString() + path[curPathIndex].ToString());
         if (dir.x > 0)
         {
             pet.ChangeLeft(false, false);
@@ -43,9 +46,10 @@ public class PetFollowState : PetState
         }
 
         float speed = 5f;//pet.staticAttr.speed;
-        transform.position += (Vector3)dir * speed * Time.deltaTime;
+        rb.velocity = dir * speed;
+        //transform.position +=  * Time.deltaTime;
 
-        if (Vector2.Distance(transform.position, path.vectorPath[curPathIndex]) < minDistance)
+        if (Vector2.Distance(transform.position, path[curPathIndex]) < minDistance)
         {
             curPathIndex++;
         }
@@ -55,14 +59,8 @@ public class PetFollowState : PetState
     {
         while (true)
         {
-            if (seeker.IsDone())
-            {
-                seeker.StartPath(transform.position, pet.owner.transform.position, (p) =>
-                {
-                    path = p;
-                    curPathIndex = 1;
-                });
-            }
+            path = pathFinder.FindPath(transform.position, pet.owner.transform.position);
+            curPathIndex = 0;
 
             yield return new WaitForSeconds(0.5f);
         }
