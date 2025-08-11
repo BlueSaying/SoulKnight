@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class EnemyState : State
 {
-    public new EnemyStateMachine stateMachine { get => base.stateMachine as EnemyStateMachine; set => base.stateMachine = value; }
+    public new EnemyFSM fsm { get => base.fsm as EnemyFSM; set => base.fsm = value; }
 
     protected Player targetPlayer;
     protected Enemy enemy;
@@ -12,11 +12,11 @@ public class EnemyState : State
     protected Rigidbody2D rb;
     protected Animator animator;
 
-    public EnemyState(StateMachine stateMachine) : base(stateMachine) { }
+    public EnemyState(FSM fsm) : base(fsm) { }
     protected override void OnInit()
     {
         base.OnInit();
-        enemy = stateMachine.enemy;
+        enemy = fsm.enemy;
         gameObject = enemy.gameObject;
         rb = transform.GetComponent<Rigidbody2D>();
         animator = UnityTools.Instance.GetComponentFromChildren<Animator>(gameObject, "Sprite");

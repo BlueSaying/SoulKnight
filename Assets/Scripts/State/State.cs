@@ -1,13 +1,13 @@
 ﻿public abstract class State
 {
-    public StateMachine stateMachine { get; protected set; }
+    public FSM fsm { get; protected set; }
 
     private bool isInit;
     private bool isEnter;
 
-    public State(StateMachine stateMachine)
+    public State(FSM fsm)
     {
-        this.stateMachine = stateMachine;
+        this.fsm = fsm;
     }
 
     protected virtual void OnInit() { }

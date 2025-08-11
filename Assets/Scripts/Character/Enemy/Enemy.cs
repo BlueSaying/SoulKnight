@@ -29,7 +29,7 @@ public class Enemy : Character, IDamageable
         }
     }
 
-    protected EnemyStateMachine stateMachine;
+    protected EnemyFSM stateMachine;
 
     private bool isDead = false;
 
@@ -44,6 +44,7 @@ public class Enemy : Character, IDamageable
         stateMachine?.GameUpdate();
     }
 
+    // call it when get hurt
     public virtual void TakeDamage(int damage, Color damageColor)
     {
         // HACK
@@ -57,12 +58,14 @@ public class Enemy : Character, IDamageable
         {
             Die();
         }
+
         if (!isFlashing)
         {
             CoroutinePool.Instance.StartCoroutine(this, BeWhite());
         }
     }
 
+    // be white when get hurt
     private IEnumerator BeWhite()
     {
         isFlashing = true;
@@ -71,9 +74,9 @@ public class Enemy : Character, IDamageable
 
         float timer = 0f;
         float time = 0.15f;
-        while(timer< time)
+        while (timer < time)
         {
-            render.color = new Color(render.color.r, render.color.g, render.color.b, 1-timer/time);
+            render.color = new Color(render.color.r, render.color.g, render.color.b, 1 - timer / time);
             timer += Time.deltaTime;
             yield return null;
         }
@@ -111,5 +114,13 @@ public class Enemy : Character, IDamageable
 
         EventCenter.Instance.NotifyEvent(EventType.OnEnemyDie);
         //CoroutinePool.Instance.StopAllCoroutine(this);
+    }
+
+    public float DistanceToTargetPlayer()
+    {
+        Player targetPlayer = SystemRepository.Instance.GetSystem<PlayerSystem>().mainPlayer;
+        float x = (targetPlayer.transform.position.x - transform.position.x);
+        float y = (targetPlayer.transform.position.y - transform.position.y);
+        return x * x + y * y;
     }
 }

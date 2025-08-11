@@ -8,6 +8,6 @@ public class LittleCool : Pet
     protected override void OnCharacterStart()
     {
         base.OnCharacterStart();
-        stateMachine = new LittleCoolStateMachine(this);
+        stateMachine = new LittleCoolFSM(this);
     }
 }

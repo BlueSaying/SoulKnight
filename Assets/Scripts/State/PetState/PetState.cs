@@ -1,9 +1,8 @@
-﻿using Pathfinding;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PetState : State
 {
-    public new PetStateMachine stateMachine { get => base.stateMachine as PetStateMachine; set => base.stateMachine = value; }
+    public new PetFSM fsm { get => base.fsm as PetFSM; set => base.fsm = value; }
     protected Pet pet;
 
     protected GameObject gameObject;
@@ -11,21 +10,17 @@ public class PetState : State
     protected Rigidbody2D rb;
     protected Animator animator;
 
-    //protected Seeker seeker;
-    //protected Path path;
-
     protected PathFinder pathFinder;
 
-    public PetState(StateMachine stateMachine) : base(stateMachine) { }
+    public PetState(FSM fsm) : base(fsm) { }
 
     protected override void OnInit()
     {
         base.OnInit();
-        pet = stateMachine.pet;
+        pet = fsm.pet;
         gameObject = pet.gameObject;
         rb = transform.GetComponent<Rigidbody2D>();
         animator = transform.Find("Sprite").GetComponent<Animator>();
-        //seeker = transform.GetComponent<Seeker>();
 
         pathFinder = new PathFinder();
     }

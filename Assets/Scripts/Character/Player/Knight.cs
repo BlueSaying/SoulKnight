@@ -7,6 +7,6 @@ public class Knight : Player
     protected override void OnCharacterStart()
     {
         base.OnCharacterStart();
-        stateMachine = new KnightStateMachine(this);
+        stateMachine = new KnightFSM(this);
     }
 }

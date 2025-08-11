@@ -64,6 +64,6 @@ public class NavigationMeshBuilder : MonoBehaviour
             }
         }
 
-        Debug.Log("Navigation Mesh Finished!");
+        //Debug.Log("Navigation Mesh Finished!");
     }
 }

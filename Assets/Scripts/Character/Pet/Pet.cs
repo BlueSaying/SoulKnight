@@ -4,7 +4,7 @@ public class Pet : Character
 {
     public new PetModel model { get => base.model as PetModel; set => base.model = value; }
 
-    protected PetStateMachine stateMachine;
+    protected PetFSM stateMachine;
     public Player owner { get; protected set; }
 
     public Pet(GameObject obj, PetModel model, Player owner) : base(obj, model)
@@ -21,6 +21,6 @@ public class Pet : Character
     protected override void OnCharacterUpdate()
     {
         base.OnCharacterUpdate();
-        stateMachine.GameUpdate();
+        stateMachine?.GameUpdate();
     }
 }

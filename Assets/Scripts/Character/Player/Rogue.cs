@@ -7,7 +7,7 @@ public class Rogue : Player
     protected override void OnCharacterStart()
     {
         base.OnCharacterStart();
-        stateMachine = new RogueStateMachine(this);
+        stateMachine = new RogueFSM(this);
     }
 
 }

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 
-public abstract class StateMachine
+public abstract class FSM
 {
     private Dictionary<Type, State> stateDic;
     protected State curState;
 
-    public StateMachine()
+    public FSM()
     {
         stateDic = new Dictionary<Type, State>();
     }

@@ -2,14 +2,47 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PetFollowState : PetState
+public abstract class LittleCoolState : PetState
 {
+    public LittleCoolState(FSM fsm) : base(fsm) { }
+}
+
+public class LittleCoolIdleState : LittleCoolState
+{
+    public LittleCoolIdleState(FSM fsm) : base(fsm) { }
+
+    protected override void OnEnter()
+    {
+        base.OnEnter();
+        rb.velocity = Vector2.zero;
+        animator.SetBool("isIdle", true);
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+        animator.SetBool("isIdle", false);
+    }
+
+    protected override void OnUpdate()
+    {
+        base.OnUpdate();
+
+        if (pet.DistanceToOwner() > 5f)
+        {
+            fsm.SwitchState<LittleCoolFollowState>();
+        }
+    }
+}
+
+public class LittleCoolFollowState : LittleCoolState
+{
+    public LittleCoolFollowState(FSM fsm) : base(fsm) { }
+
     private const float minDistance = 1f;
     private int curPathIndex;
 
     private List<Vector2> path;
-
-    public PetFollowState(StateMachine stateMachine) : base(stateMachine) { }
 
     protected override void OnEnter()
     {
@@ -28,6 +61,11 @@ public class PetFollowState : PetState
     {
         base.OnUpdate();
         MoveToTarget();
+
+        if (pet.DistanceToOwner() < 2f)
+        {
+            fsm.SwitchState<LittleCoolIdleState>();
+        }
     }
 
     private void MoveToTarget()
@@ -35,7 +73,6 @@ public class PetFollowState : PetState
         if (path == null || curPathIndex >= path.Count) return;
 
         Vector2 dir = (path[curPathIndex] - (Vector2)transform.position).normalized;
-        Debug.Log(((Vector2)transform.position).ToString() + path[curPathIndex].ToString());
         if (dir.x > 0)
         {
             pet.ChangeLeft(false, false);
@@ -47,7 +84,6 @@ public class PetFollowState : PetState
 
         float speed = 5f;//pet.staticAttr.speed;
         rb.velocity = dir * speed;
-        //transform.position +=  * Time.deltaTime;
 
         if (Vector2.Distance(transform.position, path[curPathIndex]) < minDistance)
         {

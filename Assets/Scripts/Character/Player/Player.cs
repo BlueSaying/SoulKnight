@@ -5,7 +5,7 @@ public class Player : Character, IDamageable
 {
     public new PlayerModel model { get => base.model as PlayerModel; set => base.model = value; }
 
-    protected PlayerStateMachine stateMachine;
+    protected PlayerFSM stateMachine;
 
     public List<PlayerWeapon> weapons;
     protected PlayerWeapon usingWeapon;
@@ -22,13 +22,13 @@ public class Player : Character, IDamageable
         base.OnInit();
 
         // NOTE:角色初始化时，添加阿凉为宠物
-        SystemRepository.Instance.GetSystem<PlayerSystem>().AddPlayerPet(PetType.LittleCool, this);
+        //SystemRepository.Instance.GetSystem<PlayerSystem>().AddPlayerPet(PetType.LittleCool, this);
     }
 
     protected override void OnCharacterUpdate()
     {
         base.OnCharacterUpdate();
-        stateMachine.GameUpdate();
+        stateMachine?.GameUpdate();
 
         if (usingWeapon != null)
         {
