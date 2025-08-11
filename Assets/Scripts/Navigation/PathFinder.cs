@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -31,7 +32,7 @@ public class PathFinder
     private int height;
     private NavigationNode[,] nodes;
 
-    private List<NavigationNode> openList = new List<NavigationNode>();
+    private BinaryHeap openList = new BinaryHeap();
     private List<NavigationNode> closeList = new List<NavigationNode>();
 
     public PathFinder()
@@ -61,24 +62,24 @@ public class PathFinder
     {
         Vector2Int start = NavigationMeshBuilder.WorldToMeshPoint(startPos);
         Vector2Int end = NavigationMeshBuilder.WorldToMeshPoint(endPos);
-        Debug.Log(start + end);
+
         if (IsOutOfMap(start) || IsOutOfMap(end)) return null;
         if (nodes[start.x, start.y].nodeType == NodeType.Obstacle || nodes[end.x, end.y].nodeType == NodeType.Obstacle) return null;
 
-        openList = new List<NavigationNode>();
+        openList = new BinaryHeap();
         closeList = new List<NavigationNode>();
 
         nodes[start.x, start.y].parent = null;
         nodes[start.x, start.y].g = 0;
         nodes[start.x, start.y].h = ManhattanDistance(start, end);
-        openList.Add(nodes[start.x, start.y]);
+        openList.Push(nodes[start.x, start.y]);
 
         while (openList.Count > 0)
         {
-            openList.Sort((a, b) => { return a.f.CompareTo(b.f); });
-            Vector2Int curPos = openList[0].nodePos;
-            closeList.Add(openList[0]);
-            openList.RemoveAt(0);
+            //openList.Sort((a, b) => { return a.f.CompareTo(b.f); });
+            Vector2Int curPos = openList.GetTop().nodePos;
+            closeList.Add(openList.GetTop());
+            openList.Pop();
 
             // judge if we have found the end
             if (curPos == end)
@@ -116,7 +117,7 @@ public class PathFinder
                     nodes[newPos.x, newPos.y].parent = nodes[curPos.x, curPos.y];
                     nodes[newPos.x, newPos.y].g = nodes[curPos.x, curPos.y].g + EuclidDistance(newPos, curPos);
                     nodes[newPos.x, newPos.y].h = ManhattanDistance(newPos, end);
-                    openList.Add(nodes[newPos.x, newPos.y]);
+                    openList.Push(nodes[newPos.x, newPos.y]);
                 }
             }
         }

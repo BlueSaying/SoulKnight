@@ -22,7 +22,7 @@ public class Player : Character, IDamageable
         base.OnInit();
 
         // NOTE:角色初始化时，添加阿凉为宠物
-        //SystemRepository.Instance.GetSystem<PlayerSystem>().AddPlayerPet(PetType.LittleCool, this);
+        SystemRepository.Instance.GetSystem<PlayerSystem>().AddPlayerPet(PetType.LittleCool, this);
     }
 
     protected override void OnCharacterUpdate()
