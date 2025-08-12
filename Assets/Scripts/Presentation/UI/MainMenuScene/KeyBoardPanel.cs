@@ -6,6 +6,7 @@ namespace MainMenuScene
 {
     public class KeyBoardPanel : Panel
     {
+        // 当前选中的按键事件
         private Transform selectingKeyDescription = null;
 
         private Dictionary<KeyInputType, KeyCode> inputDic = SystemRepository.Instance.GetSystem<InputSystem>().inputDic;
@@ -32,13 +33,20 @@ namespace MainMenuScene
                 InactivateAllKeys();
                 ActivateKey();
                 RenderLine();
+
+                // 取消所有红框
+                foreach (var keyInputType in inputDic.Keys)
+                {
+                    transform.Find("KeyDescriptions").Find(keyInputType.ToString()).Find("SelectBounds").gameObject.SetActive(false);
+                }
             });
 
-            // 给所有keyDescription添加事件
+            // 给所有Keys添加事件
             foreach (Transform trans in transform.Find("Keys"))
             {
                 trans.Find("Inactive").GetComponent<Button>().onClick.AddListener(() =>
                 {
+                    // 如果当前没有选中keyDescription便直接返回
                     if (selectingKeyDescription == null) return;
 
                     ActivateKey(trans);
@@ -54,7 +62,7 @@ namespace MainMenuScene
 
             ActivateKey();
 
-            // 遍历所有输入
+            // 给所有KeyDescriptions添加事件
             foreach (var keyInputType in inputDic.Keys)
             {
                 Transform keyDescription = transform.Find("KeyDescriptions").Find(keyInputType.ToString());
@@ -63,6 +71,14 @@ namespace MainMenuScene
                 keyDescription.GetComponent<Button>().onClick.AddListener(() =>
                 {
                     selectingKeyDescription = keyDescription;
+
+                    // 先取消所有红框,再勾选选定红框
+                    // NOTE:下方的两个keyInputType不同
+                    foreach (var keyInputType in inputDic.Keys)
+                    {
+                        transform.Find("KeyDescriptions").Find(keyInputType.ToString()).Find("SelectBounds").gameObject.SetActive(false);
+                    }
+                    transform.Find("KeyDescriptions").Find(keyInputType.ToString()).Find("SelectBounds").gameObject.SetActive(true);
                 });
             }
 
@@ -87,8 +103,8 @@ namespace MainMenuScene
                 Vector2 mediatorPoint;
                 if (Mathf.Abs(startPoint.x - endPoint.x) > Mathf.Abs(startPoint.y - endPoint.y)) mediatorPoint = new Vector2(endPoint.x, startPoint.y);
                 else mediatorPoint = new Vector2(startPoint.x, endPoint.y);
-                lineRenderer.RendererLine(startPoint, mediatorPoint, new Color(0.4039216f, 0.7215686f, 0.7215686f, 0.75f));
-                lineRenderer.RendererLine(mediatorPoint, endPoint, new Color(0.4039216f, 0.7215686f, 0.7215686f, 0.75f));
+                lineRenderer.RendererLine(startPoint, mediatorPoint, new Color(0.2498911f, 0.5974842f, 0.5974842f, 0.7f), 5f);
+                lineRenderer.RendererLine(mediatorPoint, endPoint, new Color(0.2498911f, 0.5974842f, 0.5974842f, 0.7f), 5f);
             }
         }
 
@@ -110,7 +126,7 @@ namespace MainMenuScene
 
         private void InactivateAllKeys()
         {
-            foreach(Transform key in transform.Find("Keys"))
+            foreach (Transform key in transform.Find("Keys"))
             {
                 InactivateKey(key);
             }

@@ -35,6 +35,7 @@ public class Player : Character, IDamageable
             usingWeapon.GameUpdate();
             usingWeapon.ControlWeapon(SystemRepository.Instance.GetSystem<InputSystem>().GetKeyInput(KeyInputType.Shoot));
 
+            // 自动瞄准最近敌人
             Enemy cloestEnemy = AutoAimingEnemy();
             if (cloestEnemy == null)
             {
@@ -68,12 +69,12 @@ public class Player : Character, IDamageable
     }
 
     // 切换下一把武器
-    public void SwitchWeapon()
+    private void SwitchWeapon()
     {
         // 只有武器数量大于一才可以切换武器
         if (weapons.Count <= 1) return;
 
-        int usingWeaponIndex = 0;
+        int index = 0;
 
         foreach (PlayerWeapon weapon in weapons)
         {
@@ -81,10 +82,10 @@ public class Player : Character, IDamageable
             {
                 break;
             }
-            usingWeaponIndex++;
+            index++;
         }
 
-        PlayerWeapon newWeapon = weapons[(usingWeaponIndex + 1) % weapons.Count];
+        PlayerWeapon newWeapon = weapons[(index + 1) % weapons.Count];
 
         UnequipWeapon();
         EquipWeapon(newWeapon);

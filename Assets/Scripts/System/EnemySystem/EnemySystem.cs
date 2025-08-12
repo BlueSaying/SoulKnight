@@ -30,7 +30,7 @@ public class EnemySystem : BaseSystem
     protected override void OnExit()
     {
         base.OnExit();
-        
+
         enemies.Clear();
     }
 
@@ -40,7 +40,7 @@ public class EnemySystem : BaseSystem
     }
 
     // 在场景中添加一个敌人
-    public void AddEnemy(EnemyType enemyType, Vector2 position, Quaternion quaternion)
+    public void AddEnemy(EnemyType enemyType, Vector2 position, Quaternion quaternion, PlayerWeaponModel model)
     {
         ItemFactory.Instance.CreateEffect(EffectType.SummonEffect, position, quaternion);
 
@@ -49,10 +49,8 @@ public class EnemySystem : BaseSystem
             ItemFactory.Instance.CreateEffect(EffectType.AppearEffect, position, quaternion);
             UnityTools.Instance.WaitThenCallFun(this, 0.416667f, () =>
             {
-                enemies.Add(EnemyFactory.Instance.CreateEnemy(enemyRepository.GetEnemyModel(enemyType), position, quaternion));
+                enemies.Add(EnemyFactory.Instance.CreateEnemy(enemyRepository.GetEnemyModel(enemyType), position, quaternion, model));
             });
         });
-
-        
     }
 }

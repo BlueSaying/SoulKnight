@@ -29,6 +29,8 @@ public class Enemy : Character, IDamageable
         }
     }
 
+    public PlayerWeapon weapon { get; protected set; }
+
     protected EnemyFSM stateMachine;
 
     private bool isDead = false;
@@ -122,5 +124,13 @@ public class Enemy : Character, IDamageable
         float x = (targetPlayer.transform.position.x - transform.position.x);
         float y = (targetPlayer.transform.position.y - transform.position.y);
         return x * x + y * y;
+    }
+
+    // Add a weapon to this enemy
+    public void AddWeapon(PlayerWeaponModel model)
+    {
+        if (model == null) return;
+
+        weapon = WeaponFactory.Instance.GetPlayerWeapon(model, this);
     }
 }

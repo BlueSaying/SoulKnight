@@ -25,6 +25,9 @@ public class WeaponFactory : Singleton<WeaponFactory>
             case PlayerWeaponType.Ak47:
                 weapon = new Ak47(obj, character, model);
                 break;
+            case PlayerWeaponType.Pike:
+                weapon = new Pike(obj, character, model);
+                break;
         }
         
         return weapon;

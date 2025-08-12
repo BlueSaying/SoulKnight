@@ -29,13 +29,14 @@ public enum PlayerWeaponType
     WoodenCross,
     BlueFireGatling,
     RainbowGatling,
+    Pike,
 }
 
 public abstract class PlayerWeapon : Weapon
 {
     public new PlayerWeaponModel model { get => base.model as PlayerWeaponModel; set => base.model = value; }
 
-    public Player player { get => base.character as Player; set => base.character = value; }
+    //public Player player { get => base.character as Player; set => base.character = value; }
 
     protected GameObject rotOrigin;
 
@@ -48,6 +49,7 @@ public abstract class PlayerWeapon : Weapon
     protected override void OnInit()
     {
         base.OnInit();
+        
         rotOrigin = UnityTools.Instance.GetTransformFromChildren(gameObject, "RotOrigin").gameObject;
     }
 

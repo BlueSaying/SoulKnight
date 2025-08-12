@@ -6,6 +6,21 @@ public class GoblinGuardState : EnemyState
     protected const float IdleTime = 2f;
 
     public GoblinGuardState(FSM fsm) : base(fsm) { }
+
+    protected override void OnUpdate()
+    {
+        base.OnUpdate();
+
+        Vector2 dir = targetPlayer.transform.position - enemy.transform.position;
+        if (dir.x > 0f)
+        {
+            enemy.ChangeLeft(false, false);
+        }
+        else
+        {
+            enemy.ChangeLeft(true, false);
+        }
+    }
 }
 
 public class GoblinGuardIdleState : GoblinGuardState
@@ -17,7 +32,6 @@ public class GoblinGuardIdleState : GoblinGuardState
     protected override void OnEnter()
     {
         base.OnEnter();
-        rb.velocity = Vector2.zero;
         timer = -1f;
     }
 
@@ -53,7 +67,8 @@ public class GoblinGuardRunState : GoblinGuardState
     protected override void OnUpdate()
     {
         base.OnUpdate();
-        rb.velocity = (targetPlayer.transform.position - enemy.transform.position).normalized * enemy.model.staticAttr.speed;
+        Vector2 dir = (targetPlayer.transform.position - enemy.transform.position).normalized;
+        rb.velocity = dir * enemy.model.staticAttr.speed;
 
         if (enemy.DistanceToTargetPlayer() < AttackDistance * AttackDistance)
         {
@@ -64,6 +79,7 @@ public class GoblinGuardRunState : GoblinGuardState
     public override void OnExit()
     {
         base.OnExit();
+        rb.velocity = Vector2.zero;
         animator.SetBool("isRun", false);
     }
 }
@@ -72,26 +88,31 @@ public class GoblinGuardAttackState : GoblinGuardState
 {
     public GoblinGuardAttackState(FSM fsm) : base(fsm) { }
 
-    protected override void OnEnter()
-    {
-        base.OnEnter();
-        animator.SetBool("isAttack", true);
-    }
-
     protected override void OnUpdate()
     {
         base.OnUpdate();
-        Debug.Log("Attack");
 
         if (enemy.DistanceToTargetPlayer() > AttackDistance * AttackDistance * 2.25f)
         {
             fsm.SwitchState<GoblinGuardIdleState>();
+        }
+
+        Vector2 dir = (targetPlayer.transform.position - enemy.transform.position).normalized;
+        if (enemy.weapon != null)
+        {
+            enemy.weapon.GameUpdate();
+            enemy.weapon.ControlWeapon(true);
+            enemy.weapon.RotateWeapon(targetPlayer.transform.position - enemy.transform.position);
         }
     }
 
     public override void OnExit()
     {
         base.OnExit();
-        animator.SetBool("isAttack", false);
+
+        if (enemy.weapon != null)
+        {
+            enemy.weapon.RotateWeapon(Vector2.right);
+        }
     }
 }

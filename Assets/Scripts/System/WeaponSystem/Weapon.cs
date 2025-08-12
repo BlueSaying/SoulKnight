@@ -11,6 +11,7 @@ public enum WeaponCategory
     ThrownWeapon,
     Bow,
     CloseCombat,
+    Melee
 }
 
 public enum QualityType
@@ -33,6 +34,8 @@ public abstract class Weapon
     public Transform transform => gameObject.transform;
     protected Character character; // 代表哪个角色拥有该武器
     protected GameObject firePoint;
+
+    protected Animator animator;
 
     // 武器能否旋转
     protected bool canRotate;
@@ -63,6 +66,7 @@ public abstract class Weapon
     protected virtual void OnInit()
     {
         firePoint = UnityTools.Instance.GetTransformFromChildren(gameObject, "FirePoint").gameObject;
+        animator = gameObject.GetComponent<Animator>();
     }
 
     // 每次切换至此武器时调用一次
