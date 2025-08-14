@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Bullet : Item
+public abstract class Bullet : Item
 {
     // 子弹飞行速度
     private const float speed = 30f;
@@ -8,12 +8,10 @@ public class Bullet : Item
     protected TriggerDetector triggerDetector;
 
     public Bullet(GameObject gameObject) : base(gameObject) { }
-
+    
     protected override void OnInit()
     {
         base.OnInit();
-
-        transform.GetComponent<Rigidbody2D>().velocity = rotation * Vector2.right * speed;
         try
         {
             triggerDetector = gameObject.GetComponent<TriggerDetector>();
@@ -27,18 +25,14 @@ public class Bullet : Item
         {
             OnHitObstacle();
         });
-        transform.GetComponent<BoxCollider2D>().enabled = true;
-        // 延迟开启碰撞箱
-        //UnityTools.Instance.WaitThenCallFun(this, 0.05f, () =>
-        //{
-        //    
-        //});
     }
 
-    protected override void OnExit()
+    public override void OnEnter()
     {
-        base.OnExit();
-        Object.Destroy(gameObject);
+        base.OnEnter();
+        transform.GetComponent<Rigidbody2D>().velocity = rotation * Vector2.right * speed;
+        transform.GetComponent<BoxCollider2D>().enabled = true;
+        //Debug.Log(ToString());
     }
 
     protected virtual void OnHitObstacle() { Remove(); }

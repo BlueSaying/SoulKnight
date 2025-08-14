@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class SummonEffect : BaseEffect
+public class SummonEffect : Effect
 {
     public SummonEffect(GameObject gameObject) : base(gameObject)
     {

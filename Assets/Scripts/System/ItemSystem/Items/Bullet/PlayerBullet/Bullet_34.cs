@@ -7,8 +7,7 @@ public class Bullet_34 : PlayerBullet
     protected override void OnHitObstacle()
     {
         base.OnHitObstacle();
-
-        BoomEffect effect = ItemFactory.Instance.CreateEffect(EffectType.BoomEffect, position, Quaternion.identity) as BoomEffect;
+        ItemFactory.Instance.CreateEffect(EffectType.BoomEffect, position, Quaternion.identity);
     }
 
     protected override void OnHitEnemy(Enemy enemy)
@@ -18,6 +17,12 @@ public class Bullet_34 : PlayerBullet
         // HACK
         enemy.TakeDamage(5, Color.red);
 
-        BoomEffect effect = ItemFactory.Instance.CreateEffect(EffectType.BoomEffect, position, Quaternion.identity) as BoomEffect;
+        ItemFactory.Instance.CreateEffect(EffectType.BoomEffect, position, Quaternion.identity);
+    }
+
+    public override void Reset()
+    {
+        base.Reset();
+        gameObject.transform.position = SystemRepository.Instance.GetSystem<PlayerSystem>().mainPlayer.usingWeapon.firePoint.transform.position;
     }
 }

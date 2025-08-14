@@ -33,7 +33,7 @@ public abstract class Weapon
     public GameObject gameObject { get; protected set; }
     public Transform transform => gameObject.transform;
     protected Character character; // 代表哪个角色拥有该武器
-    protected GameObject firePoint;
+    public GameObject firePoint {  get; protected set; }
 
     protected Animator animator;
 

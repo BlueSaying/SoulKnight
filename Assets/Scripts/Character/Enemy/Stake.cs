@@ -6,9 +6,9 @@ public class Stake : Enemy
 
     public override void TakeDamage(int damage, Color damageColor)
     {
-        Transform damageNumPoint = transform.Find("DamageNumPoint");
-
-        DamageNum damageNum = ItemFactory.Instance.CreateDamageNum("DamageNum", damageNumPoint, damage, damageColor);
+        //Transform damageNumPoint = transform.Find("DamageNumPoint");
+        //
+        //DamageNum damageNum = ItemFactory.Instance.CreateDamageNum("DamageNum", damageNumPoint, damage, damageColor);
 
         Animator.SetTrigger("BeAttack");
     }

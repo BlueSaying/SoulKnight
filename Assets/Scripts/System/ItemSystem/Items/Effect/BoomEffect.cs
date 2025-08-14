@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class BoomEffect : BaseEffect
+public class BoomEffect : Effect
 {
     public BoomEffect(GameObject gameObject) : base(gameObject)
     {

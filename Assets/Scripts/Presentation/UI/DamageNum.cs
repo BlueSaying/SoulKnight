@@ -32,10 +32,15 @@ public class DamageNum : Item
         }
     }
 
-    protected override void OnExit()
+    public virtual void Reset(Transform parent, int damage, Color color)
     {
-        base.OnExit();
+        base.Reset();
+        timer = 0f;
+        transform.SetParent(parent, false);
+        text.text = damage.ToString();
+        text.color = color;
+        transform.position = Vector2.zero;
 
-        Object.Destroy(gameObject);
+        gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(UnityTools.GetRandomFloat(-1, 1), 2).normalized * 5;
     }
 }

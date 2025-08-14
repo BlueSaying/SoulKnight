@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Item
+public abstract class Item
 {
     public GameObject gameObject { get; protected set; }
     public Transform transform => gameObject.transform;
@@ -9,8 +9,9 @@ public class Item
 
     private bool isInit;
     private bool isEnter;
-    private bool beingRemoved;
-    public bool hasRemoved { get; protected set; }
+    //private bool beingRemoved;
+    //public bool hasRemoved { get; protected set; }
+    public bool isRemoved { get; protected set; }
 
     public Item(GameObject gameObject)
     {
@@ -28,22 +29,30 @@ public class Item
             OnInit();
         }
 
-        if (beingRemoved && !hasRemoved)
+        //if (beingRemoved && !hasRemoved)
+        //{
+        //    OnExit();
+        //    hasRemoved = true;
+        //}
+        //
+        //if (!hasRemoved)
+        //{
+        //    OnUpdate();
+        //}
+
+        if(isRemoved)
         {
             OnExit();
-            hasRemoved = true;
         }
-
-        OnUpdate();
+        else
+        {
+            OnUpdate();
+        }
     }
 
     protected virtual void OnInit() { }
 
-    public virtual void OnEnter()
-    {
-        beingRemoved = false;
-        hasRemoved = false;
-    }
+    public virtual void OnEnter() { }
 
     protected virtual void OnUpdate()
     {
@@ -58,12 +67,22 @@ public class Item
 
     public void Remove()
     {
-        beingRemoved = true;
+        isRemoved = true;
+        //beingRemoved = true;
     }
 
     // 将*this*托管到ItemController中
     public void ManagedToController()
     {
-        SystemRepository.Instance.GetSystem<ItemSystem>().AddItem(this);
+        SystemRepository.Instance.GetSystem<ItemSystem>().AddActiveItem(this);
+    }
+
+    public virtual void Reset()
+    {
+        isEnter = false;
+        isRemoved = false;
+        //hasRemoved = false;
+        //beingRemoved = false;
+        ManagedToController();
     }
 }

@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.UIElements;
 
 public enum PlayerBulletType
 {
@@ -30,37 +32,77 @@ public class ItemFactory : Singleton<ItemFactory>
 
     public PlayerBullet CreatePlayerBullet(PlayerBulletType playerBulletType, Vector3 position, Quaternion quaternion)
     {
-        GameObject obj = Object.Instantiate(ResourcesLoader.Instance.LoadBullet(playerBulletType.ToString()), position, quaternion);
+        ItemPool itemPool = SystemRepository.Instance.GetSystem<ItemSystem>().itemPool;
         PlayerBullet bullet = null;
 
         switch (playerBulletType)
         {
             case PlayerBulletType.Bullet_5:
-                bullet = new Bullet_5(obj);
+                bullet = itemPool.GetItem<Bullet_5>() as PlayerBullet;
+                if (bullet != null)
+                {
+                    bullet.Reset(position, quaternion);
+                }
+                else
+                {
+                    bullet = new Bullet_5(UnityEngine.Object.Instantiate(ResourcesLoader.Instance.LoadBullet(playerBulletType.ToString()), position, quaternion));
+                }
                 break;
             case PlayerBulletType.Bullet_34:
-                bullet = new Bullet_34(obj);
+                bullet = itemPool.GetItem<Bullet_34>() as PlayerBullet;
+                if (bullet != null)
+                {
+                    bullet.Reset(position, quaternion);
+                }
+                else
+                {
+                    bullet = new Bullet_34(UnityEngine.Object.Instantiate(ResourcesLoader.Instance.LoadBullet(playerBulletType.ToString()), position, quaternion));
+                }
                 break;
         }
 
         return bullet;
     }
 
-    public BaseEffect CreateEffect(EffectType effectType, Vector3 position, Quaternion quaternion)
+    public Effect CreateEffect(EffectType effectType, Vector3 position, Quaternion quaternion)
     {
-        GameObject obj = Object.Instantiate(ResourcesLoader.Instance.LoadEffect(effectType.ToString()), position, quaternion);
-        BaseEffect effect = null;
+        ItemPool itemPool = SystemRepository.Instance.GetSystem<ItemSystem>().itemPool;
+        Effect effect = null;
 
         switch (effectType)
         {
             case EffectType.BoomEffect:
-                effect = new BoomEffect(obj);
+                effect = itemPool.GetItem<BoomEffect>() as Effect;
+                if (effect != null)
+                {
+                    effect.Reset(position, quaternion);
+                }
+                else
+                {
+                    effect = new BoomEffect(UnityEngine.Object.Instantiate(ResourcesLoader.Instance.LoadEffect(effectType.ToString()), position, quaternion));
+                }
                 break;
             case EffectType.SummonEffect:
-                effect = new SummonEffect(obj);
+                effect = itemPool.GetItem<SummonEffect>() as Effect;
+                if (effect != null)
+                {
+                    effect.Reset(position, quaternion);
+                }
+                else
+                {
+                    effect = new SummonEffect(UnityEngine.Object.Instantiate(ResourcesLoader.Instance.LoadEffect(effectType.ToString()), position, quaternion));
+                }
                 break;
             case EffectType.AppearEffect:
-                effect = new AppearEffect(obj);
+                effect = itemPool.GetItem<AppearEffect>() as Effect;
+                if (effect != null)
+                {
+                    effect.Reset(position, quaternion);
+                }
+                else
+                {
+                    effect = new AppearEffect(UnityEngine.Object.Instantiate(ResourcesLoader.Instance.LoadEffect(effectType.ToString()), position, quaternion));
+                }
                 break;
         }
 
@@ -69,8 +111,17 @@ public class ItemFactory : Singleton<ItemFactory>
 
     public DamageNum CreateDamageNum(string canvasName, Transform parent, int damage, Color color)
     {
-        GameObject obj = Object.Instantiate(ResourcesLoader.Instance.LoadPanel("Generic", canvasName), parent);
-        DamageNum damageNum = new DamageNum(obj, damage, color);
+        ItemPool itemPool = SystemRepository.Instance.GetSystem<ItemSystem>().itemPool;
+        DamageNum damageNum = null;
+        damageNum = itemPool.GetItem<DamageNum>() as DamageNum;
+        if (damageNum != null)
+        {
+            damageNum.Reset();
+        }
+        else
+        {
+            damageNum = new DamageNum(UnityEngine.Object.Instantiate(ResourcesLoader.Instance.LoadPanel("Generic", canvasName), parent), damage, color);
+        }
 
         return damageNum;
     }

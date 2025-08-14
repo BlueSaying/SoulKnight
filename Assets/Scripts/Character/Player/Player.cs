@@ -8,7 +8,7 @@ public class Player : Character, IDamageable
     protected PlayerFSM stateMachine;
 
     public List<PlayerWeapon> weapons;
-    protected PlayerWeapon usingWeapon;
+    public PlayerWeapon usingWeapon { get; protected set; }
 
     public Player(GameObject obj, PlayerModel model) : base(obj, model)
     {

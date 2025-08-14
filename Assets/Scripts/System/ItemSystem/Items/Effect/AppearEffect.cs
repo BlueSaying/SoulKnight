@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class AppearEffect : BaseEffect
+public class AppearEffect : Effect
 {
     public AppearEffect(GameObject gameObject) : base(gameObject) 
     {
