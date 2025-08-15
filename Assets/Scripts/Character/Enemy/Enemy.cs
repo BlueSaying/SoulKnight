@@ -1,19 +1,5 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.UIElements;
-
-public enum EnemyType
-{
-    Boar,
-    DireBoar,
-    GoblinGuard,
-    EliteGoblinGuard,
-    GoblinShaman,
-    TrumpetFlower,
-    GunShark,
-    GoblinGiant,
-    Stake,
-}
 
 public class Enemy : Character, IDamageable
 {

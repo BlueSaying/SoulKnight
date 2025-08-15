@@ -3,45 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace MainMenuScene
-{
-    public enum CameraType
-    {
-        
-    }
-}
 
-namespace MiddleScene
-{
-    public enum CameraType
-    {
-        /// <summary>
-        /// 刚进游戏时，选择角色时的相机
-        /// </summary>
-        StaticCamera,
-
-        /// <summary>
-        /// 选中某个角色后，对该角色特写的相机
-        /// </summary>
-        SelectingCamera,
-
-        /// <summary>
-        /// 角色选择完成后，始终跟随角色的相机
-        /// </summary>
-        FollowCamera
-    }
-}
-
-namespace BattleScene
-{
-    public enum CameraType
-    {
-        /// <summary>
-        /// 跟随玩家的摄像机
-        /// </summary>
-        FollowCamera,
-    }
-}
 
 public class CameraSystem : BaseSystem
 {

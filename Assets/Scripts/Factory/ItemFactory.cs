@@ -1,43 +1,17 @@
-﻿using System;
-using UnityEngine;
-using UnityEngine.UIElements;
-
-public enum PlayerBulletType
-{
-    Bullet_5,
-    Bullet_34,
-}
-
-public enum EffectType
-{
-    /// <summary>
-    /// 子弹碰撞
-    /// </summary>
-    BoomEffect,
-
-    /// <summary>
-    /// 敌人生成
-    /// </summary>
-    SummonEffect,
-
-    /// <summary>
-    /// 敌人出现
-    /// </summary>
-    AppearEffect,
-}
+﻿using UnityEngine;
 
 public class ItemFactory : Singleton<ItemFactory>
 {
     private ItemFactory() { }
 
-    public PlayerBullet CreatePlayerBullet(PlayerBulletType playerBulletType, Vector3 position, Quaternion quaternion)
+    public PlayerBullet CreatePlayerBullet(BulletType playerBulletType, Vector3 position, Quaternion quaternion)
     {
         ItemPool itemPool = SystemRepository.Instance.GetSystem<ItemSystem>().itemPool;
         PlayerBullet bullet = null;
 
         switch (playerBulletType)
         {
-            case PlayerBulletType.Bullet_5:
+            case BulletType.Bullet_5:
                 bullet = itemPool.GetItem<Bullet_5>() as PlayerBullet;
                 if (bullet != null)
                 {
@@ -48,7 +22,7 @@ public class ItemFactory : Singleton<ItemFactory>
                     bullet = new Bullet_5(UnityEngine.Object.Instantiate(ResourcesLoader.Instance.LoadBullet(playerBulletType.ToString()), position, quaternion));
                 }
                 break;
-            case PlayerBulletType.Bullet_34:
+            case BulletType.Bullet_34:
                 bullet = itemPool.GetItem<Bullet_34>() as PlayerBullet;
                 if (bullet != null)
                 {

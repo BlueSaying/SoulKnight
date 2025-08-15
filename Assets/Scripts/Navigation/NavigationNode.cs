@@ -1,11 +1,5 @@
 ﻿using UnityEngine;
 
-public enum NodeType
-{
-    None,
-    Obstacle,
-}
-
 public class NavigationNode
 {
     public Vector2Int nodePos;

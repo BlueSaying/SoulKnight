@@ -1,18 +1,5 @@
 ﻿using UnityEngine;
 
-public enum AudioType
-{
-    gun,
-}
-
-public enum AudioName
-{
-    /// <summary>
-    /// 手枪开火
-    /// </summary>
-    fx_gun_1,
-}
-
 public class AudioManager
 {
     private static AudioManager instance;

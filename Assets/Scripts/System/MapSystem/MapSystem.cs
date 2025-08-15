@@ -1,12 +1,6 @@
 ﻿using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-
-public enum LevelType
-{
-    Forest,
-}
 
 public class MapSystem : BaseSystem
 {

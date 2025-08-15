@@ -1,62 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine.Events;
 
-// NOTE:在此处注册事件
-public enum EventType
-{
-    #region 永久事件
-    /// <summary>
-    /// 场景开始切换
-    /// </summary>
-    OnSceneSwitchStart,
-
-    /// <summary>
-    /// 场景完成切换
-    /// </summary>
-    OnSceneSwitchComplete,
-    #endregion
-
-    /// <summary>
-    /// 是否为永久事件分界点
-    /// </summary>
-    isPermanentPoint,
-
-    /// <summary>
-    /// 角色选择完毕
-    /// </summary>
-    OnSelectPlayerComplete,
-
-    /// <summary>
-    /// 皮肤选择完毕
-    /// </summary>
-    OnSelectSkinComplete,
-
-    /// <summary>
-    /// 房间生成完毕
-    /// </summary>
-    OnFinishRoomCreate,
-
-    /// <summary>
-    /// 敌人死亡
-    /// </summary>
-    OnEnemyDie,
-
-    /// <summary>
-    /// 玩家死亡
-    /// </summary>
-    OnPlayerDie,
-
-    /// <summary>
-    /// 战斗结束
-    /// </summary>
-    OnBattleFinish,
-
-    /// <summary>
-    /// 更新战斗界面
-    /// </summary>
-    UpdateBattlePanel,
-}
-
 public class EventCenter : Singleton<EventCenter>
 {
     public class IEventInfo { }

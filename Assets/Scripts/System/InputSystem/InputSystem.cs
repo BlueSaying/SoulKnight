@@ -2,58 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum MouseInputType
-{
-    leftButton,
-    rightButton,
-    middleButton,
-}
 
-/// <summary>
-/// 键盘输入之类型之枚举
-/// </summary>
-public enum KeyInputType
-{
-    /// <summary>
-    /// 上移
-    /// </summary>
-    UpWard,
-
-    /// <summary>
-    /// 下移
-    /// </summary>
-    DownWard,
-
-    /// <summary>
-    /// 左移
-    /// </summary>
-    LeftWard,
-
-    /// <summary>
-    /// 右移
-    /// </summary>
-    RightWard,
-
-    /// <summary>
-    /// 玩家拾取物品
-    /// </summary>
-    PickUp,
-
-    /// <summary>
-    /// 玩家切换武器
-    /// </summary>
-    SwitchWeapon,
-
-    /// <summary>
-    /// 玩家释放技能
-    /// </summary>
-    ReleaseSkill,
-
-    /// <summary>
-    /// 玩家射击
-    /// </summary>
-    Shoot,
-}
 
 public class InputSystem : BaseSystem
 {

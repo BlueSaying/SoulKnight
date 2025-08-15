@@ -1,35 +1,5 @@
 using UnityEngine;
 
-namespace MainMenuScene
-{
-    public enum PanelName
-    {
-        MainMenuPanel,
-        KeyBoardPanel,
-    }
-}
-
-namespace MiddleScene
-{
-    public enum PanelName
-    {
-        BattlePanel,
-        GemPanel,
-        RoomPanel,
-        SelectingPlayerPanel,
-        SelectingSkinPanel,
-    }
-}
-
-namespace BattleScene
-{
-    public enum PanelName
-    {
-
-    }
-}
-
-
 /// <summary>
 /// UI界面基类（需要调用UI_Manager来打开界面的需要继承此类）
 /// </summary>

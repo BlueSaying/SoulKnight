@@ -4,13 +4,6 @@ using UnityEngine.Events;
 
 using GameObjectTag = System.String;
 
-public enum TriggerEventType
-{
-    OnTriggerEnter2D,
-    OnTriggerExit2D,
-    OnTriggerStay2D,
-}
-
 
 public class TriggerDetector : MonoBehaviour
 {

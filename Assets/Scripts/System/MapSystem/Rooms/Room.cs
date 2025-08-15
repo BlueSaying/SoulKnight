@@ -1,18 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public enum RoomType
-{
-    Empty,
-    Birth,
-    Normal,
-    Boss,
-    Transmission,
-    Speical,
-    Chest,
-    Corridor,
-}
-
 public class Room
 {
     public LevelType levelType;

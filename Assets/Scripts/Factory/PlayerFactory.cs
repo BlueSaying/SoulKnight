@@ -1,20 +1,6 @@
 ﻿using Unity.VisualScripting;
 using UnityEngine;
 
-public enum PlayerType
-{
-    Knight,
-    Rogue,
-}
-
-public enum PlayerSkinType
-{
-    None,
-    Knight,
-    Rogue,
-    RogueKun,
-}
-
 public class PlayerFactory : Singleton<PlayerFactory>
 {
     private PlayerFactory() { }

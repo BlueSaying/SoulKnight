@@ -1,30 +1,5 @@
 ﻿using UnityEngine;
 
-public enum WeaponCategory
-{
-    Pistol,
-    Rifle,
-    Missile,
-    Staff,
-    Other,
-    Shotgun,
-    ThrownWeapon,
-    Bow,
-    CloseCombat,
-    Melee
-}
-
-public enum QualityType
-{
-    White,
-    Green,
-    Blue,
-    Purple,
-    Orange,
-    Red,
-    colorful,
-}
-
 public abstract class Weapon
 {
     public WeaponModel model { get; protected set; }

@@ -1,37 +1,5 @@
 ﻿using UnityEngine;
 
-public enum PlayerWeaponType
-{
-    BadPistol,
-    Ak47,
-    H2O,
-    P250Pistol,
-    Furnace,
-    Icebreaker,
-    PKP,
-    UZI,
-    SnowFoxL,
-    AssaultRifle,
-    MissileBattery,
-    TheCode,
-    TheCodePlus,
-    CrimsonWineGlass,
-    DesertEagle,
-    GrenadePistol,
-    NextNextNextGenSMG,
-    EagleOfIceAndFire,
-    DormantBubbleMachine,
-    Basketball,
-    Bow,
-    Shower,
-    GatlingGun,
-    DoubleBladeSword,
-    WoodenCross,
-    BlueFireGatling,
-    RainbowGatling,
-    Pike,
-}
-
 public abstract class PlayerWeapon : Weapon
 {
     public new PlayerWeaponModel model { get => base.model as PlayerWeaponModel; set => base.model = value; }

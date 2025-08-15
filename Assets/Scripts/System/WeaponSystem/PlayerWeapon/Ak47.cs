@@ -8,6 +8,6 @@ public class Ak47 : PlayerWeapon
     {
         base.OnFire();
         AudioManager.Instance.PlaySound(AudioType.gun, AudioName.fx_gun_1);
-        ItemFactory.Instance.CreatePlayerBullet(PlayerBulletType.Bullet_34, firePoint.transform.position, rotOrigin.transform.rotation);
+        ItemFactory.Instance.CreatePlayerBullet(BulletType.Bullet_34, firePoint.transform.position, rotOrigin.transform.rotation);
     }
 }

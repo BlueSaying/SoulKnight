@@ -1,18 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 
-public enum SystemType
-{
-    BuffSystem,
-    CameraSystem,
-    EnemySystem,
-    InputSystem,
-    ItemSystem,
-    MapSystem,
-    PlayerSystem,
-    WeaponSystem,
-}
-
 public class SystemRepository : Singleton<SystemRepository>
 {
     private Dictionary<Type, BaseSystem> systemDic;

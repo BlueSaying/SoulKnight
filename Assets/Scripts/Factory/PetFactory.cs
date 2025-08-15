@@ -1,11 +1,5 @@
 ﻿using UnityEngine;
 
-public enum PetType
-{
-    LittleCool,
-
-}
-
 public class PetFactory : Singleton<PetFactory>
 {
     private PetFactory() { }

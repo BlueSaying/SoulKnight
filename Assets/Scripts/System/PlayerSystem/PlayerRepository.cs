@@ -28,18 +28,4 @@ public class PlayerRepository
 
         return default;
     }
-
-    // 获取特定玩家类型的属性
-    //public PlayerStaticAttr GetPlayerStaticAttr(PlayerType playerType)
-    //{
-    //    foreach (var attr in playerStaticData)
-    //    {
-    //        if (attr.playerType == playerType)
-    //        {
-    //            return attr;
-    //        }
-    //    }
-    //
-    //    return default;
-    //}
 }
