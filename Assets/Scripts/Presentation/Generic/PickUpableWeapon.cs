@@ -14,8 +14,8 @@ public class PickUpableWeapon : MonoBehaviour
         {
             if (SystemRepository.Instance.GetSystem<InputSystem>().GetKeyDownInput(KeyInputType.PickUp))
             {
-                PlayerWeaponModel model = SystemRepository.Instance.GetSystem<WeaponSystem>().
-                    GetPlayerWeaponModel(System.Enum.Parse<PlayerWeaponType>(name));
+                WeaponModel model = SystemRepository.Instance.GetSystem<WeaponSystem>().
+                    GetWeaponModel(System.Enum.Parse<WeaponType>(name));
                 player.AddWeapon(model);
                 Destroy(gameObject);
             }

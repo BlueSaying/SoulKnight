@@ -16,7 +16,7 @@ public class Enemy : Character, IDamageable
         }
     }
 
-    public PlayerWeapon weapon { get; protected set; }
+    public Weapon weapon { get; protected set; }
 
     protected EnemyFSM stateMachine;
 
@@ -39,7 +39,7 @@ public class Enemy : Character, IDamageable
         // HACK
         Transform damageNumPoint = transform.Find("DamageNumPoint");
 
-        DamageNum damageNum = ItemFactory.Instance.CreateDamageNum("DamageNum", damageNumPoint, damage, damageColor);
+        ItemFactory.Instance.CreateDamageNum("DamageNum", damageNumPoint, damage, damageColor);
 
         model.dynamicAttr.curHP -= damage;
 
@@ -114,10 +114,10 @@ public class Enemy : Character, IDamageable
     }
 
     // Add a weapon to this enemy
-    public void AddWeapon(PlayerWeaponModel model)
+    public void AddWeapon(WeaponModel model)
     {
         if (model == null) return;
 
-        weapon = WeaponFactory.Instance.GetPlayerWeapon(model, this);
+        weapon = WeaponFactory.Instance.GetWeapon(model, this);
     }
 }

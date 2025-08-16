@@ -2,7 +2,7 @@
 
 public abstract class Effect : Item
 {
-    protected float effectTimer;
+    private float effectTimer;
     protected float duration; // 特效持续时间
 
     public Effect(GameObject gameObject) : base(gameObject)

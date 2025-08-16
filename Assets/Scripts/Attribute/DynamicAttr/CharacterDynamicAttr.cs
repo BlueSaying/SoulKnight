@@ -10,8 +10,8 @@
         curHP = 0;
     }
 
-    public CharacterDynamicAttr(int hp)
+    public CharacterDynamicAttr(int curHP)
     {
-        this.curHP = hp;
+        this.curHP = curHP;
     }
 }

@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class DamageNum : Item
 {
-    private static readonly float duration = 1f;    // 持续时间
+    private static readonly float duration = 1.2f;    // 持续时间
 
     private float timer = 0f;
     private Text text;
@@ -28,7 +28,7 @@ public class DamageNum : Item
         }
         else
         {
-            OnExit();
+            Remove();
         }
     }
 
@@ -41,6 +41,6 @@ public class DamageNum : Item
         text.color = color;
         transform.position = Vector2.zero;
 
-        gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(UnityTools.GetRandomFloat(-1, 1), 2).normalized * 5;
+        gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(UnityTools.GetRandomFloat(-1, 1), 2).normalized * UnityTools.GetRandomFloat(0.8f, 1.25f) * 5;
     }
 }

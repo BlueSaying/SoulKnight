@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   textAsset: {fileID: 4900000, guid: 6035b8e80a62b5a4cb6da70067b6c995, type: 3}
-  playershareAttrs:
+  attrs:
   - name: "\u9A91\u58EB"
-    maxHp: 6
+    maxHP: 6
     speed: 12
     playerType: 0
-    defaultWeaponType: 0
-    armor: 5
-    energy: 180
+    defaultWeaponType: 2
+    maxArmor: 5
+    maxEnergy: 180
     critical: 5
     handAttackDamage: 4
     fightingSpeed: 7.5
@@ -29,12 +29,12 @@ MonoBehaviour:
     hurtArmorRecoveryTime: 4
     hurtInvincibleTime: 0.5
   - name: "\u6E38\u4FA0"
-    maxHp: 5
+    maxHP: 5
     speed: 12
     playerType: 1
-    defaultWeaponType: 0
-    armor: 2
-    energy: 180
+    defaultWeaponType: 2
+    maxArmor: 2
+    maxEnergy: 180
     critical: 10
     handAttackDamage: 5
     fightingSpeed: 7.5

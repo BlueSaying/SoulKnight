@@ -74,13 +74,17 @@ public enum QualityType
 /// <summary>
 /// 玩家武器类型
 /// </summary>
-public enum PlayerWeaponType
+public enum WeaponType
 {
     Ak47,
 
     AssaultRifle,
 
+    BadPistol,
+
     Basketball,
+
+    Blowpipe,
 
     BlueFireGatling,
 
@@ -100,9 +104,17 @@ public enum PlayerWeaponType
 
     GatlingGun,
 
+    GoblinMagicStaff,
+
     GrenadePistol,
 
     H2O,
+
+    Hammer,
+
+    Handgun,
+
+    Hoe,
 
     Icebreaker,
 
@@ -118,6 +130,8 @@ public enum PlayerWeaponType
 
     RainbowGatling,
 
+    Shotgun,
+
     Shower,
 
     SnowFoxL,
@@ -126,38 +140,11 @@ public enum PlayerWeaponType
 
     TheCodePlus,
 
+    TrumpetFlower,
+
     UZI,
 
     WoodenCross,
-
-    BadPistol,
-
-
-}
-
-/// <summary>
-/// 敌人武器类型
-/// </summary>
-public enum EnemyWeaponType
-{
-    Blowpipe,
-
-    Bow,
-
-    GoblinMagicStaff,
-
-    Hammer,
-
-    Handgun,
-
-    Hoe,
-
-    Pike,
-
-    Shotgun,
-
-    None,
-
 
 }
 

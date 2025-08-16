@@ -40,7 +40,7 @@ public class EnemySystem : BaseSystem
     }
 
     // 在场景中添加一个敌人
-    public void AddEnemy(EnemyType enemyType, Vector2 position, Quaternion quaternion, PlayerWeaponModel model)
+    public void AddEnemy(EnemyType enemyType, Vector2 position, Quaternion quaternion, WeaponModel model)
     {
         ItemFactory.Instance.CreateEffect(EffectType.SummonEffect, position, quaternion);
 

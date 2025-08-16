@@ -5,7 +5,7 @@ public class EnemyFactory : Singleton<EnemyFactory>
 {
     private EnemyFactory() { }
 
-    public Enemy CreateEnemy(EnemyModel enemymodel, Vector2 position, Quaternion quaternion,PlayerWeaponModel model)
+    public Enemy CreateEnemy(EnemyModel enemymodel, Vector2 position, Quaternion quaternion,WeaponModel model)
     {
         EnemyType enemyType = enemymodel.staticAttr.enemyType;
         GameObject obj = InstantiateEnemy(enemyType, position, quaternion);

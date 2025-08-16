@@ -6,50 +6,50 @@ public class WeaponFactory : Singleton<WeaponFactory>
 
     // 给*character*角色添加一个*type*类型的武器并
     // 放于WeaponOriginPoint物体下，返回该武器
-    public PlayerWeapon GetPlayerWeapon(PlayerWeaponModel model, Character character)
+    public Weapon GetWeapon(WeaponModel model, Character character)
     {
-        PlayerWeaponType type = model.staticAttr.playerWeaponType;
-        GameObject WeaponOriginPoint = UnityTools.Instance.GetTransformFromChildren(character.gameObject, "WeaponOriginPoint").gameObject;        
+        WeaponType type = model.staticAttr.weaponType;
+        GameObject WeaponOriginPoint = UnityTools.Instance.GetTransformFromChildren(character.gameObject, "WeaponOriginPoint").gameObject;
 
         GameObject obj = Object.Instantiate(ResourcesLoader.Instance.LoadWeapon(type.ToString()), WeaponOriginPoint.transform);
         obj.name = type.ToString();
-        
+
         obj.transform.localPosition = Vector3.zero;
 
-        PlayerWeapon weapon = null;
+        Weapon weapon = null;
         switch (type)
         {
-            case PlayerWeaponType.BadPistol:
+            case WeaponType.BadPistol:
                 weapon = new BadPistol(obj, character, model);
                 break;
-            case PlayerWeaponType.Ak47:
+            case WeaponType.Ak47:
                 weapon = new Ak47(obj, character, model);
                 break;
-            case PlayerWeaponType.Pike:
+            case WeaponType.Pike:
                 weapon = new Pike(obj, character, model);
                 break;
         }
-        
+
         return weapon;
     }
 
     // 在地上生成武器
-    public GameObject InstantiatePlayerWeapon(PlayerWeaponType type, Vector3 position, Quaternion quaternion, Transform parent = null)
+    public GameObject InstantiateWeapon(WeaponType type, Vector3 position, Quaternion quaternion, Transform parent = null)
     {
-        GameObject playerWeaponPrefab = ResourcesLoader.Instance.LoadWeapon(type.ToString());
+        GameObject weaponPrefab = ResourcesLoader.Instance.LoadWeapon(type.ToString());
 
-        GameObject newPlayerWeapon;
+        GameObject newWeapon;
         if (parent != null)
         {
-            newPlayerWeapon = Object.Instantiate(playerWeaponPrefab, position, quaternion, parent);
+            newWeapon = Object.Instantiate(weaponPrefab, position, quaternion, parent);
         }
         else
         {
-            newPlayerWeapon = Object.Instantiate(playerWeaponPrefab, position, quaternion);
+            newWeapon = Object.Instantiate(weaponPrefab, position, quaternion);
         }
 
-        newPlayerWeapon.name = type.ToString();
-        newPlayerWeapon.AddComponent<PickUpableWeapon>();
-        return newPlayerWeapon;
+        newWeapon.name = type.ToString();
+        newWeapon.AddComponent<PickUpableWeapon>();
+        return newWeapon;
     }
 }

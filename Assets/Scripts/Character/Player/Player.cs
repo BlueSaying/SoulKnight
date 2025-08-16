@@ -7,14 +7,14 @@ public class Player : Character, IDamageable
 
     protected PlayerFSM stateMachine;
 
-    public List<PlayerWeapon> weapons;
-    public PlayerWeapon usingWeapon { get; protected set; }
+    public List<Weapon> weapons;
+    public Weapon usingWeapon { get; protected set; }
 
     public Player(GameObject obj, PlayerModel model) : base(obj, model)
     {
         this.model = model;
 
-        weapons = new List<PlayerWeapon>();
+        weapons = new List<Weapon>();
     }
 
     protected override void OnInit()
@@ -55,9 +55,9 @@ public class Player : Character, IDamageable
         }
     }
 
-    public void AddWeapon(PlayerWeaponModel model)
+    public void AddWeapon(WeaponModel model)
     {
-        PlayerWeapon newWeapon = WeaponFactory.Instance.GetPlayerWeapon(model, this);
+        Weapon newWeapon = WeaponFactory.Instance.GetWeapon(model, this);
 
         if (usingWeapon != null)
         {
@@ -76,7 +76,7 @@ public class Player : Character, IDamageable
 
         int index = 0;
 
-        foreach (PlayerWeapon weapon in weapons)
+        foreach (Weapon weapon in weapons)
         {
             if (weapon.isUsing)
             {
@@ -85,13 +85,13 @@ public class Player : Character, IDamageable
             index++;
         }
 
-        PlayerWeapon newWeapon = weapons[(index + 1) % weapons.Count];
+        Weapon newWeapon = weapons[(index + 1) % weapons.Count];
 
         UnequipWeapon();
         EquipWeapon(newWeapon);
     }
 
-    private void EquipWeapon(PlayerWeapon weapon)
+    private void EquipWeapon(Weapon weapon)
     {
         weapon.isUsing = true;
         weapon.gameObject.SetActive(true);

@@ -9,4 +9,10 @@ public class GoblinGuard : Enemy
         base.OnCharacterStart();
         stateMachine = new GoblinGuardFSM(this);
     }
+
+    public override void TakeDamage(int damage, Color damageColor)
+    {
+        base.TakeDamage(damage, damageColor);
+
+    }
 }

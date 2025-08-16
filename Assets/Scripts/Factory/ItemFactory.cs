@@ -90,7 +90,7 @@ public class ItemFactory : Singleton<ItemFactory>
         damageNum = itemPool.GetItem<DamageNum>() as DamageNum;
         if (damageNum != null)
         {
-            damageNum.Reset();
+            damageNum.Reset(parent, damage, color);
         }
         else
         {

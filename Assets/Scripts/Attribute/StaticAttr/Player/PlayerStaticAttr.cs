@@ -7,13 +7,13 @@ public class PlayerStaticAttr : CharacterStaticAttr
     public PlayerType playerType;
 
     // 默认武器
-    public PlayerWeaponType defaultWeaponType;
+    public WeaponType defaultWeaponType;
 
     // 护甲值
-    public int armor;
+    public int maxArmor;
 
     // 能量值
-    public int energy;
+    public int maxEnergy;
 
     // 暴击
     public int critical;

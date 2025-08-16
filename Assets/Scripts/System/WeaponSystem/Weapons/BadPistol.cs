@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-public class BadPistol : PlayerWeapon
+public class BadPistol : Weapon
 {
-    public BadPistol(GameObject gameObject, Character character, PlayerWeaponModel model) : base(gameObject, character, model) { }
+    public BadPistol(GameObject gameObject, Character character, WeaponModel model) : base(gameObject, character, model) { }
 
     protected override void OnFire()
     {

@@ -18,7 +18,7 @@ public class Bullet_5 : PlayerBullet
 
         // HACK:后期将伤害作为该函数的参数传入
         enemy.TakeDamage(5, Color.red);
-
+        
         ItemFactory.Instance.CreateEffect(EffectType.BoomEffect, position, Quaternion.identity);
     }
 

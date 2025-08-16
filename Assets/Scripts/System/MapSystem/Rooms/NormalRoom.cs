@@ -55,7 +55,7 @@ public class NormalRoom : Room
         for (int i = 0; i < enemyCountPerWave[curWaveCount]; i++)
         {
             EnemyType enemyType = EnemyType.GoblinGuard;  // HACK
-            PlayerWeaponModel model = SystemRepository.Instance.GetSystem<WeaponSystem>().GetPlayerWeaponModel(PlayerWeaponType.Pike);
+            WeaponModel model = SystemRepository.Instance.GetSystem<WeaponSystem>().GetWeaponModel(WeaponType.Pike);
 
             Vector2 pos = (Vector2)bounds.center + new Vector2(UnityTools.GetRandomFloat(-6, 6), UnityTools.GetRandomFloat(-6, 6)) + Vector2.one;
             SystemRepository.Instance.GetSystem<EnemySystem>().AddEnemy(enemyType, pos, Quaternion.identity, model);

@@ -8,7 +8,7 @@ public static class SOLoader
 
     private static string playerDataPath = "PlayerData";
     private static string playerSkinDataPath = "PlayerSkinData";
-    private static string playerWeaponDataPath = "PlayerWeaponData";
+    private static string weaponDataPath = "WeaponData";
     private static string enemyDataPath = "EnemyData";
     private static string levelDataPath = "Level/LevelData_";
 
@@ -22,9 +22,9 @@ public static class SOLoader
         return Resources.Load<PlayerSkinSO>(dataPath + playerSkinDataPath);
     }
 
-    public static PlayerWeaponSO GetPlayerWeaponSO()
+    public static WeaponSO GetWeaponSO()
     {
-        return Resources.Load<PlayerWeaponSO>(dataPath + playerWeaponDataPath);
+        return Resources.Load<WeaponSO>(dataPath + weaponDataPath);
     }
 
     public static EnemySO GetEnemySO()

@@ -81,8 +81,6 @@ public abstract class Item
     {
         isEnter = false;
         isRemoved = false;
-        //hasRemoved = false;
-        //beingRemoved = false;
         ManagedToController();
     }
 }

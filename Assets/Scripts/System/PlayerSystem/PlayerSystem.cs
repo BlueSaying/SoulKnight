@@ -44,12 +44,12 @@ public class PlayerSystem : BaseSystem
                 // 记录信息
                 PlayerType playerType = mainPlayer.model.staticAttr.playerType;
                 Vector2 playerPos = SystemRepository.Instance.GetSystem<MapSystem>().roomMatrix[2, 2].bounds.center + Vector3.one;
-                PlayerWeaponType usingWeaponType = default;
-                List<PlayerWeaponType> weaponTypes = new List<PlayerWeaponType>();
+                WeaponType usingWeaponType = default;
+                List<WeaponType> weaponTypes = new List<WeaponType>();
                 foreach (var weapon in mainPlayer.weapons)
                 {
-                    if (weapon.isUsing) usingWeaponType = weapon.model.staticAttr.playerWeaponType;
-                    weaponTypes.Add(weapon.model.staticAttr.playerWeaponType);
+                    if (weapon.isUsing) usingWeaponType = weapon.model.staticAttr.weaponType;
+                    weaponTypes.Add(weapon.model.staticAttr.weaponType);
                 }
 
                 // 实例化Player
@@ -69,14 +69,14 @@ public class PlayerSystem : BaseSystem
                     // 先不添加正在使用的武器，待所有武器添加完再添加
                     if (weaponType != usingWeaponType)
                     {
-                        mainPlayer.AddWeapon(SystemRepository.Instance.GetSystem<WeaponSystem>().GetPlayerWeaponModel(weaponType));
+                        mainPlayer.AddWeapon(SystemRepository.Instance.GetSystem<WeaponSystem>().GetWeaponModel(weaponType));
                     }
                 }
 
                 // 如果玩家有武器，那么才可以设置武器
                 if (weaponTypes.Count > 0)
                 {
-                    mainPlayer.AddWeapon(SystemRepository.Instance.GetSystem<WeaponSystem>().GetPlayerWeaponModel(usingWeaponType));
+                    mainPlayer.AddWeapon(SystemRepository.Instance.GetSystem<WeaponSystem>().GetWeaponModel(usingWeaponType));
                 }
 
                 // 设置相机

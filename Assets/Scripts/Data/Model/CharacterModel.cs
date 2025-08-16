@@ -12,7 +12,7 @@
         Recover();
     }
 
-    public void Recover()
+    public virtual void Recover()
     {
         dynamicAttr.curHP = staticAttr.maxHP;
     }

@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "PlayerWeaponData", menuName = "ScriptableObjects/PlayerWeaponData")]
-public class PlayerWeaponSO : ScriptableObject
+[CreateAssetMenu(fileName = "WeaponData", menuName = "ScriptableObjects/WeaponData")]
+public class WeaponSO : ScriptableObject
 {
     public TextAsset textAsset;
 
     // 储存所有角色武器的列表
     [SerializeField]
-    public List<PlayerWeaponStaticAttr> attrs = new List<PlayerWeaponStaticAttr>();
+    public List<WeaponStaticAttr> attrs = new List<WeaponStaticAttr>();
 
     private void OnValidate()
     {

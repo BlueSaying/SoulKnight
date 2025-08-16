@@ -56,13 +56,13 @@ namespace MiddleScene
 
             // 护甲
             temp = UnityTools.Instance.GetTransformFromChildren(gameObject, "DivHor2");
-            temp.Find("Slider").GetComponent<Slider>().value = 1.0f * playerModel.staticAttr.armor / armorLimit;
-            temp.Find("Text").GetComponent<Text>().text = playerModel.staticAttr.armor.ToString();
+            temp.Find("Slider").GetComponent<Slider>().value = 1.0f * playerModel.staticAttr.maxArmor / armorLimit;
+            temp.Find("Text").GetComponent<Text>().text = playerModel.staticAttr.maxArmor.ToString();
 
             // 能量
             temp = UnityTools.Instance.GetTransformFromChildren(gameObject, "DivHor3");
-            temp.Find("Slider").GetComponent<Slider>().value = 1.0f * playerModel.staticAttr.energy / energyLimit;
-            temp.Find("Text").GetComponent<Text>().text = playerModel.staticAttr.energy.ToString();
+            temp.Find("Slider").GetComponent<Slider>().value = 1.0f * playerModel.staticAttr.maxEnergy / energyLimit;
+            temp.Find("Text").GetComponent<Text>().text = playerModel.staticAttr.maxEnergy.ToString();
 
             // 暴击
             temp = UnityTools.Instance.GetTransformFromChildren(gameObject, "DivHor4");

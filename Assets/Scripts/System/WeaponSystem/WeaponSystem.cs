@@ -2,19 +2,18 @@
 public class WeaponSystem : BaseSystem
 {
     // 系统持有的武器库
-    private PlayerWeaponRepository playerWeaponRepository;
-    //enemyWeaponRepository
+    private WeaponRepository weaponRepository;
 
     public WeaponSystem() { }
 
     protected override void OnInit()
     {
         base.OnInit();
-        playerWeaponRepository = new PlayerWeaponRepository();
+        weaponRepository = new WeaponRepository();
     }
 
-    public PlayerWeaponModel GetPlayerWeaponModel(PlayerWeaponType playerWeaponType)
+    public WeaponModel GetWeaponModel(WeaponType playerWeaponType)
     {
-        return playerWeaponRepository.GetPlayerWeaponModel(playerWeaponType);
+        return weaponRepository.GetWeaponModel(playerWeaponType);
     }
 }
