@@ -4,33 +4,33 @@ public class ItemFactory : Singleton<ItemFactory>
 {
     private ItemFactory() { }
 
-    public PlayerBullet CreatePlayerBullet(BulletType playerBulletType, Vector3 position, Quaternion quaternion)
+    public Bullet CreateBullet(BulletType bulletType, Vector3 position, Quaternion quaternion, Character owner)
     {
         ItemPool itemPool = SystemRepository.Instance.GetSystem<ItemSystem>().itemPool;
-        PlayerBullet bullet = null;
+        Bullet bullet = null;
 
-        switch (playerBulletType)
+        switch (bulletType)
         {
             case BulletType.Bullet_5:
-                bullet = itemPool.GetItem<Bullet_5>() as PlayerBullet;
+                bullet = itemPool.GetItem<Bullet_5>() as Bullet;
                 if (bullet != null)
                 {
                     bullet.Reset(position, quaternion);
                 }
                 else
                 {
-                    bullet = new Bullet_5(UnityEngine.Object.Instantiate(ResourcesLoader.Instance.LoadBullet(playerBulletType.ToString()), position, quaternion));
+                    bullet = new Bullet_5(Object.Instantiate(ResourcesLoader.Instance.LoadBullet(bulletType.ToString()), position, quaternion), owner);
                 }
                 break;
             case BulletType.Bullet_34:
-                bullet = itemPool.GetItem<Bullet_34>() as PlayerBullet;
+                bullet = itemPool.GetItem<Bullet_34>() as Bullet;
                 if (bullet != null)
                 {
                     bullet.Reset(position, quaternion);
                 }
                 else
                 {
-                    bullet = new Bullet_34(UnityEngine.Object.Instantiate(ResourcesLoader.Instance.LoadBullet(playerBulletType.ToString()), position, quaternion));
+                    bullet = new Bullet_34(Object.Instantiate(ResourcesLoader.Instance.LoadBullet(bulletType.ToString()), position, quaternion), owner);
                 }
                 break;
         }
@@ -53,7 +53,7 @@ public class ItemFactory : Singleton<ItemFactory>
                 }
                 else
                 {
-                    effect = new BoomEffect(UnityEngine.Object.Instantiate(ResourcesLoader.Instance.LoadEffect(effectType.ToString()), position, quaternion));
+                    effect = new BoomEffect(Object.Instantiate(ResourcesLoader.Instance.LoadEffect(effectType.ToString()), position, quaternion));
                 }
                 break;
             case EffectType.SummonEffect:
@@ -64,7 +64,7 @@ public class ItemFactory : Singleton<ItemFactory>
                 }
                 else
                 {
-                    effect = new SummonEffect(UnityEngine.Object.Instantiate(ResourcesLoader.Instance.LoadEffect(effectType.ToString()), position, quaternion));
+                    effect = new SummonEffect(Object.Instantiate(ResourcesLoader.Instance.LoadEffect(effectType.ToString()), position, quaternion));
                 }
                 break;
             case EffectType.AppearEffect:
@@ -75,7 +75,7 @@ public class ItemFactory : Singleton<ItemFactory>
                 }
                 else
                 {
-                    effect = new AppearEffect(UnityEngine.Object.Instantiate(ResourcesLoader.Instance.LoadEffect(effectType.ToString()), position, quaternion));
+                    effect = new AppearEffect(Object.Instantiate(ResourcesLoader.Instance.LoadEffect(effectType.ToString()), position, quaternion));
                 }
                 break;
         }
@@ -83,18 +83,20 @@ public class ItemFactory : Singleton<ItemFactory>
         return effect;
     }
 
-    public DamageNum CreateDamageNum(string canvasName, Transform parent, int damage, Color color)
+    public DamageNum CreateDamageNum(string canvasName, Vector2 position, int damage, Color color)
     {
         ItemPool itemPool = SystemRepository.Instance.GetSystem<ItemSystem>().itemPool;
         DamageNum damageNum = null;
         damageNum = itemPool.GetItem<DamageNum>() as DamageNum;
         if (damageNum != null)
         {
-            damageNum.Reset(parent, damage, color);
+            damageNum.Reset(position, damage, color);
         }
         else
         {
-            damageNum = new DamageNum(UnityEngine.Object.Instantiate(ResourcesLoader.Instance.LoadPanel("Generic", canvasName), parent), damage, color);
+            GameObject prefab = ResourcesLoader.Instance.LoadPanel("Generic", canvasName);
+            GameObject obj = Object.Instantiate(prefab, position, Quaternion.identity);
+            damageNum = new DamageNum(obj, damage, color);
         }
 
         return damageNum;

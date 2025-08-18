@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : Character, IDamageable
+public abstract class Player : Character, IDamageable
 {
     public new PlayerModel model { get => base.model as PlayerModel; set => base.model = value; }
 

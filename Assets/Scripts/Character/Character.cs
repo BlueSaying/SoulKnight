@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Character
+public abstract class Character
 {
     public CharacterModel model { get; protected set; }
 
@@ -16,7 +16,7 @@ public class Character
     {
         if (isLeftAuto && !isAuto) return;
         isLeftAuto = isAuto;
-
+        
         if (isLeft)
         {
             transform.rotation = Quaternion.Euler(0, 180, 0);

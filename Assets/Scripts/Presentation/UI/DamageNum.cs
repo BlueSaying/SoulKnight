@@ -32,14 +32,14 @@ public class DamageNum : Item
         }
     }
 
-    public virtual void Reset(Transform parent, int damage, Color color)
+    public virtual void Reset(Vector2 position, int damage, Color color)
     {
         base.Reset();
         timer = 0f;
-        transform.SetParent(parent, false);
+        transform.position = position;
         text.text = damage.ToString();
         text.color = color;
-        transform.position = Vector2.zero;
+        //transform.localPosition = Vector2.zero;
 
         gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(UnityTools.GetRandomFloat(-1, 1), 2).normalized * UnityTools.GetRandomFloat(0.8f, 1.25f) * 5;
     }

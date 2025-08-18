@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Pet : Character
+public abstract class Pet : Character
 {
     public new PetModel model { get => base.model as PetModel; set => base.model = value; }
 

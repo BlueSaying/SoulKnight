@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6564640401675493800}
   m_Layer: 0
-  m_Name: FirePoint
+  m_Name: ShootPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1629449405984095232}
   - component: {fileID: 3007518689825437676}
-  - component: {fileID: 3149602762421194060}
+  - component: {fileID: 2435388987150840369}
   m_Layer: 12
   m_Name: Ak47
   m_TagString: Untagged
@@ -116,7 +116,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &3149602762421194060
+--- !u!61 &2435388987150840369
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -145,10 +145,10 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.06543782}
+  m_Offset: {x: 0, y: -0.0014872551}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -159,7 +159,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.625, y: 0.4495439}
+  m_Size: {x: 1.5119708, y: 0.57744527}
   m_EdgeRadius: 0
 --- !u!1 &5285288860350222405
 GameObject:

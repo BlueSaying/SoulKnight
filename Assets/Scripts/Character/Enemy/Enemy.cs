@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class Enemy : Character, IDamageable
+public abstract class Enemy : Character, IDamageable
 {
     public new EnemyModel model { get => base.model as EnemyModel; set => base.model = value; }
 
@@ -39,7 +39,7 @@ public class Enemy : Character, IDamageable
         // HACK
         Transform damageNumPoint = transform.Find("DamageNumPoint");
 
-        ItemFactory.Instance.CreateDamageNum("DamageNum", damageNumPoint, damage, damageColor);
+        ItemFactory.Instance.CreateDamageNum("DamageNum", damageNumPoint.position, damage, damageColor);
 
         model.dynamicAttr.curHP -= damage;
 

@@ -7,9 +7,8 @@ public abstract class Weapon
     // 武器的游戏物体
     public GameObject gameObject { get; protected set; }
     public Transform transform => gameObject.transform;
-    protected Character character; // 代表哪个角色拥有该武器
-    public GameObject firePoint {  get; protected set; }
-    public GameObject rotOrigin {  get; protected set; }
+    public Character owner { get; protected set; } // 代表哪个角色拥有该武器
+    public GameObject rotOrigin { get; protected set; }
 
     protected Animator animator;
 
@@ -22,14 +21,11 @@ public abstract class Weapon
 
     private bool isInit;
     private bool isEnter;
-    public Weapon(GameObject gameObject, Character character, WeaponModel model)
+    public Weapon(GameObject gameObject, Character owner, WeaponModel model)
     {
         this.gameObject = gameObject;
-        this.character = character;
+        this.owner = owner;
         this.model = model;
-
-        //HACK
-        canRotate = true;
     }
 
     public void ControlWeapon(bool isAttack)
@@ -47,7 +43,7 @@ public abstract class Weapon
         if (!canRotate) return;
 
         float angle;
-        if (character.isLeft)
+        if (owner.isLeft)
         {
             angle = -Vector2.SignedAngle(Vector2.left, weaponDir);
         }
@@ -78,7 +74,6 @@ public abstract class Weapon
     protected virtual void OnInit()
     {
         animator = gameObject.GetComponent<Animator>();
-        firePoint = UnityTools.Instance.GetTransformFromChildren(gameObject, "FirePoint").gameObject;
         rotOrigin = UnityTools.Instance.GetTransformFromChildren(gameObject, "RotOrigin").gameObject;
     }
 

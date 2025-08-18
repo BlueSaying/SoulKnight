@@ -6,10 +6,10 @@ public class WeaponFactory : Singleton<WeaponFactory>
 
     // 给*character*角色添加一个*type*类型的武器并
     // 放于WeaponOriginPoint物体下，返回该武器
-    public Weapon GetWeapon(WeaponModel model, Character character)
+    public Weapon GetWeapon(WeaponModel model, Character owner)
     {
         WeaponType type = model.staticAttr.weaponType;
-        GameObject WeaponOriginPoint = UnityTools.Instance.GetTransformFromChildren(character.gameObject, "WeaponOriginPoint").gameObject;
+        GameObject WeaponOriginPoint = UnityTools.Instance.GetTransformFromChildren(owner.gameObject, "WeaponOriginPoint").gameObject;
 
         GameObject obj = Object.Instantiate(ResourcesLoader.Instance.LoadWeapon(type.ToString()), WeaponOriginPoint.transform);
         obj.name = type.ToString();
@@ -20,13 +20,13 @@ public class WeaponFactory : Singleton<WeaponFactory>
         switch (type)
         {
             case WeaponType.BadPistol:
-                weapon = new BadPistol(obj, character, model);
+                weapon = new BadPistol(obj, owner, model);
                 break;
             case WeaponType.Ak47:
-                weapon = new Ak47(obj, character, model);
+                weapon = new Ak47(obj, owner, model);
                 break;
             case WeaponType.Pike:
-                weapon = new Pike(obj, character, model);
+                weapon = new Pike(obj, owner, model);
                 break;
         }
 

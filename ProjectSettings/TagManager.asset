@@ -22,7 +22,7 @@ TagManager:
   - PickUpable
   - EnemyTrigger
   - PlayerTrigger
-  - 
+  - MeleeTrigger
   - 
   - 
   - 

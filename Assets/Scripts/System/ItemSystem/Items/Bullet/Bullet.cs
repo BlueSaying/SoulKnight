@@ -7,8 +7,13 @@ public abstract class Bullet : Item
 
     protected TriggerDetector triggerDetector;
 
-    public Bullet(GameObject gameObject) : base(gameObject) { }
-    
+    public Character owner { get; protected set; }
+
+    public Bullet(GameObject gameObject, Character owner) : base(gameObject)
+    {
+        this.owner = owner;
+    }
+
     protected override void OnInit()
     {
         base.OnInit();
@@ -25,6 +30,12 @@ public abstract class Bullet : Item
         {
             OnHitObstacle();
         });
+
+        // TODO:根据owner是否为敌人判断
+        triggerDetector.AddTriggerListener(TriggerEventType.OnTriggerEnter2D, "Enemy", (obj) =>
+        {
+            OnHitEnemy(obj.GetComponent<Symbol>().character as Enemy);
+        });
     }
 
     public override void OnEnter()
@@ -36,4 +47,13 @@ public abstract class Bullet : Item
     }
 
     protected virtual void OnHitObstacle() { Remove(); }
+
+    protected virtual void OnHitEnemy(Enemy enemy) { Remove(); }
+
+    public virtual void Reset(Vector3 position, Quaternion quaternion)
+    {
+        base.Reset();
+        this.position = position;
+        this.rotation = quaternion;
+    }
 }
