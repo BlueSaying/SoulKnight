@@ -17,11 +17,10 @@ public class UIRenderer : Singleton<UIRenderer>
     //构造函数
     private UIRenderer() { }
 
-    public Panel InstantiatePanel(string panelName)
+    public Panel InstantiatePanel(SceneName sceneName, string panelName)
     {
         //使用缓存的预制件
-        string curSceneName = SceneFacade.Instance.GetActiveSceneName().ToString();
-        GameObject panelPrefab = ResourcesLoader.Instance.LoadPanel(curSceneName, panelName);
+        GameObject panelPrefab = ResourcesLoader.Instance.LoadPanel(sceneName.ToString(), panelName);
 
         //打开UI界面
         GameObject panelObject = Object.Instantiate(panelPrefab, UIRoot, false);    //从预制体中实例化一个新的界面

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public abstract class Bullet : Item
 {
@@ -7,11 +8,14 @@ public abstract class Bullet : Item
 
     protected TriggerDetector triggerDetector;
 
+    protected int damage;
+
     public Character owner { get; protected set; }
 
-    public Bullet(GameObject gameObject, Character owner) : base(gameObject)
+    public Bullet(GameObject gameObject, Character owner, int damage) : base(gameObject)
     {
         this.owner = owner;
+        this.damage = damage;
     }
 
     protected override void OnInit()
@@ -31,11 +35,21 @@ public abstract class Bullet : Item
             OnHitObstacle();
         });
 
-        // TODO:根据owner是否为敌人判断
-        triggerDetector.AddTriggerListener(TriggerEventType.OnTriggerEnter2D, "Enemy", (obj) =>
+        // 根据owner是否为敌人判断
+        if (owner.GetType().IsSubclassOf(typeof(Player)))
         {
-            OnHitEnemy(obj.GetComponent<Symbol>().character as Enemy);
-        });
+            triggerDetector.AddTriggerListener(TriggerEventType.OnTriggerEnter2D, "Enemy", (obj) =>
+            {
+                OnHitEnemy(obj.GetComponent<Symbol>().character as Enemy);
+            });
+        }
+        else if (owner.GetType().IsSubclassOf(typeof(Enemy)))
+        {
+            triggerDetector.AddTriggerListener(TriggerEventType.OnTriggerEnter2D, "Player", (obj) =>
+            {
+                OnHitPlayer(obj.GetComponent<Symbol>().character as Player);
+            });
+        }
     }
 
     public override void OnEnter()
@@ -43,12 +57,13 @@ public abstract class Bullet : Item
         base.OnEnter();
         transform.GetComponent<Rigidbody2D>().velocity = rotation * Vector2.right * speed;
         transform.GetComponent<BoxCollider2D>().enabled = true;
-        //Debug.Log(ToString());
     }
 
     protected virtual void OnHitObstacle() { Remove(); }
 
     protected virtual void OnHitEnemy(Enemy enemy) { Remove(); }
+
+    protected virtual void OnHitPlayer(Player player) { Remove(); }
 
     public virtual void Reset(Vector3 position, Quaternion quaternion)
     {

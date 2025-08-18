@@ -24,7 +24,7 @@ namespace MiddleScene
             {
                 SystemRepository.Instance.GetSystem<CameraSystem>().SwitchCamera(CameraType.StaticCamera);
 
-                UIMediator.Instance.OpenPanel(PanelName.RoomPanel.ToString());
+                UIMediator.Instance.OpenPanel(SceneName.MiddleScene, PanelName.RoomPanel.ToString());
                 //UIManager.Instance.OpenPanel(PanelName.GemPanel.ToString());
                 UIMediator.Instance.ClosePanel(PanelName.SelectingPlayerPanel.ToString());
             });
@@ -33,7 +33,7 @@ namespace MiddleScene
             UInextButton.onClick.AddListener(() =>
             {
                 EventCenter.Instance.NotifyEvent(EventType.OnSelectPlayerComplete);
-                UIMediator.Instance.OpenPanel(PanelName.SelectingSkinPanel.ToString());
+                UIMediator.Instance.OpenPanel(SceneName.MiddleScene, PanelName.SelectingSkinPanel.ToString());
                 UIMediator.Instance.ClosePanel(PanelName.SelectingPlayerPanel.ToString());
             });
         }

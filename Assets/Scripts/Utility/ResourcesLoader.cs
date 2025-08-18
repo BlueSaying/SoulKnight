@@ -99,10 +99,10 @@ public class ResourcesLoader : Singleton<ResourcesLoader>
 
     public GameObject LoadPanel(string sceneName, string panelName)
     {
-        if (panelDic.ContainsKey(panelName)) return panelDic[panelName];
+        if (panelDic.ContainsKey(sceneName + panelName)) return panelDic[sceneName + panelName];
 
         GameObject newPanel = Resources.LoadAll<GameObject>(panelPath + sceneName).Where(x => x.name == panelName).ToArray()[0];
-        panelDic.Add(panelName, newPanel);
+        panelDic.Add(sceneName + panelName, newPanel);
         return newPanel;
     }
 

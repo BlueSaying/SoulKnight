@@ -39,7 +39,6 @@ public class DamageNum : Item
         transform.position = position;
         text.text = damage.ToString();
         text.color = color;
-        //transform.localPosition = Vector2.zero;
 
         gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(UnityTools.GetRandomFloat(-1, 1), 2).normalized * UnityTools.GetRandomFloat(0.8f, 1.25f) * 5;
     }

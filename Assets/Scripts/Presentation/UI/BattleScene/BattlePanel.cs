@@ -1,35 +1,37 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class BattlePanel : Panel
+namespace BattleScene
 {
-    private PlayerModel playerModel;
-
-    protected override void Awake()
+    public class BattlePanel : Panel
     {
-        base.Awake();
+        private PlayerModel playerModel;
 
-        playerModel = SystemRepository.Instance.GetSystem<PlayerSystem>().mainPlayer.model;
-        RefreshPlayerStatePanel();
+        protected override void Start()
+        {
+            base.Start();
+            playerModel = SystemRepository.Instance.GetSystem<PlayerSystem>().mainPlayer.model;
+            RefreshPlayerStatePanel();
 
-        EventCenter.Instance.RegisterEvent(EventType.UpdateBattlePanel, RefreshPlayerStatePanel);
-    }
+            EventCenter.Instance.RegisterEvent(EventType.UpdateBattlePanel, RefreshPlayerStatePanel);
+        }
 
-    private void RefreshPlayerStatePanel()
-    {
-        // fresh HP state
-        Transform sliderHP = UnityTools.Instance.GetTransformFromChildren(gameObject, "SliderHP");
-        sliderHP.GetComponent<Slider>().value = 1.0f * playerModel.dynamicAttr.curHP / playerModel.staticAttr.maxHP;
-        sliderHP.Find("Text").GetComponent<Text>().text = playerModel.dynamicAttr.curHP + "/" + playerModel.staticAttr.maxHP;
+        private void RefreshPlayerStatePanel()
+        {
+            // fresh HP state
+            Transform sliderHP = UnityTools.Instance.GetTransformFromChildren(gameObject, "SliderHP");
+            sliderHP.GetComponent<Slider>().value = 1.0f * playerModel.dynamicAttr.curHP / playerModel.staticAttr.maxHP;
+            sliderHP.Find("Text").GetComponent<Text>().text = playerModel.dynamicAttr.curHP + "/" + playerModel.staticAttr.maxHP;
 
-        // fresh armor
-        Transform sliderArmor = UnityTools.Instance.GetTransformFromChildren(gameObject, "SliderArmor");
-        sliderArmor.GetComponent<Slider>().value = 1.0f * playerModel.dynamicAttr.curArmor / playerModel.staticAttr.maxArmor;
-        sliderArmor.Find("Text").GetComponent<Text>().text = playerModel.dynamicAttr.curArmor + "/" + playerModel.staticAttr.maxArmor;
+            // fresh armor
+            Transform sliderArmor = UnityTools.Instance.GetTransformFromChildren(gameObject, "SliderArmor");
+            sliderArmor.GetComponent<Slider>().value = 1.0f * playerModel.dynamicAttr.curArmor / playerModel.staticAttr.maxArmor;
+            sliderArmor.Find("Text").GetComponent<Text>().text = playerModel.dynamicAttr.curArmor + "/" + playerModel.staticAttr.maxArmor;
 
-        // fresh energy
-        Transform sliderEnergy = UnityTools.Instance.GetTransformFromChildren(gameObject, "SliderEnergy");
-        sliderEnergy.GetComponent<Slider>().value = 1.0f * playerModel.dynamicAttr.curEnergy / playerModel.staticAttr.maxEnergy;
-        sliderEnergy.Find("Text").GetComponent<Text>().text = playerModel.dynamicAttr.curEnergy + "/" + playerModel.staticAttr.maxEnergy;
+            // fresh energy
+            Transform sliderEnergy = UnityTools.Instance.GetTransformFromChildren(gameObject, "SliderEnergy");
+            sliderEnergy.GetComponent<Slider>().value = 1.0f * playerModel.dynamicAttr.curEnergy / playerModel.staticAttr.maxEnergy;
+            sliderEnergy.Find("Text").GetComponent<Text>().text = playerModel.dynamicAttr.curEnergy + "/" + playerModel.staticAttr.maxEnergy;
+        }
     }
 }

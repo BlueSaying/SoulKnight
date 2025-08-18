@@ -4,7 +4,7 @@ public class ItemFactory : Singleton<ItemFactory>
 {
     private ItemFactory() { }
 
-    public Bullet CreateBullet(BulletType bulletType, Vector3 position, Quaternion quaternion, Character owner)
+    public Bullet CreateBullet(BulletType bulletType, Vector3 position, Quaternion quaternion, Character owner, int damage)
     {
         ItemPool itemPool = SystemRepository.Instance.GetSystem<ItemSystem>().itemPool;
         Bullet bullet = null;
@@ -19,7 +19,7 @@ public class ItemFactory : Singleton<ItemFactory>
                 }
                 else
                 {
-                    bullet = new Bullet_5(Object.Instantiate(ResourcesLoader.Instance.LoadBullet(bulletType.ToString()), position, quaternion), owner);
+                    bullet = new Bullet_5(Object.Instantiate(ResourcesLoader.Instance.LoadBullet(bulletType.ToString()), position, quaternion), owner, damage);
                 }
                 break;
             case BulletType.Bullet_34:
@@ -30,7 +30,7 @@ public class ItemFactory : Singleton<ItemFactory>
                 }
                 else
                 {
-                    bullet = new Bullet_34(Object.Instantiate(ResourcesLoader.Instance.LoadBullet(bulletType.ToString()), position, quaternion), owner);
+                    bullet = new Bullet_34(Object.Instantiate(ResourcesLoader.Instance.LoadBullet(bulletType.ToString()), position, quaternion), owner, damage);
                 }
                 break;
         }

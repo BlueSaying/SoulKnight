@@ -8,7 +8,8 @@ namespace MainMenuScene
 
         void Awake()
         {
-            UIMediator.Instance.OpenPanel(PanelName.MainMenuPanel.ToString());
+            UIMediator.Instance.OpenPanel(SceneName.MainMenuScene,PanelName.MainMenuPanel.ToString());
+            AudioManager.Instance.PlayBGM(AudioType.bgm, AudioName.bgm_1Low);
 
             facade = new Facade();
         }

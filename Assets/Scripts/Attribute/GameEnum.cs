@@ -269,7 +269,11 @@ public enum TriggerEventType
 /// </summary>
 public enum AudioType
 {
+    bgm,
+
     gun,
+
+    sword,
 }
 
 /// <summary>
@@ -281,6 +285,26 @@ public enum AudioName
     /// 手枪开火
     /// </summary>
     fx_gun_1,
+
+    /// <summary>
+    /// 开始界面BGM
+    /// </summary>
+    bgm_1Low,
+
+    /// <summary>
+    /// 开始大厅BGM
+    /// </summary>
+    bgm_room,
+
+    /// <summary>
+    /// 近战武器1
+    /// </summary>
+    fx_sword1,
+
+    /// <summary>
+    /// 近战武器2
+    /// </summary>
+    fx_sword2,
 }
 
 /// <summary>
@@ -541,7 +565,7 @@ namespace BattleScene
 
     public enum PanelName
     {
-
+        BattlePanel,
     }
 }
 #endregion

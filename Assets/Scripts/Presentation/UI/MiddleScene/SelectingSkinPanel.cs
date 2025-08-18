@@ -26,7 +26,7 @@ namespace MiddleScene
             // 返回
             UnityTools.Instance.GetComponentFromChildren<Button>(gameObject, "ButtonBack").onClick.AddListener(() =>
             {
-                UIMediator.Instance.OpenPanel(PanelName.SelectingPlayerPanel.ToString());
+                UIMediator.Instance.OpenPanel(SceneName.MiddleScene, PanelName.SelectingPlayerPanel.ToString());
                 UIMediator.Instance.ClosePanel(PanelName.SelectingSkinPanel.ToString());
             });
 
@@ -36,7 +36,7 @@ namespace MiddleScene
                 EventCenter.Instance.NotifyEvent(EventType.OnSelectSkinComplete);// TODO:读取数据填写UI
 
                 // 解除冻结位置，即仅设置冻结旋转
-                UIMediator.Instance.OpenPanel(PanelName.BattlePanel.ToString());
+                UIMediator.Instance.OpenPanel(SceneName.MiddleScene, PanelName.BattlePanel.ToString());
                 UIMediator.Instance.ClosePanel(PanelName.SelectingSkinPanel.ToString());
                 UIMediator.Instance.ClosePanel(PanelName.GemPanel.ToString());
 

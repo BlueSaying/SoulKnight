@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace MiddleScene
@@ -41,7 +40,7 @@ namespace MiddleScene
                     GameObject selectingGameObject = _collider.transform.parent.gameObject;
                     SystemRepository.Instance.GetSystem<PlayerSystem>().SetMainPlayer(selectingGameObject);
 
-                    UIMediator.Instance.OpenPanel(PanelName.SelectingPlayerPanel.ToString());
+                    UIMediator.Instance.OpenPanel(SceneName.MiddleScene, PanelName.SelectingPlayerPanel.ToString());
                     UIMediator.Instance.ClosePanel(PanelName.RoomPanel.ToString());
                 }
             }

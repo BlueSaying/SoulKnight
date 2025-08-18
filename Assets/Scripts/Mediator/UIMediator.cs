@@ -34,7 +34,7 @@ public class UIMediator : Singleton<UIMediator>
     /// </summary>
     /// <param name="panelName">要打开的UI界面的名称</param>
     /// <returns>打开的界面的Base_Panel</returns>
-    public Panel OpenPanel(string panelName)
+    public Panel OpenPanel(SceneName sceneName, string panelName)
     {
         Panel panel = null;
         //Debug.Log(panelDictionary.Count);
@@ -42,11 +42,10 @@ public class UIMediator : Singleton<UIMediator>
         if (panelDictionary.TryGetValue(panelName, out panel))
         {
             Debug.Log("界面已打开" + panelName);
-            Debug.Log(panelDictionary.Count);
             return null;
         }
 
-        panel = UIRenderer.Instance.InstantiatePanel(panelName);
+        panel = UIRenderer.Instance.InstantiatePanel(sceneName, panelName);
 
         panelDictionary.Add(panelName, panel);
 

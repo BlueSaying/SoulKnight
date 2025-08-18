@@ -9,7 +9,9 @@ public class Panel : MonoBehaviour
     protected new string name;
 
     protected virtual void Awake() { }
-    
+
+    protected virtual void Start() { }
+
     protected virtual void Update() { }
 
     /// <summary>

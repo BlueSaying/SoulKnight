@@ -107,13 +107,24 @@ public abstract class Player : Character, IDamageable
 
     public virtual void TakeDamage(int damage, Color damageColor)
     {
-        //dynamicAttr.Hp -= damage;
-        Debug.Log(damage);
+        // HACK
+        Transform damageNumPoint = transform.Find("DamageNumPoint");
+
+        ItemFactory.Instance.CreateDamageNum("DamageNum", damageNumPoint.position, damage, damageColor);
+
+        model.dynamicAttr.curHP -= damage;
+        EventCenter.Instance.NotifyEvent(EventType.UpdateBattlePanel);
+
+        if (model.dynamicAttr.curHP <= 0)
+        {
+            Die();
+        }
     }
 
     public virtual void Die()
     {
         EventCenter.Instance.NotifyEvent(EventType.OnPlayerDie);
+        Debug.Log("DIE");
     }
 
     // 获取自动瞄准的敌人

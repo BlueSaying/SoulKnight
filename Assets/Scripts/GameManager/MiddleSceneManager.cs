@@ -9,8 +9,11 @@ namespace MiddleScene
         void Awake()
         {
             // 打开场景最初UI界面
-            UIMediator.Instance.OpenPanel(PanelName.RoomPanel.ToString());
-            UIMediator.Instance.OpenPanel(PanelName.GemPanel.ToString());
+            UIMediator.Instance.OpenPanel(SceneName.MiddleScene, PanelName.RoomPanel.ToString());
+            UIMediator.Instance.OpenPanel(SceneName.MiddleScene, PanelName.GemPanel.ToString());
+
+            // 播放BGM
+            AudioManager.Instance.PlayBGM(AudioType.bgm, AudioName.bgm_room);
 
             // 实例化相应的角色
             PlayerFactory.Instance.InstantiatePlayer(PlayerType.Knight, new Vector2(9, 7), Quaternion.identity);

@@ -20,7 +20,7 @@ namespace MainMenuScene
 
             UnityTools.Instance.GetComponentFromChildren<Button>(gameObject, "ButtonSetting").onClick.AddListener(() =>
             {
-                UIMediator.Instance.OpenPanel(PanelName.KeyBoardPanel.ToString());
+                UIMediator.Instance.OpenPanel(SceneName.MainMenuScene, PanelName.KeyBoardPanel.ToString());
             });
         }
     }
