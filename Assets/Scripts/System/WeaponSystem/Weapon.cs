@@ -14,10 +14,14 @@ public abstract class Weapon
 
     // 射击冷却计时器
     private float fireTimer;
+    private float fireTime => 1 / model.staticAttr.fireRate;
     public bool isUsing;
+
+    public bool isPickUp;
 
     // 武器能否旋转
     protected bool canRotate;
+    protected Quaternion rotation;
 
     private bool isInit;
     private bool isEnter;
@@ -30,29 +34,35 @@ public abstract class Weapon
 
     public void ControlWeapon(bool isAttack)
     {
-        if (isAttack && fireTimer >= 1 / model.staticAttr.fireRate)
+        if (isAttack && fireTimer >= fireTime)
         {
             if (!TestManager.Instance.isUnlockWeapon) fireTimer = 0f;
-            else fireTimer = 0.9f / model.staticAttr.fireRate;  // 10倍射速
+            else fireTimer = 0.9f * fireTime;  // 10倍射速
             OnFire();
         }
     }
 
     public void RotateWeapon(Vector2 weaponDir)
     {
-        if (!canRotate) return;
-
-        float angle;
+        float angleY, angleZ;
         if (owner.isLeft)
         {
-            angle = -Vector2.SignedAngle(Vector2.left, weaponDir);
+            angleY = -180;
+            angleZ = -Vector2.SignedAngle(Vector2.left, weaponDir);
         }
         else
         {
-            angle = Vector2.SignedAngle(Vector2.right, weaponDir);
+            angleY = 0;
+            angleZ = Vector2.SignedAngle(Vector2.right, weaponDir);
         }
 
-        rotOrigin.transform.localRotation = Quaternion.Euler(0, 0, angle);
+        rotation = Quaternion.Euler(0, angleY, angleZ);
+
+        // 如果可以旋转那么便修改武器表现
+        if (canRotate)
+        {
+            rotOrigin.transform.rotation = rotation;
+        }
     }
 
     public void GameUpdate()

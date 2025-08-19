@@ -10,6 +10,62 @@ public abstract class Player : Character, IDamageable
     public List<Weapon> weapons;
     public Weapon usingWeapon { get; protected set; }
 
+    #region Attr
+    // 静态属性
+    public PlayerType playerType => model.staticAttr.playerType;
+    public WeaponType defaultWeaponType => model.staticAttr.defaultWeaponType;
+    public int maxArmor => model.staticAttr.maxArmor;
+    public int maxEnergy => model.staticAttr.maxEnergy;
+    public int critical => model.staticAttr.critical;
+    public int handAttackDamage => model.staticAttr.handAttackDamage;
+    public float fightingSpeed => model.staticAttr.fightingSpeed;
+    public float finishFightingSpeed => model.staticAttr.finishFightingSpeed;
+    public float armorRecoveryTime => model.staticAttr.armorRecoveryTime;
+    public float hurtArmorRecoveryTime => model.staticAttr.hurtArmorRecoveryTime;
+    public float hurtInvincibleTime => model.staticAttr.hurtInvincibleTime;
+
+    // 动态属性
+    public PlayerSkinType playerSkinType { get; }
+
+    public new int curHP
+    {
+        get
+        {
+            return model.dynamicAttr.curHP;
+        }
+        set
+        {
+            model.dynamicAttr.curHP = value;
+            EventCenter.Instance.NotifyEvent(EventType.UpdateBattlePanel);
+        }
+    }
+    public int curArmor
+    {
+        get
+        {
+            return model.dynamicAttr.curArmor;
+        }
+        set
+        {
+            model.dynamicAttr.curArmor = value;
+            EventCenter.Instance.NotifyEvent(EventType.UpdateBattlePanel);
+        }
+    }
+
+    public int curEnergy
+    {
+        get
+        {
+            return model.dynamicAttr.curEnergy;
+        }
+        set
+        {
+            model.dynamicAttr.curEnergy = value;
+            EventCenter.Instance.NotifyEvent(EventType.UpdateBattlePanel);
+        }
+    }
+    #endregion
+
     public Player(GameObject obj, PlayerModel model) : base(obj, model)
     {
         this.model = model;
@@ -58,6 +114,7 @@ public abstract class Player : Character, IDamageable
     public void AddWeapon(WeaponModel model)
     {
         Weapon newWeapon = WeaponFactory.Instance.GetWeapon(model, this);
+        newWeapon.isPickUp = true;
 
         if (usingWeapon != null)
         {
@@ -107,22 +164,45 @@ public abstract class Player : Character, IDamageable
 
     public virtual void TakeDamage(int damage, Color damageColor)
     {
-        // HACK
-        Transform damageNumPoint = transform.Find("DamageNumPoint");
+        if (damage <= 0) return;
 
+        // 弹出伤害值
+        Transform damageNumPoint = transform.Find("DamageNumPoint");
         ItemFactory.Instance.CreateDamageNum("DamageNum", damageNumPoint.position, damage, damageColor);
 
-        model.dynamicAttr.curHP -= damage;
-        EventCenter.Instance.NotifyEvent(EventType.UpdateBattlePanel);
-
-        if (model.dynamicAttr.curHP <= 0)
+        // 优先扣除护盾值
+        if (curArmor >= damage)
         {
+            curArmor -= damage;
+            damage = 0;
+        }
+        else
+        {
+            damage -= curArmor;
+            curArmor = 0;
+        }
+
+        // 判断剩余伤害是否要继续扣除血量
+        if (damage <= 0) return;
+
+        if (curHP>=damage)
+        {
+            curHP -= damage;
+            damage = 0;
+        }
+        else
+        {
+            damage-=curHP;
+            curHP = 0;
             Die();
         }
     }
 
     public virtual void Die()
     {
+        if (isDead) return;
+        isDead = true;
+
         EventCenter.Instance.NotifyEvent(EventType.OnPlayerDie);
         Debug.Log("DIE");
     }

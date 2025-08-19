@@ -62,13 +62,13 @@ public abstract class Bullet : Item
 
     protected virtual void OnHitEnemy(Enemy enemy)
     {
-        enemy.TakeDamage(damage, new Color(1f, 0.4f, 0f));
+        enemy.TakeDamage(damage, Color.red);
         Remove();
     }
 
     protected virtual void OnHitPlayer(Player player)
     {
-        player.TakeDamage(damage, new Color(1f, 0.4f, 0f));
+        player.TakeDamage(damage, Color.red);
         Remove();
     }
 

@@ -20,10 +20,8 @@ public abstract class Enemy : Character, IDamageable
 
     protected EnemyFSM stateMachine;
 
-    private bool isDead = false;
-
     // 当前是否为受击闪烁状态
-    private bool isFlashing = false;
+    private bool isFlashing;
 
     public Enemy(GameObject obj, EnemyModel model) : base(obj, model) { }
 
@@ -84,14 +82,8 @@ public abstract class Enemy : Character, IDamageable
 
     public virtual void Die()
     {
-        if (isDead)
-        {
-            return;
-        }
-        else
-        {
-            isDead = true;
-        }
+        if (isDead) return;
+        isDead = true;
 
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
 

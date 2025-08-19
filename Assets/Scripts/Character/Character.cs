@@ -10,13 +10,35 @@ public abstract class Character
 
     public GameObject trigger { get; protected set; }
 
+    public bool isDead { get; protected set; }
+
+    #region Attr
+    // 静态属性
+    public string name => model.staticAttr.name;
+    public int maxHP => model.staticAttr.maxHP;
+    public float speed => model.staticAttr.speed;
+
+    // 动态属性
+    public int curHP
+    {
+        get
+        {
+            return model.dynamicAttr.curHP;
+        }
+        set
+        {
+            model.dynamicAttr.curHP = value;
+        }
+    }
+    #endregion
+
     public bool isLeft { get; private set; }
     protected bool isLeftAuto = false;
     public void ChangeLeft(bool isLeft, bool isAuto)
     {
         if (isLeftAuto && !isAuto) return;
         isLeftAuto = isAuto;
-        
+
         if (isLeft)
         {
             transform.rotation = Quaternion.Euler(0, 180, 0);

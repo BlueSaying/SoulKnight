@@ -7,7 +7,7 @@ public class Basketball : Strange
 
     public Basketball(GameObject gameObject, Character owner, WeaponModel model) : base(gameObject, owner, model)
     {
-        canRotate = true;
+        canRotate = false;
     }
 
     protected override void OnInit()
@@ -19,26 +19,24 @@ public class Basketball : Strange
     protected override void OnEnter()
     {
         base.OnEnter();
-        
-    }
 
-    protected override void OnUpdate()
-    {
-        base.OnUpdate();
-
-        if (SystemRepository.Instance.GetSystem<InputSystem>().GetMoveInput() != Vector2.zero)
+        animator.SetBool("isPickUp", isPickUp);
+        #region 等待游戏物体加载的临时方案
+        UnityTools.Instance.WaitThenCallFun(this, 1f, () =>
         {
-            animator.SetTrigger("PlayerBasketball");
-        }
+            animator.SetBool("isPickUp", isPickUp);
+        });
+        #endregion
     }
 
     protected override void OnFire()
     {
         base.OnFire();
 
-        animator.SetTrigger("PlayerBasketball");
-        //AudioManager.Instance.PlaySound(AudioType.gun, AudioName.fx_gun_1);
-        ItemFactory.Instance.CreateBullet(BulletType.BulletBasketball, shootPoint.transform.position, rotOrigin.transform.rotation, owner, model.staticAttr.damage);
+        AudioManager.Instance.PlaySound(AudioType.gun, AudioName.fx_gun_6);
+        
+        Quaternion quaternion = rotation * Quaternion.Euler(0, 0, UnityTools.GetRandomFloat(-model.staticAttr.scatterRate / 2.0f, model.staticAttr.scatterRate / 2.0f));
+        ItemFactory.Instance.CreateBullet(BulletType.BulletBasketball, shootPoint.transform.position, quaternion, owner, model.staticAttr.damage);
     }
 }
 

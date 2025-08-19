@@ -42,7 +42,7 @@ public class PlayerSystem : BaseSystem
                 break;
             case SceneName.BattleScene:
                 // 记录信息
-                PlayerType playerType = mainPlayer.model.staticAttr.playerType;
+                PlayerType playerType = mainPlayer.playerType;
                 Vector2 playerPos = SystemRepository.Instance.GetSystem<MapSystem>().roomMatrix[2, 2].bounds.center + Vector3.one;
                 WeaponType usingWeaponType = default;
                 List<WeaponType> weaponTypes = new List<WeaponType>();
@@ -73,7 +73,7 @@ public class PlayerSystem : BaseSystem
                     }
                 }
 
-                // 如果玩家有武器，那么才可以设置武器
+                // 如果玩家有武器，那么才添加正在使用的武器
                 if (weaponTypes.Count > 0)
                 {
                     mainPlayer.AddWeapon(SystemRepository.Instance.GetSystem<WeaponSystem>().GetWeaponModel(usingWeaponType));

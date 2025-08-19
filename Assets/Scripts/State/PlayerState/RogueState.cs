@@ -47,7 +47,7 @@ public class RogueRunState : KnightState
         if (moveDir.magnitude > 0)
         {
             // TODO: 手感调优：自己写一个更平滑的移动函数
-            rb.velocity = moveDir.normalized * player.model.staticAttr.speed;
+            rb.velocity = moveDir.normalized * player.speed;
         }
         else
         {

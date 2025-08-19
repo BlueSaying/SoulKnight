@@ -252,6 +252,11 @@ public enum AudioName
     fx_gun_1,
 
     /// <summary>
+    /// 扔出投掷物
+    /// </summary>
+    fx_gun_6,
+
+    /// <summary>
     /// 开始界面BGM
     /// </summary>
     bgm_1Low,
