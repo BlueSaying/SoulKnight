@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class ItemFactory : Singleton<ItemFactory>
 {
@@ -19,7 +20,7 @@ public class ItemFactory : Singleton<ItemFactory>
                 }
                 else
                 {
-                    bullet = new Bullet_5(Object.Instantiate(ResourcesLoader.Instance.LoadBullet(bulletType.ToString()), position, quaternion), owner, damage);
+                    bullet = new Bullet_5(UnityEngine.Object.Instantiate(ResourcesLoader.Instance.LoadBullet(bulletType.ToString()), position, quaternion), owner, damage);
                 }
                 break;
             case BulletType.Bullet_34:
@@ -30,7 +31,18 @@ public class ItemFactory : Singleton<ItemFactory>
                 }
                 else
                 {
-                    bullet = new Bullet_34(Object.Instantiate(ResourcesLoader.Instance.LoadBullet(bulletType.ToString()), position, quaternion), owner, damage);
+                    bullet = new Bullet_34(UnityEngine.Object.Instantiate(ResourcesLoader.Instance.LoadBullet(bulletType.ToString()), position, quaternion), owner, damage);
+                }
+                break;
+            case BulletType.BulletBasketball:
+                bullet = itemPool.GetItem<BulletBasketball>() as Bullet;
+                if (bullet != null)
+                {
+                    bullet.Reset(position, quaternion);
+                }
+                else
+                {
+                    bullet = new BulletBasketball(UnityEngine.Object.Instantiate(ResourcesLoader.Instance.LoadBullet(bulletType.ToString()), position, quaternion), owner, damage);
                 }
                 break;
         }
@@ -53,7 +65,7 @@ public class ItemFactory : Singleton<ItemFactory>
                 }
                 else
                 {
-                    effect = new BoomEffect(Object.Instantiate(ResourcesLoader.Instance.LoadEffect(effectType.ToString()), position, quaternion));
+                    effect = new BoomEffect(UnityEngine.Object.Instantiate(ResourcesLoader.Instance.LoadEffect(effectType.ToString()), position, quaternion));
                 }
                 break;
             case EffectType.SummonEffect:
@@ -64,7 +76,7 @@ public class ItemFactory : Singleton<ItemFactory>
                 }
                 else
                 {
-                    effect = new SummonEffect(Object.Instantiate(ResourcesLoader.Instance.LoadEffect(effectType.ToString()), position, quaternion));
+                    effect = new SummonEffect(UnityEngine.Object.Instantiate(ResourcesLoader.Instance.LoadEffect(effectType.ToString()), position, quaternion));
                 }
                 break;
             case EffectType.AppearEffect:
@@ -75,7 +87,7 @@ public class ItemFactory : Singleton<ItemFactory>
                 }
                 else
                 {
-                    effect = new AppearEffect(Object.Instantiate(ResourcesLoader.Instance.LoadEffect(effectType.ToString()), position, quaternion));
+                    effect = new AppearEffect(UnityEngine.Object.Instantiate(ResourcesLoader.Instance.LoadEffect(effectType.ToString()), position, quaternion));
                 }
                 break;
         }
@@ -95,7 +107,7 @@ public class ItemFactory : Singleton<ItemFactory>
         else
         {
             GameObject prefab = ResourcesLoader.Instance.LoadPanel("Generic", canvasName);
-            GameObject obj = Object.Instantiate(prefab, position, Quaternion.identity);
+            GameObject obj = UnityEngine.Object.Instantiate(prefab, position, Quaternion.identity);
             damageNum = new DamageNum(obj, damage, color);
         }
 

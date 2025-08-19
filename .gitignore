@@ -5,13 +5,18 @@ Logs/
 UserSettings/
 Packages/
 obj/
+Build/
 Assets/Audios/
 Assets/Resources/Excel/
 Assets/Resources/Images/
 Assets/Sprite/
 
 *.sln
+*.suo
 *.csproj
 *.userprefs
 *.unityproj
 *.DS_Store
+AssetImportState
+
+Packages

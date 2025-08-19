@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6565211028966948960}
   - component: {fileID: 3848430381382589362}
   m_Layer: 12
-  m_Name: Pike
+  m_Name: GoblinSpear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,6 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7099280025356406169}
+  - {fileID: 4413383836450020707}
   m_Father: {fileID: 2462613808741021881}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6565211028966948960
@@ -157,11 +158,11 @@ Transform:
   m_GameObject: {fileID: 1395605196472330927}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2, y: 0, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
+  m_LocalPosition: {x: 1.4, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2462613808741021881}
+  m_Father: {fileID: 6256863794491321405}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6712641890230142191
 SpriteRenderer:
@@ -203,9 +204,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2081561517
   m_SortingLayer: 7
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 92e5b61cc67591e4e8e3a9446141b31e, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -227,7 +228,7 @@ GameObject:
   - component: {fileID: 2605049916652065813}
   - component: {fileID: 5327420474275042981}
   m_Layer: 0
-  m_Name: Pike
+  m_Name: GoblinSpear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -327,7 +328,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6256863794491321405}
-  - {fileID: 4413383836450020707}
   m_Father: {fileID: 3954117699130116737}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9012456704376421018
@@ -395,7 +395,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 1.1, y: 0}
+  m_Offset: {x: 1.2, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -406,7 +406,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.8, y: 0.25}
+  m_Size: {x: 3, y: 0.75}
   m_EdgeRadius: 0
 --- !u!114 &2146696526608318283
 MonoBehaviour:

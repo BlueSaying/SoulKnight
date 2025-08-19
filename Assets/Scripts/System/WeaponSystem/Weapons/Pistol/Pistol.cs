@@ -8,7 +8,6 @@ public abstract class Pistol : Weapon
     protected Pistol(GameObject gameObject, Character owner, WeaponModel model) : base(gameObject, owner, model)
     {
         canRotate = true;
-        
     }
 
     protected override void OnInit()

@@ -24,7 +24,7 @@ MonoBehaviour:
     scatterRate: 5
     angle: 0
     speedDecrease: 0.1
-    fireRate: 4
+    fireRate: 3
     speed: 30
   - buffType: 0
     weaponCategory: 5
@@ -291,7 +291,7 @@ MonoBehaviour:
     fireRate: 10
     speed: 30
   - buffType: 0
-    weaponCategory: 1
+    weaponCategory: 2
     weaponType: 10
     qualityType: 6
     damage: 8
@@ -347,8 +347,8 @@ MonoBehaviour:
     criticalRate: 0
     scatterRate: 0
     angle: 0
-    speedDecrease: 0
-    fireRate: 666
+    speedDecrease: -0.2
+    fireRate: 1
     speed: 0
   - buffType: 0
     weaponCategory: 2

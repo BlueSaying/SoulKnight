@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.UIElements;
 
-public class Pike : Melee
+public class GoblinSpear : Melee
 {
-    public Pike(GameObject gameObject, Character owner, WeaponModel model) : base(gameObject, owner, model)
+    public GoblinSpear(GameObject gameObject, Character owner, WeaponModel model) : base(gameObject, owner, model)
     {
         canRotate = true;
 

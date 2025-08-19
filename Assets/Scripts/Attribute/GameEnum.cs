@@ -28,8 +28,6 @@ public enum WeaponCategory
 {
     Bow,
 
-    CloseCombat,
-
     Melee,
 
     Missile,
@@ -46,7 +44,7 @@ public enum WeaponCategory
 
     Pistol,
 
-
+    Strange,
 }
 
 /// <summary>
@@ -72,79 +70,46 @@ public enum QualityType
 }
 
 /// <summary>
-/// 玩家武器类型
+/// 武器类型
 /// </summary>
 public enum WeaponType
 {
-    Ak47,
-
-    AssaultRifle,
-
     BadPistol,
-
-    Basketball,
-
-    Blowpipe,
-
-    BlueFireGatling,
-
-    Bow,
-
-    CrimsonWineGlass,
-
-    DesertEagle,
-
-    DormantBubbleMachine,
-
-    DoubleBladeSword,
-
-    EagleOfIceAndFire,
-
+    H2O,
+    P250Pistol,
     Furnace,
-
+    Icebreaker,
+    PKP,
+    AK47,
+    UZI,
+    SnowFoxL,
+    AssaultRifle,
+    MissileBattery,
+    TheCode,
+    TheCodePlus,
+    CrimsonWineGlass,
+    DesertEagle,
+    GrenadePistol,
+    NextNextNextGenSMG,
+    EagleOfIceAndFire,
+    DormantBubbleMachine,
+    Basketball,
+    Bow,
+    Shower,
     GatlingGun,
-
+    DoubleBladeSword,
+    WoodenCross,
+    BlueFireGatling,
+    RainbowGatling,
+    GoblinSpear,
+    Handgun,
+    Shotgun,
+    TrumpetFlower,
+    Blowpipe,
+    Hoe,
+    Hammer,
     GoblinMagicStaff,
 
-    GrenadePistol,
-
-    H2O,
-
-    Hammer,
-
-    Handgun,
-
-    Hoe,
-
-    Icebreaker,
-
-    MissileBattery,
-
-    NextNextNextGenSMG,
-
-    P250Pistol,
-
-    PKP,
-
-    Pike,
-
-    RainbowGatling,
-
-    Shotgun,
-
-    Shower,
-
-    SnowFoxL,
-
-    TheCode,
-
-    TheCodePlus,
-
-    TrumpetFlower,
-
-    UZI,
-
-    WoodenCross,
 
 }
 
@@ -422,6 +387,8 @@ public enum BulletType
     Bullet_5,
 
     Bullet_34,
+
+    BulletBasketball,
 }
 
 /// <summary>

@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-public class Ak47 : Rifle
+public class AK47 : Rifle
 {
-    public Ak47(GameObject gameObject, Character owner, WeaponModel model) : base(gameObject, owner, model) { }
+    public AK47(GameObject gameObject, Character owner, WeaponModel model) : base(gameObject, owner, model) { }
 
     protected override void OnFire()
     {

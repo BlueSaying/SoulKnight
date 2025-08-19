@@ -44,9 +44,10 @@ namespace MiddleScene
                 SystemRepository.Instance.GetSystem<PlayerSystem>().SetMainPlayerSkin(playerSkins[curSkinIndex]);
 
                 // HACK
-                WeaponFactory.Instance.InstantiateWeapon(WeaponType.Ak47, new Vector2(5, 0), Quaternion.identity);
+                WeaponFactory.Instance.InstantiateWeapon(WeaponType.AK47, new Vector2(5, 0), Quaternion.identity);
                 WeaponFactory.Instance.InstantiateWeapon(WeaponType.BadPistol, new Vector2(3, 0), Quaternion.identity);
-                WeaponFactory.Instance.InstantiateWeapon(WeaponType.Pike, new Vector2(7, 0), Quaternion.identity);
+                WeaponFactory.Instance.InstantiateWeapon(WeaponType.GoblinSpear, new Vector2(7, 0), Quaternion.identity);
+                WeaponFactory.Instance.InstantiateWeapon(WeaponType.Basketball, new Vector2(9, 0), Quaternion.identity);
 
                 SystemRepository.Instance.GetSystem<EnemySystem>().AddEnemy(EnemyType.Stake, Vector2.zero, Quaternion.identity, null);
             });

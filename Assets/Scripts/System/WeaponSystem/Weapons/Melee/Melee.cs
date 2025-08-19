@@ -38,7 +38,7 @@ public abstract class Melee : Weapon
     protected override void OnFire()
     {
         base.OnFire();
-        if (TestManager.Instance.isUnlockWeapon) animator.speed = 8f;
+        if (TestManager.Instance.isUnlockWeapon) animator.speed = 5f;
         else animator.speed = 1f;
         animator.SetTrigger("Attack");
         AudioManager.Instance.PlaySound(AudioType.sword, Random.Range(0, 2) > 0 ? AudioName.fx_sword1 : AudioName.fx_sword2);

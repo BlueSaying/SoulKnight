@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public abstract class Bullet : Item
 {
@@ -56,14 +55,22 @@ public abstract class Bullet : Item
     {
         base.OnEnter();
         transform.GetComponent<Rigidbody2D>().velocity = rotation * Vector2.right * speed;
-        transform.GetComponent<BoxCollider2D>().enabled = true;
+        transform.GetComponent<Collider2D>().enabled = true;
     }
 
     protected virtual void OnHitObstacle() { Remove(); }
 
-    protected virtual void OnHitEnemy(Enemy enemy) { Remove(); }
+    protected virtual void OnHitEnemy(Enemy enemy)
+    {
+        enemy.TakeDamage(damage, new Color(1f, 0.4f, 0f));
+        Remove();
+    }
 
-    protected virtual void OnHitPlayer(Player player) { Remove(); }
+    protected virtual void OnHitPlayer(Player player)
+    {
+        player.TakeDamage(damage, new Color(1f, 0.4f, 0f));
+        Remove();
+    }
 
     public virtual void Reset(Vector3 position, Quaternion quaternion)
     {

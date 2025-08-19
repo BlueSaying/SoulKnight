@@ -151,14 +151,14 @@ public class UnityTools : Singleton<UnityTools>
             }
             else
             {
-                throw new Exception("无法转换类型" + type);
+                throw new Exception("无法将" + s + "转换为类型" + type);
             }
         }
 
         object obj = Convert.ChangeType(s, type);
         if (obj == null)
         {
-            throw new Exception("无法转换类型" + type);
+            throw new Exception("无法将" + s + "转换为类型" + type);
         }
         else
         {

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class WeaponFactory : Singleton<WeaponFactory>
 {
@@ -11,26 +12,14 @@ public class WeaponFactory : Singleton<WeaponFactory>
         WeaponType type = model.staticAttr.weaponType;
         GameObject WeaponOriginPoint = UnityTools.Instance.GetTransformFromChildren(owner.gameObject, "WeaponOriginPoint").gameObject;
 
-        GameObject obj = Object.Instantiate(ResourcesLoader.Instance.LoadWeapon(type.ToString()), WeaponOriginPoint.transform);
+        GameObject obj = UnityEngine.Object.Instantiate(ResourcesLoader.Instance.LoadWeapon(type.ToString()), WeaponOriginPoint.transform);
         obj.name = type.ToString();
-
         obj.transform.localPosition = Vector3.zero;
 
-        Weapon weapon = null;
-        switch (type)
-        {
-            case WeaponType.BadPistol:
-                weapon = new BadPistol(obj, owner, model);
-                break;
-            case WeaponType.Ak47:
-                weapon = new Ak47(obj, owner, model);
-                break;
-            case WeaponType.Pike:
-                weapon = new Pike(obj, owner, model);
-                break;
-        }
+        Type typeofWeapon = Type.GetType(type.ToString());
+        Weapon newWeapon = Activator.CreateInstance(typeofWeapon, new object[] { obj, owner, model }) as Weapon;
 
-        return weapon;
+        return newWeapon;
     }
 
     // 在地上生成武器
@@ -41,11 +30,11 @@ public class WeaponFactory : Singleton<WeaponFactory>
         GameObject newWeapon;
         if (parent != null)
         {
-            newWeapon = Object.Instantiate(weaponPrefab, position, quaternion, parent);
+            newWeapon = UnityEngine.Object.Instantiate(weaponPrefab, position, quaternion, parent);
         }
         else
         {
-            newWeapon = Object.Instantiate(weaponPrefab, position, quaternion);
+            newWeapon = UnityEngine.Object.Instantiate(weaponPrefab, position, quaternion);
         }
 
         newWeapon.name = type.ToString();
