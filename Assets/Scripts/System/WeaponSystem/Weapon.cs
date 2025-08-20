@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public abstract class Weapon
 {
@@ -52,8 +53,22 @@ public abstract class Weapon
     {
         if (isAttack && fireTimer >= fireTime)
         {
-            if (!TestManager.Instance.isUnlockWeapon) fireTimer = 0f;
-            else fireTimer = 0.9f * fireTime;  // 10倍射速
+            // 根据武器拥有者是否为玩家扣除能量值
+            if (owner is Player && !TestManager.Instance.isUnlockWeapon)
+            {
+                Player player = owner as Player;
+                if (player.curEnergy >= energyCost)
+                {
+                    player.curEnergy -= energyCost;
+                }
+                else
+                {
+                    return;
+                }
+            }
+
+            if (TestManager.Instance.isUnlockWeapon) fireTimer = 0.9f * fireTime;  // 10倍射速
+            else fireTimer = 0f;
             OnFire();
         }
     }

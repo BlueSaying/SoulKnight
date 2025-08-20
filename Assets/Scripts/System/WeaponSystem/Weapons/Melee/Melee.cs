@@ -19,14 +19,14 @@ public abstract class Melee : Weapon
             throw new System.Exception("无法获取" + gameObject.name + "的TriggerDetector组件,请检查是否已经添加");
         }
 
-        if (owner.GetType().IsSubclassOf(typeof(Enemy)))
+        if (owner is Enemy)
         {
             triggerDetector.AddTriggerListener(TriggerEventType.OnTriggerEnter2D, "Player", (obj) =>
             {
                 OnHitPlayer(obj.GetComponent<Symbol>().character as Player);
             });
         }
-        else if (owner.GetType().IsSubclassOf(typeof(Player)))
+        else if (owner is Player)
         {
             triggerDetector.AddTriggerListener(TriggerEventType.OnTriggerEnter2D, "Enemy", (obj) =>
             {

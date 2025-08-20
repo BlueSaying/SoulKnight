@@ -35,14 +35,14 @@ public abstract class Bullet : Item
         });
 
         // 根据owner是否为敌人判断
-        if (owner.GetType().IsSubclassOf(typeof(Player)))
+        if (owner is Player)
         {
             triggerDetector.AddTriggerListener(TriggerEventType.OnTriggerEnter2D, "Enemy", (obj) =>
             {
                 OnHitEnemy(obj.GetComponent<Symbol>().character as Enemy);
             });
         }
-        else if (owner.GetType().IsSubclassOf(typeof(Enemy)))
+        else if (owner is Enemy)
         {
             triggerDetector.AddTriggerListener(TriggerEventType.OnTriggerEnter2D, "Player", (obj) =>
             {

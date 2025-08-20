@@ -70,6 +70,7 @@ public abstract class Player : Character, IDamageable
     public Player(GameObject obj, PlayerModel model) : base(obj, model)
     {
         this.model = model;
+        model.Recover();
 
         weaponsCanPickUp = new List<GameObject>();
         weapons = new List<Weapon>();
@@ -157,7 +158,7 @@ public abstract class Player : Character, IDamageable
         usingWeapon = weapon;
 
         // 播放音效
-        AudioManager.Instance.PlaySound(AudioType.Others, AudioName.fx_switch);Debug.Log(1);
+        AudioManager.Instance.PlaySound(AudioType.Others, AudioName.fx_switch);
     }
 
     private void UnequipWeapon()

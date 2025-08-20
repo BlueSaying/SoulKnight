@@ -230,6 +230,16 @@ public enum TriggerEventType
 }
 
 /// <summary>
+/// 碰撞事件类型
+/// </summary>
+public enum CollisionEventType
+{
+    OnCollisionEnter2D,
+    OnCollisionExit2D,
+    OnCollisionStay2D,
+}
+
+/// <summary>
 /// 音频类型
 /// </summary>
 public enum AudioType
