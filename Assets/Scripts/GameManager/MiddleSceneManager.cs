@@ -13,7 +13,7 @@ namespace MiddleScene
             UIMediator.Instance.OpenPanel(SceneName.MiddleScene, PanelName.GemPanel.ToString());
 
             // 播放BGM
-            AudioManager.Instance.PlayBGM(AudioType.bgm, AudioName.bgm_room);
+            AudioManager.Instance.PlayBGM(AudioType.Bgm, AudioName.bgm_room);
 
             // 实例化相应的角色
             PlayerFactory.Instance.InstantiatePlayer(PlayerType.Knight, new Vector2(9, 7), Quaternion.identity);

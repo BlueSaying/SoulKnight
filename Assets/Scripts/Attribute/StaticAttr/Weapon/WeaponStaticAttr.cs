@@ -61,5 +61,5 @@ public class WeaponStaticAttr
     /// <summary>
     /// 子弹速度
     /// </summary>
-    public float speed;
+    public float bulletSpeed;
 }

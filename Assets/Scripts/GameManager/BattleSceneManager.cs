@@ -10,9 +10,9 @@ namespace BattleScene
         {
             // 打开场景最初UI界面
             UIMediator.Instance.OpenPanel(SceneName.BattleScene, PanelName.BattlePanel.ToString());
-
+            WeaponFactory.Instance.InstantiateWeapon(WeaponType.AK47, new Vector2(5, 0), Quaternion.identity);
             // 播放BGM
-            AudioManager.Instance.PlayBGM(AudioType.bgm, AudioName.bgm_1Low);
+            AudioManager.Instance.PlayBGM(AudioType.Bgm, AudioName.bgm_1Low);
 
             facade = new Facade();
         }

@@ -7,6 +7,7 @@ public abstract class Player : Character, IDamageable
 
     protected PlayerFSM stateMachine;
 
+    public List<GameObject> weaponsCanPickUp;
     public List<Weapon> weapons;
     public Weapon usingWeapon { get; protected set; }
 
@@ -70,6 +71,7 @@ public abstract class Player : Character, IDamageable
     {
         this.model = model;
 
+        weaponsCanPickUp = new List<GameObject>();
         weapons = new List<Weapon>();
     }
 
@@ -153,6 +155,9 @@ public abstract class Player : Character, IDamageable
         weapon.isUsing = true;
         weapon.gameObject.SetActive(true);
         usingWeapon = weapon;
+
+        // 播放音效
+        AudioManager.Instance.PlaySound(AudioType.Others, AudioName.fx_switch);Debug.Log(1);
     }
 
     private void UnequipWeapon()
@@ -185,14 +190,14 @@ public abstract class Player : Character, IDamageable
         // 判断剩余伤害是否要继续扣除血量
         if (damage <= 0) return;
 
-        if (curHP>=damage)
+        if (curHP >= damage)
         {
             curHP -= damage;
             damage = 0;
         }
         else
         {
-            damage-=curHP;
+            damage -= curHP;
             curHP = 0;
             Die();
         }

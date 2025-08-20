@@ -1,3 +1,4 @@
+using Generic;
 using UnityEngine;
 
 public class PickUpableWeapon : MonoBehaviour
@@ -14,9 +15,7 @@ public class PickUpableWeapon : MonoBehaviour
         {
             if (SystemRepository.Instance.GetSystem<InputSystem>().GetKeyDownInput(KeyInputType.PickUp))
             {
-                WeaponModel model = SystemRepository.Instance.GetSystem<WeaponSystem>().
-                    GetWeaponModel(System.Enum.Parse<WeaponType>(name));
-                player.AddWeapon(model);
+                player.AddWeapon(SystemRepository.Instance.GetSystem<WeaponSystem>().GetWeaponModel(System.Enum.Parse<WeaponType>(name)));
                 Destroy(gameObject);
             }
         }
@@ -29,6 +28,14 @@ public class PickUpableWeapon : MonoBehaviour
         {
             isPlayerEnter = true;
             player = collision.GetComponent<Symbol>().character as Player;
+            player.weaponsCanPickUp.Insert(0, gameObject);
+
+            if (!UIMediator.Instance.IsPanelOpened(PanelName.WeaponInfoPanel.ToString()))
+            {
+                UIMediator.Instance.OpenPanel(SceneName.Generic, PanelName.WeaponInfoPanel.ToString());
+            }
+
+            (UIMediator.Instance.GetPanel(PanelName.WeaponInfoPanel.ToString()) as WeaponInfoPanel).RefreshPanel();
         }
     }
 
@@ -38,6 +45,16 @@ public class PickUpableWeapon : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             isPlayerEnter = false;
+            player.weaponsCanPickUp.Remove(gameObject);
+
+            if (player.weaponsCanPickUp.Count <= 0)
+            {
+                UIMediator.Instance.ClosePanel(PanelName.WeaponInfoPanel.ToString());
+            }
+            else
+            {
+                (UIMediator.Instance.GetPanel(PanelName.WeaponInfoPanel.ToString()) as WeaponInfoPanel).RefreshPanel();
+            }
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿#region 通用场景
+﻿#region GenericScene
 /// <summary>
 /// 系统分类
 /// </summary>
@@ -234,11 +234,13 @@ public enum TriggerEventType
 /// </summary>
 public enum AudioType
 {
-    bgm,
+    Bgm,
 
-    gun,
+    Gun,
 
-    sword,
+    Others,
+
+    Sword,
 }
 
 /// <summary>
@@ -275,6 +277,11 @@ public enum AudioName
     /// 近战武器2
     /// </summary>
     fx_sword2,
+
+    /// <summary>
+    /// 切换武器
+    /// </summary>
+    fx_switch,
 }
 
 /// <summary>
@@ -344,8 +351,6 @@ public enum EventType
     /// 更新战斗界面
     /// </summary>
     UpdateBattlePanel,
-
-
     #endregion
 }
 
@@ -438,6 +443,11 @@ public enum SceneName
     /// 战斗场景
     /// </summary>
     BattleScene,
+
+    /// <summary>
+    /// 通用场景
+    /// </summary>
+    Generic,
 }
 
 /// <summary>
@@ -464,6 +474,13 @@ public enum EnemyType
     Boar,
 
 
+}
+namespace Generic
+{
+    public enum PanelName
+    {
+        WeaponInfoPanel,
+    }
 }
 #endregion
 

@@ -29,6 +29,14 @@ public class UIMediator : Singleton<UIMediator>
         return panelDictionary.ContainsKey(panelname);
     }
 
+    // 获取界面
+    public Panel GetPanel(string panelname)
+    {
+        if (!IsPanelOpened(panelname)) return default;
+
+        return panelDictionary[panelname];
+    }
+
     /// <summary>
     /// 打开UI界面
     /// </summary>
@@ -37,7 +45,7 @@ public class UIMediator : Singleton<UIMediator>
     public Panel OpenPanel(SceneName sceneName, string panelName)
     {
         Panel panel = null;
-        //Debug.Log(panelDictionary.Count);
+
         //检查是否已经打开
         if (panelDictionary.TryGetValue(panelName, out panel))
         {

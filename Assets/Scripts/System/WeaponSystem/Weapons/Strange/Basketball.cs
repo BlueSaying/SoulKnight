@@ -33,7 +33,7 @@ public class Basketball : Strange
     {
         base.OnFire();
 
-        AudioManager.Instance.PlaySound(AudioType.gun, AudioName.fx_gun_6);
+        AudioManager.Instance.PlaySound(AudioType.Gun, AudioName.fx_gun_6);
         
         Quaternion quaternion = rotation * Quaternion.Euler(0, 0, UnityTools.GetRandomFloat(-model.staticAttr.scatterRate / 2.0f, model.staticAttr.scatterRate / 2.0f));
         ItemFactory.Instance.CreateBullet(BulletType.BulletBasketball, shootPoint.transform.position, quaternion, owner, model.staticAttr.damage);

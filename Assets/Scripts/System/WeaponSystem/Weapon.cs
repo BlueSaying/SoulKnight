@@ -25,6 +25,22 @@ public abstract class Weapon
 
     private bool isInit;
     private bool isEnter;
+
+    #region Attr
+    public BuffType buffType => model.staticAttr.buffType;
+    public WeaponCategory weaponCategory => model.staticAttr.weaponCategory;
+    public WeaponType weaponType => model.staticAttr.weaponType;
+    public QualityType qualityType => model.staticAttr.qualityType;
+    public int damage => model.staticAttr.damage;
+    public int energyCost => model.staticAttr.energyCost;
+    public int criticalRate => model.staticAttr.criticalRate;
+    public int scatterRate => model.staticAttr.scatterRate;
+    public int angle => model.staticAttr.angle;
+    public float speedDecrease => model.staticAttr.speedDecrease;
+    public float fireRate => model.staticAttr.fireRate;
+    public float bulletSpeed => model.staticAttr.bulletSpeed;
+    #endregion
+
     public Weapon(GameObject gameObject, Character owner, WeaponModel model)
     {
         this.gameObject = gameObject;

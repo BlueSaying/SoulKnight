@@ -106,7 +106,7 @@ public class ItemFactory : Singleton<ItemFactory>
         }
         else
         {
-            GameObject prefab = ResourcesLoader.Instance.LoadPanel("Generic", canvasName);
+            GameObject prefab = ResourcesLoader.Instance.LoadPanel(SceneName.Generic.ToString(), canvasName);
             GameObject obj = UnityEngine.Object.Instantiate(prefab, position, Quaternion.identity);
             damageNum = new DamageNum(obj, damage, color);
         }

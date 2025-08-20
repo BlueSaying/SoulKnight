@@ -11,12 +11,12 @@ namespace BattleScene
         {
             base.Start();
             playerModel = SystemRepository.Instance.GetSystem<PlayerSystem>().mainPlayer.model;
-            RefreshPlayerStatePanel();
+            RefreshPanel();
 
-            EventCenter.Instance.RegisterEvent(EventType.UpdateBattlePanel, RefreshPlayerStatePanel);
+            EventCenter.Instance.RegisterEvent(EventType.UpdateBattlePanel, RefreshPanel);
         }
 
-        private void RefreshPlayerStatePanel()
+        private void RefreshPanel()
         {
             // fresh HP state
             Transform sliderHP = UnityTools.Instance.GetTransformFromChildren(gameObject, "SliderHP");

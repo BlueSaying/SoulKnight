@@ -41,7 +41,7 @@ public abstract class Melee : Weapon
         if (TestManager.Instance.isUnlockWeapon) animator.speed = 5f;
         else animator.speed = 1f;
         animator.SetTrigger("Attack");
-        AudioManager.Instance.PlaySound(AudioType.sword, Random.Range(0, 2) > 0 ? AudioName.fx_sword1 : AudioName.fx_sword2);
+        AudioManager.Instance.PlaySound(AudioType.Sword, Random.Range(0, 2) > 0 ? AudioName.fx_sword1 : AudioName.fx_sword2);
 
         //owner.rb.AddForce(Vector2.right * 100);
     }
