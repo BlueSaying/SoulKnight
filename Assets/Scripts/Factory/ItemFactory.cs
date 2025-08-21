@@ -1,11 +1,10 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ItemFactory : Singleton<ItemFactory>
 {
     private ItemFactory() { }
 
-    public Bullet CreateBullet(BulletType bulletType, Vector3 position, Quaternion quaternion, Character owner, int damage)
+    public Bullet CreateBullet(BulletType bulletType, Vector3 position, Quaternion quaternion, Character owner, int damage, float bulletSpeed)
     {
         ItemPool itemPool = SystemRepository.Instance.GetSystem<ItemSystem>().itemPool;
         Bullet bullet = null;
@@ -20,7 +19,7 @@ public class ItemFactory : Singleton<ItemFactory>
                 }
                 else
                 {
-                    bullet = new Bullet_5(UnityEngine.Object.Instantiate(ResourcesLoader.Instance.LoadBullet(bulletType.ToString()), position, quaternion), owner, damage);
+                    bullet = new Bullet_5(UnityEngine.Object.Instantiate(ResourcesLoader.Instance.LoadBullet(bulletType.ToString()), position, quaternion), owner, damage, bulletSpeed);
                 }
                 break;
             case BulletType.Bullet_34:
@@ -31,7 +30,7 @@ public class ItemFactory : Singleton<ItemFactory>
                 }
                 else
                 {
-                    bullet = new Bullet_34(UnityEngine.Object.Instantiate(ResourcesLoader.Instance.LoadBullet(bulletType.ToString()), position, quaternion), owner, damage);
+                    bullet = new Bullet_34(UnityEngine.Object.Instantiate(ResourcesLoader.Instance.LoadBullet(bulletType.ToString()), position, quaternion), owner, damage, bulletSpeed);
                 }
                 break;
             case BulletType.BulletBasketball:
@@ -42,7 +41,7 @@ public class ItemFactory : Singleton<ItemFactory>
                 }
                 else
                 {
-                    bullet = new BulletBasketball(UnityEngine.Object.Instantiate(ResourcesLoader.Instance.LoadBullet(bulletType.ToString()), position, quaternion), owner, damage);
+                    bullet = new BulletBasketball(UnityEngine.Object.Instantiate(ResourcesLoader.Instance.LoadBullet(bulletType.ToString()), position, quaternion), owner, damage, bulletSpeed);
                 }
                 break;
         }
@@ -112,5 +111,15 @@ public class ItemFactory : Singleton<ItemFactory>
         }
 
         return damageNum;
+    }
+
+    public ItemArrow CreateItemArrow(string canvasName, string info, Transform parent)
+    {
+        GameObject prefab = ResourcesLoader.Instance.LoadPanel(SceneName.Generic.ToString(), canvasName);
+        GameObject obj = UnityEngine.Object.Instantiate(prefab, parent);
+
+        ItemArrow itemArrow = new ItemArrow(obj.transform, info);
+
+        return itemArrow;
     }
 }

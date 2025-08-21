@@ -9,7 +9,7 @@ public class AK47 : Rifle
         base.OnFire();
         AudioManager.Instance.PlaySound(AudioType.Gun, AudioName.fx_gun_1);
 
-        Quaternion quaternion = rotation * Quaternion.Euler(0, 0, UnityTools.GetRandomFloat(-model.staticAttr.scatterRate / 2.0f, model.staticAttr.scatterRate / 2.0f));
-        ItemFactory.Instance.CreateBullet(BulletType.Bullet_34, shootPoint.transform.position, quaternion, owner, model.staticAttr.damage);
+        Quaternion quaternion = rotation * Quaternion.Euler(0, 0, UnityTools.GetRandomFloat(-scatterRate / 2.0f, scatterRate / 2.0f));
+        ItemFactory.Instance.CreateBullet(BulletType.Bullet_34, shootPoint.transform.position, quaternion, owner, damage, bulletSpeed);
     }
 }

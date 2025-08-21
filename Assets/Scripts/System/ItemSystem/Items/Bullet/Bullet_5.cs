@@ -2,7 +2,7 @@
 
 public class Bullet_5 : Bullet
 {
-    public Bullet_5(GameObject gameObject, Character owner, int damage) : base(gameObject, owner, damage) { }
+    public Bullet_5(GameObject gameObject, Character owner, int damage, float bulletSpeed) : base(gameObject, owner, damage, bulletSpeed) { }
 
     protected override void OnHitObstacle()
     {

@@ -7,7 +7,7 @@ public class BulletBasketball : Bullet
 
     protected CollisionDetector collisionDetector;
 
-    public BulletBasketball(GameObject gameObject, Character owner, int damage) : base(gameObject, owner, damage) { }
+    public BulletBasketball(GameObject gameObject, Character owner, int damage, float bulletSpeed) : base(gameObject, owner, damage, bulletSpeed) { }
 
     protected override void OnInit()
     {

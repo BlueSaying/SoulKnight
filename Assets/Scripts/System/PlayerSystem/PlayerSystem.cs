@@ -110,15 +110,22 @@ public class PlayerSystem : BaseSystem
 
     }
 
+    protected override void OnFixedUpdate()
+    {
+        base.OnFixedUpdate();
+
+        mainPlayer?.OnFixedUpdate();
+    }
+
     protected override void OnUpdate()
     {
         base.OnUpdate();
 
-        mainPlayer?.GameUpdate();
+        mainPlayer?.OnUpdate();
 
         foreach (var pet in pets)
         {
-            pet.GameUpdate();
+            pet.OnUpdate();
         }
     }
 
@@ -152,7 +159,11 @@ public class PlayerSystem : BaseSystem
     #region 事件集
     public void OnSelectSkinComplete()
     {
-        mainPlayer = PlayerFactory.Instance.CreatePlayer(playerRepository.GetPlayerModel(Enum.Parse<PlayerType>(playerGameObject.name)));
+        PlayerModel playerModel = playerRepository.GetPlayerModel(Enum.Parse<PlayerType>(playerGameObject.name));
+
+        // 设置角色皮肤
+        playerModel.dynamicAttr.playerSkinType = skinType;
+        mainPlayer = PlayerFactory.Instance.CreatePlayer(playerModel);
         mainPlayer.rb.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
     #endregion

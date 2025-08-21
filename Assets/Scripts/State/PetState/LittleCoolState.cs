@@ -24,7 +24,7 @@ public class LittleCoolIdleState : LittleCoolState
         animator.SetBool("isIdle", false);
     }
 
-    protected override void OnUpdate()
+    public override void OnUpdate()
     {
         base.OnUpdate();
 
@@ -57,7 +57,7 @@ public class LittleCoolFollowState : LittleCoolState
         CoroutinePool.Instance.StopAllCoroutine(this);
     }
 
-    protected override void OnUpdate()
+    public override void OnUpdate()
     {
         base.OnUpdate();
         MoveToTarget();

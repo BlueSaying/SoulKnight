@@ -3,6 +3,8 @@
 public abstract class RogueState : PlayerState
 {
     public RogueState(PlayerFSM fsm) : base(fsm) { }
+
+
 }
 
 public class RogueIdleState : KnightState
@@ -13,8 +15,6 @@ public class RogueIdleState : KnightState
     {
         base.OnEnter();
         animator.SetBool("isIdle", true);
-
-        rb.velocity = Vector2.zero;
     }
 
     public override void OnExit()
@@ -23,11 +23,10 @@ public class RogueIdleState : KnightState
         animator.SetBool("isIdle", false);
     }
 
-    protected override void OnUpdate()
+    public override void OnUpdate()
     {
         base.OnUpdate();
-
-        if (SystemRepository.Instance.GetSystem<InputSystem>().GetMoveInput() != Vector2.zero)
+        if (rb.velocity != Vector2.zero)
         {
             fsm.SwitchState<RogueRunState>();
         }
@@ -38,21 +37,9 @@ public class RogueRunState : KnightState
 {
     public RogueRunState(PlayerFSM fsm) : base(fsm) { }
 
-    protected override void OnUpdate()
+    public override void OnUpdate()
     {
         base.OnUpdate();
-
-        // 测试代码
-        Vector2 moveDir = (SystemRepository.Instance.GetSystem<InputSystem>().GetMoveInput());
-        if (moveDir.magnitude > 0)
-        {
-            // TODO: 手感调优：自己写一个更平滑的移动函数
-            rb.velocity = moveDir.normalized * player.speed;
-        }
-        else
-        {
-            fsm.SwitchState<RogueIdleState>();
-        }
 
         if (moveDir.x > 0)
         {
@@ -61,6 +48,11 @@ public class RogueRunState : KnightState
         else if (moveDir.x < 0)
         {
             player.ChangeLeft(true, false);
+        }
+
+        if (rb.velocity == Vector2.zero)
+        {
+            fsm.SwitchState<RogueIdleState>();
         }
     }
 }
@@ -76,7 +68,7 @@ public class RogueRollState : PlayerState
         animator.SetTrigger("isRoll");
     }
 
-    protected override void OnUpdate()
+    public override void OnUpdate()
     {
         base.OnUpdate();
     }

@@ -22,9 +22,14 @@ namespace MainMenuScene
             facade.TurnOn();
         }
 
+        private void FixedUpdate()
+        {
+            facade.FixedUpdate();
+        }
+
         void Update()
         {
-            facade.GameUpdate();
+            facade.Update();
         }
 
         private void OnDisable()

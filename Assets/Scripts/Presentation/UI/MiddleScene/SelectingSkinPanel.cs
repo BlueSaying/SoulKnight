@@ -33,15 +33,15 @@ namespace MiddleScene
             // 下一步
             UnityTools.Instance.GetComponentFromChildren<Button>(gameObject, "ButtonNext").onClick.AddListener(() =>
             {
+                // 保存皮肤
+                SystemRepository.Instance.GetSystem<PlayerSystem>().SetMainPlayerSkin(playerSkins[curSkinIndex]);
+
                 EventCenter.Instance.NotifyEvent(EventType.OnSelectSkinComplete);// TODO:读取数据填写UI
 
                 // 解除冻结位置，即仅设置冻结旋转
                 UIMediator.Instance.OpenPanel(SceneName.MiddleScene, PanelName.BattlePanel.ToString());
                 UIMediator.Instance.ClosePanel(PanelName.SelectingSkinPanel.ToString());
                 UIMediator.Instance.ClosePanel(PanelName.GemPanel.ToString());
-
-                // 保存皮肤
-                SystemRepository.Instance.GetSystem<PlayerSystem>().SetMainPlayerSkin(playerSkins[curSkinIndex]);
 
                 // HACK
                 WeaponFactory.Instance.InstantiateWeapon(WeaponType.AK47, new Vector2(5, 0), Quaternion.identity);

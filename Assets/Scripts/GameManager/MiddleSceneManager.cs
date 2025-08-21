@@ -27,11 +27,17 @@ namespace MiddleScene
             facade.TurnOn();
         }
 
+        private void FixedUpdate()
+        {
+            facade.FixedUpdate();
+        }
+
         void Update()
         {
-            facade.GameUpdate();
+            facade.Update();
 
-            if (Input.GetKeyDown(KeyCode.U)) TestManager.Instance.isUnlockWeapon = !TestManager.Instance.isUnlockWeapon;
+            //if (Input.GetKeyDown(KeyCode.U)) TestManager.Instance.isUnlockWeapon = !TestManager.Instance.isUnlockWeapon;
+            //if (Input.GetKeyDown(KeyCode.U)) TestManager.Instance.isUnlockWeapon = !TestManager.Instance.isUnlockWeapon;
         }
 
         private void OnDisable()

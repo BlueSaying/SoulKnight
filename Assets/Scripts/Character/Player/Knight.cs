@@ -4,9 +4,9 @@ public class Knight : Player
 {
     public Knight(GameObject obj, PlayerModel playerModel) : base(obj, playerModel) { }
 
-    protected override void OnCharacterStart()
+    protected override void OnEnter()
     {
-        base.OnCharacterStart();
+        base.OnEnter();
         stateMachine = new KnightFSM(this);
     }
 }

@@ -15,7 +15,7 @@ public abstract class Weapon
 
     // 射击冷却计时器
     private float fireTimer;
-    private float fireTime => 1 / model.staticAttr.fireRate;
+    private float fireTime => 1 / fireRate;
     public bool isUsing;
 
     public bool isPickUp;
@@ -121,7 +121,7 @@ public abstract class Weapon
     // 每次切换至此武器时调用一次
     protected virtual void OnEnter()
     {
-        fireTimer = 1 / model.staticAttr.fireRate;
+        fireTimer = 1 / fireRate;
     }
 
     protected virtual void OnUpdate()

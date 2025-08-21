@@ -7,7 +7,13 @@ public abstract class BaseSystem
     private bool isEnter;
     private bool isEnable;
 
-    public void GameUpdate()
+    protected virtual void OnInit() { }
+
+    protected virtual void OnEnter() { }
+
+    protected virtual void OnExit() { }
+
+    public void FixedUpdate()
     {
         if (!isInit)
         {
@@ -17,24 +23,39 @@ public abstract class BaseSystem
 
         if (isEnable)
         {
+            if (!isEnter)
+            {
+                isEnter = true;
+                OnEnter();
+            }
+
+            OnFixedUpdate();
+        }
+    }
+
+    protected virtual void OnFixedUpdate() { }
+
+    public void Update()
+    {
+        if (!isInit)
+        {
+            isInit = true;
+            OnInit();
+        }
+
+        if (isEnable)
+        {
+            if (!isEnter)
+            {
+                isEnter = true;
+                OnEnter();
+            }
+
             OnUpdate();
         }
     }
 
-    protected virtual void OnInit() { }
-
-    protected virtual void OnEnter() { }
-
-    protected virtual void OnExit() { }
-
-    protected virtual void OnUpdate()
-    {
-        if (!isEnter)
-        {
-            isEnter = true;
-            OnEnter();
-        }
-    }
+    protected virtual void OnUpdate() { }
 
     public void TurnOn()
     {

@@ -51,7 +51,7 @@ public abstract class Character
     }
 
     private bool isInit;
-    private bool isStart;
+    private bool isEnter;
 
     public Character(GameObject obj, CharacterModel model)
     {
@@ -78,7 +78,11 @@ public abstract class Character
 
     }
 
-    public void GameUpdate()
+    protected virtual void OnInit() { }
+
+    protected virtual void OnEnter() { }
+
+    public virtual void OnFixedUpdate()
     {
         if (!isInit)
         {
@@ -86,19 +90,25 @@ public abstract class Character
             OnInit();
         }
 
-        OnCharacterUpdate();
+        if (!isEnter)
+        {
+            isEnter = true;
+            OnEnter();
+        }
     }
 
-    protected virtual void OnInit() { }
-
-    protected virtual void OnCharacterStart() { }
-
-    protected virtual void OnCharacterUpdate()
+    public virtual void OnUpdate()
     {
-        if (!isStart)
+        if (!isInit)
         {
-            isStart = true;
-            OnCharacterStart();
+            isInit = true;
+            OnInit();
+        }
+
+        if (!isEnter)
+        {
+            isEnter = true;
+            OnEnter();
         }
     }
 }

@@ -25,19 +25,20 @@ public abstract class Enemy : Character, IDamageable
 
     public Enemy(GameObject obj, EnemyModel model) : base(obj, model) { }
 
-    protected override void OnCharacterUpdate()
+    public override void OnUpdate()
     {
-        base.OnCharacterUpdate();
-        stateMachine?.GameUpdate();
+        base.OnUpdate();
+        stateMachine?.OnUpdate();
     }
 
     // call it when get hurt
     public virtual void TakeDamage(int damage, Color damageColor)
     {
-        // HACK
+        // 弹出伤害值
         Transform damageNumPoint = transform.Find("DamageNumPoint");
-
         ItemFactory.Instance.CreateDamageNum("DamageNum", damageNumPoint.position, damage, damageColor);
+
+        
 
         model.dynamicAttr.curHP -= damage;
 
@@ -84,6 +85,9 @@ public abstract class Enemy : Character, IDamageable
     {
         if (isDead) return;
         isDead = true;
+
+        // 播放音效
+        AudioManager.Instance.PlaySound(AudioType.Hurt, (AudioName)(AudioName.fx_hit_p1 + Random.Range(0, 5)));
 
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
 

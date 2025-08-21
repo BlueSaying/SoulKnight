@@ -2,7 +2,7 @@
 
 public class Bullet_34 : Bullet
 {
-    public Bullet_34(GameObject gameObject, Character owner, int damage) : base(gameObject, owner, damage) { }
+    public Bullet_34(GameObject gameObject, Character owner, int damage, float bulletSpeed) : base(gameObject, owner, damage, bulletSpeed) { }
 
     protected override void OnHitObstacle()
     {
@@ -13,7 +13,7 @@ public class Bullet_34 : Bullet
     protected override void OnHitEnemy(Enemy enemy)
     {
         base.OnHitEnemy(enemy);
-        
+
         ItemFactory.Instance.CreateEffect(EffectType.BoomEffect, position, Quaternion.identity);
     }
 

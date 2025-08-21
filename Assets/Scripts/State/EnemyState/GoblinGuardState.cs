@@ -7,7 +7,7 @@ public class GoblinGuardState : EnemyState
 
     public GoblinGuardState(FSM fsm) : base(fsm) { }
 
-    protected override void OnUpdate()
+    public override void OnUpdate()
     {
         base.OnUpdate();
 
@@ -35,7 +35,7 @@ public class GoblinGuardIdleState : GoblinGuardState
         timer = -1f;
     }
 
-    protected override void OnUpdate()
+    public override void OnUpdate()
     {
         base.OnUpdate();
 
@@ -64,7 +64,7 @@ public class GoblinGuardRunState : GoblinGuardState
         animator.SetBool("isRun", true);
     }
 
-    protected override void OnUpdate()
+    public override void OnUpdate()
     {
         base.OnUpdate();
         Vector2 dir = (targetPlayer.transform.position - enemy.transform.position).normalized;
@@ -88,7 +88,7 @@ public class GoblinGuardAttackState : GoblinGuardState
 {
     public GoblinGuardAttackState(FSM fsm) : base(fsm) { }
 
-    protected override void OnUpdate()
+    public override void OnUpdate()
     {
         base.OnUpdate();
 

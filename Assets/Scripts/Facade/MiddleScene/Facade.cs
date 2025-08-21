@@ -1,4 +1,6 @@
 ﻿
+using UnityEngine;
+
 namespace MiddleScene
 {
     public class Facade : AbstractFacade

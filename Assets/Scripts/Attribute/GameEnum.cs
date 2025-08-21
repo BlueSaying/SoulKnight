@@ -251,6 +251,8 @@ public enum AudioType
     Others,
 
     Sword,
+
+    Hurt,
 }
 
 /// <summary>
@@ -292,6 +294,46 @@ public enum AudioName
     /// 切换武器
     /// </summary>
     fx_switch,
+
+    /// <summary>
+    /// 鸡
+    /// </summary>
+    ji,
+
+    /// <summary>
+    /// 受击音效1
+    /// </summary>
+    fx_hit_p1,
+
+    /// <summary>
+    /// 受击音效2
+    /// </summary>
+    fx_hit_p2,
+
+    /// <summary>
+    /// 受击音效3
+    /// </summary>
+    fx_hit_p3,
+
+    /// <summary>
+    /// 受击音效4
+    /// </summary>
+    fx_hit_p4,
+
+    /// <summary>
+    /// 受击音效5
+    /// </summary>
+    fx_hit_p5,
+
+    /// <summary>
+    /// 受鸡音效
+    /// </summary>
+    niganma,
+
+    /// <summary>
+    /// 全民制作人们
+    /// </summary>
+    quanminzhizuorenmen
 }
 
 /// <summary>
@@ -482,8 +524,6 @@ public enum EnemyType
     TrumpetFlower,
 
     Boar,
-
-
 }
 namespace Generic
 {

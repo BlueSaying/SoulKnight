@@ -9,8 +9,6 @@ public abstract class Item
 
     private bool isInit;
     private bool isEnter;
-    //private bool beingRemoved;
-    //public bool hasRemoved { get; protected set; }
     public bool isRemoved { get; protected set; }
 
     public Item(GameObject gameObject)
@@ -28,17 +26,6 @@ public abstract class Item
             isInit = true;
             OnInit();
         }
-
-        //if (beingRemoved && !hasRemoved)
-        //{
-        //    OnExit();
-        //    hasRemoved = true;
-        //}
-        //
-        //if (!hasRemoved)
-        //{
-        //    OnUpdate();
-        //}
 
         if(isRemoved)
         {
@@ -68,7 +55,6 @@ public abstract class Item
     public void Remove()
     {
         isRemoved = true;
-        //beingRemoved = true;
     }
 
     // 将*this*托管到ItemController中

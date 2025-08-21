@@ -13,13 +13,13 @@ public class GoblinSpear : Melee
     {
         base.OnHitEnemy(enemy);
 
-        enemy.TakeDamage(model.staticAttr.damage, Color.red);
+        enemy.TakeDamage(damage, Color.red);
     }
 
     protected override void OnHitPlayer(Player player)
     {
         base.OnHitPlayer(player);
 
-        player.TakeDamage(model.staticAttr.damage, Color.red);
+        player.TakeDamage(damage, Color.red);
     }
 }

@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-
 public class Basketball : Strange
 {
     private GameObject shootPoint;
@@ -33,10 +32,17 @@ public class Basketball : Strange
     {
         base.OnFire();
 
-        AudioManager.Instance.PlaySound(AudioType.Gun, AudioName.fx_gun_6);
-        
-        Quaternion quaternion = rotation * Quaternion.Euler(0, 0, UnityTools.GetRandomFloat(-model.staticAttr.scatterRate / 2.0f, model.staticAttr.scatterRate / 2.0f));
-        ItemFactory.Instance.CreateBullet(BulletType.BulletBasketball, shootPoint.transform.position, quaternion, owner, model.staticAttr.damage);
+        if (owner is Player && (owner as Player).playerSkinType == PlayerSkinType.RogueKun)
+        {
+            AudioManager.Instance.PlaySound(AudioType.Others, AudioName.ji);
+        }
+        else
+        {
+            AudioManager.Instance.PlaySound(AudioType.Gun, AudioName.fx_gun_6);
+        }
+
+        Quaternion quaternion = rotation * Quaternion.Euler(0, 0, UnityTools.GetRandomFloat(-scatterRate / 2.0f, scatterRate / 2.0f));
+        ItemFactory.Instance.CreateBullet(BulletType.BulletBasketball, shootPoint.transform.position, quaternion, owner, damage, bulletSpeed);
     }
 }
 

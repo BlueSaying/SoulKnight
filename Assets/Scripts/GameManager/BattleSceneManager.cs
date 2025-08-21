@@ -10,7 +10,7 @@ namespace BattleScene
         {
             // 打开场景最初UI界面
             UIMediator.Instance.OpenPanel(SceneName.BattleScene, PanelName.BattlePanel.ToString());
-            WeaponFactory.Instance.InstantiateWeapon(WeaponType.AK47, new Vector2(5, 0), Quaternion.identity);
+
             // 播放BGM
             AudioManager.Instance.PlayBGM(AudioType.Bgm, AudioName.bgm_1Low);
 
@@ -22,11 +22,16 @@ namespace BattleScene
             facade.TurnOn();
         }
 
+        private void FixedUpdate()
+        {
+            facade.FixedUpdate();
+        }
+
         void Update()
         {
-            facade.GameUpdate();
+            facade.Update();
 
-            if (Input.GetKeyDown(KeyCode.U)) TestManager.Instance.isUnlockWeapon = !TestManager.Instance.isUnlockWeapon;
+            //if (Input.GetKeyDown(KeyCode.U)) TestManager.Instance.isUnlockWeapon = !TestManager.Instance.isUnlockWeapon;
         }
 
         private void OnDisable()

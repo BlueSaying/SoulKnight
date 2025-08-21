@@ -14,7 +14,7 @@
 
     protected virtual void OnEnter() { }
 
-    public void GameUpdate()
+    public virtual void OnFixedUpdate()
     {
         if (!isInit)
         {
@@ -22,11 +22,21 @@
             OnInit();
         }
 
-        OnUpdate();
+        if (!isEnter)
+        {
+            isEnter = true;
+            OnEnter();
+        }
     }
 
-    protected virtual void OnUpdate()
+    public virtual void OnUpdate()
     {
+        if (!isInit)
+        {
+            isInit = true;
+            OnInit();
+        }
+
         if (!isEnter)
         {
             isEnter = true;

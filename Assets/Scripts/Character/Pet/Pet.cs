@@ -18,9 +18,9 @@ public abstract class Pet : Character
         return Vector2.Distance(transform.position, owner.transform.position);
     }
 
-    protected override void OnCharacterUpdate()
+    public override void OnUpdate()
     {
-        base.OnCharacterUpdate();
-        stateMachine?.GameUpdate();
+        base.OnUpdate();
+        stateMachine?.OnUpdate();
     }
 }

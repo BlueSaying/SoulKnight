@@ -10,20 +10,6 @@ public abstract class AbstractFacade
     private bool isEnter;
     private bool isEnable;
 
-    public void GameUpdate()
-    {
-        if (!isInit)
-        {
-            isInit = true;
-            OnInit();
-        }
-
-        if (isEnable)
-        {
-            OnUpdate();
-        }
-    }
-
     protected virtual void OnInit()
     {
         systems = new Dictionary<Type, BaseSystem>();
@@ -39,19 +25,59 @@ public abstract class AbstractFacade
         }
     }
 
-    protected virtual void OnUpdate()
+    public void FixedUpdate()
     {
-        if (!isEnter)
+        if (!isInit)
         {
-            isEnter = true;
-            OnEnter();
-        }
+            isInit = true;
+            OnInit();
+        }        
 
-        foreach (var system in systems.Values)
+        if(isEnable)
         {
-            system.GameUpdate();
+            if (!isEnter)
+            {
+                isEnter = true;
+                OnEnter();
+            }
+
+            foreach (var system in systems.Values)
+            {
+                system.FixedUpdate();
+            }
+
+            OnFixedUpdate();
         }
     }
+
+    protected virtual void OnFixedUpdate() { }
+
+    public void Update()
+    {
+        if (!isInit)
+        {
+            isInit = true;
+            OnInit();
+        }
+
+        if (isEnable)
+        {
+            if (!isEnter)
+            {
+                isEnter = true;
+                OnEnter();
+            }
+
+            foreach (var system in systems.Values)
+            {
+                system.Update();
+            }
+
+            OnUpdate();
+        }
+    }
+
+    protected virtual void OnUpdate() { }
 
     public void TurnOn()
     {

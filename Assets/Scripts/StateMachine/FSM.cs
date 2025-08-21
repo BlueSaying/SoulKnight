@@ -26,11 +26,13 @@ public abstract class FSM
         curState = stateDic[typeof(T)];
     }
 
-    public void GameUpdate()
+    public virtual void OnFixedUpdate()
     {
-        curState?.GameUpdate();
-        OnUpdate();
+        curState?.OnFixedUpdate();
     }
 
-    protected virtual void OnUpdate() { }
+    public virtual void OnUpdate()
+    {
+        curState?.OnUpdate();
+    }
 }

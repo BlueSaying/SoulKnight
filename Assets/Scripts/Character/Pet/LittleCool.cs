@@ -5,9 +5,9 @@ public class LittleCool : Pet
 
     public LittleCool(GameObject obj, PetModel model, Player owner) : base(obj, model, owner) { }
 
-    protected override void OnCharacterStart()
+    protected override void OnEnter()
     {
-        base.OnCharacterStart();
+        base.OnEnter();
         stateMachine = new LittleCoolFSM(this);
     }
 }

@@ -26,7 +26,17 @@ public abstract class Player : Character, IDamageable
     public float hurtInvincibleTime => model.staticAttr.hurtInvincibleTime;
 
     // 动态属性
-    public PlayerSkinType playerSkinType { get; }
+    public PlayerSkinType playerSkinType
+    {
+        get
+        {
+            return model.dynamicAttr.playerSkinType;
+        }
+        protected set
+        {
+            model.dynamicAttr.playerSkinType = value;
+        }
+    }
 
     public new int curHP
     {
@@ -67,6 +77,10 @@ public abstract class Player : Character, IDamageable
     }
     #endregion
 
+    private float hurtArmorRecoveryTimer;
+    private float armorRecoveryTimer;
+    private float hurtInvincibleTimer;
+
     public Player(GameObject obj, PlayerModel model) : base(obj, model)
     {
         this.model = model;
@@ -74,6 +88,10 @@ public abstract class Player : Character, IDamageable
 
         weaponsCanPickUp = new List<GameObject>();
         weapons = new List<Weapon>();
+
+        hurtArmorRecoveryTimer = 0f;
+        armorRecoveryTimer = 0f;
+        hurtInvincibleTimer = 0f;
     }
 
     protected override void OnInit()
@@ -84,10 +102,16 @@ public abstract class Player : Character, IDamageable
         //SystemRepository.Instance.GetSystem<PlayerSystem>().AddPlayerPet(PetType.LittleCool, this);
     }
 
-    protected override void OnCharacterUpdate()
+    public override void OnFixedUpdate()
     {
-        base.OnCharacterUpdate();
-        stateMachine?.GameUpdate();
+        base.OnFixedUpdate();
+        stateMachine?.OnFixedUpdate();
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+        stateMachine?.OnUpdate();
 
         if (usingWeapon != null)
         {
@@ -112,6 +136,22 @@ public abstract class Player : Character, IDamageable
         {
             SwitchWeapon();
         }
+
+        hurtArmorRecoveryTimer += Time.deltaTime;
+        if (hurtArmorRecoveryTimer > hurtArmorRecoveryTime && curArmor < maxArmor)
+        {
+            if (armorRecoveryTimer > armorRecoveryTime)
+            {
+                curArmor++;
+                armorRecoveryTimer = 0f;
+            }
+            else
+            {
+                armorRecoveryTimer += Time.deltaTime;
+            }
+        }
+
+        hurtInvincibleTimer += Time.deltaTime;
     }
 
     public void AddWeapon(WeaponModel model)
@@ -170,11 +210,27 @@ public abstract class Player : Character, IDamageable
 
     public virtual void TakeDamage(int damage, Color damageColor)
     {
-        if (damage <= 0) return;
+        if (damage <= 0 || hurtInvincibleTimer < hurtInvincibleTime) return;
+
+        // 护甲恢复计时器归零
+        hurtArmorRecoveryTimer = 0f;
+        armorRecoveryTimer = 0f;
+        hurtInvincibleTimer = 0f;
 
         // 弹出伤害值
         Transform damageNumPoint = transform.Find("DamageNumPoint");
         ItemFactory.Instance.CreateDamageNum("DamageNum", damageNumPoint.position, damage, damageColor);
+
+        // 播放音效
+        if(playerSkinType == PlayerSkinType.RogueKun)
+        {
+            AudioManager.Instance.PlaySound(AudioType.Hurt, AudioName.niganma);
+        }
+        else
+        {
+            AudioManager.Instance.PlaySound(AudioType.Hurt, (AudioName)(AudioName.fx_hit_p1 + Random.Range(0, 5)));
+        }
+
 
         // 优先扣除护盾值
         if (curArmor >= damage)

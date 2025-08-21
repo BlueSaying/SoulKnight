@@ -3,7 +3,7 @@
 public abstract class Bullet : Item
 {
     // 子弹飞行速度
-    private const float speed = 30f;
+    private float bulletSpeed;
 
     protected TriggerDetector triggerDetector;
 
@@ -11,10 +11,11 @@ public abstract class Bullet : Item
 
     public Character owner { get; protected set; }
 
-    public Bullet(GameObject gameObject, Character owner, int damage) : base(gameObject)
+    public Bullet(GameObject gameObject, Character owner, int damage, float bulletSpeed) : base(gameObject)
     {
         this.owner = owner;
         this.damage = damage;
+        this.bulletSpeed = bulletSpeed;
     }
 
     protected override void OnInit()
@@ -54,7 +55,7 @@ public abstract class Bullet : Item
     public override void OnEnter()
     {
         base.OnEnter();
-        transform.GetComponent<Rigidbody2D>().velocity = rotation * Vector2.right * speed;
+        transform.GetComponent<Rigidbody2D>().velocity = rotation * Vector2.right * bulletSpeed;
         transform.GetComponent<Collider2D>().enabled = true;
     }
 
