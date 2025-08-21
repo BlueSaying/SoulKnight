@@ -3,8 +3,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-
 public class CameraSystem : BaseSystem
 {
     private SceneName CurSceneName => SceneFacade.Instance.GetActiveSceneName();

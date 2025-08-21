@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Cinemachine;
+using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Player : Character, IDamageable
@@ -10,6 +11,8 @@ public abstract class Player : Character, IDamageable
     public List<GameObject> weaponsCanPickUp;
     public List<Weapon> weapons;
     public Weapon usingWeapon { get; protected set; }
+
+    private CinemachineFramingTransposer cinemachineFramingTransposer;
 
     #region Attr
     // 静态属性
@@ -98,6 +101,9 @@ public abstract class Player : Character, IDamageable
     {
         base.OnInit();
 
+        cinemachineFramingTransposer = GameObject.Find("FollowCamera").
+            GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineFramingTransposer>();
+
         // NOTE:角色初始化时，添加阿凉为宠物
         //SystemRepository.Instance.GetSystem<PlayerSystem>().AddPlayerPet(PetType.LittleCool, this);
     }
@@ -118,18 +124,8 @@ public abstract class Player : Character, IDamageable
             usingWeapon.GameUpdate();
             usingWeapon.ControlWeapon(SystemRepository.Instance.GetSystem<InputSystem>().GetKeyInput(KeyInputType.Shoot));
 
-            // 自动瞄准最近敌人
-            Enemy cloestEnemy = AutoAimingEnemy();
-            if (cloestEnemy == null)
-            {
-                usingWeapon.RotateWeapon(SystemRepository.Instance.GetSystem<InputSystem>().GetMoveInput());
-                isLeftAuto = false;
-            }
-            else
-            {
-                usingWeapon.RotateWeapon(cloestEnemy.transform.position - transform.position);
-                ChangeLeft(cloestEnemy.transform.position.x < transform.position.x, true);
-            }
+            // 尝试自动瞄准最近敌人
+            TryAutoAimingEnemy();
         }
 
         if (SystemRepository.Instance.GetSystem<InputSystem>().GetKeyDownInput(KeyInputType.SwitchWeapon))
@@ -222,7 +218,7 @@ public abstract class Player : Character, IDamageable
         ItemFactory.Instance.CreateDamageNum("DamageNum", damageNumPoint.position, damage, damageColor);
 
         // 播放音效
-        if(playerSkinType == PlayerSkinType.RogueKun)
+        if (playerSkinType == PlayerSkinType.RogueKun)
         {
             AudioManager.Instance.PlaySound(AudioType.Hurt, AudioName.niganma);
         }
@@ -270,14 +266,15 @@ public abstract class Player : Character, IDamageable
     }
 
     // 获取自动瞄准的敌人
-    public Enemy AutoAimingEnemy()
+    public void TryAutoAimingEnemy()
     {
         // 仅10米内的敌人可以自动瞄准
         const float AutoAimingDistance = 10f;
 
-        Enemy output = null;
+        Enemy cloestEnemy = null;
         float distance = AutoAimingDistance * AutoAimingDistance;
 
+        // 遍历所有敌人
         foreach (var enemy in SystemRepository.Instance.GetSystem<EnemySystem>().enemies)
         {
             float x = (enemy.transform.position.x - transform.position.x);
@@ -285,11 +282,29 @@ public abstract class Player : Character, IDamageable
 
             if (x * x + y * y < distance)
             {
-                output = enemy;
+                cloestEnemy = enemy;
                 distance = x * x + y * y;
             }
         }
 
-        return output;
+        if (cloestEnemy == null)
+        {
+            usingWeapon.RotateWeapon(SystemRepository.Instance.GetSystem<InputSystem>().GetMoveInput());
+            isLeftAuto = false;
+
+            // 修改VCam
+            cinemachineFramingTransposer.m_TrackedObjectOffset = new Vector2(1.5f, 0);
+        }
+        else
+        {
+            Vector2 dir = cloestEnemy.transform.position - transform.position;
+            usingWeapon.RotateWeapon(dir);
+            ChangeLeft(cloestEnemy.transform.position.x < transform.position.x, true);
+
+            // 修改VCam
+            cinemachineFramingTransposer.m_TrackedObjectOffset = new Vector2(Mathf.Abs(Mathf.Clamp(dir.x, -1.5f, 1.5f)), Mathf.Clamp(dir.y, -2, 2));
+            Debug.Log(cinemachineFramingTransposer.m_TrackedObjectOffset);
+
+        }
     }
 }
