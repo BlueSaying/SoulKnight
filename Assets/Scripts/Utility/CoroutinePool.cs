@@ -8,13 +8,13 @@ public class CoroutinePool : MonoBehaviour
     {
         get
         {
-            GameObject obj = GameObject.Find("CoroutinePool");
-            if (obj == null)
+            GameObject pool = GameObject.Find("CoroutinePool");
+            if (pool == null)
             {
-                obj = new GameObject("CoroutinePool", typeof(CoroutinePool));
+                pool = new GameObject("CoroutinePool", typeof(CoroutinePool));
             }
 
-            return obj.GetComponent<CoroutinePool>();
+            return pool.GetComponent<CoroutinePool>();
         }
     }
 
@@ -28,30 +28,27 @@ public class CoroutinePool : MonoBehaviour
     /// <summary>
     /// 开启协程
     /// </summary>
-    /// <param name="obj"></param>
-    /// <param name="coroutine"></param>
-    /// <returns></returns>
-    public void StartCoroutine(object obj, IEnumerator coroutine)
+    public void StartCoroutine(object caller, IEnumerator coroutine)
     {
-        if (dic.ContainsKey(obj))
+        if (dic.ContainsKey(caller))
         {
-            dic[obj].Add(StartCoroutine(coroutine));
+            dic[caller].Add(StartCoroutine(coroutine));
         }
         else
         {
-            dic.Add(obj, new List<Coroutine>() { StartCoroutine(coroutine) });
+            dic.Add(caller, new List<Coroutine>() { StartCoroutine(coroutine) });
         }
     }
 
-    public void StopAllCoroutine(object obj)
+    public void StopAllCoroutine(object caller)
     {
-        if (dic.ContainsKey(obj))
+        if (dic.ContainsKey(caller))
         {
-            foreach (Coroutine coroutine in dic[obj])
+            foreach (Coroutine coroutine in dic[caller])
             {
                 StopCoroutine(coroutine);
             }
-            dic[obj].Clear();
+            dic[caller].Clear();
         }
     }
 }

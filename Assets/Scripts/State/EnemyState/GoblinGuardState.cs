@@ -88,6 +88,16 @@ public class GoblinGuardAttackState : GoblinGuardState
 {
     public GoblinGuardAttackState(FSM fsm) : base(fsm) { }
 
+    public override void OnFixedUpdate()
+    {
+        base.OnFixedUpdate();
+
+        if(enemy.weapon!=null)
+        {
+            enemy.weapon.OnFixedUpdate();
+        }
+    }
+
     public override void OnUpdate()
     {
         base.OnUpdate();
@@ -100,7 +110,7 @@ public class GoblinGuardAttackState : GoblinGuardState
         Vector2 dir = (targetPlayer.transform.position - enemy.transform.position).normalized;
         if (enemy.weapon != null)
         {
-            enemy.weapon.GameUpdate();
+            enemy.weapon.OnUpdate();
             enemy.weapon.ControlWeapon(true);
             enemy.weapon.RotateWeapon(targetPlayer.transform.position - enemy.transform.position);
         }

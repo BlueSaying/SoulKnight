@@ -112,6 +112,11 @@ public abstract class Player : Character, IDamageable
     {
         base.OnFixedUpdate();
         stateMachine?.OnFixedUpdate();
+
+        if (usingWeapon != null)
+        {
+            usingWeapon.OnFixedUpdate();
+        }
     }
 
     public override void OnUpdate()
@@ -121,7 +126,7 @@ public abstract class Player : Character, IDamageable
 
         if (usingWeapon != null)
         {
-            usingWeapon.GameUpdate();
+            usingWeapon.OnUpdate();
             usingWeapon.ControlWeapon(SystemRepository.Instance.GetSystem<InputSystem>().GetKeyInput(KeyInputType.Shoot));
 
             // 尝试自动瞄准最近敌人
@@ -293,18 +298,17 @@ public abstract class Player : Character, IDamageable
             isLeftAuto = false;
 
             // 修改VCam
-            cinemachineFramingTransposer.m_TrackedObjectOffset = new Vector2(1.5f, 0);
+            cinemachineFramingTransposer.m_TrackedObjectOffset = new Vector2(0.5f, 0);
         }
         else
         {
-            Vector2 dir = cloestEnemy.transform.position - transform.position;
+            Vector2 dir = (cloestEnemy.transform.position - transform.position).normalized;
             usingWeapon.RotateWeapon(dir);
             ChangeLeft(cloestEnemy.transform.position.x < transform.position.x, true);
 
             // 修改VCam
-            cinemachineFramingTransposer.m_TrackedObjectOffset = new Vector2(Mathf.Abs(Mathf.Clamp(dir.x, -1.5f, 1.5f)), Mathf.Clamp(dir.y, -2, 2));
-            Debug.Log(cinemachineFramingTransposer.m_TrackedObjectOffset);
-
+            cinemachineFramingTransposer.m_TrackedObjectOffset =
+                new Vector2(Mathf.Abs(dir.x), dir.y);
         }
     }
 }

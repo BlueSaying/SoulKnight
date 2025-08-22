@@ -14,12 +14,12 @@ public class MoveManager
         float distance = Vector2.Distance(from, to);
         if (distance < acceleration * Time.fixedDeltaTime) // 如果目标速度和现在的速度之间的“距离”小于一个单位加速度
         {
-            return to;// 返回目标速度
+            return to;  // 返回目标速度
         }
         else
         {
-            float arg = Mathf.Exp((to.magnitude - distance) / smoothingFactor);
-            return from + (to - from).normalized * acceleration * Time.fixedDeltaTime / arg;// 返回现速度加上一个指向目标速度的加速度
+            float arg = acceleration * Mathf.Exp(-from.magnitude / smoothingFactor);
+            return from + (to - from).normalized * Time.fixedDeltaTime * arg;   // 返回现速度加上一个指向目标速度的加速度
         }
     }
 }

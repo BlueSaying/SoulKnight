@@ -16,6 +16,7 @@ public abstract class Weapon
     // 射击冷却计时器
     private float fireTimer;
     private float fireTime => 1 / fireRate;
+
     public bool isUsing;
 
     public bool isPickUp;
@@ -96,17 +97,6 @@ public abstract class Weapon
         }
     }
 
-    public void GameUpdate()
-    {
-        if (!isInit)
-        {
-            isInit = true;
-            OnInit();
-        }
-
-        OnUpdate();
-    }
-
     public virtual void OnExit()
     {
         isEnter = false;
@@ -124,8 +114,29 @@ public abstract class Weapon
         fireTimer = 1 / fireRate;
     }
 
-    protected virtual void OnUpdate()
+    public virtual void OnFixedUpdate()
     {
+        if (!isInit)
+        {
+            isInit = true;
+            OnInit();
+        }
+
+        if (!isEnter)
+        {
+            isEnter = true;
+            OnEnter();
+        }
+    }
+
+    public virtual void OnUpdate()
+    {
+        if (!isInit)
+        {
+            isInit = true;
+            OnInit();
+        }
+
         if (!isEnter)
         {
             isEnter = true;

@@ -31,7 +31,7 @@ namespace BattleScene
         {
             facade.Update();
 
-            //if (Input.GetKeyDown(KeyCode.U)) TestManager.Instance.isUnlockWeapon = !TestManager.Instance.isUnlockWeapon;
+            if (Input.GetKeyDown(KeyCode.V)) TestManager.Instance.isUnlockWeapon = !TestManager.Instance.isUnlockWeapon;
         }
 
         private void OnDisable()

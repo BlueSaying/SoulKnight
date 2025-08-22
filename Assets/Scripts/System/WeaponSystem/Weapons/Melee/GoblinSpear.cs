@@ -1,12 +1,10 @@
 ﻿using UnityEngine;
-using UnityEngine.UIElements;
 
 public class GoblinSpear : Melee
 {
     public GoblinSpear(GameObject gameObject, Character owner, WeaponModel model) : base(gameObject, owner, model)
     {
         canRotate = true;
-
     }
 
     protected override void OnHitEnemy(Enemy enemy)
@@ -21,5 +19,5 @@ public class GoblinSpear : Melee
         base.OnHitPlayer(player);
 
         player.TakeDamage(damage, Color.red);
-    }
+    }   
 }

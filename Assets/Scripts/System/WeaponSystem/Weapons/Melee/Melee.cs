@@ -1,4 +1,4 @@
-﻿
+﻿using System.Collections;
 using UnityEngine;
 
 public abstract class Melee : Weapon
@@ -43,9 +43,33 @@ public abstract class Melee : Weapon
         animator.SetTrigger("Attack");
         AudioManager.Instance.PlaySound(AudioType.Sword, Random.Range(0, 2) > 0 ? AudioName.fx_sword1 : AudioName.fx_sword2);
 
-        //owner.rb.AddForce(Vector2.right * 100);
+        if (owner is Player)
+        {
+            float angle = rotation.eulerAngles.z * Mathf.Deg2Rad;
+            Vector2 dir = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+            if (rotation.eulerAngles.y != 0) dir.x *= -1;
+
+            CoroutinePool.Instance.StartCoroutine(this, AttackMove(dir));
+        }
     }
 
     protected virtual void OnHitEnemy(Enemy enemy) { }
     protected virtual void OnHitPlayer(Player player) { }
+
+    private IEnumerator AttackMove(Vector2 dir)
+    {
+        float timer = 0f;
+        float time = 0.2f;
+
+        yield return new WaitForSeconds(2.0f / 12.0f);
+
+        while (true)
+        {
+            timer += Time.fixedDeltaTime;
+            if (timer > time) break;
+
+            MoveManager.Move(owner.rb, dir * 40f, 400f, 50f);
+            yield return null;
+        }
+    }
 }
