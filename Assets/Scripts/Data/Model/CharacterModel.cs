@@ -14,6 +14,7 @@
 
     public virtual void Recover()
     {
-        dynamicAttr.curHP = staticAttr.maxHP;
+        dynamicAttr.curHP.AddModifier(new FlatModifier(staticAttr.maxHP - dynamicAttr.curHP.Value));
+        dynamicAttr.curSpeed.AddModifier(new FlatModifier(staticAttr.speed - dynamicAttr.curSpeed.Value));
     }
 }

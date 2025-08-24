@@ -3,15 +3,7 @@
     /// <summary>
     /// 当前血量
     /// </summary>
-    public int curHP;
+    public DynamicAttr curHP = new DynamicAttr();
 
-    public CharacterDynamicAttr()
-    {
-        curHP = 0;
-    }
-
-    public CharacterDynamicAttr(int curHP)
-    {
-        this.curHP = curHP;
-    }
+    public DynamicAttr curSpeed = new DynamicAttr();
 }

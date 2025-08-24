@@ -38,11 +38,9 @@ public abstract class Enemy : Character, IDamageable
         Transform damageNumPoint = transform.Find("DamageNumPoint");
         ItemFactory.Instance.CreateDamageNum("DamageNum", damageNumPoint.position, damage, damageColor);
 
-        
+        CurHP -= damage;
 
-        model.dynamicAttr.curHP -= damage;
-
-        if (model.dynamicAttr.curHP <= 0)
+        if (CurHP <= 0)
         {
             Die();
         }

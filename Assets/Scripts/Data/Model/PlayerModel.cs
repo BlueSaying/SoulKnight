@@ -9,7 +9,9 @@ public class PlayerModel : CharacterModel
     public override void Recover()
     {
         base.Recover();
-        dynamicAttr.curArmor = staticAttr.maxArmor;
-        dynamicAttr.curEnergy = staticAttr.maxEnergy;
+        dynamicAttr.curArmor.AddModifier(new FlatModifier(staticAttr.maxArmor - dynamicAttr.curArmor.Value));
+        dynamicAttr.curEnergy.AddModifier(new FlatModifier(staticAttr.maxEnergy - dynamicAttr.curEnergy.Value));
+
+        EventCenter.Instance.NotifyEvent(EventType.UpdateBattlePanel);
     }
 }

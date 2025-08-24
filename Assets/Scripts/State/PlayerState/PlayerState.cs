@@ -26,7 +26,7 @@ public abstract class PlayerState : State
     {
         base.OnFixedUpdate();
 
-        MoveManager.Move(rb, moveDir.normalized * player.speed);
+        MoveManager.Move(rb, moveDir.normalized * player.CurSpeed);
     }
 
     public override void OnUpdate()

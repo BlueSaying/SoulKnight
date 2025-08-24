@@ -52,15 +52,25 @@ public abstract class Weapon
 
     public void ControlWeapon(bool isAttack)
     {
-        if (isAttack && fireTimer >= fireTime)
+        // 如果不在攻击则直接返回
+        if (!isAttack)
+        {
+            owner.CurSpeed = owner.speed;
+            return;
+        }
+
+        owner.CurSpeed = owner.speed * (1 - speedDecrease);
+
+        // 如果冷却时间到了,那么发射子弹
+        if (fireTimer >= fireTime)
         {
             // 根据武器拥有者是否为玩家扣除能量值
             if (owner is Player && !TestManager.Instance.isUnlockWeapon)
             {
                 Player player = owner as Player;
-                if (player.curEnergy >= energyCost)
+                if (player.CurEnergy >= energyCost)
                 {
-                    player.curEnergy -= energyCost;
+                    player.CurEnergy -= energyCost;
                 }
                 else
                 {

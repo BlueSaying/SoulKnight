@@ -10,7 +10,7 @@ public class PickUpableWeapon : MonoBehaviour
     private Player player;
 
     private ItemArrow itemArrow;
-
+    
     private void Update()
     {
         if (isPlayerEnter)
@@ -30,13 +30,12 @@ public class PickUpableWeapon : MonoBehaviour
         {
             isPlayerEnter = true;
             player = collision.GetComponent<Symbol>().character as Player;
-            player.weaponsCanPickUp.Insert(0, gameObject);
+            player.pickUpableList.Insert(0, gameObject);
 
             itemArrow = ItemFactory.Instance.CreateItemArrow("ItemArrow", name, transform.Find("ItemArrowPoint"));
             if (!UIMediator.Instance.IsPanelOpened(PanelName.WeaponInfoPanel.ToString()))
             {
                 UIMediator.Instance.OpenPanel(SceneName.Generic, PanelName.WeaponInfoPanel.ToString());
-                
             }
 
             (UIMediator.Instance.GetPanel(PanelName.WeaponInfoPanel.ToString()) as WeaponInfoPanel).RefreshPanel();
@@ -49,13 +48,12 @@ public class PickUpableWeapon : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             isPlayerEnter = false;
-            player.weaponsCanPickUp.Remove(gameObject);
+            player.pickUpableList.Remove(gameObject);
             Destroy(itemArrow.transform.gameObject);
 
-            if (player.weaponsCanPickUp.Count <= 0)
+            if (player.pickUpableList.Count <= 0)
             {
                 UIMediator.Instance.ClosePanel(PanelName.WeaponInfoPanel.ToString());
-                
             }
             else
             {

@@ -19,15 +19,26 @@ public abstract class Character
     public float speed => model.staticAttr.speed;
 
     // 动态属性
-    public int curHP
+    public int CurHP
     {
         get
         {
-            return model.dynamicAttr.curHP;
+            return Mathf.RoundToInt(model.dynamicAttr.curHP.Value);
         }
         set
         {
-            model.dynamicAttr.curHP = value;
+            model.dynamicAttr.curHP.AddModifier(new FlatModifier(value - CurHP));
+        }
+    }
+    public float CurSpeed
+    {
+        get
+        {
+            return model.dynamicAttr.curSpeed.Value;
+        }
+        set
+        {
+            model.dynamicAttr.curSpeed.AddModifier(new FlatModifier(value - CurSpeed));
         }
     }
     #endregion

@@ -8,7 +8,7 @@ public abstract class Player : Character, IDamageable
 
     protected PlayerFSM stateMachine;
 
-    public List<GameObject> weaponsCanPickUp;
+    public List<GameObject> pickUpableList;
     public List<Weapon> weapons;
     public Weapon usingWeapon { get; protected set; }
 
@@ -29,7 +29,7 @@ public abstract class Player : Character, IDamageable
     public float hurtInvincibleTime => model.staticAttr.hurtInvincibleTime;
 
     // 动态属性
-    public PlayerSkinType playerSkinType
+    public PlayerSkinType PlayerSkinType
     {
         get
         {
@@ -41,40 +41,40 @@ public abstract class Player : Character, IDamageable
         }
     }
 
-    public new int curHP
+    public new int CurHP
     {
         get
         {
-            return model.dynamicAttr.curHP;
+            return Mathf.RoundToInt(model.dynamicAttr.curHP.Value);
         }
         set
         {
-            model.dynamicAttr.curHP = value;
+            model.dynamicAttr.curHP.AddModifier(new FlatModifier(value - CurHP));
             EventCenter.Instance.NotifyEvent(EventType.UpdateBattlePanel);
         }
     }
-    public int curArmor
+    public int CurArmor
     {
         get
         {
-            return model.dynamicAttr.curArmor;
+            return Mathf.RoundToInt(model.dynamicAttr.curArmor.Value);
         }
         set
         {
-            model.dynamicAttr.curArmor = value;
+            model.dynamicAttr.curArmor.AddModifier(new FlatModifier(value - CurArmor));
             EventCenter.Instance.NotifyEvent(EventType.UpdateBattlePanel);
         }
     }
 
-    public int curEnergy
+    public int CurEnergy
     {
         get
         {
-            return model.dynamicAttr.curEnergy;
+            return Mathf.RoundToInt(model.dynamicAttr.curEnergy.Value);
         }
         set
         {
-            model.dynamicAttr.curEnergy = value;
+            model.dynamicAttr.curEnergy.AddModifier(new FlatModifier(value - CurEnergy));
             EventCenter.Instance.NotifyEvent(EventType.UpdateBattlePanel);
         }
     }
@@ -89,7 +89,7 @@ public abstract class Player : Character, IDamageable
         this.model = model;
         model.Recover();
 
-        weaponsCanPickUp = new List<GameObject>();
+        pickUpableList = new List<GameObject>();
         weapons = new List<Weapon>();
 
         hurtArmorRecoveryTimer = 0f;
@@ -139,11 +139,11 @@ public abstract class Player : Character, IDamageable
         }
 
         hurtArmorRecoveryTimer += Time.deltaTime;
-        if (hurtArmorRecoveryTimer > hurtArmorRecoveryTime && curArmor < maxArmor)
+        if (hurtArmorRecoveryTimer > hurtArmorRecoveryTime && CurArmor < maxArmor)
         {
             if (armorRecoveryTimer > armorRecoveryTime)
             {
-                curArmor++;
+                CurArmor++;
                 armorRecoveryTimer = 0f;
             }
             else
@@ -223,7 +223,7 @@ public abstract class Player : Character, IDamageable
         ItemFactory.Instance.CreateDamageNum("DamageNum", damageNumPoint.position, damage, damageColor);
 
         // 播放音效
-        if (playerSkinType == PlayerSkinType.RogueKun)
+        if (PlayerSkinType == PlayerSkinType.RogueKun)
         {
             AudioManager.Instance.PlaySound(AudioType.Hurt, AudioName.niganma);
         }
@@ -234,29 +234,29 @@ public abstract class Player : Character, IDamageable
 
 
         // 优先扣除护盾值
-        if (curArmor >= damage)
+        if (CurArmor >= damage)
         {
-            curArmor -= damage;
+            CurArmor -= damage;
             damage = 0;
         }
         else
         {
-            damage -= curArmor;
-            curArmor = 0;
+            damage -= CurArmor;
+            CurArmor = 0;
         }
 
         // 判断剩余伤害是否要继续扣除血量
         if (damage <= 0) return;
 
-        if (curHP >= damage)
+        if (CurHP >= damage)
         {
-            curHP -= damage;
+            CurHP -= damage;
             damage = 0;
         }
         else
         {
-            damage -= curHP;
-            curHP = 0;
+            damage -= CurHP;
+            CurHP = 0;
             Die();
         }
     }

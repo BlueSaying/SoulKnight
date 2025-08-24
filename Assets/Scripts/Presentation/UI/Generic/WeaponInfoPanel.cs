@@ -6,7 +6,7 @@ public class WeaponInfoPanel : Panel
 {
     public void RefreshPanel()
     {
-        GameObject weaponCanPickUp = SystemRepository.Instance.GetSystem<PlayerSystem>().mainPlayer.weaponsCanPickUp.FirstOrDefault();
+        GameObject weaponCanPickUp = SystemRepository.Instance.GetSystem<PlayerSystem>().mainPlayer.pickUpableList.FirstOrDefault();
         if (weaponCanPickUp == default)
         {
             Debug.Log(1);

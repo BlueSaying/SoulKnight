@@ -32,7 +32,7 @@ public class Basketball : Strange
     {
         base.OnFire();
 
-        if (owner is Player && (owner as Player).playerSkinType == PlayerSkinType.RogueKun)
+        if (owner is Player && (owner as Player).PlayerSkinType == PlayerSkinType.RogueKun)
         {
             AudioManager.Instance.PlaySound(AudioType.Others, AudioName.ji);
         }

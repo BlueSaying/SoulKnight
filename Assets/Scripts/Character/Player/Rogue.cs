@@ -10,7 +10,7 @@ public class Rogue : Player
         stateMachine = new RogueFSM(this);
         
         // 根据皮肤播放音效
-        if(playerSkinType == PlayerSkinType.RogueKun)
+        if(PlayerSkinType == PlayerSkinType.RogueKun)
         {
             AudioManager.Instance.PlaySound(AudioType.Others, AudioName.quanminzhizuorenmen);
         }
