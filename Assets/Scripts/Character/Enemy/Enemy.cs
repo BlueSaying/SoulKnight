@@ -112,6 +112,6 @@ public abstract class Enemy : Character, IDamageable
     {
         if (model == null) return;
 
-        weapon = WeaponFactory.Instance.GetWeapon(model, this);
+        weapon = WeaponFactory.GetWeapon(model, this);
     }
 }

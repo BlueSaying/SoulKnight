@@ -143,18 +143,19 @@ public class MapSystem : BaseSystem
                 doorTile = levelRepository.GetLevelModel(curLevel).LevelStaticAttr.birthRoomStaticAttr.doorTile;
 
                 PaintSingleRoom(newRoom, roomBounds, floorTile, wallTile, doorTile);
-
                 break;
+
             case RoomType.Normal:
                 floorTile = levelRepository.GetLevelModel(curLevel).LevelStaticAttr.normalRoomStaticAttr.floorTile;
                 wallTile = levelRepository.GetLevelModel(curLevel).LevelStaticAttr.normalRoomStaticAttr.wallTile;
                 doorTile = levelRepository.GetLevelModel(curLevel).LevelStaticAttr.normalRoomStaticAttr.doorTile;
 
                 PaintSingleRoom(newRoom, roomBounds, floorTile, wallTile, doorTile);
-
                 break;
+
             case RoomType.Boss:
                 break;
+
             case RoomType.Transmission:
                 floorTile = levelRepository.GetLevelModel(curLevel).LevelStaticAttr.transmissionRoomStaticAttr.floorTile;
                 wallTile = levelRepository.GetLevelModel(curLevel).LevelStaticAttr.transmissionRoomStaticAttr.wallTile;
@@ -162,9 +163,16 @@ public class MapSystem : BaseSystem
 
                 PaintSingleRoom(newRoom, roomBounds, floorTile, wallTile, doorTile);
                 break;
+
             case RoomType.Speical:
                 break;
+
             case RoomType.Chest:
+                floorTile = levelRepository.GetLevelModel(curLevel).LevelStaticAttr.chestStaticAttr.floorTile;
+                wallTile = levelRepository.GetLevelModel(curLevel).LevelStaticAttr.chestStaticAttr.wallTile;
+                doorTile = levelRepository.GetLevelModel(curLevel).LevelStaticAttr.chestStaticAttr.doorTile;
+
+                PaintSingleRoom(newRoom, roomBounds, floorTile, wallTile, doorTile);
                 break;
         }
 
@@ -323,7 +331,7 @@ public class MapSystem : BaseSystem
         }
         else
         {
-            for (int y = yMin - 2; y <= yMax+1; y++)
+            for (int y = yMin - 2; y <= yMax + 1; y++)
             {
                 UnityTools.Instance.GetComponentFromChildren<Tilemap>(newCorridor, "Wall").
                         SetTile(new Vector3Int(xMin - 1, y), wallTile);
@@ -548,9 +556,10 @@ public class MapSystem : BaseSystem
         curRoomCount++;
 
         // 构建所有Normal房间
+        Vector2Int extendablePos;
         while (curRoomCount < roomCount)
         {
-            Vector2Int extendablePos = GetExtendablePos();
+            extendablePos = GetExtendablePos();
             curPos = GetGeneratable(extendablePos);// 从周围四个方向找一个generatable的
 
             // 生成房间
@@ -558,6 +567,11 @@ public class MapSystem : BaseSystem
             {
                 roomBounds = new BoundsInt((Vector3Int)(startPos + curPos * UnitSize), new Vector3Int(17 - 1, 17 - 1));
                 roomMatrix[curPos.x, curPos.y] = new TransmissionRoom(curLevel, RoomType.Transmission, roomBounds, InstantiateRooms(RoomType.Transmission, roomBounds));
+            }
+            else if (curRoomCount == roomCount - 2)
+            {
+                roomBounds = new BoundsInt((Vector3Int)(startPos + curPos * UnitSize), new Vector3Int(17 - 1, 17 - 1));
+                roomMatrix[curPos.x, curPos.y] = new ChestRoom(curLevel, RoomType.Chest, roomBounds, InstantiateRooms(RoomType.Chest, roomBounds));
             }
             else
             {
@@ -568,6 +582,7 @@ public class MapSystem : BaseSystem
             AddPath(roomMatrix[curPos.x, curPos.y], roomMatrix[extendablePos.x, extendablePos.y]);
             curRoomCount++;
         }
+
 
         InstantiateLevel();
         OpenAllDoor();

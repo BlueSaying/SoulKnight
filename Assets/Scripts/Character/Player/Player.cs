@@ -157,7 +157,7 @@ public abstract class Player : Character, IDamageable
 
     public void AddWeapon(WeaponModel model)
     {
-        Weapon newWeapon = WeaponFactory.Instance.GetWeapon(model, this);
+        Weapon newWeapon = WeaponFactory.GetWeapon(model, this);
         newWeapon.isPickUp = true;
 
         if (usingWeapon != null)

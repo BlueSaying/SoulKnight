@@ -13,6 +13,7 @@ public class ResourcesLoader : Singleton<ResourcesLoader>
         enemyDic = new Dictionary<string, GameObject>();
         effectDic = new Dictionary<string, GameObject>();
         panelDic = new Dictionary<string, GameObject>();
+        decorationDic = new Dictionary<string, GameObject>();
     }
 
     // 武器
@@ -38,6 +39,10 @@ public class ResourcesLoader : Singleton<ResourcesLoader>
     // UI
     private Dictionary<string, GameObject> panelDic;
     private string panelPath = "Prefabs/Panels/";
+
+    // 装饰物
+    private Dictionary<string, GameObject> decorationDic;
+    private string decorationPath = "Prefabs/Decoration/";
 
     // 音效
     private string audioPath = "Audios/";
@@ -104,6 +109,15 @@ public class ResourcesLoader : Singleton<ResourcesLoader>
         GameObject newPanel = Resources.LoadAll<GameObject>(panelPath + sceneName).Where(x => x.name == panelName).ToArray()[0];
         panelDic.Add(sceneName + panelName, newPanel);
         return newPanel;
+    }
+
+    public GameObject LoadDecoration(string decorationName)
+    {
+        if (decorationDic.ContainsKey(decorationName)) return decorationDic[decorationName];
+
+        GameObject newDecoration = Resources.LoadAll<GameObject>(decorationPath).Where(x => x.name == decorationName).ToArray()[0];
+        decorationDic.Add(decorationName, newDecoration);
+        return newDecoration;
     }
 
     public AudioClip LoadAudioClip(string audioType, string audioName)

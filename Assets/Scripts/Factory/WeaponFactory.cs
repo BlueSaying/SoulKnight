@@ -1,13 +1,12 @@
 ﻿using System;
 using UnityEngine;
 
-public class WeaponFactory : Singleton<WeaponFactory>
+public static class WeaponFactory
 {
-    private WeaponFactory() { }
 
     // 给*character*角色添加一个*type*类型的武器并
     // 放于WeaponOriginPoint物体下，返回该武器
-    public Weapon GetWeapon(WeaponModel model, Character owner)
+    public static Weapon GetWeapon(WeaponModel model, Character owner)
     {
         WeaponType type = model.staticAttr.weaponType;
         GameObject WeaponOriginPoint = UnityTools.Instance.GetTransformFromChildren(owner.gameObject, "WeaponOriginPoint").gameObject;
@@ -23,7 +22,7 @@ public class WeaponFactory : Singleton<WeaponFactory>
     }
 
     // 在地上生成武器
-    public GameObject InstantiateWeapon(WeaponType type, Vector3 position, Quaternion quaternion, Transform parent = null)
+    public static GameObject InstantiateWeapon(WeaponType type, Vector3 position, Quaternion quaternion, Transform parent = null)
     {
         GameObject weaponPrefab = ResourcesLoader.Instance.LoadWeapon(type.ToString());
 

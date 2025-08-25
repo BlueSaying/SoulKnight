@@ -9,5 +9,7 @@ public class LevelStaticAttr
 
     public TransmissionRoomStaticAttr transmissionRoomStaticAttr;
 
+    public ChestStaticAttr chestStaticAttr;
+
     public CorridorStaticAttr corridorStaticAttr;
 }

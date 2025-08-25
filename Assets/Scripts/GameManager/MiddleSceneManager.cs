@@ -19,6 +19,10 @@ namespace MiddleScene
             PlayerFactory.Instance.InstantiatePlayer(PlayerType.Knight, new Vector2(9, 7), Quaternion.identity);
             PlayerFactory.Instance.InstantiatePlayer(PlayerType.Rogue, new Vector2(6, -2), Quaternion.identity);
 
+            // 实例化宝箱
+            // HACK
+            DecorationFactory.InstantiateChest(new Vector2(10.5f, -3.5f), Quaternion.identity);
+
             facade = new Facade();
         }
 
