@@ -3,6 +3,8 @@ using UnityEngine;
 
 public abstract class Melee : Weapon
 {
+    public new MeleeModel model { get => base.model as MeleeModel; protected set => base.model = value; }
+
     protected TriggerDetector triggerDetector;
 
     protected Melee(GameObject gameObject, Character owner, WeaponModel model) : base(gameObject, owner, model) { }
@@ -41,6 +43,7 @@ public abstract class Melee : Weapon
         if (TestManager.Instance.isUnlockWeapon) animator.speed = 5f;
         else animator.speed = 1f;
         animator.SetTrigger("Attack");
+
         AudioManager.Instance.PlaySound(AudioType.Sword, Random.Range(0, 2) > 0 ? AudioName.fx_sword1 : AudioName.fx_sword2);
 
         if (owner is Player)
@@ -59,7 +62,7 @@ public abstract class Melee : Weapon
     private IEnumerator AttackMove(Vector2 dir)
     {
         float timer = 0f;
-        float time = 0.2f;
+        float time = 0.15f;
 
         yield return new WaitForSeconds(2.0f / 12.0f);
 

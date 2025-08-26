@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-public class WeaponModel : AbstractModel
+﻿public class WeaponModel : AbstractModel
 {
     public WeaponStaticAttr staticAttr { get;protected set; }
 

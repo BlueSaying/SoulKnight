@@ -12,8 +12,13 @@ public class WeaponSystem : BaseSystem
         weaponRepository = new WeaponRepository();
     }
 
-    public WeaponModel GetWeaponModel(WeaponType playerWeaponType)
+    public WeaponModel GetWeaponModel(WeaponCategory weaponCategory, WeaponType WeaponType)
     {
-        return weaponRepository.GetWeaponModel(playerWeaponType);
+        return weaponRepository.GetWeaponModel(weaponCategory, WeaponType);
+    }
+
+    public WeaponModel GetWeaponModel(WeaponType WeaponType)
+    {
+        return weaponRepository.GetWeaponModel(WeaponType);
     }
 }

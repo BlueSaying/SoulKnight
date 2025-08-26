@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 495c0a28bd9b7d34687f39cb1f8b9334, type: 3}
+  m_Name: ShotGunData
+  m_EditorClassIdentifier: 
+  textAsset: {fileID: 4900000, guid: 6c3b9292549f14a47ad2373d5b0707c8, type: 3}
+  attrs:
+  - buffType: 2
+    weaponCategory: 2
+    weaponType: 18
+    qualityType: 6
+    damage: 2
+    energyCost: 2
+    criticalRate: 15
+    scatterRate: 3
+    speedDecrease: 0.1
+    fireRate: 1.6
+    bulletSpeed: 20
+    angle: 8
+  - buffType: 0
+    weaponCategory: 2
+    weaponType: 25
+    qualityType: 3
+    damage: 2
+    energyCost: 1
+    criticalRate: 0
+    scatterRate: 30
+    speedDecrease: 0.4
+    fireRate: 10
+    bulletSpeed: 30
+    angle: 0
+  - buffType: 0
+    weaponCategory: 2
+    weaponType: 22
+    qualityType: 3
+    damage: 2
+    energyCost: 2
+    criticalRate: 0
+    scatterRate: 20
+    speedDecrease: 0.4
+    fireRate: 10
+    bulletSpeed: 30
+    angle: 0
+  - buffType: 0
+    weaponCategory: 2
+    weaponType: 26
+    qualityType: 3
+    damage: 2
+    energyCost: 2
+    criticalRate: 0
+    scatterRate: 20
+    speedDecrease: 0.4
+    fireRate: 10
+    bulletSpeed: 30
+    angle: 0

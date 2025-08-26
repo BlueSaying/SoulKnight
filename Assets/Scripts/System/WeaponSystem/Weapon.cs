@@ -37,7 +37,6 @@ public abstract class Weapon
     public int energyCost => model.staticAttr.energyCost;
     public int criticalRate => model.staticAttr.criticalRate;
     public int scatterRate => model.staticAttr.scatterRate;
-    public int angle => model.staticAttr.angle;
     public float speedDecrease => model.staticAttr.speedDecrease;
     public float fireRate => model.staticAttr.fireRate;
     public float bulletSpeed => model.staticAttr.bulletSpeed;

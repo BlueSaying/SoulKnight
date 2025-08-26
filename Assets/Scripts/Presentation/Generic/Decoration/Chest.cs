@@ -26,7 +26,7 @@ public class Chest : MonoBehaviour
                 gameObject.GetComponent<Animator>().SetTrigger("OpenChest");
 
                 // HACK
-                WeaponFactory.InstantiateWeapon(WeaponType.AK47, transform.Find("GenerationPoint").position, Quaternion.identity);
+                WeaponFactory.InstantiateWeapon(WeaponType.GatlingGun, transform.Find("GenerationPoint").position, Quaternion.identity);
 
                 Destroy(itemArrow.transform.gameObject);
             }

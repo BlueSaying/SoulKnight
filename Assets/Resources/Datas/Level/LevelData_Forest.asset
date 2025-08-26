@@ -27,6 +27,10 @@ MonoBehaviour:
       floorTile: {fileID: 11400000, guid: 0712a189b1c93dc48986b2793510da14, type: 2}
       wallTile: {fileID: 11400000, guid: 70eb74a393e6e4548a129f6c91080fd7, type: 2}
       doorTile: {fileID: 11400000, guid: f26548a58648200408ef7e551d2a9694, type: 2}
+    chestStaticAttr:
+      floorTile: {fileID: 11400000, guid: 0712a189b1c93dc48986b2793510da14, type: 2}
+      wallTile: {fileID: 11400000, guid: 70eb74a393e6e4548a129f6c91080fd7, type: 2}
+      doorTile: {fileID: 11400000, guid: f26548a58648200408ef7e551d2a9694, type: 2}
     corridorStaticAttr:
       floorTile: {fileID: 11400000, guid: 0712a189b1c93dc48986b2793510da14, type: 2}
       wallTile: {fileID: 11400000, guid: 70eb74a393e6e4548a129f6c91080fd7, type: 2}

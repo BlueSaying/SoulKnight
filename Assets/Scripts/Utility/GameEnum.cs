@@ -26,21 +26,19 @@ public enum SystemType
 /// </summary>
 public enum WeaponCategory
 {
-    Bow,
+    //Bow,
 
     Melee,
 
-    Missile,
-
-    Other,
+    //Missile,
 
     Rifle,
 
-    Shotgun,
+    ShotGun,
 
-    Staff,
+    //Staff,
 
-    ThrownWeapon,
+    //ThrownWeapon,
 
     Pistol,
 
@@ -109,8 +107,6 @@ public enum WeaponType
     Hoe,
     Hammer,
     GoblinMagicStaff,
-
-
 }
 
 /// <summary>

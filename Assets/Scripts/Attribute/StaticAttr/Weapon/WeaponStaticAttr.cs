@@ -44,11 +44,6 @@ public class WeaponStaticAttr
     public int scatterRate;
 
     /// <summary>
-    /// 弹道之间的夹角(仅霰弹枪)
-    /// </summary>
-    public int angle;
-
-    /// <summary>
     /// 移速降低量
     /// </summary>
     public float speedDecrease;
