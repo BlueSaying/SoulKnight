@@ -50,6 +50,13 @@ public class WeaponRepository
                         models[weaponCategory].Add(new StrangeModel(attr));
                     }
                     break;
+
+                case WeaponCategory.Bow:
+                    foreach (var attr in SOLoader.GetBowSO().attrs)
+                    {
+                        models[weaponCategory].Add(new BowModel(attr));
+                    }
+                    break;
             }
         }
     }

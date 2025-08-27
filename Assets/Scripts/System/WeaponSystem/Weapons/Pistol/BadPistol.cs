@@ -9,7 +9,7 @@ public class BadPistol : Pistol
         base.OnFire();
         AudioManager.Instance.PlaySound(AudioType.Gun, AudioName.fx_gun_1);
 
-        Quaternion quaternion = rotation * Quaternion.Euler(0, 0, UnityTools.GetRandomFloat(-scatterRate / 2.0f, scatterRate / 2.0f));
-        ItemFactory.Instance.CreateBullet(BulletType.Bullet_5, shootPoint.transform.position, quaternion, owner, damage, bulletSpeed);
+        Quaternion quaternion = rotation * Quaternion.Euler(0, 0, UnityTools.GetRandomFloat(-ScatterRate / 2.0f, ScatterRate / 2.0f));
+        ItemFactory.Instance.CreateBullet(BulletType.Bullet_5, shootPoint.transform.position, quaternion, owner, Damage, BulletSpeed);
     }
 }

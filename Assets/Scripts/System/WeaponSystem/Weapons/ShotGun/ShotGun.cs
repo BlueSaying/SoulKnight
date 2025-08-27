@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class ShotGun : Weapon
+public abstract class ShotGun : Weapon
 {
     public new ShotGunModel model { get => base.model as ShotGunModel; protected set => base.model = value; }
 

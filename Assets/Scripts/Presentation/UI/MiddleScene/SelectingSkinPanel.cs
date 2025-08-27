@@ -51,6 +51,7 @@ namespace MiddleScene
                 WeaponFactory.InstantiateWeapon(WeaponType.GatlingGun, new Vector2(3, 2), Quaternion.identity);
                 WeaponFactory.InstantiateWeapon(WeaponType.P250Pistol, new Vector2(5, 2), Quaternion.identity);
                 WeaponFactory.InstantiateWeapon(WeaponType.DesertEagle, new Vector2(7, 2), Quaternion.identity);
+                WeaponFactory.InstantiateWeapon(WeaponType.StrongBow, new Vector2(9, 2), Quaternion.identity);
 
                 SystemRepository.Instance.GetSystem<EnemySystem>().AddEnemy(EnemyType.Stake, Vector2.zero, Quaternion.identity, null);
             });

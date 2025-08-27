@@ -2,5 +2,5 @@
 {
     public new MeleeStaticAttr staticAttr { get => base.staticAttr as MeleeStaticAttr; protected set => base.staticAttr = value; }
 
-    public MeleeModel(WeaponStaticAttr staticAttr) : base(staticAttr) { }
+    public MeleeModel(MeleeStaticAttr staticAttr) : base(staticAttr) { }
 }

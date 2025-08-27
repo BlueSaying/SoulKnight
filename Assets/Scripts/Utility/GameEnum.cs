@@ -26,7 +26,7 @@ public enum SystemType
 /// </summary>
 public enum WeaponCategory
 {
-    //Bow,
+    Bow,
 
     Melee,
 
@@ -92,7 +92,7 @@ public enum WeaponType
     EagleOfIceAndFire,
     DormantBubbleMachine,
     Basketball,
-    Bow,
+    StrongBow,
     Shower,
     GatlingGun,
     DoubleBladeSword,
@@ -211,8 +211,6 @@ public enum BuffType
     Poisoning,
 
     None,
-
-
 }
 
 /// <summary>
@@ -265,6 +263,11 @@ public enum AudioName
     /// 扔出投掷物
     /// </summary>
     fx_gun_6,
+
+    /// <summary>
+    /// 火箭与弓箭发射
+    /// </summary>
+    fx_gun_rocket,
 
     /// <summary>
     /// 开始界面BGM
@@ -449,6 +452,8 @@ public enum BulletType
     Bullet_130,
 
     BulletBasketball,
+
+    Arrow,
 }
 
 /// <summary>

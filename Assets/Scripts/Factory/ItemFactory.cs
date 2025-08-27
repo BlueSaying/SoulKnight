@@ -58,6 +58,18 @@ public class ItemFactory : Singleton<ItemFactory>
                     bullet = new Bullet_130(UnityEngine.Object.Instantiate(ResourcesLoader.Instance.LoadBullet(bulletType.ToString()), position, quaternion), owner, damage, bulletSpeed);
                 }
                 break;
+
+            case BulletType.Arrow:
+                bullet = itemPool.GetItem<Arrow>() as Bullet;
+                if (bullet != null)
+                {
+                    (bullet as Arrow).Reset(position, quaternion, damage);
+                }
+                else
+                {
+                    bullet = new Arrow(UnityEngine.Object.Instantiate(ResourcesLoader.Instance.LoadBullet(bulletType.ToString()), position, quaternion), owner, damage, bulletSpeed);
+                }
+                break;
         }
 
         return bullet;

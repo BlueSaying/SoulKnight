@@ -1,0 +1,112 @@
+﻿using System.Collections.Generic;
+using UnityEngine;
+
+public abstract class Bow : Weapon
+{
+    protected bool isCharging;
+    protected float chargingTimer;
+
+    public new BowModel model { get => base.model as BowModel; protected set => base.model = value; }
+
+    public GameObject chargingBar { get; protected set; }
+    public GameObject[] chargingBars = new GameObject[5];
+
+    public GameObject shootPoint { get; protected set; }
+
+    #region Attr
+    public int ChargingDamage => model.staticAttr.chargingDamage;
+
+    public int ChargingCritical => model.staticAttr.chargingCritical;
+
+    public float ChargingTime => model.staticAttr.chargingTime;
+    #endregion
+
+    public Bow(GameObject gameObject, Character owner, WeaponModel model) : base(gameObject, owner, model)
+    {
+        canRotate = true;
+    }
+
+    protected override void OnInit()
+    {
+        base.OnInit();
+        chargingBar = UnityTools.Instance.GetTransformFromChildren(gameObject, "ChargingBar").gameObject;
+        for (int i = 0; i < 5; i++)
+        {
+            chargingBars[i] = chargingBar.transform.Find("ChargingBar" + i.ToString()).gameObject;
+        }
+
+        shootPoint = UnityTools.Instance.GetTransformFromChildren(gameObject, "ShootPoint").gameObject;
+    }
+
+    public override void ControlWeapon(bool isCharging)
+    {
+        // 如果现在没有在蓄力但之间在蓄力
+        if (!isCharging)
+        {
+            if (this.isCharging)
+            {
+                this.isCharging = false;
+
+                // 根据武器拥有者是否为玩家扣除能量值
+                if (owner is Player && !TestManager.Instance.isUnlockWeapon)
+                {
+                    (owner as Player).CurEnergy -= EnergyCost;
+                }
+
+                OnFire();
+
+                chargingTimer = 0f;
+
+                RefreshChargingBar();
+            }
+        }
+        else
+        {
+            // 根据武器拥有者是否为玩家
+            if (owner is Player && !TestManager.Instance.isUnlockWeapon)
+            {
+                if ((owner as Player).CurEnergy < EnergyCost)
+                {
+                    return;
+                }
+            }
+
+            this.isCharging = true;
+            chargingTimer = Mathf.Clamp(chargingTimer + Time.deltaTime, 0f, ChargingTime);
+            RefreshChargingBar();
+        }
+    }
+
+    private void RefreshChargingBar()
+    {
+        // 根据当前是否在蓄力决定蓄力条是否可见
+        if (isCharging)
+        {
+            chargingBar.SetActive(true);
+        }
+        else
+        {
+            chargingBar.SetActive(false);
+        }
+
+        float chargingProgress = 5 * chargingTimer / ChargingTime;
+
+        for (int i = 0; i < 5; i++)
+        {
+            if (chargingProgress >= 1)
+            {
+                chargingBars[i].GetComponent<SpriteRenderer>().color = Color.white;
+                chargingProgress -= 1;
+            }
+            else if (chargingProgress > 0)
+            {
+                chargingBars[i].GetComponent<SpriteRenderer>().color = Color.Lerp(Color.gray, Color.white, chargingProgress);
+                chargingProgress = 0;
+            }
+            else
+            {
+                chargingBars[i].GetComponent<SpriteRenderer>().color = Color.gray;
+            }
+        }
+    }
+}

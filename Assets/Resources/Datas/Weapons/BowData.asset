@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39cdb2272be381440baeccc1c8114ed1, type: 3}
+  m_Name: BowData
+  m_EditorClassIdentifier: 
+  textAsset: {fileID: 4900000, guid: e49e5971f359d924297f98cd1ddcdc37, type: 3}
+  attrs:
+  - buffType: 0
+    weaponCategory: 0
+    weaponType: 20
+    qualityType: 5
+    damage: 4
+    energyCost: 2
+    criticalRate: 0
+    scatterRate: 0
+    speedDecrease: 0.1
+    fireRate: 0
+    bulletSpeed: 20
+    chargingDamage: 10
+    chargingCritical: 50
+    chargingTime: 0.4

@@ -16,6 +16,7 @@ public static class SOLoader
     private static readonly string RifleDataPath = "Weapons/RifleData";
     private static readonly string ShotGunDataPath = "Weapons/ShotGunData";
     private static readonly string StrangeDataPath = "Weapons/StrangeData";
+    private static readonly string BowDataPath = "Weapons/BowData";
 
     public static PlayerSO GetPlayerSO()
     {
@@ -61,6 +62,11 @@ public static class SOLoader
     public static StrangeSO GetStrangeSO()
     {
         return Resources.Load<StrangeSO>(dataPath + StrangeDataPath);
+    }
+
+    public static BowSO GetBowSO()
+    {
+        return Resources.Load<BowSO>(dataPath + BowDataPath);
     }
     #endregion
 }

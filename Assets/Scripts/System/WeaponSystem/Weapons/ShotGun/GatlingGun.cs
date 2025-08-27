@@ -15,8 +15,8 @@ public class GatlingGun : ShotGun
             AudioManager.Instance.PlaySound(AudioType.Gun, AudioName.fx_gun_1);
 
             // 计算散布
-            Quaternion quaternion = rotation * Quaternion.Euler(0, 0, UnityTools.GetRandomFloat(-scatterRate / 2.0f, scatterRate / 2.0f));
-            ItemFactory.Instance.CreateBullet(BulletType.Bullet_130, shootPoint.transform.position, quaternion, owner, damage, bulletSpeed);
+            Quaternion quaternion = rotation * Quaternion.Euler(0, 0, UnityTools.GetRandomFloat(-ScatterRate / 2.0f, ScatterRate / 2.0f));
+            ItemFactory.Instance.CreateBullet(BulletType.Bullet_130, shootPoint.transform.position, quaternion, owner, Damage, BulletSpeed);
         }
     }
 }

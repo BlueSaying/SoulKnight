@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public abstract class Weapon
 {
@@ -15,7 +14,7 @@ public abstract class Weapon
 
     // 射击冷却计时器
     private float fireTimer;
-    private float fireTime => 1 / fireRate;
+    private float fireTime => 1 / FireRate;
 
     public bool isUsing;
 
@@ -29,17 +28,17 @@ public abstract class Weapon
     private bool isEnter;
 
     #region Attr
-    public BuffType buffType => model.staticAttr.buffType;
-    public WeaponCategory weaponCategory => model.staticAttr.weaponCategory;
-    public WeaponType weaponType => model.staticAttr.weaponType;
-    public QualityType qualityType => model.staticAttr.qualityType;
-    public int damage => model.staticAttr.damage;
-    public int energyCost => model.staticAttr.energyCost;
-    public int criticalRate => model.staticAttr.criticalRate;
-    public int scatterRate => model.staticAttr.scatterRate;
-    public float speedDecrease => model.staticAttr.speedDecrease;
-    public float fireRate => model.staticAttr.fireRate;
-    public float bulletSpeed => model.staticAttr.bulletSpeed;
+    public BuffType BuffType => model.staticAttr.buffType;
+    public WeaponCategory WeaponCategory => model.staticAttr.weaponCategory;
+    public WeaponType WeaponType => model.staticAttr.weaponType;
+    public QualityType QualityType => model.staticAttr.qualityType;
+    public int Damage => model.staticAttr.damage;
+    public int EnergyCost => model.staticAttr.energyCost;
+    public int CriticalRate => model.staticAttr.criticalRate;
+    public int ScatterRate => model.staticAttr.scatterRate;
+    public float SpeedDecrease => model.staticAttr.speedDecrease;
+    public float FireRate => model.staticAttr.fireRate;
+    public float BulletSpeed => model.staticAttr.bulletSpeed;
     #endregion
 
     public Weapon(GameObject gameObject, Character owner, WeaponModel model)
@@ -49,7 +48,7 @@ public abstract class Weapon
         this.model = model;
     }
 
-    public void ControlWeapon(bool isAttack)
+    public virtual void ControlWeapon(bool isAttack)
     {
         // 如果不在攻击则直接返回
         if (!isAttack)
@@ -58,7 +57,7 @@ public abstract class Weapon
             return;
         }
 
-        owner.CurSpeed = owner.speed * (1 - speedDecrease);
+        owner.CurSpeed = owner.speed * (1 - SpeedDecrease);
 
         // 如果冷却时间到了,那么发射子弹
         if (fireTimer >= fireTime)
@@ -67,9 +66,9 @@ public abstract class Weapon
             if (owner is Player && !TestManager.Instance.isUnlockWeapon)
             {
                 Player player = owner as Player;
-                if (player.CurEnergy >= energyCost)
+                if (player.CurEnergy >= EnergyCost)
                 {
-                    player.CurEnergy -= energyCost;
+                    player.CurEnergy -= EnergyCost;
                 }
                 else
                 {

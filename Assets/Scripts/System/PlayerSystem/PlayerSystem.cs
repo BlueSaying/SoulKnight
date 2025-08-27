@@ -48,8 +48,8 @@ public class PlayerSystem : BaseSystem
                 List<WeaponType> weaponTypes = new List<WeaponType>();
                 foreach (var weapon in mainPlayer.weapons)
                 {
-                    if (weapon.isUsing) usingWeaponType = weapon.weaponType;
-                    weaponTypes.Add(weapon.weaponType);
+                    if (weapon.isUsing) usingWeaponType = weapon.WeaponType;
+                    weaponTypes.Add(weapon.WeaponType);
                 }
 
                 // 实例化Player
