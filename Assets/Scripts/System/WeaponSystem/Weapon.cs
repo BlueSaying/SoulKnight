@@ -120,7 +120,7 @@ public abstract class Weapon
     // 每次切换至此武器时调用一次
     protected virtual void OnEnter()
     {
-        fireTimer = 1 / fireRate;
+        fireTimer = 0;
     }
 
     public virtual void OnFixedUpdate()

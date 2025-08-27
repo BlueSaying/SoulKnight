@@ -32,7 +32,9 @@ public class PickUpableWeapon : MonoBehaviour
             player = collision.GetComponent<Symbol>().character as Player;
             player.pickUpableList.Insert(0, gameObject);
 
-            itemArrow = ItemFactory.Instance.CreateItemArrow("ItemArrow", name, transform.Find("ItemArrowPoint"));
+            itemArrow = ItemFactory.Instance.CreateItemArrow("ItemArrow", name,
+                SystemRepository.Instance.GetSystem<WeaponSystem>().GetWeaponModel(System.Enum.Parse<WeaponType>(name)).staticAttr.qualityType
+                , transform.Find("ItemArrowPoint"));
             if (!UIMediator.Instance.IsPanelOpened(PanelName.WeaponInfoPanel.ToString()))
             {
                 UIMediator.Instance.OpenPanel(SceneName.Generic, PanelName.WeaponInfoPanel.ToString());

@@ -6,7 +6,7 @@ public class Chest : MonoBehaviour
     // 使得Update方法只在玩家进入可拾取范围时调用
     private bool isPlayerEnter;
 
-    private Player player;
+    //private Player player;
 
     private ItemArrow itemArrow;
 
@@ -41,9 +41,9 @@ public class Chest : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             isPlayerEnter = true;
-            player = collision.GetComponent<Symbol>().character as Player;
+            //player = collision.GetComponent<Symbol>().character as Player;
 
-            itemArrow = ItemFactory.Instance.CreateItemArrow("ItemArrow", name, transform.Find("ItemArrowPoint"));
+            itemArrow = ItemFactory.Instance.CreateItemArrow("ItemArrow", name, QualityType.White, transform.Find("ItemArrowPoint"));
         }
     }
 

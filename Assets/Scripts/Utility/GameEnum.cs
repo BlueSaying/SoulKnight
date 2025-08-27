@@ -60,7 +60,7 @@ public enum QualityType
 
     Red,
 
-    colorful,
+    //colorful,
 
     White,
 
@@ -445,6 +445,8 @@ public enum BulletType
     Bullet_5,
 
     Bullet_34,
+
+    Bullet_130,
 
     BulletBasketball,
 }

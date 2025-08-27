@@ -22,6 +22,7 @@ public class ItemFactory : Singleton<ItemFactory>
                     bullet = new Bullet_5(UnityEngine.Object.Instantiate(ResourcesLoader.Instance.LoadBullet(bulletType.ToString()), position, quaternion), owner, damage, bulletSpeed);
                 }
                 break;
+
             case BulletType.Bullet_34:
                 bullet = itemPool.GetItem<Bullet_34>() as Bullet;
                 if (bullet != null)
@@ -33,6 +34,7 @@ public class ItemFactory : Singleton<ItemFactory>
                     bullet = new Bullet_34(UnityEngine.Object.Instantiate(ResourcesLoader.Instance.LoadBullet(bulletType.ToString()), position, quaternion), owner, damage, bulletSpeed);
                 }
                 break;
+
             case BulletType.BulletBasketball:
                 bullet = itemPool.GetItem<BulletBasketball>() as Bullet;
                 if (bullet != null)
@@ -42,6 +44,18 @@ public class ItemFactory : Singleton<ItemFactory>
                 else
                 {
                     bullet = new BulletBasketball(UnityEngine.Object.Instantiate(ResourcesLoader.Instance.LoadBullet(bulletType.ToString()), position, quaternion), owner, damage, bulletSpeed);
+                }
+                break;
+
+            case BulletType.Bullet_130:
+                bullet = itemPool.GetItem<Bullet_130>() as Bullet;
+                if (bullet != null)
+                {
+                    bullet.Reset(position, quaternion);
+                }
+                else
+                {
+                    bullet = new Bullet_130(UnityEngine.Object.Instantiate(ResourcesLoader.Instance.LoadBullet(bulletType.ToString()), position, quaternion), owner, damage, bulletSpeed);
                 }
                 break;
         }
@@ -113,12 +127,12 @@ public class ItemFactory : Singleton<ItemFactory>
         return damageNum;
     }
 
-    public ItemArrow CreateItemArrow(string canvasName, string info, Transform parent)
+    public ItemArrow CreateItemArrow(string canvasName, string info, QualityType qualityType, Transform parent)
     {
         GameObject prefab = ResourcesLoader.Instance.LoadPanel(SceneName.Generic.ToString(), canvasName);
         GameObject obj = UnityEngine.Object.Instantiate(prefab, parent);
 
-        ItemArrow itemArrow = new ItemArrow(obj.transform, info);
+        ItemArrow itemArrow = new ItemArrow(obj.transform, info, qualityType);
 
         return itemArrow;
     }

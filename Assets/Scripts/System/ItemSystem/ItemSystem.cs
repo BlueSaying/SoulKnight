@@ -93,7 +93,7 @@ public class ItemPool
             curPoolSize--;
             result.gameObject.SetActive(true);
 
-            return result;
+            return result as T;
         }
     }
 

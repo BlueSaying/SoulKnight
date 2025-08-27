@@ -16,7 +16,7 @@ public class GatlingGun : ShotGun
 
             // 计算散布
             Quaternion quaternion = rotation * Quaternion.Euler(0, 0, UnityTools.GetRandomFloat(-scatterRate / 2.0f, scatterRate / 2.0f));
-            ItemFactory.Instance.CreateBullet(BulletType.Bullet_5, shootPoint.transform.position, quaternion, owner, damage, bulletSpeed);
+            ItemFactory.Instance.CreateBullet(BulletType.Bullet_130, shootPoint.transform.position, quaternion, owner, damage, bulletSpeed);
         }
     }
 }
