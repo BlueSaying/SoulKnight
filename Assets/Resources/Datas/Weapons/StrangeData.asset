@@ -15,9 +15,9 @@ MonoBehaviour:
   textAsset: {fileID: 4900000, guid: 0f6b5ebb8dc88dd4396a33aae64af1be, type: 3}
   attrs:
   - buffType: 0
-    weaponCategory: 4
+    weaponCategory: 5
     weaponType: 19
-    qualityType: 6
+    qualityType: 5
     damage: 5
     energyCost: 1
     criticalRate: -30

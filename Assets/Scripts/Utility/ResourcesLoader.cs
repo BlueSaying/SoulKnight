@@ -5,6 +5,51 @@ using UnityEngine;
 // 专门用来管理从Resources文件加载东西的类
 public class ResourcesLoader : Singleton<ResourcesLoader>
 {
+    // Prefab
+    // 武器
+    private Dictionary<string, GameObject> weaponDic;
+    private static readonly string weaponPath = "Prefabs/Weapons/";
+
+    // 子弹
+    private Dictionary<string, GameObject> bulletDic;
+    private static readonly string bulletPath = "Prefabs/Bullets/";
+
+    // 玩家
+    private Dictionary<string, GameObject> playerDic;
+    private static readonly string playerPath = "Prefabs/Player";
+
+    // 敌人
+    private Dictionary<string, GameObject> enemyDic;
+    private static readonly string enemyPath = "Prefabs/Enemies/";
+
+    // 特效
+    private Dictionary<string, GameObject> effectDic;
+    private static readonly string effectPath = "Prefabs/Effects/";
+
+    // UI
+    private Dictionary<string, GameObject> panelDic;
+    private static readonly string panelPath = "Prefabs/Panels/";
+
+    // 装饰物
+    private Dictionary<string, GameObject> decorationDic;
+    private static readonly string decorationPath = "Prefabs/Decoration/";
+
+    // 音效
+    private static readonly string audioPath = "Audios/";
+
+    // 宠物
+    private static readonly string petPath = "Prefabs/Pets/";
+
+    // 角色皮肤
+    private static readonly string playerSkinPath = "Animatior/Characters/Players/";
+
+    // 关卡房间
+    private static readonly string levelRoomPath = "Prefabs/Rooms/";
+
+    // Sprite
+    private Dictionary<string, Sprite> spriteDic;
+    private static readonly string spritePath = "Sprites/";
+
     private ResourcesLoader()
     {
         weaponDic = new Dictionary<string, GameObject>();
@@ -14,47 +59,9 @@ public class ResourcesLoader : Singleton<ResourcesLoader>
         effectDic = new Dictionary<string, GameObject>();
         panelDic = new Dictionary<string, GameObject>();
         decorationDic = new Dictionary<string, GameObject>();
+
+        spriteDic = new Dictionary<string, Sprite>();
     }
-
-    // 武器
-    private Dictionary<string, GameObject> weaponDic;
-    private string weaponPath = "Prefabs/Weapons/";
-
-    // 子弹
-    private Dictionary<string, GameObject> bulletDic;
-    private string bulletPath = "Prefabs/Bullets/";
-
-    // 玩家
-    private Dictionary<string, GameObject> playerDic;
-    private string playerPath = "Prefabs/Player";
-
-    // 敌人
-    private Dictionary<string, GameObject> enemyDic;
-    private string enemyPath = "Prefabs/Enemies/";
-
-    // 特效
-    private Dictionary<string, GameObject> effectDic;
-    private string effectPath = "Prefabs/Effects/";
-
-    // UI
-    private Dictionary<string, GameObject> panelDic;
-    private string panelPath = "Prefabs/Panels/";
-
-    // 装饰物
-    private Dictionary<string, GameObject> decorationDic;
-    private string decorationPath = "Prefabs/Decoration/";
-
-    // 音效
-    private string audioPath = "Audios/";
-
-    // 宠物
-    private string petPath = "Prefabs/Pets/";
-
-    // 角色皮肤
-    private string playerSkinPath = "Animatior/Characters/Players/";
-
-    // 关卡房间
-    private string levelRoomPath = "Prefabs/Rooms/";
 
     public GameObject LoadWeapon(string weaponName)
     {
@@ -138,5 +145,14 @@ public class ResourcesLoader : Singleton<ResourcesLoader>
     public GameObject LoadLevelRoom(string levelName, string roomName)
     {
         return Resources.LoadAll<GameObject>(levelRoomPath + levelName).Where(x => x.name == roomName).ToArray()[0];
+    }
+
+    public Sprite LoadSprite(string spriteName)
+    {
+        if (spriteDic.ContainsKey(spriteName)) return spriteDic[spriteName];
+
+        Sprite newSprite = Resources.LoadAll<Sprite>(spritePath).Where(x => x.name == spriteName).ToArray()[0];
+        spriteDic.Add(spriteName, newSprite);
+        return newSprite;
     }
 }

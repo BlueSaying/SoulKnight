@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public abstract class Character
 {
@@ -7,10 +8,11 @@ public abstract class Character
     public GameObject gameObject { get; protected set; }
     public Transform transform => gameObject.transform;
     public Rigidbody2D rb;
-
     public GameObject trigger { get; protected set; }
+    public GameObject buffIcon { get; protected set; }
 
-    public bool isDead { get; protected set; }
+    // Buff不可叠加,故使用字典
+    public Dictionary<BuffType, Buff> buffs { get; protected set; }
 
     #region Attr
     // 静态属性
@@ -43,6 +45,11 @@ public abstract class Character
     }
     #endregion
 
+    private bool isInit;
+    private bool isEnter;
+
+    public bool isDead { get; protected set; }
+
     public bool isLeft { get; private set; }
     protected bool isLeftAuto = false;
     public void ChangeLeft(bool isLeft, bool isAuto)
@@ -60,9 +67,6 @@ public abstract class Character
         }
         this.isLeft = isLeft;
     }
-
-    private bool isInit;
-    private bool isEnter;
 
     public Character(GameObject obj, CharacterModel model)
     {
@@ -87,6 +91,16 @@ public abstract class Character
             throw new System.Exception("无法获取" + gameObject.name + "的Trigger子物体,请检查是否已经添加");
         }
 
+        try
+        {
+            buffIcon = UnityTools.Instance.GetTransformFromChildren(gameObject, "BuffIcon").gameObject;
+        }
+        catch (System.Exception)
+        {
+            throw new System.Exception("无法获取" + gameObject.name + "的BuffIcon子物体,请检查是否已经添加");
+        }
+
+        buffs = new Dictionary<BuffType, Buff>();
     }
 
     protected virtual void OnInit() { }
@@ -120,6 +134,41 @@ public abstract class Character
         {
             isEnter = true;
             OnEnter();
+        }
+
+        ManageBuff();
+    }
+
+    private void ManageBuff()
+    {
+        // 记录当前是否还有buff
+        bool hasBuff = false;
+
+        foreach (var buff in buffs.Values)
+        {
+            if (!buff.isEnd)
+            {
+                buff.OnUpdate();
+                hasBuff = true;
+                buffIcon.GetComponent<SpriteRenderer>().sprite=ResourcesLoader.Instance.LoadSprite(buff.ToString());
+            }
+        }
+
+        buffIcon.SetActive(hasBuff);
+    }
+
+    public void AddBuff(BuffType buffType, float duartion)
+    {
+        if (buffs.ContainsKey(buffType))
+        {
+            if (buffs[buffType].isEnd)
+            {
+                buffs[buffType] = BuffFactory.CreateBuff(buffType, duartion, this);
+            }
+        }
+        else
+        {
+            buffs.Add(buffType, BuffFactory.CreateBuff(buffType, duartion, this));
         }
     }
 }

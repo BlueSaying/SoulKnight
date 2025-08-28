@@ -232,7 +232,6 @@ public abstract class Player : Character, IDamageable
             AudioManager.Instance.PlaySound(AudioType.Hurt, (AudioName)(AudioName.fx_hit_p1 + Random.Range(0, 5)));
         }
 
-
         // 优先扣除护盾值
         if (CurArmor >= damage)
         {

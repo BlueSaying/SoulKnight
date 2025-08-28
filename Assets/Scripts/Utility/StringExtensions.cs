@@ -12,6 +12,7 @@ public static class StringExtensions
         {"P250Pistol", "P250手枪"},
 
         {"AK47","AK47" },
+        {"AssaultRifle","突击步枪" },
 
         {"GoblinSpear","哥布林长枪" },
 

@@ -15,9 +15,9 @@ MonoBehaviour:
   textAsset: {fileID: 4900000, guid: 8af743a6fe77e42419d15e63ce5abe57, type: 3}
   attrs:
   - buffType: 0
-    weaponCategory: 1
+    weaponCategory: 2
     weaponType: 1
-    qualityType: 6
+    qualityType: 5
     damage: 2
     energyCost: 0
     criticalRate: 0
@@ -25,8 +25,8 @@ MonoBehaviour:
     speedDecrease: 0.2
     fireRate: 1.5
     bulletSpeed: 30
-  - buffType: 0
-    weaponCategory: 1
+  - buffType: 1
+    weaponCategory: 2
     weaponType: 3
     qualityType: 0
     damage: 5
@@ -36,8 +36,8 @@ MonoBehaviour:
     speedDecrease: 0.1
     fireRate: 3
     bulletSpeed: 30
-  - buffType: 1
-    weaponCategory: 1
+  - buffType: 2
+    weaponCategory: 2
     weaponType: 4
     qualityType: 0
     damage: 8
@@ -48,9 +48,9 @@ MonoBehaviour:
     fireRate: 1
     bulletSpeed: 0
   - buffType: 0
-    weaponCategory: 1
+    weaponCategory: 2
     weaponType: 5
-    qualityType: 6
+    qualityType: 5
     damage: 3
     energyCost: 1
     criticalRate: 5
@@ -59,9 +59,9 @@ MonoBehaviour:
     fireRate: 6
     bulletSpeed: 30
   - buffType: 0
-    weaponCategory: 1
+    weaponCategory: 2
     weaponType: 6
-    qualityType: 6
+    qualityType: 5
     damage: 3
     energyCost: 1
     criticalRate: 12
@@ -70,9 +70,9 @@ MonoBehaviour:
     fireRate: 6
     bulletSpeed: 30
   - buffType: 0
-    weaponCategory: 1
+    weaponCategory: 2
     weaponType: 7
-    qualityType: 6
+    qualityType: 5
     damage: 2
     energyCost: 0
     criticalRate: 5
@@ -81,9 +81,9 @@ MonoBehaviour:
     fireRate: 6
     bulletSpeed: 30
   - buffType: 0
-    weaponCategory: 1
+    weaponCategory: 2
     weaponType: 8
-    qualityType: 6
+    qualityType: 5
     damage: 2
     energyCost: 0
     criticalRate: 5
@@ -92,9 +92,9 @@ MonoBehaviour:
     fireRate: 6
     bulletSpeed: 30
   - buffType: 0
-    weaponCategory: 1
+    weaponCategory: 2
     weaponType: 9
-    qualityType: 6
+    qualityType: 5
     damage: 3
     energyCost: 1
     criticalRate: 10
@@ -103,7 +103,7 @@ MonoBehaviour:
     fireRate: 6
     bulletSpeed: 30
   - buffType: 0
-    weaponCategory: 1
+    weaponCategory: 2
     weaponType: 16
     qualityType: 3
     damage: 2

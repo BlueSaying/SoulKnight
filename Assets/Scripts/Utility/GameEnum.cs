@@ -196,8 +196,6 @@ public enum KeyInputType
     /// 玩家切换武器
     /// </summary>
     SwitchWeapon,
-
-
 }
 
 /// <summary>
@@ -205,13 +203,17 @@ public enum KeyInputType
 /// </summary>
 public enum BuffType
 {
+    None,
+
     Burn,
 
     Freeze,
 
     Poisoning,
 
-    None,
+    Dizziness,
+
+    Inductance,
 }
 
 /// <summary>
