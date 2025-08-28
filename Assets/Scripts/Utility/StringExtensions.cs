@@ -16,6 +16,7 @@ public static class StringExtensions
         {"GoblinSpear","哥布林长枪" },
 
         {"StrongBow","强弓" },
+        {"CompositeBow","复合弓" },
 
         {"GatlingGun","加特林" },
 

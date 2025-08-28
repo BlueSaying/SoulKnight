@@ -93,6 +93,7 @@ public enum WeaponType
     DormantBubbleMachine,
     Basketball,
     StrongBow,
+    CompositeBow,
     Shower,
     GatlingGun,
     DoubleBladeSword,

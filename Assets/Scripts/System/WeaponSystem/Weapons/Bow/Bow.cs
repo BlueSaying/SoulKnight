@@ -20,10 +20,7 @@ public abstract class Bow : Weapon
     public float ChargingTime => model.staticAttr.chargingTime;
     #endregion
 
-    public Bow(GameObject gameObject, Character owner, WeaponModel model) : base(gameObject, owner, model)
-    {
-        canRotate = true;
-    }
+    public Bow(GameObject gameObject, Character owner, WeaponModel model) : base(gameObject, owner, model) { }
 
     protected override void OnInit()
     {
@@ -33,7 +30,7 @@ public abstract class Bow : Weapon
         {
             chargingBars[i] = chargingBar.transform.Find("ChargingBar" + i.ToString()).gameObject;
         }
-        
+
         shootPoint = UnityTools.Instance.GetTransformFromChildren(gameObject, "ShootPoint").gameObject;
     }
 
@@ -52,6 +49,9 @@ public abstract class Bow : Weapon
                     (owner as Player).CurEnergy -= EnergyCost;
                 }
 
+                animator.SetBool("isCharging", isCharging);
+                canRotate = isCharging; // 能否旋转仅依赖是否在蓄力
+
                 OnFire();
 
                 chargingTimer = 0f;
@@ -66,6 +66,9 @@ public abstract class Bow : Weapon
             {
                 return;
             }
+
+            animator.SetBool("isCharging", isCharging);
+            canRotate = isCharging;
 
             this.isCharging = true;
             chargingTimer = Mathf.Clamp(chargingTimer + Time.deltaTime, 0f, ChargingTime);

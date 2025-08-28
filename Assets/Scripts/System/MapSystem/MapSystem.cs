@@ -536,7 +536,7 @@ public class MapSystem : BaseSystem
 
         // 普通关卡生成5-7个房间
         int curRoomCount = 0;
-        int roomCount = UnityTools.GetRandomInt(5, 7);
+        int roomCount = UnityTools.GetRandomInt(5,7);
 
         // 构建大本营
         Vector2Int curPos = birthPos;

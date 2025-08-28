@@ -52,6 +52,11 @@ namespace MiddleScene
                 WeaponFactory.InstantiateWeapon(WeaponType.P250Pistol, new Vector2(5, 2), Quaternion.identity);
                 WeaponFactory.InstantiateWeapon(WeaponType.DesertEagle, new Vector2(7, 2), Quaternion.identity);
                 WeaponFactory.InstantiateWeapon(WeaponType.StrongBow, new Vector2(9, 2), Quaternion.identity);
+                WeaponFactory.InstantiateWeapon(WeaponType.CompositeBow, new Vector2(3, 4), Quaternion.identity);
+
+                // 实例化宝箱
+                // HACK
+                DecorationFactory.InstantiateChest(new Vector2(-5.5f, 0.5f), Quaternion.identity);
 
                 SystemRepository.Instance.GetSystem<EnemySystem>().AddEnemy(EnemyType.Stake, Vector2.zero, Quaternion.identity, null);
             });
