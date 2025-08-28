@@ -24,10 +24,4 @@ public class Arrow : Bullet
 
         ItemFactory.Instance.CreateEffect(EffectType.BoomEffect, position, Quaternion.identity);
     }
-
-    public void Reset(Vector3 position, Quaternion quaternion, int damage)
-    {
-        base.Reset(position, quaternion);
-        this.damage = damage;
-    }
 }

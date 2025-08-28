@@ -73,10 +73,11 @@ public abstract class Bullet : Item
         Remove();
     }
 
-    public virtual void Reset(Vector3 position, Quaternion quaternion)
+    public virtual void Reset(Vector3 position, Quaternion quaternion, int damage)
     {
         base.Reset();
         this.position = position;
         this.rotation = quaternion;
+        this.damage = damage;
     }
 }

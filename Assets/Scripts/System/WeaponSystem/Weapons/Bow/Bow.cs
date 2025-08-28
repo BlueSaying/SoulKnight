@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public abstract class Bow : Weapon
 {
@@ -34,7 +33,7 @@ public abstract class Bow : Weapon
         {
             chargingBars[i] = chargingBar.transform.Find("ChargingBar" + i.ToString()).gameObject;
         }
-
+        
         shootPoint = UnityTools.Instance.GetTransformFromChildren(gameObject, "ShootPoint").gameObject;
     }
 
@@ -63,12 +62,9 @@ public abstract class Bow : Weapon
         else
         {
             // 根据武器拥有者是否为玩家
-            if (owner is Player && !TestManager.Instance.isUnlockWeapon)
+            if (!TestManager.Instance.isUnlockWeapon && owner is Player && (owner as Player).CurEnergy < EnergyCost)
             {
-                if ((owner as Player).CurEnergy < EnergyCost)
-                {
-                    return;
-                }
+                return;
             }
 
             this.isCharging = true;
@@ -79,6 +75,9 @@ public abstract class Bow : Weapon
 
     private void RefreshChargingBar()
     {
+        Color whiteColor = Color.white;
+        Color grayColor = new Color(0.3f, 0.3f, 0.3f);
+
         // 根据当前是否在蓄力决定蓄力条是否可见
         if (isCharging)
         {
@@ -95,17 +94,17 @@ public abstract class Bow : Weapon
         {
             if (chargingProgress >= 1)
             {
-                chargingBars[i].GetComponent<SpriteRenderer>().color = Color.white;
+                chargingBars[i].GetComponent<SpriteRenderer>().color = whiteColor;
                 chargingProgress -= 1;
             }
             else if (chargingProgress > 0)
             {
-                chargingBars[i].GetComponent<SpriteRenderer>().color = Color.Lerp(Color.gray, Color.white, chargingProgress);
+                chargingBars[i].GetComponent<SpriteRenderer>().color = Color.Lerp(grayColor, whiteColor, chargingProgress);
                 chargingProgress = 0;
             }
             else
             {
-                chargingBars[i].GetComponent<SpriteRenderer>().color = Color.gray;
+                chargingBars[i].GetComponent<SpriteRenderer>().color = grayColor;
             }
         }
     }

@@ -12,7 +12,7 @@ public class ItemArrow
         this.transform = transform;
 
         Text text = transform.Find("Info").GetComponent<Text>();
-        text.text = info;
+        text.text = info.ToChinese();
 
         switch (qualityType)
         {

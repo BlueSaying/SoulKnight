@@ -15,7 +15,7 @@ public class ItemFactory : Singleton<ItemFactory>
                 bullet = itemPool.GetItem<Bullet_5>() as Bullet;
                 if (bullet != null)
                 {
-                    bullet.Reset(position, quaternion);
+                    bullet.Reset(position, quaternion, damage);
                 }
                 else
                 {
@@ -27,7 +27,7 @@ public class ItemFactory : Singleton<ItemFactory>
                 bullet = itemPool.GetItem<Bullet_34>() as Bullet;
                 if (bullet != null)
                 {
-                    bullet.Reset(position, quaternion);
+                    bullet.Reset(position, quaternion, damage);
                 }
                 else
                 {
@@ -39,7 +39,7 @@ public class ItemFactory : Singleton<ItemFactory>
                 bullet = itemPool.GetItem<BulletBasketball>() as Bullet;
                 if (bullet != null)
                 {
-                    bullet.Reset(position, quaternion);
+                    bullet.Reset(position, quaternion, damage);
                 }
                 else
                 {
@@ -51,7 +51,7 @@ public class ItemFactory : Singleton<ItemFactory>
                 bullet = itemPool.GetItem<Bullet_130>() as Bullet;
                 if (bullet != null)
                 {
-                    bullet.Reset(position, quaternion);
+                    bullet.Reset(position, quaternion, damage);
                 }
                 else
                 {
