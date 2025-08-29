@@ -35,10 +35,8 @@ namespace MiddleScene
         {
             base.DOClosePanel();
             (UnityTools.Instance.GetTransformFromChildren(gameObject, "PlayerStatePanel") as RectTransform).DOAnchorPosX(-400, 0.5f);
-            (UnityTools.Instance.GetTransformFromChildren(gameObject, "RightPanel") as RectTransform).DOAnchorPosX(800, 0.5f).OnComplete(() =>
-            {
-                DestroyPanel();
-            });
+            (UnityTools.Instance.GetTransformFromChildren(gameObject, "RightPanel") as RectTransform).DOAnchorPosX(800, 0.5f)
+                .OnComplete(DestroyPanel).OnKill(DestroyPanel);
         }
 
         private void RefreshPanel()

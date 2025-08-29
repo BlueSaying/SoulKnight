@@ -23,10 +23,8 @@ namespace MiddleScene
         protected override void DOClosePanel()
         {
             base.DOClosePanel();
-            (UnityTools.Instance.GetTransformFromChildren(gameObject, "Gem") as RectTransform).DOAnchorPosY(100, 0.5f).OnComplete(() =>
-            {
-                DestroyPanel();
-            });
+            (UnityTools.Instance.GetTransformFromChildren(gameObject, "Gem") as RectTransform).DOAnchorPosY(100, 0.5f)
+                .OnComplete(DestroyPanel).OnKill(DestroyPanel);
         }
     }
 }

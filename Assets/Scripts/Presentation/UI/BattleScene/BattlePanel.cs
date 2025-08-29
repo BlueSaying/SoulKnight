@@ -28,10 +28,8 @@ namespace BattleScene
         {
             base.DOClosePanel();
             (UnityTools.Instance.GetTransformFromChildren(gameObject, "PlayerStateBar") as RectTransform).DOAnchorPosX(-450, 0.5f);
-            (UnityTools.Instance.GetTransformFromChildren(gameObject, "PauseButton") as RectTransform).DOAnchorPosX(200, 0.5f).OnComplete(() =>
-            {
-                DestroyPanel();
-            });
+            (UnityTools.Instance.GetTransformFromChildren(gameObject, "PauseButton") as RectTransform).DOAnchorPosX(200, 0.5f)
+                .OnComplete(DestroyPanel).OnKill(DestroyPanel);
         }
 
         private void RefreshPanel()

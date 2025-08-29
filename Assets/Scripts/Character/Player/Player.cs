@@ -14,6 +14,10 @@ public abstract class Player : Character, IDamageable
 
     private CinemachineFramingTransposer cinemachineFramingTransposer;
 
+    public Skill skill {  get; protected set; }
+    public GameObject skillOriginPoint {  get; protected set; }
+
+
     #region Attr
     // 静态属性
     public PlayerType playerType => model.staticAttr.playerType;
@@ -93,6 +97,8 @@ public abstract class Player : Character, IDamageable
         cinemachineFramingTransposer = GameObject.Find("FollowCamera").
             GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineFramingTransposer>();
 
+        skillOriginPoint = UnityTools.Instance.GetTransformFromChildren(gameObject, "SkillOriginPoint").gameObject;
+
         // NOTE:角色初始化时，添加阿凉为宠物
         //SystemRepository.Instance.GetSystem<PlayerSystem>().AddPlayerPet(PetType.LittleCool, this);
     }
@@ -127,6 +133,12 @@ public abstract class Player : Character, IDamageable
             SwitchWeapon();
         }
 
+        // 技能释放
+        if(SystemRepository.Instance.GetSystem<InputSystem>().GetKeyInput(KeyInputType.ReleaseSkill))
+        {
+            skill?.RealeaseSkill();
+        }
+
         hurtArmorRecoveryTimer += Time.deltaTime;
         if (hurtArmorRecoveryTimer > hurtArmorRecoveryTime && CurArmor.Value < maxArmor)
         {
@@ -148,7 +160,6 @@ public abstract class Player : Character, IDamageable
     public void AddWeapon(WeaponModel model)
     {
         Weapon newWeapon = WeaponFactory.GetWeapon(model, this);
-        newWeapon.isPickUp = true;
 
         if (usingWeapon != null)
         {

@@ -28,10 +28,8 @@ namespace MainMenuScene
         protected override void DOClosePanel()
         {
             base.DOClosePanel();
-            (transform as RectTransform).DOAnchorPosX(-2500, 0.5f).OnComplete(() =>
-            {
-                DestroyPanel();
-            });
+            (transform as RectTransform).DOAnchorPosX(-2500, 0.5f)
+                .OnComplete(DestroyPanel).OnKill(DestroyPanel);
         }
 
         private void InitUI()

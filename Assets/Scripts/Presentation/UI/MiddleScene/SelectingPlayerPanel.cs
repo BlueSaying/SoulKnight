@@ -56,10 +56,8 @@ namespace MiddleScene
             (UnityTools.Instance.GetTransformFromChildren(gameObject, "LeftPanel") as RectTransform).DOAnchorPosX(-600f, 0.5f);
             (UnityTools.Instance.GetTransformFromChildren(gameObject, "RightPanel") as RectTransform).DOAnchorPosX(600f, 0.5f);
             (UnityTools.Instance.GetTransformFromChildren(gameObject, "ButtonBack") as RectTransform).DOAnchorPosX(-300f, 0.5f);
-            (UnityTools.Instance.GetTransformFromChildren(gameObject, "ButtonNext") as RectTransform).DOAnchorPosX(300f, 0.5f).OnComplete(() =>
-            {
-                DestroyPanel();
-            });
+            (UnityTools.Instance.GetTransformFromChildren(gameObject, "ButtonNext") as RectTransform).DOAnchorPosX(300f, 0.5f)
+                .OnComplete(DestroyPanel).OnKill(DestroyPanel);
         }
 
         private void InitData()

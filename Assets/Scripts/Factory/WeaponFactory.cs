@@ -17,6 +17,7 @@ public static class WeaponFactory
 
         Type typeofWeapon = Type.GetType(type.ToString());
         Weapon newWeapon = Activator.CreateInstance(typeofWeapon, new object[] { obj, owner, model }) as Weapon;
+        newWeapon.isPickUp = true;
 
         return newWeapon;
     }

@@ -93,10 +93,8 @@ namespace MiddleScene
             base.DOClosePanel();
             (UnityTools.Instance.GetTransformFromChildren(gameObject, "ButtonLeft") as RectTransform).DOAnchorPosX(-400f, 0.5f);
             (UnityTools.Instance.GetTransformFromChildren(gameObject, "ButtonRight") as RectTransform).DOAnchorPosX(400f, 0.5f);
-            (UnityTools.Instance.GetTransformFromChildren(gameObject, "BottomPanel") as RectTransform).DOAnchorPosY(-200f, 0.5f).OnComplete(() =>
-            {
-                DestroyPanel();
-            });
+            (UnityTools.Instance.GetTransformFromChildren(gameObject, "BottomPanel") as RectTransform).DOAnchorPosY(-200f, 0.5f)
+                .OnComplete(DestroyPanel).OnKill(DestroyPanel);
         }
     }
 }
