@@ -12,7 +12,6 @@ public class GoblinSpear : Melee
         base.OnHitEnemy(enemy);
 
         enemy.TakeDamage(Damage, Color.red);
-        enemy.AddBuff(BuffType.Poisoning);
     }
 
     protected override void OnHitPlayer(Player player)

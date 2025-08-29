@@ -34,6 +34,14 @@ public abstract class Bow : Weapon
         shootPoint = UnityTools.Instance.GetTransformFromChildren(gameObject, "ShootPoint").gameObject;
     }
 
+    protected override void OnEnter()
+    {
+        base.OnEnter();
+        isCharging = false;
+        chargingTimer = 0f;
+        RefreshChargingBar();
+    }
+
     public override void ControlWeapon(bool isCharging)
     {
         // 如果现在没有在蓄力但之间在蓄力

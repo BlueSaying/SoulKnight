@@ -10,12 +10,14 @@ public abstract class Bullet : Item
     protected int damage;
 
     public Character owner { get; protected set; }
+    public BuffType buffType { get; protected set; }
 
-    public Bullet(GameObject gameObject, Character owner, int damage, float bulletSpeed) : base(gameObject)
+    public Bullet(GameObject gameObject, Character owner, int damage, float bulletSpeed, BuffType buffType) : base(gameObject)
     {
         this.owner = owner;
         this.damage = damage;
         this.bulletSpeed = bulletSpeed;
+        this.buffType = buffType;
     }
 
     protected override void OnInit()
@@ -64,12 +66,16 @@ public abstract class Bullet : Item
     protected virtual void OnHitEnemy(Enemy enemy)
     {
         enemy.TakeDamage(damage, Color.red);
+        enemy.AddBuff(buffType);
+
         Remove();
     }
 
     protected virtual void OnHitPlayer(Player player)
     {
         player.TakeDamage(damage, Color.red);
+        player.AddBuff(buffType);
+
         Remove();
     }
 

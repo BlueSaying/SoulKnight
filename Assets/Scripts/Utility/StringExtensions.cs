@@ -1,6 +1,4 @@
-﻿
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 
 public static class StringExtensions
 {
@@ -13,6 +11,7 @@ public static class StringExtensions
 
         {"AK47","AK47" },
         {"AssaultRifle","突击步枪" },
+        {"GasBlaster","毒气机枪" },
 
         {"GoblinSpear","哥布林长枪" },
 

@@ -143,7 +143,7 @@ public abstract class Character
                 buff.OnUpdate();
 
                 // 如果buff.OnUpdate结束后,buff仍没结束
-                if(!buff.isEnd)
+                if (!buff.isEnd)
                 {
                     hasBuff = true;
                     buffIcon.GetComponent<SpriteRenderer>().sprite = ResourcesLoader.Instance.LoadSprite(buff.ToString());
@@ -156,6 +156,8 @@ public abstract class Character
 
     public void AddBuff(BuffType buffType)
     {
+        if (buffType == BuffType.None) return;
+
         if (buffs.ContainsKey(buffType))
         {
             if (buffs[buffType].isEnd)

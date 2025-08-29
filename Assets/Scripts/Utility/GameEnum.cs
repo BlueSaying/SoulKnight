@@ -108,6 +108,7 @@ public enum WeaponType
     Hoe,
     Hammer,
     GoblinMagicStaff,
+    GasBlaster,
 }
 
 /// <summary>
@@ -453,6 +454,8 @@ public enum BulletType
     Bullet_34,
 
     Bullet_130,
+
+    Bullet_131,
 
     BulletBasketball,
 

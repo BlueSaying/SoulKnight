@@ -97,6 +97,27 @@ public class ItemPool
         }
     }
 
+    // get item from itemPool
+    public Item GetItem(Type type)
+    {
+        if (!type.IsSubclassOf(typeof(Item)) || !pool.ContainsKey(type)) return null;
+
+        Queue<Item> queue = pool[type];
+
+        if (queue == null || queue.Count == 0)
+        {
+            return null;
+        }
+        else
+        {
+            Item result = queue.Dequeue();
+            curPoolSize--;
+            result.gameObject.SetActive(true);
+
+            return result;
+        }
+    }
+
     // return item back to itemPool
     public void ReleaseItem(Item item)
     {

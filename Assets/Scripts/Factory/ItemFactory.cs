@@ -1,75 +1,25 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class ItemFactory : Singleton<ItemFactory>
 {
     private ItemFactory() { }
 
-    public Bullet CreateBullet(BulletType bulletType, Vector3 position, Quaternion quaternion, Character owner, int damage, float bulletSpeed)
+    public Bullet CreateBullet(BulletType bulletType, Vector3 position, Quaternion quaternion,
+        Character owner, int damage, float bulletSpeed, BuffType buffType = BuffType.None)
     {
-        ItemPool itemPool = SystemRepository.Instance.GetSystem<ItemSystem>().itemPool;
-        Bullet bullet = null;
+        Type type = Type.GetType(bulletType.ToString());
+        Bullet bullet = SystemRepository.Instance.GetSystem<ItemSystem>().itemPool.GetItem(type) as Bullet;
 
-        switch (bulletType)
+        if (bullet != null)
         {
-            case BulletType.Bullet_5:
-                bullet = itemPool.GetItem<Bullet_5>() as Bullet;
-                if (bullet != null)
-                {
-                    bullet.Reset(position, quaternion, damage);
-                }
-                else
-                {
-                    bullet = new Bullet_5(UnityEngine.Object.Instantiate(ResourcesLoader.Instance.LoadBullet(bulletType.ToString()), position, quaternion), owner, damage, bulletSpeed);
-                }
-                break;
-
-            case BulletType.Bullet_34:
-                bullet = itemPool.GetItem<Bullet_34>() as Bullet;
-                if (bullet != null)
-                {
-                    bullet.Reset(position, quaternion, damage);
-                }
-                else
-                {
-                    bullet = new Bullet_34(UnityEngine.Object.Instantiate(ResourcesLoader.Instance.LoadBullet(bulletType.ToString()), position, quaternion), owner, damage, bulletSpeed);
-                }
-                break;
-
-            case BulletType.BulletBasketball:
-                bullet = itemPool.GetItem<BulletBasketball>() as Bullet;
-                if (bullet != null)
-                {
-                    bullet.Reset(position, quaternion, damage);
-                }
-                else
-                {
-                    bullet = new BulletBasketball(UnityEngine.Object.Instantiate(ResourcesLoader.Instance.LoadBullet(bulletType.ToString()), position, quaternion), owner, damage, bulletSpeed);
-                }
-                break;
-
-            case BulletType.Bullet_130:
-                bullet = itemPool.GetItem<Bullet_130>() as Bullet;
-                if (bullet != null)
-                {
-                    bullet.Reset(position, quaternion, damage);
-                }
-                else
-                {
-                    bullet = new Bullet_130(UnityEngine.Object.Instantiate(ResourcesLoader.Instance.LoadBullet(bulletType.ToString()), position, quaternion), owner, damage, bulletSpeed);
-                }
-                break;
-
-            case BulletType.Arrow:
-                bullet = itemPool.GetItem<Arrow>() as Bullet;
-                if (bullet != null)
-                {
-                    (bullet as Arrow).Reset(position, quaternion, damage);
-                }
-                else
-                {
-                    bullet = new Arrow(UnityEngine.Object.Instantiate(ResourcesLoader.Instance.LoadBullet(bulletType.ToString()), position, quaternion), owner, damage, bulletSpeed);
-                }
-                break;
+            bullet.Reset(position, quaternion, damage);
+        }
+        else
+        {
+            GameObject bulletPrefab = ResourcesLoader.Instance.LoadBullet(bulletType.ToString());
+            GameObject newBullet = UnityEngine.Object.Instantiate(bulletPrefab, position, quaternion);
+            bullet = Activator.CreateInstance(type, new object[] { newBullet, owner, damage, bulletSpeed, buffType }) as Bullet;
         }
 
         return bullet;
@@ -77,44 +27,18 @@ public class ItemFactory : Singleton<ItemFactory>
 
     public Effect CreateEffect(EffectType effectType, Vector3 position, Quaternion quaternion)
     {
-        ItemPool itemPool = SystemRepository.Instance.GetSystem<ItemSystem>().itemPool;
-        Effect effect = null;
+        Type type = Type.GetType(effectType.ToString());
+        Effect effect = SystemRepository.Instance.GetSystem<ItemSystem>().itemPool.GetItem(type) as Effect;
 
-        switch (effectType)
+        if (effect != null)
         {
-            case EffectType.BoomEffect:
-                effect = itemPool.GetItem<BoomEffect>() as Effect;
-                if (effect != null)
-                {
-                    effect.Reset(position, quaternion);
-                }
-                else
-                {
-                    effect = new BoomEffect(UnityEngine.Object.Instantiate(ResourcesLoader.Instance.LoadEffect(effectType.ToString()), position, quaternion));
-                }
-                break;
-            case EffectType.SummonEffect:
-                effect = itemPool.GetItem<SummonEffect>() as Effect;
-                if (effect != null)
-                {
-                    effect.Reset(position, quaternion);
-                }
-                else
-                {
-                    effect = new SummonEffect(UnityEngine.Object.Instantiate(ResourcesLoader.Instance.LoadEffect(effectType.ToString()), position, quaternion));
-                }
-                break;
-            case EffectType.AppearEffect:
-                effect = itemPool.GetItem<AppearEffect>() as Effect;
-                if (effect != null)
-                {
-                    effect.Reset(position, quaternion);
-                }
-                else
-                {
-                    effect = new AppearEffect(UnityEngine.Object.Instantiate(ResourcesLoader.Instance.LoadEffect(effectType.ToString()), position, quaternion));
-                }
-                break;
+            effect.Reset(position, quaternion);
+        }
+        else
+        {
+            GameObject effectPrefab = ResourcesLoader.Instance.LoadEffect(effectType.ToString());
+            GameObject newEffect = UnityEngine.Object.Instantiate(effectPrefab, position, quaternion);
+            effect = Activator.CreateInstance(type, new object[] { newEffect }) as Effect;
         }
 
         return effect;

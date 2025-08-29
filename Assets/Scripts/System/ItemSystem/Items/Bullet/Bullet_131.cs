@@ -1,15 +1,14 @@
 ﻿using UnityEngine;
 
-public class Bullet_5 : Bullet
+public class Bullet_131 : Bullet
 {
-    public Bullet_5(GameObject gameObject, Character owner, int damage, float bulletSpeed, BuffType buffType)
+    public Bullet_131(GameObject gameObject, Character owner, int damage, float bulletSpeed, BuffType buffType)
         : base(gameObject, owner, damage, bulletSpeed, buffType) { }
 
     protected override void OnHitObstacle()
     {
         base.OnHitObstacle();
 
-        // TODO:后期将effectType设为Bullet类的属性
         ItemFactory.Instance.CreateEffect(EffectType.BoomEffect, position, Quaternion.identity);
     }
 

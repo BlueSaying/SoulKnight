@@ -115,6 +115,12 @@ public abstract class Weapon
     public virtual void OnExit()
     {
         isEnter = false;
+
+        // 退出时要把攻击减少的速度加回去
+        if (IsAttack)
+        {
+            owner.CurSpeed.AddPercentModifier(SpeedDecrease);
+        }
     }
 
     protected virtual void OnInit()
@@ -127,6 +133,8 @@ public abstract class Weapon
     protected virtual void OnEnter()
     {
         fireTimer = 0;
+
+        IsAttack = false;
     }
 
     public virtual void OnFixedUpdate()
