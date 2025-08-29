@@ -3,7 +3,7 @@
     /// <summary>
     /// 当前血量
     /// </summary>
-    public DynamicAttr curHP = new DynamicAttr();
+    public DynamicAttr<int> curHP = new DynamicAttr<int>();
 
-    public DynamicAttr curSpeed = new DynamicAttr();
+    public DynamicAttr<float> curSpeed = new DynamicAttr<float>();
 }

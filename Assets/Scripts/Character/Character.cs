@@ -21,26 +21,18 @@ public abstract class Character
     public float speed => model.staticAttr.speed;
 
     // 动态属性
-    public int CurHP
+    public DynamicAttr<int> CurHP
     {
         get
         {
-            return Mathf.RoundToInt(model.dynamicAttr.curHP.Value);
-        }
-        set
-        {
-            model.dynamicAttr.curHP.AddModifier(new FlatModifier(value - CurHP));
+            return model.dynamicAttr.curHP;
         }
     }
-    public float CurSpeed
+    public DynamicAttr<float> CurSpeed
     {
         get
         {
-            return model.dynamicAttr.curSpeed.Value;
-        }
-        set
-        {
-            model.dynamicAttr.curSpeed.AddModifier(new FlatModifier(value - CurSpeed));
+            return model.dynamicAttr.curSpeed;
         }
     }
     #endregion
@@ -149,26 +141,31 @@ public abstract class Character
             if (!buff.isEnd)
             {
                 buff.OnUpdate();
-                hasBuff = true;
-                buffIcon.GetComponent<SpriteRenderer>().sprite=ResourcesLoader.Instance.LoadSprite(buff.ToString());
+
+                // 如果buff.OnUpdate结束后,buff仍没结束
+                if(!buff.isEnd)
+                {
+                    hasBuff = true;
+                    buffIcon.GetComponent<SpriteRenderer>().sprite = ResourcesLoader.Instance.LoadSprite(buff.ToString());
+                }
             }
         }
 
         buffIcon.SetActive(hasBuff);
     }
 
-    public void AddBuff(BuffType buffType, float duartion)
+    public void AddBuff(BuffType buffType)
     {
         if (buffs.ContainsKey(buffType))
         {
             if (buffs[buffType].isEnd)
             {
-                buffs[buffType] = BuffFactory.CreateBuff(buffType, duartion, this);
+                buffs[buffType] = BuffFactory.CreateBuff(buffType, this);
             }
         }
         else
         {
-            buffs.Add(buffType, BuffFactory.CreateBuff(buffType, duartion, this));
+            buffs.Add(buffType, BuffFactory.CreateBuff(buffType, this));
         }
     }
 }

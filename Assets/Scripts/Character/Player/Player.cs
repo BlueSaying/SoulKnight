@@ -41,41 +41,26 @@ public abstract class Player : Character, IDamageable
         }
     }
 
-    public new int CurHP
+    public new DynamicAttr<int> CurHP
     {
         get
         {
-            return Mathf.RoundToInt(model.dynamicAttr.curHP.Value);
-        }
-        set
-        {
-            model.dynamicAttr.curHP.AddModifier(new FlatModifier(value - CurHP));
-            EventCenter.Instance.NotifyEvent(EventType.UpdateBattlePanel);
+            return model.dynamicAttr.curHP;
         }
     }
-    public int CurArmor
+    public DynamicAttr<int> CurArmor
     {
         get
         {
-            return Mathf.RoundToInt(model.dynamicAttr.curArmor.Value);
-        }
-        set
-        {
-            model.dynamicAttr.curArmor.AddModifier(new FlatModifier(value - CurArmor));
-            EventCenter.Instance.NotifyEvent(EventType.UpdateBattlePanel);
+            return model.dynamicAttr.curArmor;
         }
     }
 
-    public int CurEnergy
+    public DynamicAttr<int> CurEnergy
     {
         get
         {
-            return Mathf.RoundToInt(model.dynamicAttr.curEnergy.Value);
-        }
-        set
-        {
-            model.dynamicAttr.curEnergy.AddModifier(new FlatModifier(value - CurEnergy));
-            EventCenter.Instance.NotifyEvent(EventType.UpdateBattlePanel);
+            return model.dynamicAttr.curEnergy;
         }
     }
     #endregion
@@ -95,6 +80,10 @@ public abstract class Player : Character, IDamageable
         hurtArmorRecoveryTimer = 0f;
         armorRecoveryTimer = 0f;
         hurtInvincibleTimer = 0f;
+
+        CurHP.AddCallBack(() => { EventCenter.Instance.NotifyEvent(EventType.UpdateBattlePanel); });
+        CurArmor.AddCallBack(() => { EventCenter.Instance.NotifyEvent(EventType.UpdateBattlePanel); });
+        CurEnergy.AddCallBack(() => { EventCenter.Instance.NotifyEvent(EventType.UpdateBattlePanel); });
     }
 
     protected override void OnInit()
@@ -139,11 +128,12 @@ public abstract class Player : Character, IDamageable
         }
 
         hurtArmorRecoveryTimer += Time.deltaTime;
-        if (hurtArmorRecoveryTimer > hurtArmorRecoveryTime && CurArmor < maxArmor)
+        if (hurtArmorRecoveryTimer > hurtArmorRecoveryTime && CurArmor.Value < maxArmor)
         {
             if (armorRecoveryTimer > armorRecoveryTime)
             {
-                CurArmor++;
+                // 恢复一点护甲
+                CurArmor.AddFlatModifier(1);
                 armorRecoveryTimer = 0f;
             }
             else
@@ -233,29 +223,29 @@ public abstract class Player : Character, IDamageable
         }
 
         // 优先扣除护盾值
-        if (CurArmor >= damage)
+        if (CurArmor.Value >= damage)
         {
-            CurArmor -= damage;
+            CurArmor.AddFlatModifier(-damage);
             damage = 0;
         }
         else
         {
-            damage -= CurArmor;
-            CurArmor = 0;
+            damage -= CurArmor.Value;
+            CurArmor.AddFlatModifier(-CurArmor.Value);
         }
 
         // 判断剩余伤害是否要继续扣除血量
         if (damage <= 0) return;
 
-        if (CurHP >= damage)
+        if (CurHP.Value >= damage)
         {
-            CurHP -= damage;
+            CurHP.AddFlatModifier(-damage);
             damage = 0;
         }
         else
         {
-            damage -= CurHP;
-            CurHP = 0;
+            damage -= CurHP.Value;
+            CurHP.AddFlatModifier(-CurHP.Value);
             Die();
         }
     }
@@ -281,6 +271,8 @@ public abstract class Player : Character, IDamageable
         // 遍历所有敌人
         foreach (var enemy in SystemRepository.Instance.GetSystem<EnemySystem>().enemies)
         {
+            if (enemy.isDead) continue;
+
             float x = (enemy.transform.position.x - transform.position.x);
             float y = (enemy.transform.position.y - transform.position.y);
 

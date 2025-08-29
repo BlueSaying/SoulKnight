@@ -48,16 +48,23 @@ public abstract class Weapon
         this.model = model;
     }
 
+    // 记录上一帧是否在攻击
+    protected bool IsAttack { get; private set; }
     public virtual void ControlWeapon(bool isAttack)
     {
-        // 如果不在攻击则直接返回
-        if (!isAttack)
+        // 如果上一帧攻击而这一帧没有在攻击
+        if (!isAttack && IsAttack)
         {
-            owner.CurSpeed = owner.speed;
-            return;
+            owner.CurSpeed.AddPercentModifier(SpeedDecrease);
         }
+        else if (isAttack && !IsAttack)
+        {
+            owner.CurSpeed.AddPercentModifier(-SpeedDecrease);
+        }
+        IsAttack = isAttack;
 
-        owner.CurSpeed = owner.speed * (1 - SpeedDecrease);
+        // 如果不在攻击则直接返回，无后续处理
+        if (!isAttack) return;
 
         // 如果冷却时间到了,那么发射子弹
         if (fireTimer >= fireTime)
@@ -66,9 +73,9 @@ public abstract class Weapon
             if (owner is Player && !TestManager.Instance.isUnlockWeapon)
             {
                 Player player = owner as Player;
-                if (player.CurEnergy >= EnergyCost)
+                if (player.CurEnergy.Value >= EnergyCost)
                 {
-                    player.CurEnergy -= EnergyCost;
+                    player.CurEnergy.AddFlatModifier(-EnergyCost);
                 }
                 else
                 {

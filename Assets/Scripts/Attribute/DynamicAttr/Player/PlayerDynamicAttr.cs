@@ -2,7 +2,7 @@
 {
     public PlayerSkinType playerSkinType;
 
-    public DynamicAttr curArmor = new DynamicAttr();
+    public DynamicAttr<int> curArmor = new DynamicAttr<int>();
 
-    public DynamicAttr curEnergy = new DynamicAttr();
+    public DynamicAttr<int> curEnergy = new DynamicAttr<int>();
 }

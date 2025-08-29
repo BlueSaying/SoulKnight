@@ -12,7 +12,7 @@ public class GoblinSpear : Melee
         base.OnHitEnemy(enemy);
 
         enemy.TakeDamage(Damage, Color.red);
-        enemy.AddBuff(BuffType.Burn, 2f);
+        enemy.AddBuff(BuffType.Poisoning);
     }
 
     protected override void OnHitPlayer(Player player)
@@ -20,5 +20,5 @@ public class GoblinSpear : Melee
         base.OnHitPlayer(player);
 
         player.TakeDamage(Damage, Color.red);
-    }   
+    }
 }

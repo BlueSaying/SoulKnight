@@ -1,52 +1,86 @@
 ﻿using System;
-using System.Collections.Generic;
+using UnityEngine.Events;
 
-public class DynamicAttr
+/// <summary>
+/// 动态属性类
+/// </summary>
+/// <typeparam name="T">int,float</typeparam>
+public class DynamicAttr<T> where T : struct
 {
     // a mark of wheather the value has updated
     private bool hasUpdated;
 
+    // a mark of wheather the value is Interger
+    private bool isInterger;
+
+    private UnityAction action;
+
     private float baseValue;
 
-    private Dictionary<Type, Modifier> modifiers = new Dictionary<Type, Modifier>();
+    private FlatModifier flatModifier;
+    private PercentModifier percentModifier;
 
-    private float value;
-    public float Value
+    private T value;
+    public T Value
     {
         get
         {
             if (hasUpdated) return value;
 
+            // 计算数值
             float output = baseValue;
-
-            foreach (var modifier in modifiers.Values)
-            {
-                output = modifier.Apply(output);
-            }
+            output = flatModifier.Apply(output);
+            output = percentModifier.Apply(output);
 
             hasUpdated = true;
-            return value = output;
-        }
-    }
 
-    public void AddModifier(Modifier modifier)
-    {
-        Type modifierType = modifier.GetType();
-
-        if (modifiers.ContainsKey(modifierType))
-        {
-            modifiers[modifierType].value = modifiers[modifierType].Apply(modifier.value);
+            if (isInterger) return value = (T)(object)(int)output;
+            else return value = (T)(object)output;
         }
-        else
-        {
-            modifiers.Add(modifierType, modifier);
-        }
-
-        hasUpdated = false;
     }
 
     public DynamicAttr(float baseValue = 0f)
     {
         this.baseValue = baseValue;
+
+        flatModifier = new FlatModifier();
+        percentModifier = new PercentModifier();
+
+        isInterger = typeof(T) == typeof(int);
+    }
+
+    public void AddFlatModifier(float value)
+    {
+        if (flatModifier == null)
+        {
+            flatModifier = new FlatModifier(value);
+        }
+        else
+        {
+            flatModifier.value += value;
+        }
+
+        hasUpdated = false;
+        action?.Invoke();
+    }
+
+    public void AddPercentModifier(float value)
+    {
+        if (percentModifier == null)
+        {
+            percentModifier = new PercentModifier(value);
+        }
+        else
+        {
+            percentModifier.value += value;
+        }
+
+        hasUpdated = false;
+        action?.Invoke();
+    }
+
+    public void AddCallBack(UnityAction action)
+    {
+        this.action += action;
     }
 }

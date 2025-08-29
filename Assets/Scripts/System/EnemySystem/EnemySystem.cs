@@ -23,7 +23,10 @@ public class EnemySystem : BaseSystem
 
         foreach (Enemy enemy in enemies)
         {
-            enemy.OnUpdate();
+            if(!enemy.isDead)
+            {
+                enemy.OnUpdate();
+            }
         }
     }
 

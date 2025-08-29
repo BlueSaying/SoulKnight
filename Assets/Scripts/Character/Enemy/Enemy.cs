@@ -38,9 +38,9 @@ public abstract class Enemy : Character, IDamageable
         Transform damageNumPoint = transform.Find("DamageNumPoint");
         ItemFactory.Instance.CreateDamageNum("DamageNum", damageNumPoint.position, damage, damageColor);
 
-        CurHP -= damage;
+        CurHP.AddFlatModifier(-damage);
 
-        if (CurHP <= 0)
+        if (CurHP.Value <= 0)
         {
             Die();
         }
@@ -93,7 +93,12 @@ public abstract class Enemy : Character, IDamageable
         transform.Find("Collider").gameObject.SetActive(false);
         transform.Find("Trigger").gameObject.SetActive(false);
 
-        SystemRepository.Instance.GetSystem<EnemySystem>().enemies.Remove(this);
+        // 移除所有buff
+        foreach(var buff in buffs.Values)
+        {
+            buff.EndBuff();
+        }
+        buffIcon.SetActive(false);
 
         EventCenter.Instance.NotifyEvent(EventType.OnEnemyDie);
         //CoroutinePool.Instance.StopAllCoroutine(this);

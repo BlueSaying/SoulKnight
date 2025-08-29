@@ -8,7 +8,7 @@ public class Buff
     public bool isEnd { get; private set; }
 
     private float durationTimer = 0f;
-    private float duration;
+    protected float duration;
 
     public Buff(float duration, Character owner)
     {
@@ -33,7 +33,7 @@ public class Buff
         }
     }
 
-    protected virtual void EndBuff()
+    public virtual void EndBuff()
     {
         isEnd = true;
     }
