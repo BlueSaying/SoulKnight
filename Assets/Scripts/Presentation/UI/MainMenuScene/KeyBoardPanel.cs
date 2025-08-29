@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using DG.Tweening;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,6 +17,21 @@ namespace MainMenuScene
             base.Awake();
 
             InitUI();
+        }
+
+        protected override void DOOpenPanel()
+        {
+            base.DOOpenPanel();
+            (transform as RectTransform).DOAnchorPosX(-2500, 0.5f).From();
+        }
+
+        protected override void DOClosePanel()
+        {
+            base.DOClosePanel();
+            (transform as RectTransform).DOAnchorPosX(-2500, 0.5f).OnComplete(() =>
+            {
+                DestroyPanel();
+            });
         }
 
         private void InitUI()

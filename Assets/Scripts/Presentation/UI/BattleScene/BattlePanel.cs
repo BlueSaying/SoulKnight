@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using DG.Tweening;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace BattleScene
@@ -14,6 +15,23 @@ namespace BattleScene
             RefreshPanel();
 
             EventCenter.Instance.RegisterEvent(EventType.UpdateBattlePanel, RefreshPanel);
+        }
+
+        protected override void DOOpenPanel()
+        {
+            base.DOOpenPanel();
+            (UnityTools.Instance.GetTransformFromChildren(gameObject, "PlayerStateBar") as RectTransform).DOAnchorPosX(-450, 0.5f).From();
+            (UnityTools.Instance.GetTransformFromChildren(gameObject, "PauseButton") as RectTransform).DOAnchorPosX(200, 0.5f).From();
+        }
+
+        protected override void DOClosePanel()
+        {
+            base.DOClosePanel();
+            (UnityTools.Instance.GetTransformFromChildren(gameObject, "PlayerStateBar") as RectTransform).DOAnchorPosX(-450, 0.5f);
+            (UnityTools.Instance.GetTransformFromChildren(gameObject, "PauseButton") as RectTransform).DOAnchorPosX(200, 0.5f).OnComplete(() =>
+            {
+                DestroyPanel();
+            });
         }
 
         private void RefreshPanel()

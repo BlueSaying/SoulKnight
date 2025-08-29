@@ -1,7 +1,7 @@
 using UnityEngine;
 
 /// <summary>
-/// UI界面基类（需要调用UI_Manager来打开界面的需要继承此类）
+/// UI界面基类（需要调用UIMediator来打开界面的需要继承此类）
 /// </summary>
 public class Panel : MonoBehaviour
 {
@@ -21,7 +21,8 @@ public class Panel : MonoBehaviour
     public virtual void OpenPanel(string panelName)
     {
         name = panelName;
-        gameObject.SetActive(true);
+        //gameObject.SetActive(true);
+        DOOpenPanel();
     }
 
     /// <summary>
@@ -29,8 +30,18 @@ public class Panel : MonoBehaviour
     /// </summary>
     public virtual void ClosePanel()
     {
+        DOClosePanel();
+    }
+
+    protected virtual void DOOpenPanel() { }
+
+    protected virtual void DOClosePanel() { }
+
+    protected void DestroyPanel()
+    {
         isRemove = true;
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
+
         Destroy(gameObject);
     }
 }

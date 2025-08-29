@@ -1216,7 +1216,7 @@ GameObject:
   - component: {fileID: 7971274773024626274}
   - component: {fileID: 8079749871935619422}
   m_Layer: 5
-  m_Name: DivRight
+  m_Name: RightPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

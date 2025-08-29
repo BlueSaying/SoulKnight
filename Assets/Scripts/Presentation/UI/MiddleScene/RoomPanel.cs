@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using DG.Tweening;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace MiddleScene
@@ -17,6 +18,24 @@ namespace MiddleScene
 
             UIbackButton.onClick.AddListener(() => { SceneFacade.Instance.LoadScene(SceneName.MainMenuScene); });
             UIstoreButton.onClick.AddListener(() => { Debug.Log("打开商店"); });
+        }
+
+        protected override void DOOpenPanel()
+        {
+            base.DOOpenPanel();
+            (UnityTools.Instance.GetTransformFromChildren(gameObject, "Title") as RectTransform).DOAnchorPosY(100, 0.5f).From();
+            (UnityTools.Instance.GetTransformFromChildren(gameObject, "BottomPanel") as RectTransform).DOAnchorPosY(-100, 0.5f).From();
+        }
+
+        protected override void DOClosePanel()
+        {
+            base.DOClosePanel();
+
+            (UnityTools.Instance.GetTransformFromChildren(gameObject, "Title") as RectTransform).DOAnchorPosY(100, 0.5f);
+            (UnityTools.Instance.GetTransformFromChildren(gameObject, "BottomPanel") as RectTransform).DOAnchorPosY(-100, 0.5f).OnComplete(() =>
+            {
+                DestroyPanel();
+            });
         }
 
         protected override void Update()
@@ -42,6 +61,7 @@ namespace MiddleScene
 
                     UIMediator.Instance.OpenPanel(SceneName.MiddleScene, PanelName.SelectingPlayerPanel.ToString());
                     UIMediator.Instance.ClosePanel(PanelName.RoomPanel.ToString());
+                    UIMediator.Instance.ClosePanel(PanelName.GemPanel.ToString());
                 }
             }
         }

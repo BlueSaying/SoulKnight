@@ -11,6 +11,12 @@ public class WeaponInfoPanel : Panel
     public Sprite meleeIcon;
     public Sprite strangeIcon;
 
+    protected override void DOClosePanel()
+    {
+        base.DOClosePanel();
+        DestroyPanel();
+    }
+
     public void RefreshPanel()
     {
         GameObject weaponCanPickUp = SystemRepository.Instance.GetSystem<PlayerSystem>().mainPlayer.pickUpableList.FirstOrDefault();

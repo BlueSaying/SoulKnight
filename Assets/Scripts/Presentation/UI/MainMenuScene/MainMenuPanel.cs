@@ -11,6 +11,12 @@ namespace MainMenuScene
             InitUI();
         }
 
+        protected override void DOClosePanel()
+        {
+            base.DOClosePanel();
+            DestroyPanel();
+        }
+
         private void InitUI()
         {
             UnityTools.Instance.GetComponentFromChildren<Button>(gameObject, "ButtonStart").onClick.AddListener(() =>

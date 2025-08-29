@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DG.Tweening;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -38,10 +39,9 @@ namespace MiddleScene
 
                 EventCenter.Instance.NotifyEvent(EventType.OnSelectSkinComplete);// TODO:读取数据填写UI
 
-                // 解除冻结位置，即仅设置冻结旋转
+                // 设置UI
                 UIMediator.Instance.OpenPanel(SceneName.MiddleScene, PanelName.BattlePanel.ToString());
                 UIMediator.Instance.ClosePanel(PanelName.SelectingSkinPanel.ToString());
-                UIMediator.Instance.ClosePanel(PanelName.GemPanel.ToString());
 
                 // HACK
                 WeaponFactory.InstantiateWeapon(WeaponType.AK47, new Vector2(3, 0), Quaternion.identity);
@@ -77,6 +77,25 @@ namespace MiddleScene
                 curSkinIndex = (curSkinIndex + 1) % playerSkins.Count;
                 selectingPlayer.transform.Find("Sprite").GetComponent<Animator>().runtimeAnimatorController =
                     ResourcesLoader.Instance.LoadPlayerSkin(playerSkins[curSkinIndex].ToString());
+            });
+        }
+
+        protected override void DOOpenPanel()
+        {
+            base.DOOpenPanel();
+            (UnityTools.Instance.GetTransformFromChildren(gameObject, "ButtonLeft") as RectTransform).DOAnchorPosX(-400f, 0.5f).From();
+            (UnityTools.Instance.GetTransformFromChildren(gameObject, "ButtonRight") as RectTransform).DOAnchorPosX(400f, 0.5f).From();
+            (UnityTools.Instance.GetTransformFromChildren(gameObject, "BottomPanel") as RectTransform).DOAnchorPosY(-200f, 0.5f).From();
+        }
+
+        protected override void DOClosePanel()
+        {
+            base.DOClosePanel();
+            (UnityTools.Instance.GetTransformFromChildren(gameObject, "ButtonLeft") as RectTransform).DOAnchorPosX(-400f, 0.5f);
+            (UnityTools.Instance.GetTransformFromChildren(gameObject, "ButtonRight") as RectTransform).DOAnchorPosX(400f, 0.5f);
+            (UnityTools.Instance.GetTransformFromChildren(gameObject, "BottomPanel") as RectTransform).DOAnchorPosY(-200f, 0.5f).OnComplete(() =>
+            {
+                DestroyPanel();
             });
         }
     }

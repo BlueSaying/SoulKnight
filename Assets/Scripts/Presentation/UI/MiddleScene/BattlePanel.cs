@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using DG.Tweening;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace MiddleScene
@@ -21,6 +22,23 @@ namespace MiddleScene
             RefreshPanel();
 
             EventCenter.Instance.RegisterEvent(EventType.UpdateBattlePanel, RefreshPanel);
+        }
+
+        protected override void DOOpenPanel()
+        {
+            base.DOOpenPanel();
+            (UnityTools.Instance.GetTransformFromChildren(gameObject, "PlayerStatePanel") as RectTransform).DOAnchorPosX(-400, 0.5f).From();
+            (UnityTools.Instance.GetTransformFromChildren(gameObject, "RightPanel") as RectTransform).DOAnchorPosX(800, 0.5f).From();
+        }
+
+        protected override void DOClosePanel()
+        {
+            base.DOClosePanel();
+            (UnityTools.Instance.GetTransformFromChildren(gameObject, "PlayerStatePanel") as RectTransform).DOAnchorPosX(-400, 0.5f);
+            (UnityTools.Instance.GetTransformFromChildren(gameObject, "RightPanel") as RectTransform).DOAnchorPosX(800, 0.5f).OnComplete(() =>
+            {
+                DestroyPanel();
+            });
         }
 
         private void RefreshPanel()

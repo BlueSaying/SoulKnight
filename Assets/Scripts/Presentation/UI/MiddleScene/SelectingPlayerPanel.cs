@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DG.Tweening;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,7 +26,7 @@ namespace MiddleScene
                 SystemRepository.Instance.GetSystem<CameraSystem>().SwitchCamera(CameraType.StaticCamera);
 
                 UIMediator.Instance.OpenPanel(SceneName.MiddleScene, PanelName.RoomPanel.ToString());
-                //UIManager.Instance.OpenPanel(PanelName.GemPanel.ToString());
+                UIMediator.Instance.OpenPanel(SceneName.MiddleScene, PanelName.GemPanel.ToString());
                 UIMediator.Instance.ClosePanel(PanelName.SelectingPlayerPanel.ToString());
             });
 
@@ -35,6 +36,29 @@ namespace MiddleScene
                 EventCenter.Instance.NotifyEvent(EventType.OnSelectPlayerComplete);
                 UIMediator.Instance.OpenPanel(SceneName.MiddleScene, PanelName.SelectingSkinPanel.ToString());
                 UIMediator.Instance.ClosePanel(PanelName.SelectingPlayerPanel.ToString());
+            });
+        }
+
+        protected override void DOOpenPanel()
+        {
+            base.DOOpenPanel();
+            (UnityTools.Instance.GetTransformFromChildren(gameObject, "Title") as RectTransform).DOAnchorPosY(100, 0.5f).From();
+            (UnityTools.Instance.GetTransformFromChildren(gameObject, "LeftPanel") as RectTransform).DOAnchorPosX(-600f, 0.5f).From();
+            (UnityTools.Instance.GetTransformFromChildren(gameObject, "RightPanel") as RectTransform).DOAnchorPosX(600f, 0.5f).From();
+            (UnityTools.Instance.GetTransformFromChildren(gameObject, "ButtonBack") as RectTransform).DOAnchorPosX(-300f, 0.5f).From();
+            (UnityTools.Instance.GetTransformFromChildren(gameObject, "ButtonNext") as RectTransform).DOAnchorPosX(300f, 0.5f).From();
+        }
+
+        protected override void DOClosePanel()
+        {
+            base.DOClosePanel();
+            (UnityTools.Instance.GetTransformFromChildren(gameObject, "Title") as RectTransform).DOAnchorPosY(100, 0.5f);
+            (UnityTools.Instance.GetTransformFromChildren(gameObject, "LeftPanel") as RectTransform).DOAnchorPosX(-600f, 0.5f);
+            (UnityTools.Instance.GetTransformFromChildren(gameObject, "RightPanel") as RectTransform).DOAnchorPosX(600f, 0.5f);
+            (UnityTools.Instance.GetTransformFromChildren(gameObject, "ButtonBack") as RectTransform).DOAnchorPosX(-300f, 0.5f);
+            (UnityTools.Instance.GetTransformFromChildren(gameObject, "ButtonNext") as RectTransform).DOAnchorPosX(300f, 0.5f).OnComplete(() =>
+            {
+                DestroyPanel();
             });
         }
 
