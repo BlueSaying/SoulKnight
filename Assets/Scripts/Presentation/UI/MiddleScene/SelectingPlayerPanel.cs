@@ -15,7 +15,7 @@ namespace MiddleScene
         {
             base.Awake();
 
-            InitData();
+            InitPanel();
 
             UIbackButton = UnityTools.Instance.GetComponentFromChildren<Button>(gameObject, "ButtonBack");
             UInextButton = UnityTools.Instance.GetComponentFromChildren<Button>(gameObject, "ButtonNext");
@@ -60,12 +60,17 @@ namespace MiddleScene
                 .OnComplete(DestroyPanel).OnKill(DestroyPanel);
         }
 
-        private void InitData()
+        private void InitPanel()
         {
             Transform temp = null;
             var playerSystem = SystemRepository.Instance.GetSystem<PlayerSystem>();
-            var playerModel = playerSystem.GetPlayerModel(Enum.Parse<PlayerType>(playerSystem.playerGameObject.name));
+            PlayerType playerType = Enum.Parse<PlayerType>(playerSystem.playerGameObject.name);
+            PlayerModel playerModel = playerSystem.GetPlayerModel(playerType);
 
+            // Title
+            transform.Find("Title").Find("Text").GetComponent<Text>().text = playerType.ToString().ToChinese();
+
+            // LeftPanel
             const int HPLimit = 12;
             const int armorLimit = 10;
             const int energyLimit = 320;
@@ -90,6 +95,14 @@ namespace MiddleScene
             temp = UnityTools.Instance.GetTransformFromChildren(gameObject, "DivHor4");
             temp.Find("Slider").GetComponent<Slider>().value = 1.0f * playerModel.staticAttr.critical / criticalLimit;
             temp.Find("Text").GetComponent<Text>().text = playerModel.staticAttr.critical.ToString();
+
+            // 初始武器
+            transform.Find("DivMain").Find("LeftPanel").Find("DivBottom").Find("DivRight").Find("DefaultWeapon").GetComponent<Image>().sprite =
+                ResourcesLoader.Instance.LoadSprite(SpriteType.Weapon.ToString(), playerModel.staticAttr.defaultWeaponType.ToString());
+
+            // RightPanel
+            
+            //temp = transform.Find("DivMain").Find("RightPanel");
         }
     }
 }

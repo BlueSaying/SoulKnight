@@ -14,8 +14,8 @@ public abstract class Player : Character, IDamageable
 
     private CinemachineFramingTransposer cinemachineFramingTransposer;
 
-    public Skill skill {  get; protected set; }
-    public GameObject skillOriginPoint {  get; protected set; }
+    public Skill skill { get; protected set; }
+    public GameObject skillOriginPoint { get; protected set; }
 
 
     #region Attr
@@ -73,9 +73,12 @@ public abstract class Player : Character, IDamageable
     private float armorRecoveryTimer;
     private float hurtInvincibleTimer;
 
-    public Player(GameObject obj, PlayerModel model) : base(obj, model)
+    // 当前是否处于无敌状态
+    public bool isInvincible;
+
+    public Player(GameObject obj, PlayerModel model, Skill skill) : base(obj, model)
     {
-        this.model = model;
+        this.skill = skill;
         model.Recover();
 
         pickUpableList = new List<GameObject>();
@@ -112,6 +115,8 @@ public abstract class Player : Character, IDamageable
         {
             usingWeapon.OnFixedUpdate();
         }
+
+        skill?.OnFixedUpdate();
     }
 
     public override void OnUpdate()
@@ -133,8 +138,9 @@ public abstract class Player : Character, IDamageable
             SwitchWeapon();
         }
 
+        skill?.OnUpdate();
         // 技能释放
-        if(SystemRepository.Instance.GetSystem<InputSystem>().GetKeyInput(KeyInputType.ReleaseSkill))
+        if (SystemRepository.Instance.GetSystem<InputSystem>().GetKeyInput(KeyInputType.ReleaseSkill))
         {
             skill?.RealeaseSkill();
         }
@@ -212,7 +218,7 @@ public abstract class Player : Character, IDamageable
 
     public virtual void TakeDamage(int damage, Color damageColor)
     {
-        if (damage <= 0 || hurtInvincibleTimer < hurtInvincibleTime) return;
+        if (damage <= 0 || hurtInvincibleTimer < hurtInvincibleTime || isInvincible) return;
 
         // 护甲恢复计时器归零
         hurtArmorRecoveryTimer = 0f;

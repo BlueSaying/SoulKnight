@@ -5,17 +5,6 @@ public abstract class Enemy : Character, IDamageable
 {
     public new EnemyModel model { get => base.model as EnemyModel; set => base.model = value; }
 
-    protected Animator animator;
-    protected Animator Animator
-    {
-        get
-        {
-            if (animator == null) animator = transform.Find("Sprite").GetComponent<Animator>();
-            if (animator == null) throw new System.Exception("无法找到Animator");
-            return animator;
-        }
-    }
-
     public Weapon weapon { get; protected set; }
 
     protected EnemyFSM stateMachine;
@@ -94,7 +83,7 @@ public abstract class Enemy : Character, IDamageable
         transform.Find("Trigger").gameObject.SetActive(false);
 
         // 移除所有buff
-        foreach(var buff in buffs.Values)
+        foreach (var buff in buffs.Values)
         {
             buff.EndBuff();
         }

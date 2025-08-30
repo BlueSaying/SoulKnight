@@ -22,7 +22,7 @@ public abstract class Weapon
 
     // 武器能否旋转
     protected bool canRotate;
-    protected Quaternion rotation;
+    public Quaternion rotation {  get; protected set; }
 
     private bool isInit;
     private bool isEnter;

@@ -22,6 +22,15 @@ public enum SystemType
 }
 
 /// <summary>
+/// Sprite分类,用于加载Sprite
+/// </summary>
+public enum SpriteType
+{
+    Buff,
+    Weapon,
+}
+
+/// <summary>
 /// 武器大类
 /// </summary>
 public enum WeaponCategory
@@ -72,35 +81,37 @@ public enum QualityType
 /// </summary>
 public enum WeaponType
 {
+    GasBlaster,
     BadPistol,
-    H2O,
+    AK47,
     P250Pistol,
+    AssaultRifle,
+    DesertEagle,
+    Basketball,
+    StrongBow,
+    CompositeBow,
+    GatlingGun,
+    GoblinSpear,
+
+    H2O,
     Furnace,
     Icebreaker,
     PKP,
-    AK47,
     UZI,
     SnowFoxL,
-    AssaultRifle,
     MissileBattery,
     TheCode,
     TheCodePlus,
     CrimsonWineGlass,
-    DesertEagle,
     GrenadePistol,
     NextNextNextGenSMG,
     EagleOfIceAndFire,
     DormantBubbleMachine,
-    Basketball,
-    StrongBow,
-    CompositeBow,
     Shower,
-    GatlingGun,
     DoubleBladeSword,
     WoodenCross,
     BlueFireGatling,
     RainbowGatling,
-    GoblinSpear,
     Handgun,
     Shotgun,
     TrumpetFlower,
@@ -108,7 +119,6 @@ public enum WeaponType
     Hoe,
     Hammer,
     GoblinMagicStaff,
-    GasBlaster,
 }
 
 /// <summary>

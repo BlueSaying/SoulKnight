@@ -11,7 +11,18 @@ public abstract class Character
     public GameObject trigger { get; protected set; }
     public GameObject buffIcon { get; protected set; }
 
-    // Buff不可叠加,故使用字典
+    protected Animator animator;
+    public Animator Animator
+    {
+        get
+        {
+            if (animator == null) animator = transform.Find("Sprite").GetComponent<Animator>();
+            if (animator == null) throw new System.Exception(ToString() + "无法找到Animator");
+            return animator;
+        }
+    }
+
+    // Buff可叠加,故使用字典
     public Dictionary<BuffType, Buff> buffs { get; protected set; }
 
     #region Attr
@@ -146,7 +157,7 @@ public abstract class Character
                 if (!buff.isEnd)
                 {
                     hasBuff = true;
-                    buffIcon.GetComponent<SpriteRenderer>().sprite = ResourcesLoader.Instance.LoadSprite(buff.ToString());
+                    buffIcon.GetComponent<SpriteRenderer>().sprite = ResourcesLoader.Instance.LoadSprite(SpriteType.Buff.ToString(), buff.ToString());
                 }
             }
         }

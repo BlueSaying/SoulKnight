@@ -22,6 +22,10 @@ public static class StringExtensions
 
         {"Basketball","篮球" },
 
+        // 角色
+        {"Knight","骑士" },
+        {"Rogue","游侠" },
+
         // 杂项
         {"Chest","宝箱" },
     };

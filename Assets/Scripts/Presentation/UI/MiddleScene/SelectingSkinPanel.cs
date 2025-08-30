@@ -59,6 +59,9 @@ namespace MiddleScene
                 // 实例化宝箱
                 // HACK
                 DecorationFactory.InstantiateChest(new Vector2(-5.5f, 0.5f), Quaternion.identity);
+                DecorationFactory.InstantiateChest(new Vector2(-7.5f, 0.5f), Quaternion.identity);
+                DecorationFactory.InstantiateChest(new Vector2(-9.5f, 0.5f), Quaternion.identity);
+                DecorationFactory.InstantiateChest(new Vector2(-11.5f, 0.5f), Quaternion.identity);
 
                 SystemRepository.Instance.GetSystem<EnemySystem>().AddEnemy(EnemyType.Stake, Vector2.zero, Quaternion.identity, null);
             });

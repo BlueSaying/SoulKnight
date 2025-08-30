@@ -9,7 +9,7 @@
         this.owner = owner;
     }
 
-    public virtual void RealeaseSkill() { }
+    public abstract void RealeaseSkill();
 
     protected virtual void OnInit() { }
 

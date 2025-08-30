@@ -1,7 +1,7 @@
-﻿// 骑士1技能,火力全开
-// 短时间内双持当前武器进行攻击
-using UnityEngine;
+﻿using UnityEngine;
 
+// 骑士1技能,火力全开
+// 短时间内双持当前武器进行攻击
 public class KnightSkill_1 : Skill
 {
     // 技能持续时间
@@ -24,21 +24,19 @@ public class KnightSkill_1 : Skill
 
     public KnightSkill_1(Player owner) : base(owner)
     {
-        coolTimer = 10f;
+        coolTimer = CoolTime;
     }
 
     public override void RealeaseSkill()
     {
         if (owner.usingWeapon == null || coolTimer < CoolTime || isSkillRealease) return;
-
-        base.RealeaseSkill();
-
+    
         isSkillRealease = true;
         skillTimer = 0f;
-
+    
         // 播放技能动画
         owner.skillOriginPoint.SetActive(true);
-
+    
         WeaponModel model = SystemRepository.Instance.GetSystem<WeaponSystem>().GetWeaponModel(owner.usingWeapon.WeaponType);
         secondWeapon = WeaponFactory.GetWeapon(model, owner);
         secondWeapon.transform.localPosition += new Vector3(0.75f, 0);
@@ -70,6 +68,11 @@ public class KnightSkill_1 : Skill
         {
             skillTimer += Time.deltaTime;
             if (skillTimer >= SkillTime)
+            {
+                EndSkill();
+            }
+
+            if(SystemRepository.Instance.GetSystem<InputSystem>().GetKeyDownInput(KeyInputType.SwitchWeapon))
             {
                 EndSkill();
             }
@@ -117,6 +120,7 @@ public class KnightSkill_1 : Skill
         // 停止技能动画
         owner.skillOriginPoint.SetActive(false);
 
+        secondWeapon.OnExit();
         Object.Destroy(secondWeapon.gameObject);
         secondWeapon = null;
         coolTimer = 0f;

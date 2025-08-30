@@ -147,11 +147,11 @@ public class ResourcesLoader : Singleton<ResourcesLoader>
         return Resources.LoadAll<GameObject>(levelRoomPath + levelName).Where(x => x.name == roomName).ToArray()[0];
     }
 
-    public Sprite LoadSprite(string spriteName)
+    public Sprite LoadSprite(string spriteType, string spriteName)
     {
         if (spriteDic.ContainsKey(spriteName)) return spriteDic[spriteName];
 
-        Sprite newSprite = Resources.LoadAll<Sprite>(spritePath).Where(x => x.name == spriteName).ToArray()[0];
+        Sprite newSprite = Resources.LoadAll<Sprite>(spritePath + spriteType).Where(x => x.name == spriteName).ToArray()[0];
         spriteDic.Add(spriteName, newSprite);
         return newSprite;
     }

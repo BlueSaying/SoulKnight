@@ -11,6 +11,7 @@ public class PlayerSystem : BaseSystem
     private PlayerSkinRepository skinRepository;
 
     public GameObject playerGameObject;
+    public Skill skill;
     public Player mainPlayer { get; protected set; }
     private PlayerSkinType skinType;
 
@@ -56,7 +57,7 @@ public class PlayerSystem : BaseSystem
                 SetMainPlayer(PlayerFactory.Instance.InstantiatePlayer(playerType, playerPos, Quaternion.identity));
 
                 // 设置mainPlayer
-                mainPlayer = PlayerFactory.Instance.CreatePlayer(playerRepository.GetPlayerModel(Enum.Parse<PlayerType>(playerGameObject.name)));
+                mainPlayer = PlayerFactory.Instance.CreatePlayer(playerRepository.GetPlayerModel(Enum.Parse<PlayerType>(playerGameObject.name)), skill);
                 mainPlayer.rb.constraints = RigidbodyConstraints2D.FreezeRotation;
 
                 // 设置角色皮肤
@@ -151,6 +152,11 @@ public class PlayerSystem : BaseSystem
         this.skinType = skinType;
     }
 
+    public void SetSkill(Skill skill)
+    {
+        this.skill = skill;
+    }
+
     public void AddPlayerPet(PetType type, Player owner)
     {
         pets.Add(PetFactory.Instance.CreatePet(type, owner, new Vector2(-1, -2), Quaternion.identity));
@@ -163,8 +169,9 @@ public class PlayerSystem : BaseSystem
 
         // 设置角色皮肤
         playerModel.dynamicAttr.playerSkinType = skinType;
-        mainPlayer = PlayerFactory.Instance.CreatePlayer(playerModel);
+        mainPlayer = PlayerFactory.Instance.CreatePlayer(playerModel, skill);
         mainPlayer.rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        mainPlayer.AddWeapon((SystemRepository.Instance.GetSystem<WeaponSystem>().GetWeaponModel(playerModel.staticAttr.defaultWeaponType)));
     }
     #endregion
 }

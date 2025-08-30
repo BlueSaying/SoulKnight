@@ -6,7 +6,7 @@ public class PlayerFactory : Singleton<PlayerFactory>
     private PlayerFactory() { }
 
     // NOTE:给定playerType，返回相应的IPlayer 每次创建新角色后都应该在此处书写
-    public Player CreatePlayer(PlayerModel playerModel)
+    public Player CreatePlayer(PlayerModel playerModel, Skill skill)
     {
         PlayerType playerType = playerModel.staticAttr.playerType;
         GameObject obj = GameObject.Find(playerType.ToString());
@@ -15,10 +15,10 @@ public class PlayerFactory : Singleton<PlayerFactory>
         switch (playerType)
         {
             case PlayerType.Knight:
-                player = new Knight(obj, playerModel);
+                player = new Knight(obj, playerModel, skill);
                 break;
             case PlayerType.Rogue:
-                player = new Rogue(obj, playerModel);
+                player = new Rogue(obj, playerModel, skill);
                 break;
         }
 

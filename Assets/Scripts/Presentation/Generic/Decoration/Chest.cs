@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Chest : MonoBehaviour
 {
@@ -25,8 +26,9 @@ public class Chest : MonoBehaviour
 
                 gameObject.GetComponent<Animator>().SetTrigger("OpenChest");
 
-                // HACK
-                WeaponFactory.InstantiateWeapon(WeaponType.GatlingGun, transform.Find("GenerationPoint").position, Quaternion.identity);
+                // HACK:暂时随机实例化武器
+                var array = Enum.GetValues(typeof(WeaponType));
+                WeaponFactory.InstantiateWeapon((WeaponType)(UnityEngine.Random.Range(0, 11)), transform.Find("GenerationPoint").position, Quaternion.identity);
 
                 Destroy(itemArrow.transform.gameObject);
             }
