@@ -6,20 +6,20 @@ public class ItemFactory : Singleton<ItemFactory>
     private ItemFactory() { }
 
     public Bullet CreateBullet(BulletType bulletType, Vector3 position, Quaternion quaternion,
-        Character owner, int damage, float bulletSpeed, BuffType buffType = BuffType.None)
+        Character owner, int damage, int criticalRate, float bulletSpeed, BuffType buffType = BuffType.None)
     {
         Type type = Type.GetType(bulletType.ToString());
         Bullet bullet = SystemRepository.Instance.GetSystem<ItemSystem>().itemPool.GetItem(type) as Bullet;
 
         if (bullet != null)
         {
-            bullet.Reset(position, quaternion, damage);
+            bullet.Reset(position, quaternion, damage, criticalRate);
         }
         else
         {
             GameObject bulletPrefab = ResourcesLoader.Instance.LoadBullet(bulletType.ToString());
             GameObject newBullet = UnityEngine.Object.Instantiate(bulletPrefab, position, quaternion);
-            bullet = Activator.CreateInstance(type, new object[] { newBullet, owner, damage, bulletSpeed, buffType }) as Bullet;
+            bullet = Activator.CreateInstance(type, new object[] { newBullet, owner, damage, criticalRate, bulletSpeed, buffType }) as Bullet;
         }
 
         return bullet;

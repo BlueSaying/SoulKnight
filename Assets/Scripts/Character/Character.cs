@@ -167,7 +167,7 @@ public abstract class Character
 
     public void AddBuff(BuffType buffType)
     {
-        if (buffType == BuffType.None) return;
+        if (buffType == BuffType.None || !(this is IDamageable) || (this as IDamageable).IsInvincible) return;
 
         if (buffs.ContainsKey(buffType))
         {

@@ -10,7 +10,8 @@ public class GasBlaster : Rifle
         AudioManager.Instance.PlaySound(AudioType.Gun, AudioName.fx_gun_1);
 
         Quaternion quaternion = rotation * Quaternion.Euler(0, 0, UnityTools.GetRandomFloat(-ScatterRate / 2.0f, ScatterRate / 2.0f));
+        int criticalRate = CriticalRate + (owner is Player player ? player.critical : 0);
         ItemFactory.Instance.CreateBullet(BulletType.Bullet_131, shootPoint.transform.position, quaternion,
-            owner, Damage, BulletSpeed, BuffType.Poisoning);
+            owner, Damage, criticalRate, BulletSpeed, BuffType.Poisoning);
     }
 }

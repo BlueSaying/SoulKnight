@@ -12,6 +12,7 @@ public class StrongBow : Bow
 
         Quaternion quaternion = rotation * Quaternion.Euler(0, 0, UnityTools.GetRandomFloat(-ScatterRate / 2.0f, ScatterRate / 2.0f));
         int damage = Mathf.RoundToInt(Mathf.Lerp(Damage, ChargingDamage, chargingTimer / ChargingTime));
-        ItemFactory.Instance.CreateBullet(BulletType.Arrow, shootPoint.transform.position, quaternion, owner, damage, BulletSpeed);
+        int criticalRate = Mathf.RoundToInt(Mathf.Lerp(CriticalRate, ChargingCritical, chargingTimer / ChargingTime));
+        ItemFactory.Instance.CreateBullet(BulletType.Arrow, shootPoint.transform.position, quaternion, owner, damage, criticalRate, BulletSpeed);
     }
 }

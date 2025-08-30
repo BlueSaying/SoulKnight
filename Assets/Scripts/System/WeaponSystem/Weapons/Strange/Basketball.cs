@@ -42,7 +42,8 @@ public class Basketball : Strange
         }
 
         Quaternion quaternion = rotation * Quaternion.Euler(0, 0, UnityTools.GetRandomFloat(-ScatterRate / 2.0f, ScatterRate / 2.0f));
-        ItemFactory.Instance.CreateBullet(BulletType.BulletBasketball, shootPoint.transform.position, quaternion, owner, Damage, BulletSpeed);
+        int criticalRate = CriticalRate + (owner is Player player ? player.critical : 0);
+        ItemFactory.Instance.CreateBullet(BulletType.BulletBasketball, shootPoint.transform.position, quaternion, owner, Damage, criticalRate, BulletSpeed);
     }
 }
 

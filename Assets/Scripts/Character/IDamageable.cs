@@ -5,6 +5,9 @@
 /// </summary>
 public interface IDamageable
 {
+    // 当前是否处于无敌状态
+    public bool IsInvincible { get; set; }
+
     /// <summary>
     /// 对角色造成伤害
     /// </summary>

@@ -11,13 +11,31 @@ public class GoblinSpear : Melee
     {
         base.OnHitEnemy(enemy);
 
-        enemy.TakeDamage(Damage, Color.red);
+        int damage = Damage;
+        Color damageColor = Color.red;
+        int criticalRate = CriticalRate + (owner is Player player ? player.critical : 0);
+        if (Random.Range(0f, 100f) < criticalRate)
+        {
+            damage *= 2;
+            damageColor = Color.yellow;
+        }
+
+        enemy.TakeDamage(damage, damageColor);
     }
 
     protected override void OnHitPlayer(Player player)
     {
         base.OnHitPlayer(player);
 
-        player.TakeDamage(Damage, Color.red);
+        int damage = Damage;
+        Color damageColor = Color.red;
+        int criticalRate = CriticalRate + (owner is Player player_ ? player_.critical : 0);
+        if (Random.Range(0f, 100f) < criticalRate)
+        {
+            damage *= 2;
+            damageColor = Color.yellow;
+        }
+
+        player.TakeDamage(damage, damageColor);
     }
 }

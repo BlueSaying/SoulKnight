@@ -31,7 +31,7 @@ public class RogueSkill_1 : Skill
         skillTimer = 0f;
 
         owner.Animator.SetTrigger("Roll");
-        owner.isInvincible = true;
+        owner.IsInvincible = true;
 
         // 释放技能
         Vector2 dir = owner.rb.velocity.normalized;
@@ -83,7 +83,7 @@ public class RogueSkill_1 : Skill
 
     public void EndSkill()
     {
-        owner.isInvincible = false;
+        owner.IsInvincible = false;
 
         coolTimer = 0f;
         isSkillRealease = false;

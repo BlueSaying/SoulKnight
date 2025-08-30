@@ -8,14 +8,16 @@ public abstract class Bullet : Item
     protected TriggerDetector triggerDetector;
 
     protected int damage;
+    protected int criticalRate;
 
     public Character owner { get; protected set; }
     public BuffType buffType { get; protected set; }
 
-    public Bullet(GameObject gameObject, Character owner, int damage, float bulletSpeed, BuffType buffType) : base(gameObject)
+    public Bullet(GameObject gameObject, Character owner, int damage, int criticalRate, float bulletSpeed, BuffType buffType) : base(gameObject)
     {
         this.owner = owner;
         this.damage = damage;
+        this.criticalRate = criticalRate;
         this.bulletSpeed = bulletSpeed;
         this.buffType = buffType;
     }
@@ -65,7 +67,15 @@ public abstract class Bullet : Item
 
     protected virtual void OnHitEnemy(Enemy enemy)
     {
-        enemy.TakeDamage(damage, Color.red);
+        int damage = this.damage;
+        Color damageColor = Color.red;
+        if (Random.Range(0f, 100f) < criticalRate)
+        {
+            damage *= 2;
+            damageColor = Color.yellow;
+        }
+
+        enemy.TakeDamage(damage, damageColor);
         enemy.AddBuff(buffType);
 
         Remove();
@@ -73,17 +83,26 @@ public abstract class Bullet : Item
 
     protected virtual void OnHitPlayer(Player player)
     {
+        int damage = this.damage;
+        Color damageColor = Color.red;
+        if (Random.Range(0f, 100f) < criticalRate)
+        {
+            damage *= 2;
+            damageColor = Color.yellow;
+        }
+
         player.TakeDamage(damage, Color.red);
         player.AddBuff(buffType);
 
         Remove();
     }
 
-    public virtual void Reset(Vector3 position, Quaternion quaternion, int damage)
+    public virtual void Reset(Vector3 position, Quaternion quaternion, int damage, int criticalRate)
     {
         base.Reset();
         this.position = position;
         this.rotation = quaternion;
         this.damage = damage;
+        this.criticalRate = criticalRate;
     }
 }

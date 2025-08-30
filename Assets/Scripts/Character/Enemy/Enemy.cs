@@ -12,6 +12,9 @@ public abstract class Enemy : Character, IDamageable
     // 当前是否为受击闪烁状态
     private bool isFlashing;
 
+    private bool isInvincible;
+    public bool IsInvincible { get => isInvincible; set => isInvincible = value; }
+
     public Enemy(GameObject obj, EnemyModel model) : base(obj, model) { }
 
     public override void OnUpdate()

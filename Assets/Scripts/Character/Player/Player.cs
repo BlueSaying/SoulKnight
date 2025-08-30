@@ -17,6 +17,8 @@ public abstract class Player : Character, IDamageable
     public Skill skill { get; protected set; }
     public GameObject skillOriginPoint { get; protected set; }
 
+    private bool isInvincible;
+    public bool IsInvincible { get => isInvincible; set => isInvincible = value; }
 
     #region Attr
     // 静态属性
@@ -73,8 +75,7 @@ public abstract class Player : Character, IDamageable
     private float armorRecoveryTimer;
     private float hurtInvincibleTimer;
 
-    // 当前是否处于无敌状态
-    public bool isInvincible;
+
 
     public Player(GameObject obj, PlayerModel model, Skill skill) : base(obj, model)
     {
@@ -218,7 +219,7 @@ public abstract class Player : Character, IDamageable
 
     public virtual void TakeDamage(int damage, Color damageColor)
     {
-        if (damage <= 0 || hurtInvincibleTimer < hurtInvincibleTime || isInvincible) return;
+        if (damage <= 0 || hurtInvincibleTimer < hurtInvincibleTime || IsInvincible) return;
 
         // 护甲恢复计时器归零
         hurtArmorRecoveryTimer = 0f;
