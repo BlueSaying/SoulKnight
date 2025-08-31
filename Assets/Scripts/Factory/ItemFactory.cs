@@ -44,20 +44,39 @@ public class ItemFactory : Singleton<ItemFactory>
         return effect;
     }
 
-    public DamageNum CreateDamageNum(string canvasName, Vector2 position, int damage, Color color)
+    public Dropped CreateDropped(DroppedType droppedType, Vector3 position, Quaternion quaternion)
+    {
+        Type type = Type.GetType(droppedType.ToString());
+        Dropped dropped = SystemRepository.Instance.GetSystem<ItemSystem>().itemPool.GetItem(type) as Dropped;
+
+        if (dropped != null)
+        {
+            dropped.Reset(position, quaternion);
+        }
+        else
+        {
+            GameObject droppedPrefab = ResourcesLoader.Instance.LoadDropped(droppedType.ToString());
+            GameObject newDropped = UnityEngine.Object.Instantiate(droppedPrefab, position, quaternion);
+            dropped = Activator.CreateInstance(type, new object[] { newDropped }) as Dropped;
+        }
+
+        return dropped;
+    }
+
+    public DamageNum CreateDamageNum(string canvasName, Vector2 position, int damage, Color color, int fontSize)
     {
         ItemPool itemPool = SystemRepository.Instance.GetSystem<ItemSystem>().itemPool;
         DamageNum damageNum = null;
-        damageNum = itemPool.GetItem<DamageNum>() as DamageNum;
+        damageNum = itemPool.GetItem(typeof(DamageNum)) as DamageNum;
         if (damageNum != null)
         {
-            damageNum.Reset(position, damage, color);
+            damageNum.Reset(position, damage, color, fontSize);
         }
         else
         {
             GameObject prefab = ResourcesLoader.Instance.LoadPanel(SceneName.Generic.ToString(), canvasName);
             GameObject obj = UnityEngine.Object.Instantiate(prefab, position, Quaternion.identity);
-            damageNum = new DamageNum(obj, damage, color);
+            damageNum = new DamageNum(obj, damage, color, fontSize);
         }
 
         return damageNum;

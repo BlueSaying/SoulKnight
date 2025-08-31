@@ -491,8 +491,14 @@ public enum EffectType
     /// 敌人生成
     /// </summary>
     SummonEffect,
+}
 
-
+public enum DroppedType
+{
+    EnergyBall,
+    CopperCoin,
+    SliverCoin,
+    GoldCoin,
 }
 
 /// <summary>

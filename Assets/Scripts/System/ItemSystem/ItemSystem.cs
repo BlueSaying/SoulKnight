@@ -4,61 +4,61 @@ using UnityEngine;
 
 public class ItemSystem : BaseSystem
 {
-    private List<Item> activeItems;
+    private List<Item> items;
     public ItemPool itemPool { get; private set; }
 
     protected override void OnInit()
     {
         base.OnInit();
-        activeItems = new List<Item>();
+        items = new List<Item>();
         itemPool = new ItemPool();
+    }
+
+    protected override void OnFixedUpdate()
+    {
+        base.OnFixedUpdate();
+        foreach (var item in items)
+        {
+            if (!item.isRemoved)
+            {
+                item.OnFixedUpdate();
+            }
+        }
     }
 
     protected override void OnUpdate()
     {
         base.OnUpdate();
-        for (int i = activeItems.Count - 1; i >= 0; i--)
+        foreach (var item in items)
         {
-            var item = activeItems[i];
-            if (item.isRemoved)
+            if (!item.isRemoved)
             {
-                activeItems.RemoveAt(i);
-                itemPool.ReleaseItem(item);
+                item.OnUpdate();
             }
-            else
-            {
-                item.GameUpdate();
-            }
-        }
-
-        int count = 0;
-        foreach (var item in itemPool.pool.Values)
-        {
-            count += item.Count;
         }
     }
 
     protected override void OnExit()
     {
         base.OnExit();
-        foreach (var item in activeItems)
+        foreach (var item in items)
         {
             GameObject.Destroy(item.gameObject);
         }
 
-        activeItems.Clear();
+        items.Clear();
         itemPool.Clear();
     }
 
     public void AddActiveItem(Item item)
     {
-        activeItems.Add(item);
+        items.Add(item);
     }
 }
 
 public class ItemPool
 {
-    private const int poolSize = 100;
+    private const int poolSize = 500;
     private int curPoolSize = 0;
 
     public Dictionary<Type, Queue<Item>> pool { get; private set; }
@@ -73,28 +73,6 @@ public class ItemPool
     {
         pool.Clear();
         curPoolSize = 0;
-    }
-
-    // get item from itemPool
-    public Item GetItem<T>() where T : Item
-    {
-        Type type = typeof(T);
-        if (!pool.ContainsKey(type)) return null;
-
-        Queue<Item> queue = pool[type];
-
-        if (queue == null || queue.Count == 0)
-        {
-            return null;
-        }
-        else
-        {
-            T result = queue.Dequeue() as T;
-            curPoolSize--;
-            result.gameObject.SetActive(true);
-
-            return result as T;
-        }
     }
 
     // get item from itemPool
@@ -137,5 +115,11 @@ public class ItemPool
         pool[itemType].Enqueue(item);
         item.gameObject.SetActive(false);
         curPoolSize++;
+    }
+
+    public bool ContainsItem(Item item)
+    {
+        if (!pool.TryGetValue(item.GetType(), out Queue<Item> queue)) return false;
+        return queue.Contains(item);
     }
 }

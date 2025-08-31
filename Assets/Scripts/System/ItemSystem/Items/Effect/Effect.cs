@@ -10,7 +10,7 @@ public abstract class Effect : Item
         effectTimer = 0f;
     }
 
-    protected override void OnUpdate()
+    public override void OnUpdate()
     {
         base.OnUpdate();
 

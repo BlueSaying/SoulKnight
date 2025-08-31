@@ -27,8 +27,9 @@ public abstract class Enemy : Character, IDamageable
     public virtual void TakeDamage(int damage, Color damageColor)
     {
         // 弹出伤害值
+        int fontSize = damageColor == Color.yellow ? 80 : 64;
         Transform damageNumPoint = transform.Find("DamageNumPoint");
-        ItemFactory.Instance.CreateDamageNum("DamageNum", damageNumPoint.position, damage, damageColor);
+        ItemFactory.Instance.CreateDamageNum("DamageNum", damageNumPoint.position, damage, damageColor, fontSize);
 
         CurHP.AddFlatModifier(-damage);
 
@@ -78,6 +79,9 @@ public abstract class Enemy : Character, IDamageable
 
         // 播放音效
         AudioManager.Instance.PlaySound(AudioType.Hurt, (AudioName)(AudioName.fx_hit_p1 + Random.Range(0, 5)));
+
+        // 生成能量球
+        ItemFactory.Instance.CreateDropped(DroppedType.EnergyBall, transform.position, Quaternion.identity);
 
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
 

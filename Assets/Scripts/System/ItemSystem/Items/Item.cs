@@ -19,7 +19,11 @@ public abstract class Item
         ManagedToController();
     }
 
-    public void GameUpdate()
+    protected virtual void OnInit() { }
+
+    public virtual void OnEnter() { }
+
+    public virtual void OnFixedUpdate()
     {
         if (!isInit)
         {
@@ -27,22 +31,6 @@ public abstract class Item
             OnInit();
         }
 
-        if(isRemoved)
-        {
-            OnExit();
-        }
-        else
-        {
-            OnUpdate();
-        }
-    }
-
-    protected virtual void OnInit() { }
-
-    public virtual void OnEnter() { }
-
-    protected virtual void OnUpdate()
-    {
         if (!isEnter)
         {
             isEnter = true;
@@ -50,11 +38,27 @@ public abstract class Item
         }
     }
 
-    protected virtual void OnExit() { }
+    public virtual void OnUpdate()
+    {
+        if (!isInit)
+        {
+            isInit = true;
+            OnInit();
+        }
+
+        if (!isEnter)
+        {
+            isEnter = true;
+            OnEnter();
+        }
+    }
 
     public void Remove()
     {
         isRemoved = true;
+
+        // 放入对象池
+        SystemRepository.Instance.GetSystem<ItemSystem>().itemPool.ReleaseItem(this);
     }
 
     // 将*this*托管到ItemController中
@@ -67,6 +71,5 @@ public abstract class Item
     {
         isEnter = false;
         isRemoved = false;
-        ManagedToController();
     }
 }

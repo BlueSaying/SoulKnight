@@ -7,32 +7,36 @@ public class ResourcesLoader : Singleton<ResourcesLoader>
 {
     // Prefab
     // 武器
-    private Dictionary<string, GameObject> weaponDic;
+    private Dictionary<string, GameObject> weaponDic = new Dictionary<string, GameObject>();
     private static readonly string weaponPath = "Prefabs/Weapons/";
 
     // 子弹
-    private Dictionary<string, GameObject> bulletDic;
+    private Dictionary<string, GameObject> bulletDic = new Dictionary<string, GameObject>();
     private static readonly string bulletPath = "Prefabs/Bullets/";
 
     // 玩家
-    private Dictionary<string, GameObject> playerDic;
+    private Dictionary<string, GameObject> playerDic = new Dictionary<string, GameObject>();
     private static readonly string playerPath = "Prefabs/Player";
 
     // 敌人
-    private Dictionary<string, GameObject> enemyDic;
+    private Dictionary<string, GameObject> enemyDic = new Dictionary<string, GameObject>();
     private static readonly string enemyPath = "Prefabs/Enemies/";
 
     // 特效
-    private Dictionary<string, GameObject> effectDic;
+    private Dictionary<string, GameObject> effectDic = new Dictionary<string, GameObject>();
     private static readonly string effectPath = "Prefabs/Effects/";
 
     // UI
-    private Dictionary<string, GameObject> panelDic;
+    private Dictionary<string, GameObject> panelDic = new Dictionary<string, GameObject>();
     private static readonly string panelPath = "Prefabs/Panels/";
 
     // 装饰物
-    private Dictionary<string, GameObject> decorationDic;
+    private Dictionary<string, GameObject> decorationDic = new Dictionary<string, GameObject>();
     private static readonly string decorationPath = "Prefabs/Decoration/";
+
+    // 掉落物
+    private Dictionary<string, GameObject> droppedDic = new Dictionary<string, GameObject>();
+    private static readonly string droppedPath = "Prefabs/Dropped/";
 
     // 音效
     private static readonly string audioPath = "Audios/";
@@ -47,21 +51,10 @@ public class ResourcesLoader : Singleton<ResourcesLoader>
     private static readonly string levelRoomPath = "Prefabs/Rooms/";
 
     // Sprite
-    private Dictionary<string, Sprite> spriteDic;
+    private Dictionary<string, Sprite> spriteDic = new Dictionary<string, Sprite>();
     private static readonly string spritePath = "Sprites/";
 
-    private ResourcesLoader()
-    {
-        weaponDic = new Dictionary<string, GameObject>();
-        bulletDic = new Dictionary<string, GameObject>();
-        playerDic = new Dictionary<string, GameObject>();
-        enemyDic = new Dictionary<string, GameObject>();
-        effectDic = new Dictionary<string, GameObject>();
-        panelDic = new Dictionary<string, GameObject>();
-        decorationDic = new Dictionary<string, GameObject>();
-
-        spriteDic = new Dictionary<string, Sprite>();
-    }
+    private ResourcesLoader() { }
 
     public GameObject LoadWeapon(string weaponName)
     {
@@ -125,6 +118,15 @@ public class ResourcesLoader : Singleton<ResourcesLoader>
         GameObject newDecoration = Resources.LoadAll<GameObject>(decorationPath).Where(x => x.name == decorationName).ToArray()[0];
         decorationDic.Add(decorationName, newDecoration);
         return newDecoration;
+    }
+
+    public GameObject LoadDropped(string droppedName)
+    {
+        if (droppedDic.ContainsKey(droppedName)) return droppedDic[droppedName];
+
+        GameObject newDropped = Resources.LoadAll<GameObject>(droppedPath).Where(x => x.name == droppedName).ToArray()[0];
+        droppedDic.Add(droppedName, newDropped);
+        return newDropped;
     }
 
     public AudioClip LoadAudioClip(string audioType, string audioName)

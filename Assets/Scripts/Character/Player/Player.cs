@@ -75,8 +75,6 @@ public abstract class Player : Character, IDamageable
     private float armorRecoveryTimer;
     private float hurtInvincibleTimer;
 
-
-
     public Player(GameObject obj, PlayerModel model, Skill skill) : base(obj, model)
     {
         this.skill = skill;
@@ -227,8 +225,9 @@ public abstract class Player : Character, IDamageable
         hurtInvincibleTimer = 0f;
 
         // 弹出伤害值
+        int fontSize = damageColor == Color.yellow ? 80 : 64;
         Transform damageNumPoint = transform.Find("DamageNumPoint");
-        ItemFactory.Instance.CreateDamageNum("DamageNum", damageNumPoint.position, damage, damageColor);
+        ItemFactory.Instance.CreateDamageNum("DamageNum", damageNumPoint.position, damage, damageColor, fontSize);
 
         // 播放音效
         if (PlayerSkinType == PlayerSkinType.RogueKun)
