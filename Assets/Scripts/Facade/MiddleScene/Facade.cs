@@ -1,7 +1,4 @@
-﻿
-using UnityEngine;
-
-namespace MiddleScene
+﻿namespace MiddleScene
 {
     public class Facade : AbstractFacade
     {
@@ -9,6 +6,7 @@ namespace MiddleScene
         {
             base.OnInit();
 
+            AddSystem<GlobalSystem>();
             AddSystem<ItemSystem>();
             AddSystem<InputSystem>();
             AddSystem<PlayerSystem>();
@@ -21,6 +19,7 @@ namespace MiddleScene
         {
             base.OnEnter();
 
+            systems[typeof(GlobalSystem)].TurnOn();
             systems[typeof(InputSystem)].TurnOn();
             systems[typeof(CameraSystem)].TurnOn();
             systems[typeof(PlayerSystem)].TurnOn();

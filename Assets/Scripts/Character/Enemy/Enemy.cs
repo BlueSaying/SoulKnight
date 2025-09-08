@@ -80,8 +80,9 @@ public abstract class Enemy : Character, IDamageable
         // 播放音效
         AudioManager.Instance.PlaySound(AudioType.Hurt, (AudioName)(AudioName.fx_hit_p1 + Random.Range(0, 5)));
 
-        // 生成能量球
+        // 生成能量球与金币
         ItemFactory.Instance.CreateDropped(DroppedType.EnergyBall, transform.position, Quaternion.identity);
+        ItemFactory.Instance.CreateDropped(DroppedType.CopperCoin, transform.position, Quaternion.identity);
 
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
 

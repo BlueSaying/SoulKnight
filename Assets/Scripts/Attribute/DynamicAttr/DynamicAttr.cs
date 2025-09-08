@@ -13,7 +13,7 @@ public class DynamicAttr<T> where T : struct
     // a mark of wheather the value is Interger
     private bool isInterger;
 
-    private UnityAction action;
+    private UnityAction actions;
 
     private float baseValue;
 
@@ -61,7 +61,7 @@ public class DynamicAttr<T> where T : struct
         }
 
         hasUpdated = false;
-        action?.Invoke();
+        actions?.Invoke();
     }
 
     public void AddPercentModifier(float value)
@@ -76,11 +76,17 @@ public class DynamicAttr<T> where T : struct
         }
 
         hasUpdated = false;
-        action?.Invoke();
+        actions?.Invoke();
     }
 
-    public void AddCallBack(UnityAction action)
+    // 添加当属性改变时的回调函数
+    public void AddOnValueChangedCallBack(UnityAction action)
     {
-        this.action += action;
+        actions += action;
+    }
+
+    public void RemoveOnValueChangedCallBack(UnityAction action)
+    {
+        actions -= action;
     }
 }

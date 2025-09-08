@@ -1,5 +1,4 @@
-﻿
-namespace BattleScene
+﻿namespace BattleScene
 {
     public class Facade : AbstractFacade
     {
@@ -7,6 +6,7 @@ namespace BattleScene
         {
             base.OnInit();
 
+            AddSystem<GlobalSystem>();
             AddSystem<ItemSystem>();
             AddSystem<InputSystem>();
             AddSystem<MapSystem>();
@@ -19,6 +19,8 @@ namespace BattleScene
         protected override void OnEnter()
         {
             base.OnEnter();
+
+            systems[typeof(GlobalSystem)].TurnOn();
             systems[typeof(ItemSystem)].TurnOn();
             systems[typeof(InputSystem)].TurnOn();
             systems[typeof(MapSystem)].TurnOn();

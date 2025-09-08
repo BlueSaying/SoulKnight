@@ -10,6 +10,8 @@ public enum SystemType
 
     EnemySystem,
 
+    GlobalSystem,
+
     InputSystem,
 
     ItemSystem,

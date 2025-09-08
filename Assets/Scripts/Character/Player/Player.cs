@@ -87,9 +87,9 @@ public abstract class Player : Character, IDamageable
         armorRecoveryTimer = 0f;
         hurtInvincibleTimer = 0f;
 
-        CurHP.AddCallBack(() => { EventCenter.Instance.NotifyEvent(EventType.UpdateBattlePanel); });
-        CurArmor.AddCallBack(() => { EventCenter.Instance.NotifyEvent(EventType.UpdateBattlePanel); });
-        CurEnergy.AddCallBack(() => { EventCenter.Instance.NotifyEvent(EventType.UpdateBattlePanel); });
+        CurHP.AddOnValueChangedCallBack(() => { EventCenter.Instance.NotifyEvent(EventType.UpdateBattlePanel); });
+        CurArmor.AddOnValueChangedCallBack(() => { EventCenter.Instance.NotifyEvent(EventType.UpdateBattlePanel); });
+        CurEnergy.AddOnValueChangedCallBack(() => { EventCenter.Instance.NotifyEvent(EventType.UpdateBattlePanel); });
     }
 
     protected override void OnInit()

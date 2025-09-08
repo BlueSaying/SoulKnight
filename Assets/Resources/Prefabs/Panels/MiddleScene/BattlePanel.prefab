@@ -250,7 +250,7 @@ GameObject:
   - component: {fileID: 1819075841725893592}
   - component: {fileID: 322254440232270126}
   m_Layer: 5
-  m_Name: ButtonPause
+  m_Name: PauseButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1162,9 +1162,9 @@ RectTransform:
   - {fileID: 5173363616430000600}
   m_Father: {fileID: 3834022846002539295}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 200, y: 440}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 200, y: -110}
   m_SizeDelta: {x: 400, y: 175}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3350870455585300433
@@ -1239,9 +1239,9 @@ RectTransform:
   - {fileID: 1599715322137553956}
   m_Father: {fileID: 3834022846002539295}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -400, y: 440}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -400, y: -110}
   m_SizeDelta: {x: 800, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8079749871935619422
@@ -1443,7 +1443,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3834022846002539295}
-  - component: {fileID: -6848851548259289098}
+  - component: {fileID: 420166134006945881}
   m_Layer: 5
   m_Name: BattlePanel
   m_TagString: Untagged
@@ -1472,7 +1472,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &-6848851548259289098
+--- !u!114 &420166134006945881
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1686,7 +1686,7 @@ GameObject:
   - component: {fileID: 6917464835602723241}
   - component: {fileID: 468935869317215130}
   m_Layer: 5
-  m_Name: GoldCoin
+  m_Name: Gold
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

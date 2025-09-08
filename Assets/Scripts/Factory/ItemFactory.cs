@@ -49,6 +49,9 @@ public class ItemFactory : Singleton<ItemFactory>
         Type type = Type.GetType(droppedType.ToString());
         Dropped dropped = SystemRepository.Instance.GetSystem<ItemSystem>().itemPool.GetItem(type) as Dropped;
 
+        // 给position一个随机位置波动
+        position += new Vector3(UnityEngine.Random.Range(-0.5f, 0.5f), UnityEngine.Random.Range(-0.5f, 0.5f));
+
         if (dropped != null)
         {
             dropped.Reset(position, quaternion);

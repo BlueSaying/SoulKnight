@@ -37,7 +37,7 @@ namespace MiddleScene
             facade.Update();
 
             if (Input.GetKeyDown(KeyCode.V)) TestManager.Instance.isUnlockWeapon = !TestManager.Instance.isUnlockWeapon;
-            if (Input.GetKeyDown(KeyCode.G)) ItemFactory.Instance.CreateDropped(DroppedType.EnergyBall, new Vector2(-5, 5), Quaternion.identity);
+            if (Input.GetKeyDown(KeyCode.G)) ItemFactory.Instance.CreateDropped(DroppedType.CopperCoin, new Vector2(-5, 5), Quaternion.identity);
         }
 
         private void OnDisable()

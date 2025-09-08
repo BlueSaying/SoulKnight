@@ -11,8 +11,21 @@ public abstract class Dropped : Item
     protected TriggerDetector triggerDetector;
     protected Rigidbody2D rb;
 
+    public Animator animator { get; protected set; }
 
-    protected bool isFollowingPlayer;
+    private bool isFollowingPlayer;
+    public bool IsFollowingPlayer
+    {
+        get
+        {
+            return isFollowingPlayer;
+        }
+        protected set
+        {
+            isFollowingPlayer = value;
+            if (animator != null) animator.SetBool("isFollowingPlayer", isFollowingPlayer);
+        }
+    }
 
     public Dropped(GameObject gameObject) : base(gameObject) { }
 
@@ -38,17 +51,19 @@ public abstract class Dropped : Item
     public override void OnEnter()
     {
         base.OnEnter();
-        player = SystemRepository.Instance.GetSystem<PlayerSystem>().mainPlayer;        
+        player = SystemRepository.Instance.GetSystem<PlayerSystem>().mainPlayer;
+        animator = gameObject.GetComponent<Animator>();
     }
 
     public override void OnFixedUpdate()
     {
         base.OnFixedUpdate();
 
-        if (isFollowingPlayer)
+        if (IsFollowingPlayer)
         {
+            const float FollowingSpeed = 20f;
             Vector2 dir = (player.transform.position - gameObject.transform.position).normalized;
-            MoveManager.Move(rb, dir * 25f);
+            MoveManager.Move(rb, dir * FollowingSpeed);
         }
     }
 
@@ -58,11 +73,11 @@ public abstract class Dropped : Item
 
         if (player != null && DistanceToPlayer() < PickUpDistance)
         {
-            isFollowingPlayer = true;
+            IsFollowingPlayer = true;
         }
         else
         {
-            isFollowingPlayer = false;
+            IsFollowingPlayer = false;
         }
     }
 
@@ -75,7 +90,6 @@ public abstract class Dropped : Item
     public virtual void Reset(Vector3 position, Quaternion quaternion)
     {
         base.Reset();
-        isFollowingPlayer = false;
         this.position = position;
         this.rotation = quaternion;
     }

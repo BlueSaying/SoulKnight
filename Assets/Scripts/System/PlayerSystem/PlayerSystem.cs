@@ -12,7 +12,7 @@ public class PlayerSystem : BaseSystem
 
     public GameObject playerGameObject;
     public Skill skill;
-    public Player mainPlayer { get; protected set; }
+    public Player mainPlayer {get; protected set; }
     private PlayerSkinType skinType;
 
     private List<Pet> pets;
