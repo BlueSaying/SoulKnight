@@ -2,8 +2,8 @@
 
 public class Bullet_34 : Bullet
 {
-    public Bullet_34(GameObject gameObject, Character owner, int damage, int criticalRate, float bulletSpeed, BuffType buffType)
-        : base(gameObject, owner, damage, criticalRate, bulletSpeed, buffType) { }
+    public Bullet_34(GameObject gameObject, Character owner, int damage, bool isCritical, float bulletSpeed, BuffType buffType)
+        : base(gameObject, owner, damage, isCritical, bulletSpeed, buffType) { }
 
     protected override void OnHitObstacle()
     {

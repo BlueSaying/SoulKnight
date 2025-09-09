@@ -7,8 +7,8 @@ public class BulletBasketball : Bullet
 
     protected CollisionDetector collisionDetector;
 
-    public BulletBasketball(GameObject gameObject, Character owner, int damage, int criticalRate, float bulletSpeed, BuffType buffType)
-        : base(gameObject, owner, damage, criticalRate, bulletSpeed, buffType) { }
+    public BulletBasketball(GameObject gameObject, Character owner, int damage, bool isCritical, float bulletSpeed, BuffType buffType)
+        : base(gameObject, owner, damage, isCritical, bulletSpeed, buffType) { }
 
     protected override void OnInit()
     {
@@ -64,9 +64,9 @@ public class BulletBasketball : Bullet
         ItemFactory.Instance.CreateEffect(EffectType.BoomEffect, position, Quaternion.identity);
     }
 
-    public override void Reset(Vector3 position, Quaternion quaternion, int damage, int criticalRate)
+    public override void Reset(Vector3 position, Quaternion quaternion, int damage, bool isCritical, BuffType buffType)
     {
-        base.Reset(position, quaternion, damage, criticalRate);
+        base.Reset(position, quaternion, damage, isCritical, buffType);
         bounceCount = 0;
     }
 }

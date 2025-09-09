@@ -21,7 +21,7 @@ public class Basketball : Strange
 
         animator.SetBool("isPickUp", isPickUp);
         #region 等待游戏物体加载的临时方案
-        UnityTools.Instance.WaitThenCallFun(this, 1f, () =>
+        UnityTools.WaitThenCallFun(this, 1f, () =>
         {
             animator.SetBool("isPickUp", isPickUp);
         });
@@ -42,8 +42,11 @@ public class Basketball : Strange
         }
 
         Quaternion quaternion = rotation * Quaternion.Euler(0, 0, UnityTools.GetRandomFloat(-ScatterRate / 2.0f, ScatterRate / 2.0f));
-        int criticalRate = CriticalRate + (owner is Player player ? player.critical : 0);
-        ItemFactory.Instance.CreateBullet(BulletType.BulletBasketball, shootPoint.transform.position, quaternion, owner, Damage, criticalRate, BulletSpeed);
+        var damageInfo = CalcDamageInfo();
+        int damage = damageInfo.damage;
+        bool isCritical = damageInfo.isCritical;
+
+        ItemFactory.Instance.CreateBullet(BulletType.BulletBasketball, shootPoint.transform.position, quaternion, owner, damage, isCritical, BulletSpeed);
     }
 }
 

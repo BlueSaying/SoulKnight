@@ -8,16 +8,16 @@ public abstract class Bullet : Item
     protected TriggerDetector triggerDetector;
 
     protected int damage;
-    protected int criticalRate;
+    protected bool isCritical;
 
     public Character owner { get; protected set; }
     public BuffType buffType { get; protected set; }
 
-    public Bullet(GameObject gameObject, Character owner, int damage, int criticalRate, float bulletSpeed, BuffType buffType) : base(gameObject)
+    public Bullet(GameObject gameObject, Character owner, int damage, bool isCritical, float bulletSpeed, BuffType buffType) : base(gameObject)
     {
         this.owner = owner;
         this.damage = damage;
-        this.criticalRate = criticalRate;
+        this.isCritical = isCritical;
         this.bulletSpeed = bulletSpeed;
         this.buffType = buffType;
     }
@@ -67,13 +67,7 @@ public abstract class Bullet : Item
 
     protected virtual void OnHitEnemy(Enemy enemy)
     {
-        int damage = this.damage;
-        Color damageColor = Color.red;
-        if (Random.Range(0f, 100f) < criticalRate)
-        {
-            damage *= 2;
-            damageColor = Color.yellow;
-        }
+        Color damageColor = isCritical ? Color.yellow : Color.red;
 
         enemy.TakeDamage(damage, damageColor);
         enemy.AddBuff(buffType);
@@ -83,26 +77,21 @@ public abstract class Bullet : Item
 
     protected virtual void OnHitPlayer(Player player)
     {
-        int damage = this.damage;
-        Color damageColor = Color.red;
-        if (Random.Range(0f, 100f) < criticalRate)
-        {
-            damage *= 2;
-            damageColor = Color.yellow;
-        }
+        Color damageColor = isCritical ? Color.yellow : Color.red;
 
-        player.TakeDamage(damage, Color.red);
+        player.TakeDamage(damage, damageColor);
         player.AddBuff(buffType);
 
         Remove();
     }
 
-    public virtual void Reset(Vector3 position, Quaternion quaternion, int damage, int criticalRate)
+    public virtual void Reset(Vector3 position, Quaternion quaternion, int damage, bool isCritical, BuffType buffType)
     {
         base.Reset();
         this.position = position;
         this.rotation = quaternion;
         this.damage = damage;
-        this.criticalRate = criticalRate;
+        this.isCritical = isCritical;
+        this.buffType = buffType;
     }
 }

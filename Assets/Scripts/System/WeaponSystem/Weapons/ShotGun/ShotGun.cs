@@ -4,7 +4,11 @@ public abstract class ShotGun : Weapon
 {
     public new ShotGunModel model { get => base.model as ShotGunModel; protected set => base.model = value; }
 
-    public int angle => model.staticAttr.angle;
+    #region Attr
+    public float angle => model.staticAttr.angle;
+
+    public int bulletCount => model.staticAttr.bulletCount;
+    #endregion
 
     public GameObject shootPoint { get; protected set; }
 
@@ -17,5 +21,20 @@ public abstract class ShotGun : Weapon
     {
         base.OnInit();
         shootPoint = UnityTools.Instance.GetTransformFromChildren(gameObject, "ShootPoint").gameObject;
+    }
+
+    protected override (int damage, bool isCritical) CalcDamageInfo()
+    {
+        int damageOutput = Damage;
+        bool isCriticalOutput = false;
+        int criticalRate = CriticalRate + (owner is Player player ? player.critical : 0);
+
+        if (Random.Range(0f, 100f) < criticalRate)
+        {
+            damageOutput *= 2;
+            isCriticalOutput = true;
+        }
+
+        return (damageOutput, isCriticalOutput);
     }
 }

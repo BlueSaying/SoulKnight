@@ -33,7 +33,7 @@
                 systems[typeof(WeaponSystem)].TurnOn();
             });
 
-            UnityTools.Instance.WaitThenCallFun(this, 0.1f, () =>
+            UnityTools.WaitThenCallFun(this, 0.1f, () =>
             {
                 (systems[typeof(MapSystem)] as MapSystem).CreateLevel(LevelType.Forest);
             });

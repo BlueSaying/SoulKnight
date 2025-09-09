@@ -9,6 +9,21 @@ public abstract class Melee : Weapon
 
     protected Melee(GameObject gameObject, Character owner, WeaponModel model) : base(gameObject, owner, model) { }
 
+    protected override (int damage, bool isCritical) CalcDamageInfo()
+    {
+        int damageOutput = Damage;
+        bool isCriticalOutput = false;
+        int criticalRate = CriticalRate + (owner is Player player ? player.critical : 0);
+
+        if (Random.Range(0f, 100f) < criticalRate)
+        {
+            damageOutput *= 2;
+            isCriticalOutput = true;
+        }
+
+        return (damageOutput, isCriticalOutput);
+    }
+
     protected override void OnInit()
     {
         base.OnInit();
@@ -46,6 +61,7 @@ public abstract class Melee : Weapon
 
         AudioManager.Instance.PlaySound(AudioType.Sword, Random.Range(0, 2) > 0 ? AudioName.fx_sword1 : AudioName.fx_sword2);
 
+        // 产生位移
         if (owner is Player)
         {
             float angle = rotation.eulerAngles.z * Mathf.Deg2Rad;

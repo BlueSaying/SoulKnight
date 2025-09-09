@@ -85,7 +85,7 @@ public class PlayerSystem : BaseSystem
 
                 // 玩家设置为不可见，1秒后可见
                 mainPlayer.gameObject.SetActive(false);
-                UnityTools.Instance.WaitThenCallFun(this, 1f, () =>
+                UnityTools.WaitThenCallFun(this, 1f, () =>
                 {
                     mainPlayer.gameObject.SetActive(true);
                 });

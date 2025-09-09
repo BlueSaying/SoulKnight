@@ -11,8 +11,10 @@ public class StrongBow : Bow
         AudioManager.Instance.PlaySound(AudioType.Gun, AudioName.fx_gun_rocket);
 
         Quaternion quaternion = rotation * Quaternion.Euler(0, 0, UnityTools.GetRandomFloat(-ScatterRate / 2.0f, ScatterRate / 2.0f));
-        int damage = Mathf.RoundToInt(Mathf.Lerp(Damage, ChargingDamage, chargingTimer / ChargingTime));
-        int criticalRate = Mathf.RoundToInt(Mathf.Lerp(CriticalRate, ChargingCritical, chargingTimer / ChargingTime));
-        ItemFactory.Instance.CreateBullet(BulletType.Arrow, shootPoint.transform.position, quaternion, owner, damage, criticalRate, BulletSpeed);
+        var damageInfo = CalcDamageInfo();
+        int damage = damageInfo.damage;
+        bool isCritical = damageInfo.isCritical;
+
+        ItemFactory.Instance.CreateBullet(BulletType.Arrow, shootPoint.transform.position, quaternion, owner, damage, isCritical, BulletSpeed);
     }
 }

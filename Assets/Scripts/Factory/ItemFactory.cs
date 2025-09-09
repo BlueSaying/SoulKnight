@@ -6,26 +6,26 @@ public class ItemFactory : Singleton<ItemFactory>
     private ItemFactory() { }
 
     public Bullet CreateBullet(BulletType bulletType, Vector3 position, Quaternion quaternion,
-        Character owner, int damage, int criticalRate, float bulletSpeed, BuffType buffType = BuffType.None)
+        Character owner, int damage, bool isCritical, float bulletSpeed, BuffType buffType = BuffType.None)
     {
         Type type = Type.GetType(bulletType.ToString());
         Bullet bullet = SystemRepository.Instance.GetSystem<ItemSystem>().itemPool.GetItem(type) as Bullet;
 
         if (bullet != null)
         {
-            bullet.Reset(position, quaternion, damage, criticalRate);
+            bullet.Reset(position, quaternion, damage, isCritical, buffType);
         }
         else
         {
             GameObject bulletPrefab = ResourcesLoader.Instance.LoadBullet(bulletType.ToString());
             GameObject newBullet = UnityEngine.Object.Instantiate(bulletPrefab, position, quaternion);
-            bullet = Activator.CreateInstance(type, new object[] { newBullet, owner, damage, criticalRate, bulletSpeed, buffType }) as Bullet;
+            bullet = Activator.CreateInstance(type, new object[] { newBullet, owner, damage, isCritical, bulletSpeed, buffType }) as Bullet;
         }
 
         return bullet;
     }
 
-    public Effect CreateEffect(EffectType effectType, Vector3 position, Quaternion quaternion)
+    public Effect CreateEffect(EffectType effectType, Vector3 position, Quaternion quaternion)// TODO :Add color
     {
         Type type = Type.GetType(effectType.ToString());
         Effect effect = SystemRepository.Instance.GetSystem<ItemSystem>().itemPool.GetItem(type) as Effect;
@@ -50,7 +50,7 @@ public class ItemFactory : Singleton<ItemFactory>
         Dropped dropped = SystemRepository.Instance.GetSystem<ItemSystem>().itemPool.GetItem(type) as Dropped;
 
         // 给position一个随机位置波动
-        position += new Vector3(UnityEngine.Random.Range(-0.5f, 0.5f), UnityEngine.Random.Range(-0.5f, 0.5f));
+        position += new Vector3(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f));
 
         if (dropped != null)
         {

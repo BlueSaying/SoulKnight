@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 3007518689825437676}
   - component: {fileID: 2435388987150840369}
   m_Layer: 12
-  m_Name: AK47
+  m_Name: GatlingGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

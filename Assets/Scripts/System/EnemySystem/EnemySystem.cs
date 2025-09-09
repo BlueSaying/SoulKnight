@@ -23,7 +23,7 @@ public class EnemySystem : BaseSystem
 
         foreach (Enemy enemy in enemies)
         {
-            if(!enemy.isDead)
+            if (!enemy.isDead)
             {
                 enemy.OnUpdate();
             }
@@ -47,11 +47,11 @@ public class EnemySystem : BaseSystem
     {
         ItemFactory.Instance.CreateEffect(EffectType.SummonEffect, position, quaternion);
 
-        UnityTools.Instance.WaitThenCallFun(this, 1f, () =>
+        UnityTools.WaitThenCallFun(this, 1f, () =>
         {
             ItemFactory.Instance.CreateEffect(EffectType.AppearEffect, position, quaternion);
 
-            UnityTools.Instance.WaitThenCallFun(this, 0.416667f, () =>
+            UnityTools.WaitThenCallFun(this, 0.416667f, () =>
             {
                 enemies.Add(EnemyFactory.Instance.CreateEnemy(GetEnemyModel(enemyType), position, quaternion, model));
             });

@@ -19,6 +19,7 @@ public static class StringExtensions
         {"CompositeBow","复合弓" },
 
         {"GatlingGun","加特林" },
+        {"StaffOfFlame","火之杖" },
 
         {"Basketball","篮球" },
 

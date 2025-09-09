@@ -42,6 +42,22 @@ public abstract class Bow : Weapon
         RefreshChargingBar();
     }
 
+    protected override (int damage, bool isCritical) CalcDamageInfo()
+    {
+        int damageOutput = Mathf.RoundToInt(Mathf.Lerp(Damage, ChargingDamage, chargingTimer / ChargingTime));
+        bool isCriticalOutput = false;
+        int criticalRate = Mathf.RoundToInt(Mathf.Lerp(CriticalRate, ChargingCritical, chargingTimer / ChargingTime))
+            + (owner is Player player ? player.critical : 0);
+
+        if (Random.Range(0f, 100f) < criticalRate)
+        {
+            damageOutput *= 2;
+            isCriticalOutput = true;
+        }
+
+        return (damageOutput, isCriticalOutput);
+    }
+
     public override void ControlWeapon(bool isCharging)
     {
         // 如果现在没有在蓄力但之间在蓄力

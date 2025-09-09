@@ -26,12 +26,12 @@ public class UnityTools : Singleton<UnityTools>
     /// <param name="caller"></param>
     /// <param name="waitTime"></param>
     /// <param name="action"></param>
-    public void WaitThenCallFun(object caller, float waitTime, UnityAction action)
+    public static void WaitThenCallFun(object caller, float waitTime, UnityAction action)
     {
         CoroutinePool.Instance.StartCoroutine(caller, WaitSecondsCallFun(waitTime, action));
     }
 
-    private IEnumerator WaitSecondsCallFun(float waitTime, UnityAction action)
+    private static IEnumerator WaitSecondsCallFun(float waitTime, UnityAction action)
     {
         yield return new WaitForSeconds(waitTime);
         action.Invoke();

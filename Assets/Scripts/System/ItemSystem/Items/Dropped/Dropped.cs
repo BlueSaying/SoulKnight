@@ -71,7 +71,7 @@ public abstract class Dropped : Item
     {
         base.OnUpdate();
 
-        if (player != null && DistanceToPlayer() < PickUpDistance)
+        if (player != null && !player.isDead && DistanceToPlayer() < PickUpDistance)
         {
             IsFollowingPlayer = true;
         }

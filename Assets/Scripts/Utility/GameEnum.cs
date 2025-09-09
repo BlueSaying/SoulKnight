@@ -94,6 +94,9 @@ public enum WeaponType
     CompositeBow,
     GatlingGun,
     GoblinSpear,
+    StaffOfFlame,
+
+    // ---下方为未添加武器---
 
     H2O,
     Furnace,
@@ -405,6 +408,11 @@ public enum EventType
     OnPlayerDie,
 
     /// <summary>
+    /// 玩家复活
+    /// </summary>
+    OnPlayerRevive,
+
+    /// <summary>
     /// 角色选择完毕
     /// </summary>
     OnSelectPlayerComplete,
@@ -464,6 +472,8 @@ public enum BulletType
     Bullet_5,
 
     Bullet_34,
+
+    Bullet_105,
 
     Bullet_130,
 
@@ -632,6 +642,8 @@ namespace BattleScene
     public enum PanelName
     {
         BattlePanel,
+
+        RevivePanel,
     }
 }
 #endregion

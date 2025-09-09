@@ -22,7 +22,7 @@ public abstract class Weapon
 
     // 武器能否旋转
     protected bool canRotate;
-    public Quaternion rotation {  get; protected set; }
+    public Quaternion rotation { get; protected set; }
 
     private bool isInit;
     private bool isEnter;
@@ -111,6 +111,8 @@ public abstract class Weapon
             rotOrigin.transform.rotation = rotation;
         }
     }
+
+    protected abstract (int damage, bool isCritical) CalcDamageInfo();
 
     public virtual void OnExit()
     {

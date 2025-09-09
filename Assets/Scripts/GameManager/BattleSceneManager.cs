@@ -17,6 +17,11 @@ namespace BattleScene
             facade = new Facade();
         }
 
+        private void Start()
+        {
+            EventCenter.Instance.RegisterEvent(EventType.OnPlayerDie, OnPlayerDie);
+        }
+
         private void OnEnable()
         {
             facade.TurnOn();
@@ -38,5 +43,15 @@ namespace BattleScene
         {
             facade.TurnOff();
         }
+
+        #region 事件集
+        private void OnPlayerDie()
+        {
+            UnityTools.WaitThenCallFun(this, 1f, () =>
+            {
+                UIMediator.Instance.OpenPanel(SceneName.BattleScene, PanelName.RevivePanel.ToString());
+            });
+        }
+        #endregion
     }
 }

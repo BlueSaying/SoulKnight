@@ -10,15 +10,10 @@ public class GoblinSpear : Melee
     protected override void OnHitEnemy(Enemy enemy)
     {
         base.OnHitEnemy(enemy);
-
-        int damage = Damage;
-        Color damageColor = Color.red;
-        int criticalRate = CriticalRate + (owner is Player player ? player.critical : 0);
-        if (Random.Range(0f, 100f) < criticalRate)
-        {
-            damage *= 2;
-            damageColor = Color.yellow;
-        }
+        var damageInfo = CalcDamageInfo();
+        int damage = damageInfo.damage;
+        bool isCritical = damageInfo.isCritical;
+        Color damageColor = isCritical ? Color.yellow : Color.red;
 
         enemy.TakeDamage(damage, damageColor);
     }
@@ -26,15 +21,10 @@ public class GoblinSpear : Melee
     protected override void OnHitPlayer(Player player)
     {
         base.OnHitPlayer(player);
-
-        int damage = Damage;
-        Color damageColor = Color.red;
-        int criticalRate = CriticalRate + (owner is Player player_ ? player_.critical : 0);
-        if (Random.Range(0f, 100f) < criticalRate)
-        {
-            damage *= 2;
-            damageColor = Color.yellow;
-        }
+        var damageInfo = CalcDamageInfo();
+        int damage = damageInfo.damage;
+        bool isCritical = damageInfo.isCritical;
+        Color damageColor = isCritical ? Color.yellow : Color.red;
 
         player.TakeDamage(damage, damageColor);
     }

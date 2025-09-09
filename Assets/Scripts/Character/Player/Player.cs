@@ -107,6 +107,8 @@ public abstract class Player : Character, IDamageable
 
     public override void OnFixedUpdate()
     {
+        if (isDead) return;
+
         base.OnFixedUpdate();
         stateMachine?.OnFixedUpdate();
 
@@ -120,6 +122,8 @@ public abstract class Player : Character, IDamageable
 
     public override void OnUpdate()
     {
+        if (isDead) return;
+
         base.OnUpdate();
         stateMachine?.OnUpdate();
 
@@ -272,8 +276,47 @@ public abstract class Player : Character, IDamageable
         if (isDead) return;
         isDead = true;
 
+        rb.constraints = RigidbodyConstraints2D.FreezeAll;
+
+        Animator.SetTrigger("Die");
+        transform.Find("Collider").gameObject.SetActive(false);
+        transform.Find("Trigger").gameObject.SetActive(false);
+
+        // 移除所有buff
+        foreach (var buff in buffs.Values)
+        {
+            buff.EndBuff();
+        }
+        buffIcon.SetActive(false);
+
+        // 将玩家颜色改为灰色
+        transform.Find("Sprite").GetComponent<SpriteRenderer>().color = Color.gray;
+
         EventCenter.Instance.NotifyEvent(EventType.OnPlayerDie);
-        Debug.Log("DIE");
+    }
+
+    public virtual void Revive()
+    {
+        if (!isDead) return;
+        isDead = false;
+
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+
+        Animator.SetTrigger("Revive");
+        transform.Find("Collider").gameObject.SetActive(true);
+        transform.Find("Trigger").gameObject.SetActive(true);
+
+        // 恢复玩家颜色
+        transform.Find("Sprite").GetComponent<SpriteRenderer>().color = Color.white;
+
+        // 属性重置
+        model.Recover();
+
+        hurtArmorRecoveryTimer = 0f;
+        armorRecoveryTimer = 0f;
+        hurtInvincibleTimer = -1f;  // 增加一秒无敌时间
+
+        EventCenter.Instance.NotifyEvent(EventType.OnPlayerRevive);
     }
 
     // 获取自动瞄准的敌人

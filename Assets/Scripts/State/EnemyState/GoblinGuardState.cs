@@ -43,7 +43,7 @@ public class GoblinGuardIdleState : GoblinGuardState
         {
             timer = UnityTools.GetRandomFloat(0.8f * IdleTime, 1.25f * IdleTime);
         }
-        else if (timer <= 0f)
+        else if (timer <= 0f && !targetPlayer.isDead)
         {
             fsm.SwitchState<GoblinGuardRunState>();
         }
@@ -70,7 +70,7 @@ public class GoblinGuardRunState : GoblinGuardState
         Vector2 dir = (targetPlayer.transform.position - enemy.transform.position).normalized;
         rb.velocity = dir * enemy.model.staticAttr.speed;
 
-        if (enemy.DistanceToTargetPlayer() < AttackDistance * AttackDistance)
+        if (!targetPlayer.isDead && enemy.DistanceToTargetPlayer() < AttackDistance * AttackDistance)
         {
             fsm.SwitchState<GoblinGuardAttackState>();
         }
@@ -92,7 +92,7 @@ public class GoblinGuardAttackState : GoblinGuardState
     {
         base.OnFixedUpdate();
 
-        if(enemy.weapon!=null)
+        if (enemy.weapon != null)
         {
             enemy.weapon.OnFixedUpdate();
         }
@@ -102,7 +102,7 @@ public class GoblinGuardAttackState : GoblinGuardState
     {
         base.OnUpdate();
 
-        if (enemy.DistanceToTargetPlayer() > AttackDistance * AttackDistance * 2.25f)
+        if (targetPlayer.isDead || enemy.DistanceToTargetPlayer() > AttackDistance * AttackDistance * 2.25f)
         {
             fsm.SwitchState<GoblinGuardIdleState>();
         }
