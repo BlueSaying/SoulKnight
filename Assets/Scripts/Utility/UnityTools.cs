@@ -6,10 +6,8 @@ using System.Reflection;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class UnityTools : Singleton<UnityTools>
+public class UnityTools
 {
-    private UnityTools() { }
-
     public static int GetRandomInt(int min, int max)
     {
         return UnityEngine.Random.Range(min, max + 1);
@@ -55,7 +53,7 @@ public class UnityTools : Singleton<UnityTools>
     /// 3. 只返回第一个找到的匹配项
     /// 4. 对性能敏感的场景慎用（遍历所有子对象+多次GetComponent调用）
     /// </remarks>
-    public T GetComponentFromChildren<T>(GameObject parent, string name, bool includeInactive = true)
+    public static T GetComponentFromChildren<T>(GameObject parent, string name, bool includeInactive = true)
     {
         if (parent == null) return default;
 
@@ -79,7 +77,7 @@ public class UnityTools : Singleton<UnityTools>
     /// 找到时：返回匹配的第一个子物体的Transform组件；
     /// 未找到时：返回null（default）
     /// </returns>
-    public Transform GetTransformFromChildren(GameObject parent, string name, bool includeInactive = true)
+    public static Transform GetTransformFromChildren(GameObject parent, string name, bool includeInactive = true)
     {
         if (parent == null) return null;
 
@@ -100,7 +98,7 @@ public class UnityTools : Singleton<UnityTools>
     /// <param name="type"></param>
     /// <param name="genericType"></param>
     /// <returns></returns>
-    public bool isGenericType(Type type, Type genericType)
+    public static bool isGenericType(Type type, Type genericType)
     {
         if (type == null || genericType == null) return false;
 
@@ -128,7 +126,7 @@ public class UnityTools : Singleton<UnityTools>
     /// <param name="s"></param>
     /// <param name="type"></param>
     /// <returns></returns>
-    public object ConvertType(string s, Type type)
+    public static object ConvertType(string s, Type type)
     {
         if (s == "None" || s == "") return null;
 
@@ -179,7 +177,7 @@ public class UnityTools : Singleton<UnityTools>
     /// <param name="list"></param>
     /// <param name="textAsset"></param>
     /// <exception cref="Exception"></exception>
-    public void WriteDataToList<T>(List<T> list, TextAsset textAsset) where T : new()
+    public static void WriteDataToList<T>(List<T> list, TextAsset textAsset) where T : new()
     {
         if (textAsset == null) return;
 

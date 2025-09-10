@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneFacade :Singleton<SceneFacade>
+public class SceneFacade : Singleton<SceneFacade>
 {
     private SceneModel sceneModel;
     private AsyncOperation op;

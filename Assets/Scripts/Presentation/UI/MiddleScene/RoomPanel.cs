@@ -13,8 +13,8 @@ namespace MiddleScene
         {
             base.Awake();
 
-            UIbackButton = UnityTools.Instance.GetComponentFromChildren<Button>(gameObject, "ButtonBack");
-            UIstoreButton = UnityTools.Instance.GetComponentFromChildren<Button>(gameObject, "ButtonStore");
+            UIbackButton = UnityTools.GetComponentFromChildren<Button>(gameObject, "ButtonBack");
+            UIstoreButton = UnityTools.GetComponentFromChildren<Button>(gameObject, "ButtonStore");
 
             UIbackButton.onClick.AddListener(() => { SceneFacade.Instance.LoadScene(SceneName.MainMenuScene); });
             UIstoreButton.onClick.AddListener(() => { Debug.Log("打开商店"); });
@@ -23,16 +23,16 @@ namespace MiddleScene
         protected override void DOOpenPanel()
         {
             base.DOOpenPanel();
-            (UnityTools.Instance.GetTransformFromChildren(gameObject, "Title") as RectTransform).DOAnchorPosY(100, 0.5f).From();
-            (UnityTools.Instance.GetTransformFromChildren(gameObject, "BottomPanel") as RectTransform).DOAnchorPosY(-100, 0.5f).From();
+            (UnityTools.GetTransformFromChildren(gameObject, "Title") as RectTransform).DOAnchorPosY(100, 0.5f).From();
+            (UnityTools.GetTransformFromChildren(gameObject, "BottomPanel") as RectTransform).DOAnchorPosY(-100, 0.5f).From();
         }
 
         protected override void DOClosePanel()
         {
             base.DOClosePanel();
 
-            (UnityTools.Instance.GetTransformFromChildren(gameObject, "Title") as RectTransform).DOAnchorPosY(100, 0.5f);
-            (UnityTools.Instance.GetTransformFromChildren(gameObject, "BottomPanel") as RectTransform).DOAnchorPosY(-100, 0.5f)
+            (UnityTools.GetTransformFromChildren(gameObject, "Title") as RectTransform).DOAnchorPosY(100, 0.5f);
+            (UnityTools.GetTransformFromChildren(gameObject, "BottomPanel") as RectTransform).DOAnchorPosY(-100, 0.5f)
                 .OnComplete(DestroyPanel).OnKill(DestroyPanel);
         }
 

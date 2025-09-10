@@ -9,7 +9,7 @@ public static class WeaponFactory
     public static Weapon GetWeapon(WeaponModel model, Character owner)
     {
         WeaponType type = model.staticAttr.weaponType;
-        GameObject WeaponOriginPoint = UnityTools.Instance.GetTransformFromChildren(owner.gameObject, "WeaponOriginPoint").gameObject;
+        GameObject WeaponOriginPoint = UnityTools.GetTransformFromChildren(owner.gameObject, "WeaponOriginPoint").gameObject;
 
         GameObject obj = UnityEngine.Object.Instantiate(ResourcesLoader.Instance.LoadWeapon(type.ToString()), WeaponOriginPoint.transform);
         obj.name = type.ToString();

@@ -25,13 +25,13 @@ public abstract class Bow : Weapon
     protected override void OnInit()
     {
         base.OnInit();
-        chargingBar = UnityTools.Instance.GetTransformFromChildren(gameObject, "ChargingBar").gameObject;
+        chargingBar = UnityTools.GetTransformFromChildren(gameObject, "ChargingBar").gameObject;
         for (int i = 0; i < 5; i++)
         {
             chargingBars[i] = chargingBar.transform.Find("ChargingBar" + i.ToString()).gameObject;
         }
 
-        shootPoint = UnityTools.Instance.GetTransformFromChildren(gameObject, "ShootPoint").gameObject;
+        shootPoint = UnityTools.GetTransformFromChildren(gameObject, "ShootPoint").gameObject;
     }
 
     protected override void OnEnter()

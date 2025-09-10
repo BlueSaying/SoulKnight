@@ -29,23 +29,23 @@ public class WeaponInfoPanel : Panel
             GetWeaponModel(System.Enum.Parse<WeaponType>(weaponCanPickUp.name));
 
         // refresh Damage
-        UnityTools.Instance.GetTransformFromChildren(gameObject, "Damage").
+        UnityTools.GetTransformFromChildren(gameObject, "Damage").
             Find("Value").GetComponent<Text>().text = weaponModel.staticAttr.damage.ToString();
 
         // refresh EnergyCost
-        UnityTools.Instance.GetTransformFromChildren(gameObject, "EnergyCost").
+        UnityTools.GetTransformFromChildren(gameObject, "EnergyCost").
             Find("Value").GetComponent<Text>().text = weaponModel.staticAttr.energyCost.ToString();
 
         // refresh CriticalRate
-        UnityTools.Instance.GetTransformFromChildren(gameObject, "CriticalRate").
+        UnityTools.GetTransformFromChildren(gameObject, "CriticalRate").
             Find("Value").GetComponent<Text>().text = weaponModel.staticAttr.criticalRate.ToString();
 
         // refresh ScatterRate
-        UnityTools.Instance.GetTransformFromChildren(gameObject, "ScatterRate").
+        UnityTools.GetTransformFromChildren(gameObject, "ScatterRate").
             Find("Value").GetComponent<Text>().text = weaponModel.staticAttr.scatterRate.ToString();
 
         // refresh weapon type
-        Image image = UnityTools.Instance.GetTransformFromChildren(gameObject, "WeaponIcon").Find("Icon").GetComponent<Image>();
+        Image image = UnityTools.GetTransformFromChildren(gameObject, "WeaponIcon").Find("Icon").GetComponent<Image>();
         switch (weaponModel.staticAttr.weaponCategory)
         {
             case WeaponCategory.Bow:

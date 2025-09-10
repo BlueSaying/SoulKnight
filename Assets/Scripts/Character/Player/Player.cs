@@ -99,7 +99,7 @@ public abstract class Player : Character, IDamageable
         cinemachineFramingTransposer = GameObject.Find("FollowCamera").
             GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineFramingTransposer>();
 
-        skillOriginPoint = UnityTools.Instance.GetTransformFromChildren(gameObject, "SkillOriginPoint").gameObject;
+        skillOriginPoint = UnityTools.GetTransformFromChildren(gameObject, "SkillOriginPoint").gameObject;
 
         // NOTE:角色初始化时，添加阿凉为宠物
         //SystemRepository.Instance.GetSystem<PlayerSystem>().AddPlayerPet(PetType.LittleCool, this);

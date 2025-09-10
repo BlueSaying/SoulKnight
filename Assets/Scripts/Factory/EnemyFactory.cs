@@ -14,7 +14,7 @@ public class EnemyFactory : Singleton<EnemyFactory>
         // 生成敌人的同时生成敌人武器
         enemy.AddWeapon(model);
 
-        UnityTools.Instance.GetComponentFromChildren<Symbol>(obj, "Trigger").SetCharacter(enemy);
+        UnityTools.GetComponentFromChildren<Symbol>(obj, "Trigger").SetCharacter(enemy);
 
         return enemy;
     }

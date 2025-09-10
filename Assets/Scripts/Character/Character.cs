@@ -87,7 +87,7 @@ public abstract class Character
 
         try
         {
-            trigger = UnityTools.Instance.GetTransformFromChildren(gameObject, "Trigger").gameObject;
+            trigger = UnityTools.GetTransformFromChildren(gameObject, "Trigger").gameObject;
         }
         catch (System.Exception)
         {
@@ -96,7 +96,7 @@ public abstract class Character
 
         try
         {
-            buffIcon = UnityTools.Instance.GetTransformFromChildren(gameObject, "BuffIcon").gameObject;
+            buffIcon = UnityTools.GetTransformFromChildren(gameObject, "BuffIcon").gameObject;
         }
         catch (System.Exception)
         {

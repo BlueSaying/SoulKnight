@@ -29,7 +29,7 @@ public abstract class Melee : Weapon
         base.OnInit();
         try
         {
-            triggerDetector = UnityTools.Instance.GetComponentFromChildren<TriggerDetector>(gameObject, "MeleeTrigger");
+            triggerDetector = UnityTools.GetComponentFromChildren<TriggerDetector>(gameObject, "MeleeTrigger");
         }
         catch (System.Exception)
         {

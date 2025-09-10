@@ -10,8 +10,8 @@ namespace BattleScene
         {
             base.Awake();
 
-            UnityTools.Instance.GetComponentFromChildren<Button>(gameObject, "BackButton").onClick.AddListener(EndGame);
-            UnityTools.Instance.GetComponentFromChildren<Button>(gameObject, "ReviveButton").onClick.AddListener(Revive);
+            UnityTools.GetComponentFromChildren<Button>(gameObject, "BackButton").onClick.AddListener(EndGame);
+            UnityTools.GetComponentFromChildren<Button>(gameObject, "ReviveButton").onClick.AddListener(Revive);
         }
 
         protected override void DOOpenPanel()

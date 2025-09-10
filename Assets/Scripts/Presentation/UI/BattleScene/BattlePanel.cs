@@ -32,15 +32,15 @@ namespace BattleScene
         protected override void DOOpenPanel()
         {
             base.DOOpenPanel();
-            (UnityTools.Instance.GetTransformFromChildren(gameObject, "PlayerStateBar") as RectTransform).DOAnchorPosX(-450, 0.5f).From();
-            (UnityTools.Instance.GetTransformFromChildren(gameObject, "RightPanel") as RectTransform).DOAnchorPosX(800, 0.5f).From();
+            (UnityTools.GetTransformFromChildren(gameObject, "PlayerStateBar") as RectTransform).DOAnchorPosX(-450, 0.5f).From();
+            (UnityTools.GetTransformFromChildren(gameObject, "RightPanel") as RectTransform).DOAnchorPosX(800, 0.5f).From();
         }
 
         protected override void DOClosePanel()
         {
             base.DOClosePanel();
-            (UnityTools.Instance.GetTransformFromChildren(gameObject, "PlayerStateBar") as RectTransform).DOAnchorPosX(-450, 0.5f);
-            (UnityTools.Instance.GetTransformFromChildren(gameObject, "RightPanel") as RectTransform).DOAnchorPosX(800, 0.5f)
+            (UnityTools.GetTransformFromChildren(gameObject, "PlayerStateBar") as RectTransform).DOAnchorPosX(-450, 0.5f);
+            (UnityTools.GetTransformFromChildren(gameObject, "RightPanel") as RectTransform).DOAnchorPosX(800, 0.5f)
                 .OnComplete(DestroyPanel).OnKill(DestroyPanel);
         }
 
@@ -49,17 +49,17 @@ namespace BattleScene
         {
             // Left Panel
             // refresh HP state
-            Transform sliderHP = UnityTools.Instance.GetTransformFromChildren(gameObject, "SliderHP");
+            Transform sliderHP = UnityTools.GetTransformFromChildren(gameObject, "SliderHP");
             sliderHP.GetComponent<Slider>().value = 1.0f * player.CurHP.Value / player.maxHP;
             sliderHP.Find("Text").GetComponent<Text>().text = player.CurHP.Value + " / " + player.maxHP;
 
             // refresh armor
-            Transform sliderArmor = UnityTools.Instance.GetTransformFromChildren(gameObject, "SliderArmor");
+            Transform sliderArmor = UnityTools.GetTransformFromChildren(gameObject, "SliderArmor");
             sliderArmor.GetComponent<Slider>().value = 1.0f * player.CurArmor.Value / player.maxArmor;
             sliderArmor.Find("Text").GetComponent<Text>().text = player.CurArmor.Value + " / " + player.maxArmor;
 
             // refresh energy
-            Transform sliderEnergy = UnityTools.Instance.GetTransformFromChildren(gameObject, "SliderEnergy");
+            Transform sliderEnergy = UnityTools.GetTransformFromChildren(gameObject, "SliderEnergy");
             sliderEnergy.GetComponent<Slider>().value = 1.0f * player.CurEnergy.Value / player.maxEnergy;
             sliderEnergy.Find("Text").GetComponent<Text>().text = player.CurEnergy.Value + " / " + player.maxEnergy;
 
@@ -71,8 +71,8 @@ namespace BattleScene
 
         private void OpenPausePanel()
         {
-            // TODO:open pause panel
-            Debug.Log("OpenPausePanel");
+            UIMediator.Instance.OpenPanel(SceneName.Generic, Generic.PanelName.PausePanel.ToString());
+            GamePauseFacade.Instance.PauseGame();
         }
         #endregion
     }

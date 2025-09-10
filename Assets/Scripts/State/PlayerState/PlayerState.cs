@@ -19,7 +19,7 @@ public abstract class PlayerState : State
         player = fsm.player;
         gameObject = player.gameObject;
         rb = transform.GetComponent<Rigidbody2D>();
-        animator = UnityTools.Instance.GetComponentFromChildren<Animator>(gameObject, "Sprite");
+        animator = UnityTools.GetComponentFromChildren<Animator>(gameObject, "Sprite");
     }
 
     public override void OnFixedUpdate()

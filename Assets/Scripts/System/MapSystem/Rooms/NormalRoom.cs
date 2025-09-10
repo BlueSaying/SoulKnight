@@ -29,7 +29,7 @@ public class NormalRoom : Room
         curEnemyCount = 0;
         curWaveCount = 0;
 
-        UnityTools.Instance.GetComponentFromChildren<TriggerDetector>(gameObject, "EnterRoomTrigger").
+        UnityTools.GetComponentFromChildren<TriggerDetector>(gameObject, "EnterRoomTrigger").
             AddTriggerListener(TriggerEventType.OnTriggerEnter2D, "Player", OnPlayerEnter);
     }
 

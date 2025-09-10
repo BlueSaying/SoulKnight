@@ -46,7 +46,7 @@ public class CameraSystem : BaseSystem
                 foreach (var cameraName in Enum.GetNames(typeof(MiddleScene.CameraType)))
                 {
                     var cameraType = Enum.Parse<MiddleScene.CameraType>(cameraName);
-                    var camera = UnityTools.Instance.GetComponentFromChildren<CinemachineVirtualCamera>(CameraParent, cameraName);
+                    var camera = UnityTools.GetComponentFromChildren<CinemachineVirtualCamera>(CameraParent, cameraName);
                     MiddleSceneCameras.Add(cameraType, camera);
                 }
                 SwitchCamera(MiddleScene.CameraType.StaticCamera);
@@ -55,7 +55,7 @@ public class CameraSystem : BaseSystem
                 foreach (var cameraName in Enum.GetNames(typeof(BattleScene.CameraType)))
                 {
                     var cameraType = Enum.Parse<BattleScene.CameraType>(cameraName);
-                    var camera = UnityTools.Instance.GetComponentFromChildren<CinemachineVirtualCamera>(CameraParent, cameraName);
+                    var camera = UnityTools.GetComponentFromChildren<CinemachineVirtualCamera>(CameraParent, cameraName);
                     BattleSceneCameras.Add(cameraType, camera);
                 }
                 SwitchCamera(BattleScene.CameraType.FollowCamera);

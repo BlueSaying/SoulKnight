@@ -17,13 +17,13 @@ namespace MiddleScene
         protected override void DOOpenPanel()
         {
             base.DOOpenPanel();
-            (UnityTools.Instance.GetTransformFromChildren(gameObject, "Gem") as RectTransform).DOAnchorPosY(100, 0.5f).From();
+            (UnityTools.GetTransformFromChildren(gameObject, "Gem") as RectTransform).DOAnchorPosY(100, 0.5f).From();
         }
 
         protected override void DOClosePanel()
         {
             base.DOClosePanel();
-            (UnityTools.Instance.GetTransformFromChildren(gameObject, "Gem") as RectTransform).DOAnchorPosY(100, 0.5f)
+            (UnityTools.GetTransformFromChildren(gameObject, "Gem") as RectTransform).DOAnchorPosY(100, 0.5f)
                 .OnComplete(DestroyPanel).OnKill(DestroyPanel);
         }
     }

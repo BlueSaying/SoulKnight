@@ -12,6 +12,6 @@ public class MeleeSO : ScriptableObject
 
     private void OnValidate()
     {
-        UnityTools.Instance.WriteDataToList(attrs, textAsset);
+        UnityTools.WriteDataToList(attrs, textAsset);
     }
 }

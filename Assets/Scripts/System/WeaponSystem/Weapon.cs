@@ -128,7 +128,7 @@ public abstract class Weapon
     protected virtual void OnInit()
     {
         animator = gameObject.GetComponent<Animator>();
-        rotOrigin = UnityTools.Instance.GetTransformFromChildren(gameObject, "RotOrigin").gameObject;
+        rotOrigin = UnityTools.GetTransformFromChildren(gameObject, "RotOrigin").gameObject;
     }
 
     // 每次切换至此武器时调用一次

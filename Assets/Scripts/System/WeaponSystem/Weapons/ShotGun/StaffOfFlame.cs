@@ -2,7 +2,10 @@
 
 public class StaffOfFlame : ShotGun
 {
-    public StaffOfFlame(GameObject gameObject, Character owner, WeaponModel model) : base(gameObject, owner, model) { }
+    public StaffOfFlame(GameObject gameObject, Character owner, WeaponModel model) : base(gameObject, owner, model)
+    {
+        canRotate = false;
+    }
 
     protected override void OnFire()
     {

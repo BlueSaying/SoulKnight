@@ -25,14 +25,14 @@ namespace MiddleScene
                 GetPlayerSkinModel(Enum.Parse<PlayerType>(selectingPlayer.name)).staticAttr.playerSkinTypes;
 
             // 返回
-            UnityTools.Instance.GetComponentFromChildren<Button>(gameObject, "ButtonBack").onClick.AddListener(() =>
+            UnityTools.GetComponentFromChildren<Button>(gameObject, "ButtonBack").onClick.AddListener(() =>
             {
                 UIMediator.Instance.OpenPanel(SceneName.MiddleScene, PanelName.SelectingPlayerPanel.ToString());
                 UIMediator.Instance.ClosePanel(PanelName.SelectingSkinPanel.ToString());
             });
 
             // 下一步
-            UnityTools.Instance.GetComponentFromChildren<Button>(gameObject, "ButtonNext").onClick.AddListener(() =>
+            UnityTools.GetComponentFromChildren<Button>(gameObject, "ButtonNext").onClick.AddListener(() =>
             {
                 // 保存皮肤
                 SystemRepository.Instance.GetSystem<PlayerSystem>().SetMainPlayerSkin(playerSkins[curSkinIndex]);
@@ -68,7 +68,7 @@ namespace MiddleScene
             });
 
             // 切换上一个皮肤
-            UnityTools.Instance.GetComponentFromChildren<Button>(gameObject, "ButtonLeft").onClick.AddListener(() =>
+            UnityTools.GetComponentFromChildren<Button>(gameObject, "ButtonLeft").onClick.AddListener(() =>
             {
                 curSkinIndex = (curSkinIndex + playerSkins.Count - 1) % playerSkins.Count;
                 selectingPlayer.transform.Find("Sprite").GetComponent<Animator>().runtimeAnimatorController =
@@ -76,7 +76,7 @@ namespace MiddleScene
             });
 
             //切换下一个皮肤
-            UnityTools.Instance.GetComponentFromChildren<Button>(gameObject, "ButtonRight").onClick.AddListener(() =>
+            UnityTools.GetComponentFromChildren<Button>(gameObject, "ButtonRight").onClick.AddListener(() =>
             {
                 curSkinIndex = (curSkinIndex + 1) % playerSkins.Count;
                 selectingPlayer.transform.Find("Sprite").GetComponent<Animator>().runtimeAnimatorController =
@@ -87,17 +87,17 @@ namespace MiddleScene
         protected override void DOOpenPanel()
         {
             base.DOOpenPanel();
-            (UnityTools.Instance.GetTransformFromChildren(gameObject, "ButtonLeft") as RectTransform).DOAnchorPosX(-400f, 0.5f).From();
-            (UnityTools.Instance.GetTransformFromChildren(gameObject, "ButtonRight") as RectTransform).DOAnchorPosX(400f, 0.5f).From();
-            (UnityTools.Instance.GetTransformFromChildren(gameObject, "BottomPanel") as RectTransform).DOAnchorPosY(-200f, 0.5f).From();
+            (UnityTools.GetTransformFromChildren(gameObject, "ButtonLeft") as RectTransform).DOAnchorPosX(-400f, 0.5f).From();
+            (UnityTools.GetTransformFromChildren(gameObject, "ButtonRight") as RectTransform).DOAnchorPosX(400f, 0.5f).From();
+            (UnityTools.GetTransformFromChildren(gameObject, "BottomPanel") as RectTransform).DOAnchorPosY(-200f, 0.5f).From();
         }
 
         protected override void DOClosePanel()
         {
             base.DOClosePanel();
-            (UnityTools.Instance.GetTransformFromChildren(gameObject, "ButtonLeft") as RectTransform).DOAnchorPosX(-400f, 0.5f);
-            (UnityTools.Instance.GetTransformFromChildren(gameObject, "ButtonRight") as RectTransform).DOAnchorPosX(400f, 0.5f);
-            (UnityTools.Instance.GetTransformFromChildren(gameObject, "BottomPanel") as RectTransform).DOAnchorPosY(-200f, 0.5f)
+            (UnityTools.GetTransformFromChildren(gameObject, "ButtonLeft") as RectTransform).DOAnchorPosX(-400f, 0.5f);
+            (UnityTools.GetTransformFromChildren(gameObject, "ButtonRight") as RectTransform).DOAnchorPosX(400f, 0.5f);
+            (UnityTools.GetTransformFromChildren(gameObject, "BottomPanel") as RectTransform).DOAnchorPosY(-200f, 0.5f)
                 .OnComplete(DestroyPanel).OnKill(DestroyPanel);
         }
     }

@@ -29,7 +29,10 @@ public enum SystemType
 public enum SpriteType
 {
     Buff,
+
     Weapon,
+
+    Profile,
 }
 
 /// <summary>
@@ -567,6 +570,8 @@ namespace Generic
     public enum PanelName
     {
         WeaponInfoPanel,
+
+        PausePanel,
     }
 }
 #endregion

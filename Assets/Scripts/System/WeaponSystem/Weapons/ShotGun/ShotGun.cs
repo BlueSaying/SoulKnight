@@ -20,7 +20,7 @@ public abstract class ShotGun : Weapon
     protected override void OnInit()
     {
         base.OnInit();
-        shootPoint = UnityTools.Instance.GetTransformFromChildren(gameObject, "ShootPoint").gameObject;
+        shootPoint = UnityTools.GetTransformFromChildren(gameObject, "ShootPoint").gameObject;
     }
 
     protected override (int damage, bool isCritical) CalcDamageInfo()

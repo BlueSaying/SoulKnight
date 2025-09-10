@@ -18,7 +18,7 @@ public class EnemyState : State
         enemy = fsm.enemy;
         gameObject = enemy.gameObject;
         rb = transform.GetComponent<Rigidbody2D>();
-        animator = UnityTools.Instance.GetComponentFromChildren<Animator>(gameObject, "Sprite");
+        animator = UnityTools.GetComponentFromChildren<Animator>(gameObject, "Sprite");
     }
 
     protected override void OnEnter()

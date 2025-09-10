@@ -22,11 +22,11 @@ public class PlayerFactory : Singleton<PlayerFactory>
                 break;
         }
 
-        if (!UnityTools.Instance.GetComponentFromChildren<Symbol>(obj, "Trigger"))
+        if (!UnityTools.GetComponentFromChildren<Symbol>(obj, "Trigger"))
         {
-            UnityTools.Instance.GetTransformFromChildren(obj, "Trigger").AddComponent<Symbol>();
+            UnityTools.GetTransformFromChildren(obj, "Trigger").AddComponent<Symbol>();
         }
-        UnityTools.Instance.GetComponentFromChildren<Symbol>(obj, "Trigger").SetCharacter(player);
+        UnityTools.GetComponentFromChildren<Symbol>(obj, "Trigger").SetCharacter(player);
 
         return player;
     }

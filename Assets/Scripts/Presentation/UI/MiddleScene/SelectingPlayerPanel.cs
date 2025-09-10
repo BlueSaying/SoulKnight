@@ -17,8 +17,8 @@ namespace MiddleScene
 
             InitPanel();
 
-            UIbackButton = UnityTools.Instance.GetComponentFromChildren<Button>(gameObject, "ButtonBack");
-            UInextButton = UnityTools.Instance.GetComponentFromChildren<Button>(gameObject, "ButtonNext");
+            UIbackButton = UnityTools.GetComponentFromChildren<Button>(gameObject, "ButtonBack");
+            UInextButton = UnityTools.GetComponentFromChildren<Button>(gameObject, "ButtonNext");
 
             // 返回
             UIbackButton.onClick.AddListener(() =>
@@ -42,21 +42,21 @@ namespace MiddleScene
         protected override void DOOpenPanel()
         {
             base.DOOpenPanel();
-            (UnityTools.Instance.GetTransformFromChildren(gameObject, "Title") as RectTransform).DOAnchorPosY(100, 0.5f).From();
-            (UnityTools.Instance.GetTransformFromChildren(gameObject, "LeftPanel") as RectTransform).DOAnchorPosX(-600f, 0.5f).From();
-            (UnityTools.Instance.GetTransformFromChildren(gameObject, "RightPanel") as RectTransform).DOAnchorPosX(600f, 0.5f).From();
-            (UnityTools.Instance.GetTransformFromChildren(gameObject, "ButtonBack") as RectTransform).DOAnchorPosX(-300f, 0.5f).From();
-            (UnityTools.Instance.GetTransformFromChildren(gameObject, "ButtonNext") as RectTransform).DOAnchorPosX(300f, 0.5f).From();
+            (UnityTools.GetTransformFromChildren(gameObject, "Title") as RectTransform).DOAnchorPosY(100, 0.5f).From();
+            (UnityTools.GetTransformFromChildren(gameObject, "LeftPanel") as RectTransform).DOAnchorPosX(-600f, 0.5f).From();
+            (UnityTools.GetTransformFromChildren(gameObject, "RightPanel") as RectTransform).DOAnchorPosX(600f, 0.5f).From();
+            (UnityTools.GetTransformFromChildren(gameObject, "ButtonBack") as RectTransform).DOAnchorPosX(-300f, 0.5f).From();
+            (UnityTools.GetTransformFromChildren(gameObject, "ButtonNext") as RectTransform).DOAnchorPosX(300f, 0.5f).From();
         }
 
         protected override void DOClosePanel()
         {
             base.DOClosePanel();
-            (UnityTools.Instance.GetTransformFromChildren(gameObject, "Title") as RectTransform).DOAnchorPosY(100, 0.5f);
-            (UnityTools.Instance.GetTransformFromChildren(gameObject, "LeftPanel") as RectTransform).DOAnchorPosX(-600f, 0.5f);
-            (UnityTools.Instance.GetTransformFromChildren(gameObject, "RightPanel") as RectTransform).DOAnchorPosX(600f, 0.5f);
-            (UnityTools.Instance.GetTransformFromChildren(gameObject, "ButtonBack") as RectTransform).DOAnchorPosX(-300f, 0.5f);
-            (UnityTools.Instance.GetTransformFromChildren(gameObject, "ButtonNext") as RectTransform).DOAnchorPosX(300f, 0.5f)
+            (UnityTools.GetTransformFromChildren(gameObject, "Title") as RectTransform).DOAnchorPosY(100, 0.5f);
+            (UnityTools.GetTransformFromChildren(gameObject, "LeftPanel") as RectTransform).DOAnchorPosX(-600f, 0.5f);
+            (UnityTools.GetTransformFromChildren(gameObject, "RightPanel") as RectTransform).DOAnchorPosX(600f, 0.5f);
+            (UnityTools.GetTransformFromChildren(gameObject, "ButtonBack") as RectTransform).DOAnchorPosX(-300f, 0.5f);
+            (UnityTools.GetTransformFromChildren(gameObject, "ButtonNext") as RectTransform).DOAnchorPosX(300f, 0.5f)
                 .OnComplete(DestroyPanel).OnKill(DestroyPanel);
         }
 
@@ -77,22 +77,22 @@ namespace MiddleScene
             const int criticalLimit = 10;
 
             // 生命
-            temp = UnityTools.Instance.GetTransformFromChildren(gameObject, "DivHor1");
+            temp = UnityTools.GetTransformFromChildren(gameObject, "DivHor1");
             temp.Find("Slider").GetComponent<Slider>().value = 1.0f * playerModel.staticAttr.maxHP / HPLimit;
             temp.Find("Text").GetComponent<Text>().text = playerModel.staticAttr.maxHP.ToString();
 
             // 护甲
-            temp = UnityTools.Instance.GetTransformFromChildren(gameObject, "DivHor2");
+            temp = UnityTools.GetTransformFromChildren(gameObject, "DivHor2");
             temp.Find("Slider").GetComponent<Slider>().value = 1.0f * playerModel.staticAttr.maxArmor / armorLimit;
             temp.Find("Text").GetComponent<Text>().text = playerModel.staticAttr.maxArmor.ToString();
 
             // 能量
-            temp = UnityTools.Instance.GetTransformFromChildren(gameObject, "DivHor3");
+            temp = UnityTools.GetTransformFromChildren(gameObject, "DivHor3");
             temp.Find("Slider").GetComponent<Slider>().value = 1.0f * playerModel.staticAttr.maxEnergy / energyLimit;
             temp.Find("Text").GetComponent<Text>().text = playerModel.staticAttr.maxEnergy.ToString();
 
             // 暴击
-            temp = UnityTools.Instance.GetTransformFromChildren(gameObject, "DivHor4");
+            temp = UnityTools.GetTransformFromChildren(gameObject, "DivHor4");
             temp.Find("Slider").GetComponent<Slider>().value = 1.0f * playerModel.staticAttr.critical / criticalLimit;
             temp.Find("Text").GetComponent<Text>().text = playerModel.staticAttr.critical.ToString();
 

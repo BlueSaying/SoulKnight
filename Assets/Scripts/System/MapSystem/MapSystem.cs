@@ -192,106 +192,106 @@ public class MapSystem : BaseSystem
         {
             for (int y = yMin; y <= yMax; y++)
             {
-                UnityTools.Instance.GetComponentFromChildren<Tilemap>(newRoom, "Floor").
+                UnityTools.GetComponentFromChildren<Tilemap>(newRoom, "Floor").
                     SetTile(new Vector3Int(x, y), floorTile);
             }
         }
 
         for (int x = xMin + size.x / 2 - 2; x <= xMin + size.x / 2 + 2; x++)
         {
-            UnityTools.Instance.GetComponentFromChildren<Tilemap>(newRoom, "Floor").
+            UnityTools.GetComponentFromChildren<Tilemap>(newRoom, "Floor").
                     SetTile(new Vector3Int(x, yMin), doorTile);
-            UnityTools.Instance.GetComponentFromChildren<Tilemap>(newRoom, "Floor").
+            UnityTools.GetComponentFromChildren<Tilemap>(newRoom, "Floor").
                     SetTile(new Vector3Int(x, yMax), doorTile);
         }
 
         for (int y = yMin + size.y / 2 - 2; y <= yMin + size.y / 2 + 2; y++)
         {
-            UnityTools.Instance.GetComponentFromChildren<Tilemap>(newRoom, "Floor").
+            UnityTools.GetComponentFromChildren<Tilemap>(newRoom, "Floor").
                     SetTile(new Vector3Int(xMin, y), doorTile);
-            UnityTools.Instance.GetComponentFromChildren<Tilemap>(newRoom, "Floor").
+            UnityTools.GetComponentFromChildren<Tilemap>(newRoom, "Floor").
                     SetTile(new Vector3Int(xMax, y), doorTile);
         }
 
         // generate WallUp
         for (int y = yMax - size.y / 2 + 2; y <= yMax; y++)
         {
-            UnityTools.Instance.GetComponentFromChildren<Tilemap>(newRoom, "WallUp").
+            UnityTools.GetComponentFromChildren<Tilemap>(newRoom, "WallUp").
                     SetTile(new Vector3Int(xMin, y), wallTile);
-            UnityTools.Instance.GetComponentFromChildren<Tilemap>(newRoom, "WallUp").
+            UnityTools.GetComponentFromChildren<Tilemap>(newRoom, "WallUp").
                     SetTile(new Vector3Int(xMax, y), wallTile);
         }
 
         for (int x = xMin + 1; x <= xMin + size.x / 2 - 3; x++)
         {
-            UnityTools.Instance.GetComponentFromChildren<Tilemap>(newRoom, "WallUp").
+            UnityTools.GetComponentFromChildren<Tilemap>(newRoom, "WallUp").
                     SetTile(new Vector3Int(x, yMax), wallTile);
-            UnityTools.Instance.GetComponentFromChildren<Tilemap>(newRoom, "WallUp").
+            UnityTools.GetComponentFromChildren<Tilemap>(newRoom, "WallUp").
                     SetTile(new Vector3Int(x, yMax - 1), wallTile);
         }
 
         for (int x = xMax - size.x / 2 + 3; x <= xMax - 1; x++)
         {
-            UnityTools.Instance.GetComponentFromChildren<Tilemap>(newRoom, "WallUp").
+            UnityTools.GetComponentFromChildren<Tilemap>(newRoom, "WallUp").
                     SetTile(new Vector3Int(x, yMax), wallTile);
-            UnityTools.Instance.GetComponentFromChildren<Tilemap>(newRoom, "WallUp").
+            UnityTools.GetComponentFromChildren<Tilemap>(newRoom, "WallUp").
                     SetTile(new Vector3Int(x, yMax - 1), wallTile);
         }
 
         // generate WallDown
         for (int y = yMin - 1; y <= yMin + size.y / 2 - 3; y++)
         {
-            UnityTools.Instance.GetComponentFromChildren<Tilemap>(newRoom, "WallDown").
+            UnityTools.GetComponentFromChildren<Tilemap>(newRoom, "WallDown").
                     SetTile(new Vector3Int(xMin, y), wallTile);
-            UnityTools.Instance.GetComponentFromChildren<Tilemap>(newRoom, "WallDown").
+            UnityTools.GetComponentFromChildren<Tilemap>(newRoom, "WallDown").
                     SetTile(new Vector3Int(xMax, y), wallTile);
         }
 
         for (int x = xMin + 1; x <= xMin + size.x / 2 - 3; x++)
         {
-            UnityTools.Instance.GetComponentFromChildren<Tilemap>(newRoom, "WallDown").
+            UnityTools.GetComponentFromChildren<Tilemap>(newRoom, "WallDown").
                     SetTile(new Vector3Int(x, yMin), wallTile);
-            UnityTools.Instance.GetComponentFromChildren<Tilemap>(newRoom, "WallDown").
+            UnityTools.GetComponentFromChildren<Tilemap>(newRoom, "WallDown").
                     SetTile(new Vector3Int(x, yMin - 1), wallTile);
         }
 
         for (int x = xMax - size.x / 2 + 3; x <= xMax - 1; x++)
         {
-            UnityTools.Instance.GetComponentFromChildren<Tilemap>(newRoom, "WallDown").
+            UnityTools.GetComponentFromChildren<Tilemap>(newRoom, "WallDown").
                     SetTile(new Vector3Int(x, yMin), wallTile);
-            UnityTools.Instance.GetComponentFromChildren<Tilemap>(newRoom, "WallDown").
+            UnityTools.GetComponentFromChildren<Tilemap>(newRoom, "WallDown").
                     SetTile(new Vector3Int(x, yMin - 1), wallTile);
         }
 
         // generate WallDoorUp
         for (int x = xMin + size.x / 2 - 2; x <= xMin + size.x / 2 + 2; x++)
         {
-            UnityTools.Instance.GetComponentFromChildren<Tilemap>(newRoom, "WallDoorUp").
+            UnityTools.GetComponentFromChildren<Tilemap>(newRoom, "WallDoorUp").
                     SetTile(new Vector3Int(x, yMax), wallTile);
-            UnityTools.Instance.GetComponentFromChildren<Tilemap>(newRoom, "WallDoorUp").
+            UnityTools.GetComponentFromChildren<Tilemap>(newRoom, "WallDoorUp").
                     SetTile(new Vector3Int(x, yMax - 1), wallTile);
         }
 
         // generate WallDoorDown
         for (int x = xMin + size.x / 2 - 2; x <= xMin + size.x / 2 + 2; x++)
         {
-            UnityTools.Instance.GetComponentFromChildren<Tilemap>(newRoom, "WallDoorDown").
+            UnityTools.GetComponentFromChildren<Tilemap>(newRoom, "WallDoorDown").
                     SetTile(new Vector3Int(x, yMin), wallTile);
-            UnityTools.Instance.GetComponentFromChildren<Tilemap>(newRoom, "WallDoorDown").
+            UnityTools.GetComponentFromChildren<Tilemap>(newRoom, "WallDoorDown").
                     SetTile(new Vector3Int(x, yMin - 1), wallTile);
         }
 
         // generate WallDoorLeft
         for (int y = yMin + size.y / 2 - 3; y <= yMin + size.y / 2 + 2; y++)
         {
-            UnityTools.Instance.GetComponentFromChildren<Tilemap>(newRoom, "WallDoorLeft").
+            UnityTools.GetComponentFromChildren<Tilemap>(newRoom, "WallDoorLeft").
                     SetTile(new Vector3Int(xMin, y), wallTile);
         }
 
         // generate WallDoorRight
         for (int y = yMin + size.y / 2 - 3; y <= yMin + size.y / 2 + 2; y++)
         {
-            UnityTools.Instance.GetComponentFromChildren<Tilemap>(newRoom, "WallDoorRight").
+            UnityTools.GetComponentFromChildren<Tilemap>(newRoom, "WallDoorRight").
                     SetTile(new Vector3Int(xMax, y), wallTile);
         }
     }
@@ -309,7 +309,7 @@ public class MapSystem : BaseSystem
         {
             for (int y = yMin; y <= yMax; y++)
             {
-                UnityTools.Instance.GetComponentFromChildren<Tilemap>(newCorridor, "Floor").
+                UnityTools.GetComponentFromChildren<Tilemap>(newCorridor, "Floor").
                         SetTile(new Vector3Int(x, y), floorTile);
             }
         }
@@ -319,13 +319,13 @@ public class MapSystem : BaseSystem
         {
             for (int x = xMin; x <= xMax; x++)
             {
-                UnityTools.Instance.GetComponentFromChildren<Tilemap>(newCorridor, "Wall").
+                UnityTools.GetComponentFromChildren<Tilemap>(newCorridor, "Wall").
                         SetTile(new Vector3Int(x, yMin - 2), wallTile);
-                UnityTools.Instance.GetComponentFromChildren<Tilemap>(newCorridor, "Wall").
+                UnityTools.GetComponentFromChildren<Tilemap>(newCorridor, "Wall").
                         SetTile(new Vector3Int(x, yMin - 1), wallTile);
-                UnityTools.Instance.GetComponentFromChildren<Tilemap>(newCorridor, "Wall").
+                UnityTools.GetComponentFromChildren<Tilemap>(newCorridor, "Wall").
                         SetTile(new Vector3Int(x, yMax - 1), wallTile);
-                UnityTools.Instance.GetComponentFromChildren<Tilemap>(newCorridor, "Wall").
+                UnityTools.GetComponentFromChildren<Tilemap>(newCorridor, "Wall").
                         SetTile(new Vector3Int(x, yMax), wallTile);
             }
         }
@@ -333,9 +333,9 @@ public class MapSystem : BaseSystem
         {
             for (int y = yMin - 2; y <= yMax + 1; y++)
             {
-                UnityTools.Instance.GetComponentFromChildren<Tilemap>(newCorridor, "Wall").
+                UnityTools.GetComponentFromChildren<Tilemap>(newCorridor, "Wall").
                         SetTile(new Vector3Int(xMin - 1, y), wallTile);
-                UnityTools.Instance.GetComponentFromChildren<Tilemap>(newCorridor, "Wall").
+                UnityTools.GetComponentFromChildren<Tilemap>(newCorridor, "Wall").
                         SetTile(new Vector3Int(xMax, y), wallTile);
             }
         }
@@ -536,7 +536,7 @@ public class MapSystem : BaseSystem
 
         // 普通关卡生成5-7个房间
         int curRoomCount = 0;
-        int roomCount = UnityTools.GetRandomInt(5,7);
+        int roomCount = UnityTools.GetRandomInt(5, 7);
 
         // 构建大本营
         Vector2Int curPos = birthPos;
