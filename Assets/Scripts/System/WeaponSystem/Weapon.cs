@@ -39,6 +39,8 @@ public abstract class Weapon
     public float SpeedDecrease => model.staticAttr.speedDecrease;
     public float FireRate => model.staticAttr.fireRate;
     public float BulletSpeed => model.staticAttr.bulletSpeed;
+    public float angle => model.staticAttr.angle;
+    public int bulletCount => model.staticAttr.bulletCount;
     #endregion
 
     public Weapon(GameObject gameObject, Character owner, WeaponModel model)
@@ -112,7 +114,20 @@ public abstract class Weapon
         }
     }
 
-    protected abstract (int damage, bool isCritical) CalcDamageInfo();
+    protected (int damage, bool isCritical) CalcDamageInfo()
+    {
+        int damageOutput = Damage;
+        bool isCriticalOutput = false;
+        int criticalRate = CriticalRate + (owner is Player player ? player.critical : 0);
+
+        if (Random.Range(0f, 100f) < criticalRate)
+        {
+            damageOutput *= 2;
+            isCriticalOutput = true;
+        }
+
+        return (damageOutput, isCriticalOutput);
+    }
 
     public virtual void OnExit()
     {

@@ -1,15 +1,20 @@
 ﻿using UnityEngine;
 
-public class StaffOfFlame : ShotGun
+public class StaffOfFlame : Staff
 {
-    public StaffOfFlame(GameObject gameObject, Character owner, WeaponModel model) : base(gameObject, owner, model)
+    public StaffOfFlame(GameObject gameObject, Character owner, WeaponModel model) : base(gameObject, owner, model) { }
+
+    protected override void OnInit()
     {
-        canRotate = false;
+        base.OnInit();
+        animator.SetTrigger("PickUp");
     }
 
     protected override void OnFire()
     {
         base.OnFire();
+
+        animator.SetTrigger("Attack");
 
         // 连续发射子弹
         for (int i = 0; i < bulletCount; i++)

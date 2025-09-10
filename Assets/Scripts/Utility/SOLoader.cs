@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public static class SOLoader
 {
@@ -17,6 +16,7 @@ public static class SOLoader
     private static readonly string ShotGunDataPath = "Weapons/ShotGunData";
     private static readonly string StrangeDataPath = "Weapons/StrangeData";
     private static readonly string BowDataPath = "Weapons/BowData";
+    private static readonly string StaffDataPath = "Weapons/StaffData";
 
     public static PlayerSO GetPlayerSO()
     {
@@ -67,6 +67,11 @@ public static class SOLoader
     public static BowSO GetBowSO()
     {
         return Resources.Load<BowSO>(dataPath + BowDataPath);
+    }
+
+    public static StaffSO GetStaffSO()
+    {
+        return Resources.Load<StaffSO>(dataPath + StaffDataPath);
     }
     #endregion
 }

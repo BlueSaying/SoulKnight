@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.Events;
-
+// 结算 散弹枪
 public class UnityTools
 {
     public static int GetRandomInt(int min, int max)
@@ -190,7 +190,7 @@ public class UnityTools
         // 以逗号分割字段
         string[] fieldNames = rows[0].Split(",");
 
-        // *oldFieldName*用于创建链表
+        // *preFieldName*用于创建链表
         string preFieldName = null;
         List<ListInfo> listInfos = new List<ListInfo>();
 

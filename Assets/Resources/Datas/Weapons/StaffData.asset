@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 253d08b956e314b4885cbc3f559875c0, type: 3}
+  m_Name: StaffData
+  m_EditorClassIdentifier: 
+  textAsset: {fileID: 4900000, guid: 2d1e39e8a51ba0d4086167b4212f9c30, type: 3}
+  attrs:
+  - buffType: 1
+    weaponCategory: 4
+    weaponType: 11
+    qualityType: 0
+    damage: 4
+    energyCost: 3
+    criticalRate: 30
+    scatterRate: 10
+    speedDecrease: 0.1
+    fireRate: 1.8
+    bulletSpeed: 20
+    angle: 10
+    bulletCount: 7

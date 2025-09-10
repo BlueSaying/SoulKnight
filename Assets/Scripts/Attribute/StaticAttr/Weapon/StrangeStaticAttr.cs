@@ -1,7 +1,7 @@
 ﻿using System;
 
 [Serializable]
-public class StrangeStaticAttr:WeaponStaticAttr
+public class StrangeStaticAttr : WeaponStaticAttr
 {
 
 }

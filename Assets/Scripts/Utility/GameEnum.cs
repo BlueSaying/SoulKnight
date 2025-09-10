@@ -50,7 +50,7 @@ public enum WeaponCategory
 
     ShotGun,
 
-    //Staff,
+    Staff,
 
     //ThrownWeapon,
 

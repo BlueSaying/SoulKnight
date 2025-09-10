@@ -57,4 +57,14 @@ public class WeaponStaticAttr
     /// 子弹速度
     /// </summary>
     public float bulletSpeed;
+
+    /// <summary>
+    /// 子弹之间的夹角
+    /// </summary>
+    public float angle;
+
+    /// <summary>
+    /// 每次攻击弹丸数
+    /// </summary>
+    public int bulletCount;
 }

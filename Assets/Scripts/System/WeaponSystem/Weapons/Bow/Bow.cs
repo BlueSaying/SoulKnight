@@ -42,7 +42,7 @@ public abstract class Bow : Weapon
         RefreshChargingBar();
     }
 
-    protected override (int damage, bool isCritical) CalcDamageInfo()
+    protected new (int damage, bool isCritical) CalcDamageInfo()
     {
         int damageOutput = Mathf.RoundToInt(Mathf.Lerp(Damage, ChargingDamage, chargingTimer / ChargingTime));
         bool isCriticalOutput = false;

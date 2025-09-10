@@ -1330,6 +1330,7 @@ MonoBehaviour:
   bowIcon: {fileID: 21300000, guid: e3ccdcfb11db4e54ba221904e0a4edab, type: 3}
   meleeIcon: {fileID: 21300000, guid: 4cfaf42b64ed85a47961974bfaf5b965, type: 3}
   strangeIcon: {fileID: 21300000, guid: e98029434ad9c1d43beadf85b29f62ba, type: 3}
+  staffIcon: {fileID: 21300000, guid: f2a2c4090115c3640b004889294965af, type: 3}
 --- !u!1 &9136248496527479160
 GameObject:
   m_ObjectHideFlags: 0

@@ -57,6 +57,13 @@ public class WeaponRepository
                         models[weaponCategory].Add(new BowModel(attr));
                     }
                     break;
+
+                case WeaponCategory.Staff:
+                    foreach (var attr in SOLoader.GetStaffSO().attrs)
+                    {
+                        models[weaponCategory].Add(new StaffModel(attr));
+                    }
+                    break;
             }
         }
     }

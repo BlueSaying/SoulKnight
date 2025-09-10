@@ -10,6 +10,7 @@ public class WeaponInfoPanel : Panel
     public Sprite bowIcon;
     public Sprite meleeIcon;
     public Sprite strangeIcon;
+    public Sprite staffIcon;
 
     protected override void DOClosePanel()
     {
@@ -70,6 +71,10 @@ public class WeaponInfoPanel : Panel
 
             case WeaponCategory.Strange:
                 image.sprite = strangeIcon;
+                break;
+
+            case WeaponCategory.Staff:
+                image.sprite = staffIcon;
                 break;
         }
         image.SetNativeSize();
