@@ -85,6 +85,7 @@ public class ItemFactory : Singleton<ItemFactory>
         return damageNum;
     }
 
+    // 在可互动物品上创建一个箭头
     public ItemArrow CreateItemArrow(string canvasName, string info, QualityType qualityType, Transform parent)
     {
         GameObject prefab = ResourcesLoader.Instance.LoadPanel(SceneName.Generic.ToString(), canvasName);

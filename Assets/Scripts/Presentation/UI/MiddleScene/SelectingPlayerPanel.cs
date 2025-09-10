@@ -10,7 +10,6 @@ namespace MiddleScene
         private Button UIbackButton;
         private Button UInextButton;
 
-
         protected override void Awake()
         {
             base.Awake();

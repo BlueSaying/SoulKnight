@@ -12,8 +12,12 @@ public class PlayerSystem : BaseSystem
 
     public GameObject playerGameObject;
     public Skill skill;
-    public Player mainPlayer {get; protected set; }
+    public Player mainPlayer { get; protected set; }
     private PlayerSkinType skinType;
+
+    // 当前复活花费
+    public int ReviveCost { get; private set; }
+    private const int BaseReviveCost = 100;
 
     private List<Pet> pets;
 
@@ -30,6 +34,9 @@ public class PlayerSystem : BaseSystem
     protected override void OnEnter()
     {
         base.OnEnter();
+
+        ReviveCost = BaseReviveCost;
+        EventCenter.Instance.RegisterEvent(EventType.OnPlayerRevive, () => { ReviveCost *= 2; });
 
         switch (CurSceneName)
         {

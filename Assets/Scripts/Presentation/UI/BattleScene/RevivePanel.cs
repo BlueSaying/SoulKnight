@@ -6,12 +6,17 @@ namespace BattleScene
 {
     public class RevivePanel : Panel
     {
+        private Text ReviveCostText;
+
         protected override void Awake()
         {
             base.Awake();
 
+            ReviveCostText=transform.Find("BottomPanel").Find("ReviveButton").Find("Text").GetComponent<Text>();
             UnityTools.GetComponentFromChildren<Button>(gameObject, "BackButton").onClick.AddListener(EndGame);
             UnityTools.GetComponentFromChildren<Button>(gameObject, "ReviveButton").onClick.AddListener(Revive);
+
+            ReviveCostText.text = SystemRepository.Instance.GetSystem<PlayerSystem>().ReviveCost.ToString();
         }
 
         protected override void DOOpenPanel()

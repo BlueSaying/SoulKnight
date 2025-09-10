@@ -1,5 +1,4 @@
-﻿
-public class TestManager : Singleton<TestManager>
+﻿public class TestManager : Singleton<TestManager>
 {
     // 是否解除武器限制
     public bool isUnlockWeapon;

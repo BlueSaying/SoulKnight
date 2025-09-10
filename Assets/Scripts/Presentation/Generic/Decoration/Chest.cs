@@ -7,8 +7,6 @@ public class Chest : MonoBehaviour
     // 使得Update方法只在玩家进入可拾取范围时调用
     private bool isPlayerEnter;
 
-    //private Player player;
-
     private ItemArrow itemArrow;
 
     private bool isOpen;
@@ -28,7 +26,8 @@ public class Chest : MonoBehaviour
 
                 // HACK:暂时随机实例化武器
                 var array = Enum.GetValues(typeof(WeaponType));
-                WeaponFactory.InstantiateWeapon((WeaponType)(UnityEngine.Random.Range(0, 11)), transform.Find("GenerationPoint").position, Quaternion.identity);
+                WeaponFactory.InstantiateWeapon((WeaponType)UnityEngine.Random.Range(0, (int)WeaponType._DivideLine_),
+                    transform.Find("GenerationPoint").position, Quaternion.identity);
 
                 Destroy(itemArrow.transform.gameObject);
             }
@@ -43,7 +42,6 @@ public class Chest : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             isPlayerEnter = true;
-            //player = collision.GetComponent<Symbol>().character as Player;
 
             itemArrow = ItemFactory.Instance.CreateItemArrow("ItemArrow", name, QualityType.White, transform.Find("ItemArrowPoint"));
         }

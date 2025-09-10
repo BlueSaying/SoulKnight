@@ -99,6 +99,8 @@ public enum WeaponType
     GoblinSpear,
     StaffOfFlame,
 
+    // ---上方为已添加武器---
+    _DivideLine_,
     // ---下方为未添加武器---
 
     H2O,
