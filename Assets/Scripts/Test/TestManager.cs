@@ -1,10 +1,8 @@
-﻿public class TestManager : Singleton<TestManager>
+﻿public static class TestManager
 {
-    // 是否解除武器限制
-    public bool isUnlockWeapon;
+    // 十倍射速
+    public static bool InfFireOn;
 
-    private TestManager()
-    {
-        isUnlockWeapon = false;
-    }
+    // 免费复活
+    public static bool FreeRevive;
 }

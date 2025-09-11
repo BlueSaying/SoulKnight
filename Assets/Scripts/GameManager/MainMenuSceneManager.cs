@@ -30,6 +30,18 @@ namespace MainMenuScene
         void Update()
         {
             facade.Update();
+
+            if (Input.GetKeyDown(KeyCode.T))
+            {
+                if (UIMediator.Instance.IsPanelOpened(Generic.PanelName.TestPanel.ToString()))
+                {
+                    UIMediator.Instance.ClosePanel(Generic.PanelName.TestPanel.ToString());
+                }
+                else
+                {
+                    UIMediator.Instance.OpenPanel(SceneName.Generic, Generic.PanelName.TestPanel.ToString());
+                }
+            }
         }
 
         private void OnDisable()

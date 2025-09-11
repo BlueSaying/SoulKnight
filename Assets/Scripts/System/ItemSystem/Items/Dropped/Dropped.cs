@@ -11,19 +11,13 @@ public abstract class Dropped : Item
     protected TriggerDetector triggerDetector;
     protected Rigidbody2D rb;
 
-    public Animator animator { get; protected set; }
-
     private bool isFollowingPlayer;
     public bool IsFollowingPlayer
     {
-        get
-        {
-            return isFollowingPlayer;
-        }
+        get => isFollowingPlayer;
         protected set
         {
             isFollowingPlayer = value;
-            if (animator != null) animator.SetBool("isFollowingPlayer", isFollowingPlayer);
         }
     }
 
@@ -52,7 +46,6 @@ public abstract class Dropped : Item
     {
         base.OnEnter();
         player = SystemRepository.Instance.GetSystem<PlayerSystem>().mainPlayer;
-        animator = gameObject.GetComponent<Animator>();
     }
 
     public override void OnFixedUpdate()

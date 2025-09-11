@@ -72,7 +72,7 @@ public abstract class Weapon
         if (fireTimer >= fireTime)
         {
             // 根据武器拥有者是否为玩家扣除能量值
-            if (owner is Player && !TestManager.Instance.isUnlockWeapon)
+            if (owner is Player && !TestManager.InfFireOn)
             {
                 Player player = owner as Player;
                 if (player.CurEnergy.Value >= EnergyCost)
@@ -85,7 +85,7 @@ public abstract class Weapon
                 }
             }
 
-            if (TestManager.Instance.isUnlockWeapon) fireTimer = 0.9f * fireTime;  // 10倍射速
+            if (TestManager.InfFireOn) fireTimer = 0.9f * fireTime;  // 10倍射速
             else fireTimer = 0f;
             OnFire();
         }

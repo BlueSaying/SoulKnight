@@ -30,7 +30,7 @@ public class PickUpableWeapon : MonoBehaviour
         {
             isPlayerEnter = true;
             player = collision.GetComponent<Symbol>().character as Player;
-            player.pickUpableList.Insert(0, gameObject);Debug.Log(SystemRepository.Instance.GetSystem<WeaponSystem>().GetWeaponModel(System.Enum.Parse<WeaponType>(name)));
+            player.pickUpableList.Insert(0, gameObject);
 
             itemArrow =
                 ItemFactory.

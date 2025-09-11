@@ -40,7 +40,7 @@ public abstract class Melee : Weapon
     protected override void OnFire()
     {
         base.OnFire();
-        if (TestManager.Instance.isUnlockWeapon) animator.speed = 5f;
+        if (TestManager.InfFireOn) animator.speed = 5f;
         else animator.speed = 1f;
         animator.SetTrigger("Attack");
 

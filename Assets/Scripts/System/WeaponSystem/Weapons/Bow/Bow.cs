@@ -68,7 +68,7 @@ public abstract class Bow : Weapon
                 this.isCharging = false;
 
                 // 根据武器拥有者是否为玩家扣除能量值
-                if (owner is Player && !TestManager.Instance.isUnlockWeapon)
+                if (owner is Player && !TestManager.InfFireOn)
                 {
                     (owner as Player).CurEnergy.AddFlatModifier(-EnergyCost);
                 }
@@ -86,7 +86,7 @@ public abstract class Bow : Weapon
         else
         {
             // 根据武器拥有者是否为玩家
-            if (!TestManager.Instance.isUnlockWeapon && owner is Player && (owner as Player).CurEnergy.Value < EnergyCost)
+            if (!TestManager.InfFireOn && owner is Player && (owner as Player).CurEnergy.Value < EnergyCost)
             {
                 return;
             }

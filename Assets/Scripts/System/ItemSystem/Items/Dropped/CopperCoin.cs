@@ -10,7 +10,6 @@ public class CopperCoin : Dropped
     {
         base.OnHitPlayer(player);
 
-        // HACK:钳制应放在属性中,而不是这里
         int gold = 1;
         SystemRepository.Instance.GetSystem<GlobalSystem>().Gold += gold;
     }

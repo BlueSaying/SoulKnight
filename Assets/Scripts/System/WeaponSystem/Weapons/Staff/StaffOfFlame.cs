@@ -9,13 +9,13 @@ public class StaffOfFlame : Staff
         base.OnInit();
         animator.SetTrigger("PickUp");
     }
-
+    
     protected override void OnFire()
     {
         base.OnFire();
 
         animator.SetTrigger("Attack");
-
+        
         // 连续发射子弹
         for (int i = 0; i < bulletCount; i++)
         {
@@ -28,8 +28,10 @@ public class StaffOfFlame : Staff
             int damage = damageInfo.damage;
             bool isCritical = damageInfo.isCritical;
 
+            float bulletSpeed = Random.Range(BulletSpeed / 1.25f, BulletSpeed * 1.25f);
+
             ItemFactory.Instance.CreateBullet(BulletType.Bullet_105, shootPoint.transform.position, quaternion,
-                owner, damage, isCritical, BulletSpeed, isCritical ? BuffType : BuffType.None);
+                owner, damage, isCritical, bulletSpeed, isCritical ? BuffType : BuffType.None);
         }
     }
 }

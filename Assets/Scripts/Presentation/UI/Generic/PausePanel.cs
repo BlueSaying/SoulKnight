@@ -41,6 +41,21 @@ public class PausePanel : Panel
         (transform as RectTransform).DOAnchorPosY(-1000, 0.5f).OnComplete(DestroyPanel).OnKill(DestroyPanel);
     }
 
+    public override void OpenPanel(string panelName)
+    {
+        base.OpenPanel(panelName);
+
+        // 暂停游戏
+        GamePauseFacade.Instance.PauseGame();
+    }
+
+    public override void ClosePanel()
+    {
+        base.ClosePanel();
+
+        GamePauseFacade.Instance.ResumeGame();
+    }
+
     #region 事件集
     private void BackHome()
     {
@@ -50,7 +65,6 @@ public class PausePanel : Panel
 
     private void ContinueGame()
     {
-        GamePauseFacade.Instance.ResumeGame();
         UIMediator.Instance.ClosePanel(name);
     }
 

@@ -78,7 +78,6 @@ namespace MiddleScene
         private void OpenPausePanel()
         {
             UIMediator.Instance.OpenPanel(SceneName.Generic, Generic.PanelName.PausePanel.ToString());
-            GamePauseFacade.Instance.PauseGame();
         }
         #endregion
     }

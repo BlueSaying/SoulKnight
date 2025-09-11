@@ -574,6 +574,8 @@ namespace Generic
         WeaponInfoPanel,
 
         PausePanel,
+
+        TestPanel,
     }
 }
 #endregion

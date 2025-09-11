@@ -36,7 +36,18 @@ namespace MiddleScene
         {
             facade.Update();
 
-            if (Input.GetKeyDown(KeyCode.V)) TestManager.Instance.isUnlockWeapon = !TestManager.Instance.isUnlockWeapon;
+            if (Input.GetKeyDown(KeyCode.T))
+            {
+                if (UIMediator.Instance.IsPanelOpened(Generic.PanelName.TestPanel.ToString()))
+                {
+                    UIMediator.Instance.ClosePanel(Generic.PanelName.TestPanel.ToString());
+                }
+                else
+                {
+                    UIMediator.Instance.OpenPanel(SceneName.Generic, Generic.PanelName.TestPanel.ToString());
+                }
+            }
+
             if (Input.GetKeyDown(KeyCode.G))
             {
                 // 随机选择一种金币实例化
@@ -44,6 +55,11 @@ namespace MiddleScene
                 DroppedType droppedTypeByRandom = droppedTypes[Random.Range(0, droppedTypes.Length)];
 
                 ItemFactory.Instance.CreateDropped(droppedTypeByRandom, new Vector2(-5, 5), Quaternion.identity);
+            }
+
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                ItemFactory.Instance.CreateDropped(DroppedType.EnergyBall, new Vector2(-5, 5), Quaternion.identity);
             }
         }
 
