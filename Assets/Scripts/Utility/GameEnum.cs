@@ -500,9 +500,24 @@ public enum EffectType
     AppearEffect,
 
     /// <summary>
-    /// 子弹碰撞
+    /// 子弹碰撞 黄色
     /// </summary>
-    BoomEffect,
+    BoomEffectYellow,
+
+    /// <summary>
+    /// 子弹碰撞 红色
+    /// </summary>
+    BoomEffectRed,
+
+    /// <summary>
+    /// 子弹碰撞 红色
+    /// </summary>
+    BoomEffectGreen,
+
+    /// <summary>
+    /// 子弹碰撞 白色
+    /// </summary>
+    BoomEffectWhite,
 
     /// <summary>
     /// 敌人生成

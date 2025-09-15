@@ -29,7 +29,7 @@ public class BulletBasketball : Bullet
             if (bounceCount >= BounceTimes)
             {
                 base.OnHitObstacle();
-                ItemFactory.Instance.CreateEffect(EffectType.BoomEffect, position, Quaternion.identity);
+                ItemFactory.Instance.CreateEffect(EffectType.BoomEffectYellow, position, Quaternion.identity);
             }
         });
 
@@ -54,14 +54,14 @@ public class BulletBasketball : Bullet
     {
         base.OnHitEnemy(enemy);
 
-        ItemFactory.Instance.CreateEffect(EffectType.BoomEffect, position, Quaternion.identity);
+        ItemFactory.Instance.CreateEffect(EffectType.BoomEffectYellow, position, Quaternion.identity);
     }
 
     protected override void OnHitPlayer(Player player)
     {
         base.OnHitPlayer(player);
 
-        ItemFactory.Instance.CreateEffect(EffectType.BoomEffect, position, Quaternion.identity);
+        ItemFactory.Instance.CreateEffect(EffectType.BoomEffectYellow, position, Quaternion.identity);
     }
 
     public override void Reset(Vector3 position, Quaternion quaternion, int damage, bool isCritical, BuffType buffType)

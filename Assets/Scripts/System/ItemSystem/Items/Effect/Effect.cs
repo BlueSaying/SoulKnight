@@ -13,7 +13,7 @@ public abstract class Effect : Item
     public override void OnUpdate()
     {
         base.OnUpdate();
-
+        
         effectTimer += Time.deltaTime;
         if (effectTimer > duration)
         {

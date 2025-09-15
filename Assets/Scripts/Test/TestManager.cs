@@ -1,6 +1,6 @@
 ﻿public static class TestManager
 {
-    // 十倍射速
+    // 无限火力
     public static bool InfFireOn;
 
     // 免费复活

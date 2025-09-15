@@ -10,20 +10,20 @@ public class Bullet_5 : Bullet
         base.OnHitObstacle();
 
         // TODO:后期将effectType设为Bullet类的属性
-        ItemFactory.Instance.CreateEffect(EffectType.BoomEffect, position, Quaternion.identity);
+        ItemFactory.Instance.CreateEffect(EffectType.BoomEffectYellow, position, Quaternion.identity);
     }
 
     protected override void OnHitEnemy(Enemy enemy)
     {
         base.OnHitEnemy(enemy);
 
-        ItemFactory.Instance.CreateEffect(EffectType.BoomEffect, position, Quaternion.identity);
+        ItemFactory.Instance.CreateEffect(EffectType.BoomEffectYellow, position, Quaternion.identity);
     }
 
     protected override void OnHitPlayer(Player player)
     {
         base.OnHitPlayer(player);
 
-        ItemFactory.Instance.CreateEffect(EffectType.BoomEffect, position, Quaternion.identity);
+        ItemFactory.Instance.CreateEffect(EffectType.BoomEffectYellow, position, Quaternion.identity);
     }
 }
