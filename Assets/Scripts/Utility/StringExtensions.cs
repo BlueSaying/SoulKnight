@@ -23,6 +23,8 @@ public static class StringExtensions
 
         {"Basketball","篮球" },
 
+        {"Bazooka","火箭筒" },
+
         // 角色
         {"Knight","骑士" },
         {"Rogue","游侠" },

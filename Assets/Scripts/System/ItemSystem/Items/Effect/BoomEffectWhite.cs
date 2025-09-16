@@ -2,7 +2,7 @@
 
 public class BoomEffectWhite : Effect
 {
-    public BoomEffectWhite(GameObject gameObject) : base(gameObject)
+    public BoomEffectWhite(GameObject gameObject, Character owner) : base(gameObject, owner)
     {
         duration = 0.5f;
     }

@@ -9,20 +9,20 @@ public class Bullet_130 : Bullet
     {
         base.OnHitObstacle();
 
-        ItemFactory.Instance.CreateEffect(EffectType.BoomEffectYellow, position, Quaternion.identity);
+        ItemFactory.Instance.CreateEffect(EffectType.BoomEffectYellow, position, Quaternion.identity, owner);
     }
 
     protected override void OnHitEnemy(Enemy enemy)
     {
         base.OnHitEnemy(enemy);
 
-        ItemFactory.Instance.CreateEffect(EffectType.BoomEffectYellow, position, Quaternion.identity);
+        ItemFactory.Instance.CreateEffect(EffectType.BoomEffectYellow, position, Quaternion.identity, owner);
     }
 
     protected override void OnHitPlayer(Player player)
     {
         base.OnHitPlayer(player);
 
-        ItemFactory.Instance.CreateEffect(EffectType.BoomEffectYellow, position, Quaternion.identity);
+        ItemFactory.Instance.CreateEffect(EffectType.BoomEffectYellow, position, Quaternion.identity, owner);
     }
 }

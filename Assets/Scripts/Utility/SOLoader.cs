@@ -6,8 +6,11 @@ public static class SOLoader
     private static readonly string dataPath = "Datas/";
 
     private static readonly string PlayerDataPath = "PlayerData";
+
     private static readonly string PlayerSkinDataPath = "PlayerSkinData";
+
     private static readonly string EnemyDataPath = "EnemyData";
+
     private static readonly string levelDataPath = "Level/LevelData_";
 
     private static readonly string MeleeDataPath = "Weapons/MeleeData";
@@ -17,6 +20,7 @@ public static class SOLoader
     private static readonly string StrangeDataPath = "Weapons/StrangeData";
     private static readonly string BowDataPath = "Weapons/BowData";
     private static readonly string StaffDataPath = "Weapons/StaffData";
+    private static readonly string RocketLauncherDataPath = "Weapons/RocketLauncherData";
 
     public static PlayerSO GetPlayerSO()
     {
@@ -72,6 +76,11 @@ public static class SOLoader
     public static StaffSO GetStaffSO()
     {
         return Resources.Load<StaffSO>(dataPath + StaffDataPath);
+    }
+
+    public static RocketLauncherSO GetRocketLauncherSO()
+    {
+        return Resources.Load<RocketLauncherSO>(dataPath + RocketLauncherDataPath);
     }
     #endregion
 }

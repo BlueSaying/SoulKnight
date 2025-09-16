@@ -45,11 +45,11 @@ public class EnemySystem : BaseSystem
     // 在场景中添加一个敌人
     public void AddEnemy(EnemyType enemyType, Vector2 position, Quaternion quaternion, WeaponModel model)
     {
-        ItemFactory.Instance.CreateEffect(EffectType.SummonEffect, position, quaternion);
+        ItemFactory.Instance.CreateEffect(EffectType.SummonEffect, position, quaternion,null);
 
         UnityTools.WaitThenCallFun(this, 1f, () =>
         {
-            ItemFactory.Instance.CreateEffect(EffectType.AppearEffect, position, quaternion);
+            ItemFactory.Instance.CreateEffect(EffectType.AppearEffect, position, quaternion, null);
 
             UnityTools.WaitThenCallFun(this, 0.416667f, () =>
             {

@@ -3,7 +3,7 @@
 public abstract class Bullet : Item
 {
     // 子弹飞行速度
-    private float bulletSpeed;
+    protected float bulletSpeed;
 
     protected TriggerDetector triggerDetector;
 

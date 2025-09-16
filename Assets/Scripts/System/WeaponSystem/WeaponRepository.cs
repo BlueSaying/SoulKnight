@@ -64,6 +64,13 @@ public class WeaponRepository
                         models[weaponCategory].Add(new StaffModel(attr));
                     }
                     break;
+
+                case WeaponCategory.RocketLauncher:
+                    foreach (var attr in SOLoader.GetRocketLauncherSO().attrs)
+                    {
+                        models[weaponCategory].Add(new RocketLauncherModel(attr));
+                    }
+                    break;
             }
         }
     }

@@ -44,7 +44,7 @@ public enum WeaponCategory
 
     Melee,
 
-    //Missile,
+    RocketLauncher,
 
     Rifle,
 
@@ -74,11 +74,9 @@ public enum QualityType
 
     Red,
 
-    //colorful,
-
     White,
 
-
+    //Colorful,
 }
 
 /// <summary>
@@ -98,6 +96,7 @@ public enum WeaponType
     GatlingGun,
     GoblinSpear,
     StaffOfFlame,
+    Bazooka,
 
     // ---上方为已添加武器---
     _DivideLine_,
@@ -324,6 +323,16 @@ public enum AudioName
     ji,
 
     /// <summary>
+    /// 小型爆炸
+    /// </summary>
+    fx_explode_small,
+
+    /// <summary>
+    /// 大型爆炸
+    /// </summary>
+    fx_explode_big,
+
+    /// <summary>
     /// 受击音效1
     /// </summary>
     fx_hit_p1,
@@ -476,6 +485,8 @@ public enum BulletType
 {
     Bullet_5,
 
+    Bullet_10,
+
     Bullet_34,
 
     Bullet_105,
@@ -487,6 +498,8 @@ public enum BulletType
     BulletBasketball,
 
     Arrow,
+
+    Explosion,
 }
 
 /// <summary>
