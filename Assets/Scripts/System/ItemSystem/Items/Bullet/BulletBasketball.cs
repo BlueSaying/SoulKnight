@@ -64,9 +64,9 @@ public class BulletBasketball : Bullet
         ItemFactory.Instance.CreateEffect(EffectType.BoomEffectYellow, position, Quaternion.identity, owner);
     }
 
-    public override void Reset(Vector3 position, Quaternion quaternion, int damage, bool isCritical, BuffType buffType)
+    public override void Reset(Character owner, Vector3 position, Quaternion quaternion, int damage, bool isCritical, BuffType buffType)
     {
-        base.Reset(position, quaternion, damage, isCritical, buffType);
+        base.Reset(owner, position, quaternion, damage, isCritical, buffType);
         bounceCount = 0;
     }
 }

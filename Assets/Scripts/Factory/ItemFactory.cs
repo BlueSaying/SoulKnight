@@ -13,7 +13,7 @@ public class ItemFactory : Singleton<ItemFactory>
 
         if (bullet != null)
         {
-            bullet.Reset(position, quaternion, damage, isCritical, buffType);
+            bullet.Reset(owner, position, quaternion, damage, isCritical, buffType);
         }
         else
         {
@@ -25,20 +25,20 @@ public class ItemFactory : Singleton<ItemFactory>
         return bullet;
     }
 
-    public Effect CreateEffect(EffectType effectType, Vector3 position, Quaternion quaternion,Character owner)
+    public Effect CreateEffect(EffectType effectType, Vector3 position, Quaternion quaternion, Character owner)
     {
         Type type = Type.GetType(effectType.ToString());
         Effect effect = SystemRepository.Instance.GetSystem<ItemSystem>().itemPool.GetItem(type) as Effect;
 
         if (effect != null)
         {
-            effect.Reset(position, quaternion,owner);
+            effect.Reset(position, quaternion, owner);
         }
         else
         {
             GameObject effectPrefab = ResourcesLoader.Instance.LoadEffect(effectType.ToString());
             GameObject newEffect = UnityEngine.Object.Instantiate(effectPrefab, position, quaternion);
-            effect = Activator.CreateInstance(type, new object[] { newEffect,owner }) as Effect;
+            effect = Activator.CreateInstance(type, new object[] { newEffect, owner }) as Effect;
         }
 
         return effect;

@@ -14,7 +14,7 @@ public class CameraSystem : BaseSystem
         get
         {
             if (cameraParent == null) cameraParent = GameObject.Find("Cameras");
-            if(cameraParent == null) throw new Exception("场景中无Cameras游戏物体！");
+            if (cameraParent == null) throw new Exception("场景中无Cameras游戏物体！");
             return cameraParent;
         }
     }
@@ -81,6 +81,23 @@ public class CameraSystem : BaseSystem
         }
     }
 
+    // 获取相机
+    public CinemachineVirtualCamera GetVCM(MainMenuScene.CameraType type)
+    {
+        return MainMenuSceneCameras[type];
+    }
+
+    public CinemachineVirtualCamera GetVCM(MiddleScene.CameraType type)
+    {
+        return MiddleSceneCameras[type];
+    }
+
+    public CinemachineVirtualCamera GetVCM(BattleScene.CameraType type)
+    {
+        return BattleSceneCameras[type];
+    }
+
+    // 设置相机跟随目标
     public void SetCameraTarget(MainMenuScene.CameraType type, Transform trans)
     {
         MainMenuSceneCameras[type].Follow = trans;

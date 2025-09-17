@@ -33,13 +33,20 @@ public abstract class Bullet : Item
         {
             throw new System.Exception("无法获取" + gameObject.name + "的TriggerDetector组件,请检查是否已经添加");
         }
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+
+        // 根据owner是否为敌人判断
+        triggerDetector.Clear();
 
         triggerDetector.AddTriggerListener(TriggerEventType.OnTriggerEnter2D, "Obstacle", (obj) =>
         {
             OnHitObstacle();
         });
 
-        // 根据owner是否为敌人判断
         if (owner is Player)
         {
             triggerDetector.AddTriggerListener(TriggerEventType.OnTriggerEnter2D, "Enemy", (obj) =>
@@ -54,11 +61,7 @@ public abstract class Bullet : Item
                 OnHitPlayer(obj.GetComponent<Symbol>().character as Player);
             });
         }
-    }
 
-    public override void OnEnter()
-    {
-        base.OnEnter();
         transform.GetComponent<Rigidbody2D>().velocity = rotation * Vector2.right * bulletSpeed;
         transform.GetComponent<Collider2D>().enabled = true;
     }
@@ -85,9 +88,10 @@ public abstract class Bullet : Item
         Remove();
     }
 
-    public virtual void Reset(Vector3 position, Quaternion quaternion, int damage, bool isCritical, BuffType buffType)
+    public virtual void Reset(Character owner,Vector3 position, Quaternion quaternion, int damage, bool isCritical, BuffType buffType)
     {
         base.Reset();
+        this.owner = owner;
         this.position = position;
         this.rotation = quaternion;
         this.damage = damage;

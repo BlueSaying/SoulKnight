@@ -85,7 +85,7 @@ public class GoblinGuardRunState : GoblinGuardState
     {
         base.OnFixedUpdate();
         Vector2 dir = (targetPlayer.transform.position - enemy.transform.position).normalized;
-        MoveManager.Move(rb, dir * enemy.CurSpeed.Value);Debug.LogWarning(1);
+        MoveManager.Move(rb, dir * enemy.CurSpeed.Value);
     }
 
     public override void OnExit()
