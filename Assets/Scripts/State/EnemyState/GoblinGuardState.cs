@@ -52,6 +52,13 @@ public class GoblinGuardIdleState : GoblinGuardState
             timer -= Time.deltaTime;
         }
     }
+
+    public override void OnFixedUpdate()
+    {
+        base.OnFixedUpdate();
+
+        MoveManager.Move(rb, Vector2.zero);
+    }
 }
 
 public class GoblinGuardRunState : GoblinGuardState
@@ -67,8 +74,6 @@ public class GoblinGuardRunState : GoblinGuardState
     public override void OnUpdate()
     {
         base.OnUpdate();
-        Vector2 dir = (targetPlayer.transform.position - enemy.transform.position).normalized;
-        rb.velocity = dir * enemy.model.staticAttr.speed;
 
         if (!targetPlayer.isDead && enemy.DistanceToTargetPlayer() < AttackDistance * AttackDistance)
         {
@@ -76,10 +81,16 @@ public class GoblinGuardRunState : GoblinGuardState
         }
     }
 
+    public override void OnFixedUpdate()
+    {
+        base.OnFixedUpdate();
+        Vector2 dir = (targetPlayer.transform.position - enemy.transform.position).normalized;
+        MoveManager.Move(rb, dir * enemy.CurSpeed.Value);Debug.LogWarning(1);
+    }
+
     public override void OnExit()
     {
         base.OnExit();
-        rb.velocity = Vector2.zero;
         animator.SetBool("isRun", false);
     }
 }
@@ -96,6 +107,8 @@ public class GoblinGuardAttackState : GoblinGuardState
         {
             enemy.weapon.OnFixedUpdate();
         }
+
+        MoveManager.Move(rb, Vector2.zero);
     }
 
     public override void OnUpdate()

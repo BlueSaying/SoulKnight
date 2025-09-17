@@ -14,7 +14,7 @@ public abstract class Weapon
 
     // 射击冷却计时器
     private float fireTimer;
-    private float fireTime => 1 / FireRate;
+    private float FireTime => 1 / FireRate;
 
     public bool isUsing;
 
@@ -69,7 +69,7 @@ public abstract class Weapon
         if (!isAttack) return;
 
         // 如果冷却时间到了,那么发射子弹
-        if (fireTimer >= fireTime)
+        if (fireTimer >= FireTime)
         {
             // 根据武器拥有者是否为玩家扣除能量值
             if (owner is Player && !TestManager.InfFireOn)
@@ -85,7 +85,7 @@ public abstract class Weapon
                 }
             }
 
-            if (TestManager.InfFireOn) fireTimer = 0.9f * fireTime;  // 10倍射速
+            if (TestManager.InfFireOn) fireTimer = 0.9f * FireTime;  // 10倍射速
             else fireTimer = 0f;
             OnFire();
         }
@@ -149,7 +149,7 @@ public abstract class Weapon
     // 每次切换至此武器时调用一次
     protected virtual void OnEnter()
     {
-        fireTimer = 0;
+        fireTimer = FireTime;
 
         IsAttack = false;
     }

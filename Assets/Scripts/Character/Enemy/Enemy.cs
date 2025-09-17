@@ -25,6 +25,12 @@ public abstract class Enemy : Character, IDamageable
         stateMachine?.OnUpdate();
     }
 
+    public override void OnFixedUpdate()
+    {
+        base.OnFixedUpdate();
+        stateMachine?.OnFixedUpdate();
+    }
+
     // call it when get hurt
     public virtual void TakeDamage(int damage, Color damageColor)
     {

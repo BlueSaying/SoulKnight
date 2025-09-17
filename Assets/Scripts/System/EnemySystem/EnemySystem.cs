@@ -30,6 +30,18 @@ public class EnemySystem : BaseSystem
         }
     }
 
+    protected override void OnFixedUpdate()
+    {
+        base.OnFixedUpdate();
+        foreach (Enemy enemy in enemies)
+        {
+            if (!enemy.isDead)
+            {
+                enemy.OnFixedUpdate();
+            }
+        }
+    }
+
     protected override void OnExit()
     {
         base.OnExit();

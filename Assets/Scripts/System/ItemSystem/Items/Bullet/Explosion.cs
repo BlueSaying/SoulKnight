@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 /// <summary>
 /// 爆炸
@@ -20,10 +21,11 @@ public class Explosion : Bullet
         enemy.TakeDamage(damage, damageColor);
         enemy.AddBuff(buffType);
 
-        // HACK
-        enemy.rb.AddForce(((Vector2)enemy.transform.position - position).normalized * 100f);
-
         AudioManager.Instance.PlaySound(AudioType.Gun, AudioName.fx_explode_big);
+
+        // 添加爆炸冲击力
+        Vector2 dir = ((Vector2)enemy.transform.position - position).normalized;
+        CoroutinePool.Instance.StartCoroutine(this, ExplosionMove(enemy.rb, dir));
     }
 
     protected override void OnHitPlayer(Player player)
@@ -33,9 +35,25 @@ public class Explosion : Bullet
         player.TakeDamage(damage, damageColor);
         player.AddBuff(buffType);
 
-        // HACK
-        player.rb.AddForce(((Vector2)player.transform.position - position).normalized * 100f);
-
         AudioManager.Instance.PlaySound(AudioType.Gun, AudioName.fx_explode_big);
+
+        // 添加爆炸冲击力
+        Vector2 dir = ((Vector2)player.transform.position - position).normalized;
+        CoroutinePool.Instance.StartCoroutine(this, ExplosionMove(player.rb, dir));
+    }
+
+    private IEnumerator ExplosionMove(Rigidbody2D targetRB, Vector2 dir)
+    {
+        float timer = 0f;
+        const float time = 0.1f;
+
+        while (true)
+        {
+            timer += Time.fixedDeltaTime;
+            if (timer > time) break;
+
+            MoveManager.Move(targetRB, dir * 75f);
+            yield return null;
+        }
     }
 }
