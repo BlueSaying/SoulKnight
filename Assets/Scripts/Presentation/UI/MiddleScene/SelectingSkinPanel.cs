@@ -57,6 +57,8 @@ namespace MiddleScene
                 WeaponFactory.InstantiateWeapon(WeaponType.GasBlaster, new Vector2(7, 4), Quaternion.identity);
                 WeaponFactory.InstantiateWeapon(WeaponType.StaffOfFlame, new Vector2(9, 4), Quaternion.identity);
                 WeaponFactory.InstantiateWeapon(WeaponType.Bazooka, new Vector2(3, 6), Quaternion.identity);
+                WeaponFactory.InstantiateWeapon(WeaponType.SidewinderGreen, new Vector2(5, 6), Quaternion.identity);
+                WeaponFactory.InstantiateWeapon(WeaponType.SidewinderRed, new Vector2(7, 6), Quaternion.identity);
 
                 // 实例化宝箱
                 // HACK

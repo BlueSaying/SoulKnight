@@ -15,6 +15,7 @@ public class StrongBow : Bow
         int damage = damageInfo.damage;
         bool isCritical = damageInfo.isCritical;
 
-        ItemFactory.Instance.CreateBullet(BulletType.Arrow, shootPoint.transform.position, quaternion, owner, damage, isCritical, BulletSpeed);
+        ItemFactory.Instance.CreateBullet(BulletType.Arrow, shootPoint.transform.position, quaternion,
+            owner, damage, isCritical, BulletSpeed, isCritical ? BuffType : BuffType.None);
     }
 }

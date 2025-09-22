@@ -97,6 +97,8 @@ public enum WeaponType
     GoblinSpear,
     StaffOfFlame,
     Bazooka,
+    SidewinderRed,
+    SidewinderGreen,
 
     // ---上方为已添加武器---
     _DivideLine_,

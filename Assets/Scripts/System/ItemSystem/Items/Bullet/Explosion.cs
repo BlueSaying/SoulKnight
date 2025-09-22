@@ -9,7 +9,7 @@ public class Explosion : Bullet
 {
     // VCM的脉冲源,用于相机抖动
     private CinemachineImpulseSource ImpulseSource => gameObject.GetComponent<CinemachineImpulseSource>();
-    private const float shakeForce = 0.25f;
+    private const float shakeForce = 0.2f;
 
     public Explosion(GameObject gameObject, Character owner, int damage, bool isCritical, float bulletSpeed, BuffType buffType)
         : base(gameObject, owner, damage, isCritical, bulletSpeed, buffType) { }
@@ -68,21 +68,6 @@ public class Explosion : Bullet
 
             MoveManager.Move(targetRB, dir * 75f);
             yield return null;
-        }
-    }
-
-    private void ShakeCamera()
-    {
-        switch (SceneFacade.Instance.GetActiveSceneName())
-        {
-            case SceneName.MainMenuScene:
-                break;
-
-            case SceneName.MiddleScene:
-                break;
-
-            case SceneName.BattleScene:
-                break;
         }
     }
 }
