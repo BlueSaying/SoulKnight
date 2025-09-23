@@ -22,9 +22,11 @@ public class SidewinderGreen : ShotGun
             var damageInfo = CalcDamageInfo();
             int damage = damageInfo.damage;
             bool isCritical = damageInfo.isCritical;
+            float bulletSpeed = Random.Range(BulletSpeed / 1.25f, BulletSpeed * 1.25f);
+            BuffType buffType = isCritical ? BuffType : BuffType.None;
 
-            ItemFactory.Instance.CreateBullet(BulletType.Bullet_130, shootPoint.transform.position, quaternion,
-                owner, damage, isCritical, BulletSpeed, isCritical ? BuffType : BuffType.None);
+            ItemFactory.Instance.CreateBullet(BulletType.Bullet_27, shootPoint.transform.position, quaternion,
+                owner, damage, isCritical, bulletSpeed, buffType);
         }
     }
 }

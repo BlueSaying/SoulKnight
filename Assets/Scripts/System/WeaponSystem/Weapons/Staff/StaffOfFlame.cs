@@ -27,7 +27,6 @@ public class StaffOfFlame : Staff
             var damageInfo = CalcDamageInfo();
             int damage = damageInfo.damage;
             bool isCritical = damageInfo.isCritical;
-
             float bulletSpeed = Random.Range(BulletSpeed / 1.25f, BulletSpeed * 1.25f);
 
             ItemFactory.Instance.CreateBullet(BulletType.Bullet_105, shootPoint.transform.position, quaternion,

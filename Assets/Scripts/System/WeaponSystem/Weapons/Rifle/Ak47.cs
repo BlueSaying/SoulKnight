@@ -13,7 +13,9 @@ public class AK47 : Rifle
         var damageInfo = CalcDamageInfo();
         int damage = damageInfo.damage;
         bool isCritical = damageInfo.isCritical;
+        BuffType buffType = isCritical ? BuffType : BuffType.None;
 
-        ItemFactory.Instance.CreateBullet(BulletType.Bullet_34, shootPoint.transform.position, quaternion, owner, damage, isCritical, BulletSpeed);
+        ItemFactory.Instance.CreateBullet(BulletType.Bullet_34, shootPoint.transform.position, quaternion,
+            owner, damage, isCritical, BulletSpeed, buffType);
     }
 }

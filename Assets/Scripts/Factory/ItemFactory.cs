@@ -6,7 +6,7 @@ public class ItemFactory : Singleton<ItemFactory>
     private ItemFactory() { }
 
     public Bullet CreateBullet(BulletType bulletType, Vector3 position, Quaternion quaternion,
-        Character owner, int damage, bool isCritical, float bulletSpeed, BuffType buffType = BuffType.None)
+        Character owner, int damage, bool isCritical, float bulletSpeed, BuffType buffType)
     {
         Type type = Type.GetType(bulletType.ToString());
         Bullet bullet = SystemRepository.Instance.GetSystem<ItemSystem>().itemPool.GetItem(type) as Bullet;

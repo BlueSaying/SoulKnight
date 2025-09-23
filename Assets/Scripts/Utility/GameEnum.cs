@@ -489,7 +489,11 @@ public enum BulletType
 
     Bullet_10,
 
+    Bullet_27,
+
     Bullet_34,
+
+    Bullet_38,
 
     Bullet_105,
 
