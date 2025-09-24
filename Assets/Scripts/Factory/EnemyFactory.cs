@@ -22,18 +22,12 @@ public class EnemyFactory : Singleton<EnemyFactory>
     // 实例化一个敌人的游戏物体
     public GameObject InstantiateEnemy(EnemyType type, Vector2 position, Quaternion quaternion, Transform parent = null)
     {
+        if (parent == null) parent = GameObject.Find("Enemies").transform;
+
         GameObject enemyPrefab = ResourcesLoader.Instance.LoadEnemy(type.ToString());
         GameObject newEnemy = null;
 
-        if (parent != null)
-        {
-            newEnemy = UnityEngine.Object.Instantiate(enemyPrefab, position, quaternion, parent);
-        }
-        else
-        {
-            newEnemy = UnityEngine.Object.Instantiate(enemyPrefab, position, quaternion);
-        }
-
+        newEnemy = UnityEngine.Object.Instantiate(enemyPrefab, position, quaternion, parent);
         newEnemy.name = type.ToString();
         return newEnemy;
     }

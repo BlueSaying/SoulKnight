@@ -51,4 +51,3 @@ public class Basketball : Strange
             owner, damage, isCritical, BulletSpeed, buffType);
     }
 }
-

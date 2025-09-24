@@ -32,22 +32,6 @@ public class BulletBasketball : Bullet
                 ItemFactory.Instance.CreateEffect(EffectType.BoomEffectYellow, position, Quaternion.identity, owner);
             }
         });
-
-        // 根据owner是否为敌人判断
-        //if (owner is Player)
-        //{
-        //    collisionDetector.AddCollisionListener(CollisionEventType.OnCollisionEnter2D, "Enemy", (obj) =>
-        //    {
-        //        OnHitEnemy(obj.GetComponent<Symbol>().character as Enemy);
-        //    });
-        //}
-        //else if (owner is Enemy)
-        //{
-        //    collisionDetector.AddCollisionListener(CollisionEventType.OnCollisionEnter2D, "Player", (obj) =>
-        //    {
-        //        OnHitPlayer(obj.GetComponent<Symbol>().character as Player);
-        //    });
-        //}
     }
 
     protected override void OnHitEnemy(Enemy enemy)

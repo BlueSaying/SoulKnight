@@ -12,10 +12,9 @@ public class SidewinderRed : ShotGun
         base.OnFire();
 
         // 连续发射子弹
+        AudioManager.Instance.PlaySound(AudioType.Gun, AudioName.fx_gun_1);
         for (int i = 0; i < bulletCount; i++)
         {
-            AudioManager.Instance.PlaySound(AudioType.Gun, AudioName.fx_gun_1);
-
             // 计算散布
             Quaternion baseQuaternion = Quaternion.Euler(0, 0, angle * (bulletCount - 1) / 2.0f - 1.0f * i * angle);
             Quaternion quaternion = baseQuaternion * rotation * Quaternion.Euler(0, 0, UnityTools.GetRandomFloat(-ScatterRate / 2.0f, ScatterRate / 2.0f));

@@ -11,6 +11,8 @@ namespace MiddleScene
             base.Awake();
 
             transform.Find("Gem").Find("GemText").GetComponent<Text>().text = SaveManager.Instance.GlobalData.GemCount.ToString();
+
+            // TODO:未来移除
             SaveManager.Instance.SaveData();
         }
 

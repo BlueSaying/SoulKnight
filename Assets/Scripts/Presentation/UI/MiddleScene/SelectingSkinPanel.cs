@@ -67,7 +67,8 @@ namespace MiddleScene
                 DecorationFactory.InstantiateChest(new Vector2(-9.5f, 0.5f), Quaternion.identity);
                 DecorationFactory.InstantiateChest(new Vector2(-11.5f, 0.5f), Quaternion.identity);
 
-                SystemRepository.Instance.GetSystem<EnemySystem>().AddEnemy(EnemyType.Stake, Vector2.zero, Quaternion.identity, null);
+                // 添加敌人
+                SystemRepository.Instance.GetSystem<EnemySystem>().AddEnemy(EnemyType.Stake, new Vector2(-33, -8), Quaternion.identity, null);
             });
 
             // 切换上一个皮肤

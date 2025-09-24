@@ -34,18 +34,12 @@ public class PlayerFactory : Singleton<PlayerFactory>
     // 实例化一个玩家的游戏物体
     public GameObject InstantiatePlayer(PlayerType type, Vector3 position, Quaternion quaternion, Transform parent = null)
     {
+        if (parent == null) parent = GameObject.Find("Players").transform;
+
         GameObject playerPrefab = ResourcesLoader.Instance.LoadPlayer(type.ToString());
         GameObject newPlayer = null;
 
-        if (parent != null)
-        {
-            newPlayer = Object.Instantiate(playerPrefab, position, quaternion, parent);
-        }
-        else
-        {
-            newPlayer = Object.Instantiate(playerPrefab, position, quaternion);
-        }
-
+        newPlayer = Object.Instantiate(playerPrefab, position, quaternion, parent);
         newPlayer.name = type.ToString();
         return newPlayer;
     }
